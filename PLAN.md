@@ -79,23 +79,7 @@ RGB / 双目 / 视频
 
 ---
 
-## 2. 当前仓库审计与版本冻结
-
-当前目录已有四个上游仓库。开始实现前要把可复现版本写入 `configs/versions.yaml`：
-
-| 仓库 | 当前上游 SHA | 用途 |
-|---|---|---|
-| `apple/ml-depth-pro` | `9e65e4dbe9568d23c546fcec53302b10445e109e` | 单图度量深度、焦距、边界指标 |
-| `DepthAnything/Depth-Anything-V2` | `a561b849ebae10a6f5ef49e26c83cbbcd36c71bf` | 逐帧相对深度与评估参考 |
-| `DepthAnything/Video-Depth-Anything` | `4f5ae23172ba60fd7bc11ef671cca678842c7072` | relative/metric 视频模型 |
-| `lpiccinelli-eth/UniDepth` | `8d8cfe4c7ee15297099983607febf0d4f32eb3d6` | 可选扩展对照 |
-
-注意：当前 `Depth-Anything-V2` 和 `Video-Depth-Anything` 工作树已有大量未提交变动。实施时：
-
-- 不覆盖、不 reset、不把来源不明的本地改动混入实验。
-- 先记录 `git status`、`git diff --stat` 和 SHA；必要时重新建立干净的只读上游副本。
-- 自己的代码放在新的顶层工程目录中，通过 adapter 调用上游，不直接大改第三方源码。
-- 公开仓库用固定 commit 的 submodule、安装脚本或清晰的 clone 指令；权重只提供下载脚本和 SHA256。
+## 2. 官方仓库
 
 官方资料：
 
@@ -108,6 +92,14 @@ RGB / 双目 / 视频
 
 ## 3. 建议的新工程结构
 
+不建议把项目拆成三个彼此独立的 `part1/`、`part2/`、`part3/` 大工程。三个 Part 会共同使用数据读取、模型 adapter、指标、可视化和结果格式；完全按 Part 复制这些代码，后期很容易出现同一指标有三个版本、修复不同步、比较不公平的问题。
+
+建议采用**混合结构**：
+
+- `pipelines/part1|part2|part3`、`scripts/part1|part2|part3`、`configs/part1|part2|part3` 和 `outputs/part1|part2|part3` 按作业 Part 组织，让执行入口和结果归属一眼可见。
+- `src/` 中只保留可复用实现，按功能组织；每个 pipeline 只负责编排，不重复实现指标或模型。
+- Part 3 直接读取 Part 2 冻结的原始预测，避免为了做改进而悄悄改变 baseline。
+
 ```text
 .
 ├── PLAN.md
@@ -118,10 +110,15 @@ RGB / 双目 / 视频
 ├── configs/
 │   ├── versions.yaml
 │   ├── paths.example.yaml
-│   ├── middlebury_sgbm.yaml
-│   ├── nyuv2_eval.yaml
-│   ├── video_eval.yaml
-│   └── temporal_fusion.yaml
+│   ├── part1/
+│   │   ├── middlebury_sgbm.yaml
+│   │   └── dav2_framewise.yaml
+│   ├── part2/
+│   │   ├── depth_pro_nyuv2.yaml
+│   │   └── video_depth_anything.yaml
+│   └── part3/
+│       ├── temporal_fusion.yaml
+│       └── ablations.yaml
 ├── src/
 │   ├── data/                 # 数据转换、split、manifest
 │   ├── stereo/               # BM/SGBM、L-R check、深度转换
@@ -131,11 +128,21 @@ RGB / 双目 / 视频
 │   ├── metrics/              # image/boundary/temporal/efficiency
 │   ├── visualization/        # 固定色标、局部放大、视频排版
 │   └── demo/                 # 点云、点击测距 UI
+├── pipelines/                # 按作业 Part 暴露清晰的 Python 入口
+│   ├── part1/
+│   │   ├── run_stereo.py
+│   │   └── run_framewise_depth.py
+│   ├── part2/
+│   │   ├── run_metric_depth.py
+│   │   └── run_video_depth.py
+│   └── part3/
+│       ├── run_temporal_fusion.py
+│       └── run_ablation.py
 ├── scripts/
-│   ├── prepare_*.sh
-│   ├── infer_*.sh
-│   ├── eval_*.sh
-│   ├── run_ablation.sh
+│   ├── prepare_data.sh
+│   ├── part1/{run_all.sh,eval_all.sh}
+│   ├── part2/{run_all.sh,eval_all.sh}
+│   ├── part3/{run_all.sh,eval_all.sh}
 │   ├── make_figures.sh
 │   └── package_submission.sh
 ├── tests/
@@ -145,16 +152,30 @@ RGB / 双目 / 视频
 │   └── test_output_schema.py
 ├── data/                     # gitignored；只留 README/manifest
 ├── checkpoints/              # gitignored；只留下载脚本/checksum
-├── outputs/                  # gitignored；按 run_id 保存
+├── outputs/                  # gitignored；先按 Part，再按 run_id 保存
+│   ├── part1/
+│   ├── part2/
+│   └── part3/
 ├── assets/                   # 小型、可公开的代表性结果
 ├── report/                   # CVPR LaTeX、BibTeX、图表
 └── third_party/              # 固定版本，不混放自己的实现
 ```
 
+依赖方向保持单向：
+
+```text
+shared src + data/evaluation contracts
+       ├── Part 1 pipelines（建立几何、逐帧与指标基线）
+       ├── Part 2 pipelines（产生冻结的 metric/video baseline）
+       └── Part 3 pipelines（读取 Part 2 结果并做改进，不反向改 baseline）
+```
+
+README 顶层按 Part 1、Part 2、Part 3 给出三组命令；读者不需要理解内部模块就能依次复现实验。开发时仍只有一份 `metrics`、一份 `visualization` 和一套输出 schema。
+
 统一预测文件规范：
 
 ```text
-outputs/<run_id>/
+outputs/<part>/<run_id>/
 ├── config_resolved.yaml      # 完整参数与版本
 ├── environment.txt           # GPU、CUDA、PyTorch、依赖版本
 ├── manifest.json             # 输入帧及哈希
@@ -586,10 +607,89 @@ Demo 定量验证：
 - [ ] 所有图表由脚本生成；所有引用、代码与模型 license 已核对。
 - [ ] ZIP 在另一台机器解压，视频可播放，README/manifest 齐全。
 
+---
+
+## 12. 任务执行顺序与阶段门禁
+
+任务总体上按 **准备工作 → Part 1 → Part 2 → Part 3 → Demo 与最终交付** 推进，但不是简单地把某个 Part 全部做完才允许碰下一个 Part。正确顺序由依赖关系决定：公共数据协议和指标必须最先完成；Part 3 必须等待 Part 2 baseline 冻结；README、实验记录和图表则从产生第一批结果时就持续更新。
+
+### Step 0：建立公共基础
+
+1. 保护并冻结第三方仓库版本，建立混合工程目录。
+2. 建立环境，确认 GPU、CUDA 和各模型 smoke test。
+3. 下载并校验 Middlebury、NYUv2、模型权重；建立 data manifest。
+4. 冻结 split、crop、valid mask、resize、对齐和输出 schema。
+5. 完成 geometry、image metric、boundary metric、temporal metric 的单元测试。
+6. 录制并冻结自有视频的开发/测试划分。
+
+**进入 Part 1 的门禁：** 数据数量和方向正确；输出 schema 可用；合成指标测试通过；至少一个模型能产生可加载的原始浮点深度。
+
+### Step 1：完成 Part 1A——经典双目几何
+
+1. 实现 Middlebury PFM/calibration loader。
+2. 先跑 StereoBM，确认 disparity 定义、1/16 缩放和无效值。
+3. 实现 StereoSGBM 与左右一致性检查。
+4. 完成 `d → z`、`doffs`、baseline 单位处理。
+5. 冻结参数后跑 15 个场景，生成 disparity/depth 指标和可视化。
+6. 做 ±0.25/0.5/1/2 px 扰动实验，完成深度误差随距离的分析。
+
+**门禁：** 一个命令可复现全部 15 场景结果；GT/prediction overlay 通过人工检查；理论敏感性曲线与数值实验趋势一致。
+
+### Step 2：完成 Part 1B——逐帧相对深度基线
+
+1. 实现统一 DA-V2-S adapter，保存未经着色的原始相对深度。
+2. 在固定图像协议上验证允许的 median/scale-shift alignment。
+3. 对全部冻结视频逐帧推理。
+4. 实现固定范围可视化、静态 flicker、flow-aligned error 和 scale drift 曲线。
+5. 冻结 Part 1 的表格、关键图与失败案例。
+
+**进入 Part 2 的门禁：** relative/aligned/metric 标签不会混淆；同一输入可由统一 evaluator 评价；视频不使用逐帧颜色归一化。
+
+### Step 3：完成 Part 2A——单图度量深度复现
+
+1. 接入 Depth Pro，先跑样例并核对输出单位、尺寸和预测焦距。
+2. 在 NYUv2 小子集跑通无 GT alignment 的完整 evaluator。
+3. 人工核对 crop、valid mask、resize 和三个样本的手算指标。
+4. 冻结配置后跑 654 张测试图。
+5. 生成全部 metric depth 指标、Boundary F1、置信区间、效率和分类失败案例。
+6. 主线稳定后，才决定是否增加 UniDepthV2 扩展对照。
+
+### Step 4：完成 Part 2B——视频深度复现
+
+1. 接入 relative VDA-S，并与 DA-V2-S 逐帧基线做严格同设置比较。
+2. 接入 metric VDA-S，并与 frame-wise Depth Pro 做 metric track 比较。
+3. 跑全部冻结视频，生成 temporal error、local flicker、scale drift、FPS 和 VRAM。
+4. 对照检查原始浮点结果、固定色标视频和指标使用同一批帧。
+5. streaming/Base 仅在主比较完整后作为扩展。
+
+**进入 Part 3 的门禁：** A0 baseline 的配置、原始预测、指标与运行环境全部冻结；Part 3 只能读取这些结果，不能为改善分数改动 baseline 的预处理或评估 mask。
+
+### Step 5：完成 Part 3——从最小改进逐步增加模块
+
+1. 先实现 A1 朴素 EMA，建立“降低闪烁但产生拖影”的弱基线。
+2. 用合成数据验证 flow warp 后实现 A2。
+3. 依次加入 occlusion、可靠性门控、edge protection、scale anchor，得到 A3–A6。
+4. 只在开发视频选择超参数，然后锁定并一次性评估测试视频。
+5. 检查 temporal improvement、单帧 metric accuracy、boundary quality 和效率四类权衡。
+6. 用独立 flow/固定 ROI 交叉检查评价，整理成功与失败类别。
+7. 即使 A6 未胜过 A0，也保留完整消融并解释原因，不回头更改协议。
+
+**Part 3 完成门禁：** A0–A6 表格可自动生成；每个模块有对应可视化证据；主张与置信区间一致；失败案例不是事后随意挑选。
+
+### Step 6：应用、复现与提交
+
+1. 用冻结的最佳模型接入点云和点击测距 Demo。
+2. 完成至少 20 个距离测点与 10 组尺寸测量。
+3. 从自动结果生成最终表格、pipeline 图、曲线和失败案例图。
+4. 在干净环境执行 README 的 Part 1→Part 2→Part 3 最小复现路径。
+5. 检查 licenses、引用、公开仓库、原始浮点输出和所有 mandatory clips。
+6. 完成 CVPR 报告、arXiv、`depth_results.zip` 和最终 checksum。
+
+这套顺序中，Part 1 提供几何理解和逐帧诊断工具，Part 2 提供可信且冻结的强 baseline，Part 3 才在这些 baseline 上做受控改进。因此最终展示是 Part 1→2→3，核心实验也大体按此顺序；只有公共基础、记录、绘图和写作是贯穿全程的。
 
 ---
 
-## 12. 报告写作计划（CVPR 6–8 页）
+## 13. 报告写作计划（CVPR 6–8 页）
 
 建议正文控制在 8 页：
 
@@ -612,9 +712,9 @@ Demo 定量验证：
 
 ---
 
-## 13. 交付物清单
+## 14. 交付物清单
 
-### 13.1 GitHub
+### 14.1 GitHub
 
 - [ ] 公共仓库 URL 出现在摘要末尾和 README。
 - [ ] README 含安装、数据、权重、推理、评估、消融、Demo 命令。
@@ -623,7 +723,7 @@ Demo 定量验证：
 - [ ] 引用所有数据集、论文、模型、借用代码；说明各 checkpoint license。
 - [ ] 不重新发布 NYUv2/Middlebury 数据、第三方权重或无权发布的素材。
 
-### 13.2 `depth_results.zip`
+### 14.2 `depth_results.zip`
 
 建议结构：
 
@@ -645,7 +745,7 @@ depth_results/
 - [ ] mandatory clips 一个不少；教师后续发布新 clip 时更新 manifest。
 - [ ] 原始浮点深度若体积过大，可压缩 NPZ 并在 README 说明；不要只交伪彩色视频。
 
-### 13.3 PDF/arXiv/Canvas
+### 14.3 PDF/arXiv/Canvas
 
 - [ ] CVPR camera-ready，6–8 页正文，参考文献不计页数。
 - [ ] 所有推荐阅读均正确引用，数字与公开代码输出一致。
@@ -655,10 +755,11 @@ depth_results/
 
 ---
 
-## 14. 风险与回退方案
+## 15. 风险与回退方案
 
 | 风险 | 预警信号 | 处理/回退 |
 |---|---|---|
+| 当前节点无 GPU | `nvidia-smi` 失败 | 先完成数据/指标/CPU stereo；切换 GPU 计算节点后跑模型 |
 | 第三方依赖冲突 | Depth Pro/UniDepth import 失败 | 分 conda 环境，通过 NPZ schema 连接；UniDepth 降为扩展 |
 | 显存不足 | VDA OOM | vits + FP16、降低 max resolution/clip window；不使用 Large |
 | NYUv2 协议混乱 | 不同实现得分差异大 | 固化 split/crop/mask，合成单测，逐图对照公开实现 |
@@ -667,21 +768,6 @@ depth_results/
 | RAFT 过慢 | FPS 远低于 baseline | 半分辨率 flow、隔帧 flow、Farnebäck 速度版本并画 Pareto |
 | 主指标不升 | temporal 降但 AbsRel/边界恶化 | 降低 `α_max`、只对不确定区融合；完整报告负结果和适用域 |
 | 自录视频无 GT | 无法证明 metric accuracy | 用卷尺/已知尺寸测点；只把 flow 指标称 proxy，不冒充 GT |
-| 截止前实验仍扩张 | 表格/图反复变化 | 代码冻结；优先完整性、消融和复现，停止 P3 扩展 |
+| 主线完成前实验仍扩张 | 表格/图反复变化 | 先冻结主模型与协议；优先完整性、消融和复现，停止 P3 扩展 |
 
 ---
-
-## 16. 立即执行的前 10 项任务
-
-1. [ ] 为自己的实现新建干净顶层结构，保护四个现有第三方仓库和其中的本地改动。
-2. [ ] 记录 GPU/显存/CUDA；据此决定 vits 统一输入尺寸和 clip window。
-3. [ ] 下载并校验 Middlebury 两个 ZIP、NYUv2 labeled MAT、Depth Pro/DA-V2/VDA-S/RAFT-Small 权重。
-4. [ ] 冻结 NYUv2 654 test split、crop、有效深度范围和聚合方式，先完成指标单元测试。
-5. [ ] 完成 Middlebury PFM/calib loader 与 SGBM 单场景 end-to-end，人工核对米制深度。
-6. [ ] 为 DA-V2、Depth Pro、VDA 定义相同 NPZ 输出 schema，各跑 smoke test。
-7. [ ] 录制 6 类自有视频并冻结 dev/test 划分、帧率和帧编号。
-8. [ ] 先获得未经 Part 3 的三个可靠基线表：Middlebury、NYUv2、video temporal。
-9. [ ] 实现 A1/A2 和合成 warp 测试，再逐步加入可靠性 mask；不要直接写完整复杂版本。
-10. [ ] 从开始就自动生成表格和图，边做实验边写报告，不把可视化和引用拖到最后。
-
-完成第 8 项后再判断扩展 UniDepthV2/Base/streaming；任何扩展都不能推迟 Part 3、Demo、报告或公开复现。
