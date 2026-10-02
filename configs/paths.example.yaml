@@ -1,0 +1,16 @@
+project_root: /absolute/path/to/3201_Project
+data_root: /absolute/path/to/3201_Project/data
+checkpoint_root: /absolute/path/to/3201_Project/checkpoints
+output_root: /absolute/path/to/3201_Project/outputs
+
+datasets:
+  middlebury: /absolute/path/to/3201_Project/data/middlebury/MiddEval3
+  nyuv2_labeled: /absolute/path/to/3201_Project/data/nyuv2/nyu_depth_v2_labeled.mat
+  self_recorded: /absolute/path/to/3201_Project/data/self_recorded
+
+checkpoints:
+  depth_pro: /absolute/path/to/3201_Project/checkpoints/depth_pro/depth_pro.pt
+  depth_anything_v2_small: /absolute/path/to/3201_Project/checkpoints/depth_anything_v2/depth_anything_v2_vits.pth
+  video_depth_anything_small: /absolute/path/to/3201_Project/checkpoints/video_depth_anything/video_depth_anything_vits.pth
+  metric_video_depth_anything_small: /absolute/path/to/3201_Project/checkpoints/video_depth_anything/metric_video_depth_anything_vits.pth
+

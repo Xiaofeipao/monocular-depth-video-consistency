@@ -1,0 +1,34 @@
+protocol_status: candidate_v1
+dataset:
+  name: NYU Depth V2 labeled
+  labeled_mat: data/nyuv2/nyu_depth_v2_labeled.mat
+  split_file: data/nyuv2/splits.mat
+  split_variable: testNdxs
+  matlab_indices_are_one_based: true
+  expected_test_images: 654
+model:
+  name: Depth Pro
+  checkpoint: checkpoints/depth_pro/depth_pro.pt
+  input_rgb: full_uncropped_image
+  focal_length_source: model_prediction
+evaluation:
+  test_time_alignment: none
+  native_scale: metric
+  unit: meter
+  crop:
+    convention: "Python half-open [top:bottom, left:right]"
+    top: 45
+    bottom: 471
+    left: 41
+    right: 601
+  valid_depth_m:
+    minimum: 0.001
+    maximum: 10.0
+  clip_prediction_to_valid_range: true
+  aggregation: per_image_macro_mean
+  resize_prediction_to_ground_truth: bilinear
+metrics: [abs_rel, sq_rel, rmse, rmse_log, delta1, delta2, delta3, boundary_f1]
+notes:
+  - The crop and 10 m cap match the checked Video Depth Anything NYUv2 evaluator.
+  - The primary result follows the evaluator's effective hard-coded 0.001 m lower bound. Its declared but unused CLI field says 0.1 m, so retain a clearly labeled 0.1 m prediction-clipping sensitivity result. The two thresholds produce the same GT mask on the cropped standard test set because its minimum positive GT is 0.71330047 m.
+  - Feed the original full RGB to Depth Pro and apply the crop only during evaluation.

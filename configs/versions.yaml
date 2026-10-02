@@ -1,0 +1,31 @@
+project:
+  plan_version: "2026-10-01"
+  python: "3.10"
+  conda_env: aiaa3201
+
+runtime_snapshot:
+  recorded_at: "2026-10-01"
+  slurm_job_id: 12897135
+  node: gpu1-25
+  gpu: NVIDIA A800-SXM4-80GB
+  gpu_memory_mib: 81920
+  driver: "570.86.10"
+  driver_max_cuda: "12.8"
+  note: Verify the allocation before every GPU command; this is a snapshot, not a permanent resource.
+
+third_party:
+  depth_pro:
+    repository: https://github.com/apple/ml-depth-pro.git
+    commit: 9e65e4dbe9568d23c546fcec53302b10445e109e
+  depth_anything_v2:
+    repository: https://github.com/DepthAnything/Depth-Anything-V2.git
+    commit: a561b849ebae10a6f5ef49e26c83cbbcd36c71bf
+  video_depth_anything:
+    repository: https://github.com/DepthAnything/Video-Depth-Anything.git
+    commit: 4f5ae23172ba60fd7bc11ef671cca678842c7072
+  unidepth:
+    repository: https://github.com/lpiccinelli-eth/UniDepth.git
+    commit: 8d8cfe4c7ee15297099983607febf0d4f32eb3d6
+    enabled_in_main_environment: false
+    note: Requires torch>=2.4 and numpy>=2, which conflicts with the official VDA environment.
+

@@ -79,7 +79,23 @@ RGB / 双目 / 视频
 
 ---
 
-## 2. 官方仓库
+## 2. 当前仓库审计与版本冻结
+
+当前目录已有四个上游仓库。开始实现前要把可复现版本写入 `configs/versions.yaml`：
+
+| 仓库 | 当前上游 SHA | 用途 |
+|---|---|---|
+| `apple/ml-depth-pro` | `9e65e4dbe9568d23c546fcec53302b10445e109e` | 单图度量深度、焦距、边界指标 |
+| `DepthAnything/Depth-Anything-V2` | `a561b849ebae10a6f5ef49e26c83cbbcd36c71bf` | 逐帧相对深度与评估参考 |
+| `DepthAnything/Video-Depth-Anything` | `4f5ae23172ba60fd7bc11ef671cca678842c7072` | relative/metric 视频模型 |
+| `lpiccinelli-eth/UniDepth` | `8d8cfe4c7ee15297099983607febf0d4f32eb3d6` | 可选扩展对照 |
+
+注意：当前 `Depth-Anything-V2` 和 `Video-Depth-Anything` 工作树已有大量未提交变动。实施时：
+
+- 不覆盖、不 reset、不把来源不明的本地改动混入实验。
+- 先记录 `git status`、`git diff --stat` 和 SHA；必要时重新建立干净的只读上游副本。
+- 自己的代码放在新的顶层工程目录中，通过 adapter 调用上游，不直接大改第三方源码。
+- 公开仓库用固定 commit 的 submodule、安装脚本或清晰的 clone 指令；权重只提供下载脚本和 SHA256。
 
 官方资料：
 
@@ -247,12 +263,12 @@ outputs/<part>/<run_id>/
 
 实现步骤：
 
-- [ ] 读取 `im0.png`、`im1.png`、`disp0GT.pfm`、`mask0nocc.png` 和 `calib.txt`。
-- [ ] 正确处理 OpenCV 视差的 1/16 定点缩放、`min_disp`、`ndisp` 和无效值。
-- [ ] 分别从左到右和从右到左估计视差，将右图视差 warp 回左图。
-- [ ] 左右一致性 mask：`|d_L(x) + d_R(x-d_L)| < τ_lr`；同时剔除出界、非正视差和遮挡。
-- [ ] 使用 SGBM 的 `P1/P2`、block size、uniqueness ratio、speckle filter 等参数建立可复现配置。
-- [ ] 固定 5 个覆盖不同困难因素的开发场景选参数，其余场景不调参；同时报告 15 场景逐项结果与宏平均。
+- [x] 读取 `im0.png`、`im1.png`、`disp0GT.pfm`、`mask0nocc.png` 和 `calib.txt`。
+- [x] 正确处理 OpenCV 视差的 1/16 定点缩放、`min_disp`、`ndisp` 和无效值。
+- [x] 分别从左到右和从右到左估计视差，将右图视差 warp 回左图。
+- [x] 左右一致性 mask：`|d_L(x) + d_R(x-d_L)| < τ_lr`；同时剔除出界、非正视差和遮挡。
+- [x] 使用 BM/SGBM 的 block size、uniqueness ratio、speckle filter，以及 SGBM 的 `P1/P2` 等参数建立可复现配置。
+- [x] 固定 5 个覆盖不同困难因素的开发场景，分别用单轮网格搜索选择 BM 和 SGBM 参数；其余场景不调参，同时保留两个固定经验参数基线并报告四组 15 场景结果。
 
 Middlebury 标定含主点偏移时，深度应使用：
 
@@ -264,7 +280,7 @@ z = \frac{fB}{d + d_{offs}}
 
 报告内容：
 
-- StereoBM 与 StereoSGBM 的 disparity MAE/RMSE、Bad-1/Bad-2/Bad-4、有效覆盖率。
+- 固定经验参数 BM、调参后 BM、固定经验参数 SGBM、调参后 SGBM 四组的 disparity MAE/RMSE、Bad-1/Bad-2/Bad-4、有效覆盖率。
 - 度量深度 AbsRel/RMSE，并按 GT 深度近/中/远三个区间分桶。
 - 每场景展示 RGB、GT disparity、预测、绝对误差、无效区、L-R inconsistency。
 - 至少一个局部放大图说明薄结构和遮挡边缘为何失败。
@@ -276,7 +292,7 @@ z = \frac{fB}{d + d_{offs}}
 = \frac{z^2}{fB}\left|\delta d\right|.
 \]
 
-对 GT disparity 人为加入 ±0.25、±0.5、±1、±2 px 误差，绘制深度误差随距离增长曲线，并与上式的一阶近似对照。这会成为报告中连接经典几何与现代单目模型的重要分析图。
+对 GT disparity 人为加入 ±0.25、±0.5、±1、±2 px 误差，绘制深度误差随距离增长曲线，并与上式的一阶近似对照；该理论分析由相机几何决定，四组共享。同时按 GT 距离分别统计四组实际预测的深度误差、Bad-2 和 coverage。这会成为报告中连接经典几何与现代单目模型的重要分析图。
 
 ### 5.2 逐帧 Depth Anything V2-Small
 
@@ -771,3 +787,18 @@ depth_results/
 | 主线完成前实验仍扩张 | 表格/图反复变化 | 先冻结主模型与协议；优先完整性、消融和复现，停止 P3 扩展 |
 
 ---
+
+## 16. 立即执行的前 10 项任务
+
+1. [ ] 为自己的实现新建干净顶层结构，保护四个现有第三方仓库和其中的本地改动。
+2. [ ] 获取可用 GPU 节点信息，记录 GPU/显存/CUDA；据此决定 vits 统一输入尺寸和 clip window。
+3. [ ] 下载并校验 Middlebury 两个 ZIP、NYUv2 labeled MAT、Depth Pro/DA-V2/VDA-S/RAFT-Small 权重。
+4. [ ] 冻结 NYUv2 654 test split、crop、有效深度范围和聚合方式，先完成指标单元测试。
+5. [x] 完成 Middlebury PFM/calib loader 与 SGBM 单场景 end-to-end，人工核对米制深度。
+6. [ ] 为 DA-V2、Depth Pro、VDA 定义相同 NPZ 输出 schema，各跑 smoke test。
+7. [ ] 录制 6 类自有视频并冻结 dev/test 划分、帧率和帧编号。
+8. [ ] 先获得未经 Part 3 的三个可靠基线表：Middlebury、NYUv2、video temporal。
+9. [ ] 实现 A1/A2 和合成 warp 测试，再逐步加入可靠性 mask；不要直接写完整复杂版本。
+10. [ ] 从第一周开始自动生成表格和图，边做实验边写报告，不把可视化和引用拖到最后。
+
+完成第 8 项后再判断扩展 UniDepthV2/Base/streaming；任何扩展都不能推迟 Part 3、Demo、报告或公开复现。

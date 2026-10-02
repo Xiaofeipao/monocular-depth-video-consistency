@@ -1,0 +1,65 @@
+protocol_status: candidate_v1
+status_notes:
+  - NYUv2 follows the effective official evaluator implementation at 0.001--10 m. On the standard cropped 654-image test set the minimum positive GT is 0.71330047 m, so 0.001 vs 0.1 does not change the GT mask; retain a 0.1 m prediction-clipping sensitivity result.
+  - Video frame rate and fixed test clips cannot be frozen until self-recorded and mandatory clips are available.
+
+reproducibility:
+  random_seed: 42
+  inference_mode: true
+  cudnn_benchmark: false
+  report_precision: true
+
+nyuv2:
+  split_file: data/nyuv2/splits.mat
+  split_variable: testNdxs
+  indexing_in_file: matlab_one_based
+  expected_test_images: 654
+  model_input: full_uncropped_rgb
+  evaluation_crop:
+    convention: python_half_open
+    top: 45
+    bottom: 471
+    left: 41
+    right: 601
+  prediction_resize:
+    target: ground_truth_shape
+    interpolation: bilinear
+    align_corners: false
+  valid_depth_m:
+    minimum: 0.001
+    maximum: 10.0
+    bounds: exclusive
+  prediction_clip_m: [0.001, 10.0]
+  aggregation: per_image_macro_mean
+  native_metric_track:
+    test_time_alignment: none
+    unit: meter
+  relative_diagnostic_track:
+    label: aligned_relative
+    alignment_domain: inverse_depth
+    alignment_method: scale_shift_least_squares
+    alignment_scope: per_image
+    unit: arbitrary
+  mandatory_metrics: [abs_rel, sq_rel, rmse, rmse_log, delta1, delta2, delta3]
+
+boundary:
+  extraction_domain: log_depth
+  log_jump_threshold: 0.05
+  match_tolerance_px: 1
+  metrics: [boundary_precision, boundary_recall, boundary_f1]
+  note: Custom reasonable boundary definition allowed by the brief; report parameters with results.
+
+video:
+  target_fps: pending_clip_freeze
+  frame_selection: identical_across_methods
+  resize_and_interpolation: identical_across_methods
+  visualization_range: fixed_per_clip
+  flow_convention: backward_target_to_source_dx_dy
+  occlusion_mask: raft_forward_backward_cycle_consistency
+  flow_cycle_threshold_px: 1.0
+  temporal_metrics: [temporal_abs_rel, temporal_rmse, temporal_rmse_log]
+  scale_drift:
+    statistic: per_frame_median_depth_ratio
+    reference_frame: 0
+    summaries: [mean_abs_log_drift, max_abs_log_drift]
+  warning: Median-scale drift is a proxy and is most interpretable on static clips.

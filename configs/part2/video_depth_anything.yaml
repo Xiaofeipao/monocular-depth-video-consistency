@@ -1,0 +1,27 @@
+protocol_status: candidate_v1
+common:
+  encoder: vits
+  input_size: 518
+  precision: fp16
+  visualization_normalization: fixed_per_clip
+  save_raw_float_depth: true
+relative_track:
+  framewise_baseline: depth_anything_v2_small
+  video_model: video_depth_anything_small
+  checkpoint: checkpoints/video_depth_anything/video_depth_anything_vits.pth
+  unit: arbitrary
+metric_track:
+  framewise_baseline: depth_pro
+  video_model: metric_video_depth_anything_small
+  checkpoint: checkpoints/video_depth_anything/metric_video_depth_anything_vits.pth
+  unit: meter
+  alignment: none
+fairness:
+  same_decoded_frames: true
+  same_frame_indices: true
+  same_target_fps: true
+  same_evaluation_masks: true
+  report_native_and_common_resolution_when_model_constraints_differ: true
+notes:
+  - target_fps, clip list, and frame hashes will be frozen after self-recorded and mandatory clips are available.
+

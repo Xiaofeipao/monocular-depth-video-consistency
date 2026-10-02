@@ -1,419 +1,203 @@
-# Project 3: Monocular Metric Depth Estimation & Video Consistency
+# AIAA 3201 Project 3
 
-AIAA 3201 — Introduction to Computer Vision  
-Term Project Instruction  
-Fall 2026
+本项目研究单目度量深度估计与视频时序一致性。工程按照 [PLAN.md](PLAN.md) 推进：各 Part 的配置、流水线和输出分别放在 `part1/`、`part2/`、`part3/` 下，数据、几何、模型、光流、指标和可视化等公共实现统一放在 `src/` 下。
 
-## Overview
+## 当前状态
 
-This project focuses on estimating dense depth from a single RGB image or an ordinary monocular video, recovering a meaningful metric scale, and maintaining stable predictions over time. The goal is to connect classical geometry with modern depth foundation models and video temporal modeling.
+Step 0 的自动化基础工作已经完成；Step 1 / Part 1A 经典双目几何也已完成并通过门禁。环境、公开数据、Small 预训练权重、输出 schema、公共指标、Middlebury 15 场景四组 BM/SGBM 对照、统一调参、敏感性分析及 A800 推理 smoke test 均已就绪。没有启动任何正式训练或微调。
 
-The final system should support an application such as point-cloud visualization, distance measurement, depth-aware effects, or obstacle warning.
+以下事项按用户要求暂缓，不阻塞当前公开数据工作：
 
-> Experimental verification required: evaluate whether the final system actually improves depth quality and temporal consistency on real image/video samples.
+- 录制六类自有视频，并加入教师指定的 mandatory clips；
+- 在 Part 1/2 的 loader 和可视化工具完成后，人工检查至少 10 组 RGB/depth overlay。
 
-### Core Task
+NYUv2 主协议已经决定采用评估代码实际执行的 `0.001--10 m`。标准裁剪后的 654 张测试图中，最小正 GT 深度为 `0.71330047 m`，因此 `0.001 m` 与 `0.1 m` 得到的 GT mask 完全相同；两者只可能因预测深度的下限裁剪而产生差异。主结果使用 `0.001 m` 以复现官方代码，同时报告一次明确标注的 `0.1 m` 敏感性对照。
 
-Given a single RGB image or monocular video, the system must:
+项目的持久执行规则记录在 [AGENTS.md](AGENTS.md)。用户最新提供的 GPU 资源为 Slurm Job `12882905`；本次 Part 1A 只使用 CPU，没有占用该 GPU。每次执行后续 GPU 命令前仍需确认 Job 状态和实际 GPU 型号。
 
-- estimate dense depth,
-- recover an approximate metric scale,
-- maintain temporal consistency across frames,
-- produce a meaningful downstream application output.
+## 环境
 
-### Key Concepts
+主环境名为 `aiaa3201`：
 
-- Projective geometry: disparity, focal length, camera intrinsics, metric scale
-- Monocular depth: relative depth vs. zero-shot metric depth
-- Foundation models: large-scale pretraining and cross-dataset generalization
-- Video consistency: temporal propagation, optical flow, scale drift, and occlusion handling
+```bash
+conda env create -f environment.yml
+conda activate aiaa3201
+```
 
-> Experimental verification required: confirm the practical effect of these concepts on real benchmarks and videos.
+如果环境已经存在，可用以下命令安装或更新依赖：
 
-### Group Size
+```bash
+conda run -n aiaa3201 python -m pip install -r requirements-core.txt
+conda run -n aiaa3201 python -m pip install --no-deps -e ./ml-depth-pro
+```
 
-- 2 students per group
+已验证的主要版本为 Python 3.10.21、PyTorch 2.1.1+cu121、torchvision 0.16.1+cu121、NumPy 1.24.0、OpenCV 4.11.0、SciPy 1.15.3 和 h5py 3.14.0。完整 Conda 导出与已安装包清单保存在 `outputs/step0/`。
 
----
+UniDepth 暂不放入主环境：其 `torch>=2.4, numpy>=2` 要求与 Video Depth Anything 官方使用的 `torch==2.1.1, numpy==1.24.0` 冲突。UniDepth 只作为后续可选扩展，不属于当前基线。
 
-## Project Goal
+## 数据与权重
 
-We aim to build a monocular depth estimation pipeline that combines:
+所有下载均通过 HPC 网络执行，并支持断点续传：
 
-- frame-wise depth estimation from a strong backbone,
-- temporal consistency modeling for video sequences,
-- optional calibration or flow-based refinement,
-- evaluation on both image and video benchmarks.
+```bash
+./scripts/prepare_data.sh
+./scripts/download_checkpoints.sh
+```
 
-The final project should demonstrate both quantitative depth quality and visually stable video results.
-> Experimental verification required: determine which combination of backbone + temporal refinement is actually better on the provided data.
----
+当前公开数据包括：
 
-## Repository Structure
+- Middlebury Stereo v3 Quarter Resolution：15/15 个训练场景，包含输入图像、GT disparity、非遮挡 mask 和标定文件；
+- NYU Depth V2 labeled：1,449 对 RGB/depth，以及互不重叠的标准 795 train / 654 test 划分。
+
+NYUv2 官方服务器在当前集群上限速严重，因此完整 MAT 来自公开 Kaggle 镜像。该文件长度为预期的 2,972,037,809 字节，并且前 5,343,837 字节与从官方地址直接获得的部分文件逐字节一致。下载地址和来源证据记录在 `data/manifests/sources.yaml`。
+
+使用以下命令检查数据结构、几何参数、划分和哈希：
+
+```bash
+conda run -n aiaa3201 python scripts/validate_data.py
+sha256sum -c data/manifests/downloads.sha256
+(cd checkpoints && sha256sum -c checksums.sha256)
+```
+
+验证结果保存在 `data/manifests/validated_datasets.json`。数据集和模型权重属于本地文件，不应提交或重新分发。
+
+## 验证方法
+
+运行所有项目自有测试：
+
+```bash
+conda run -n aiaa3201 python -m pytest -q
+```
+
+当前结果为 **36 passed**，覆盖：
+
+- 七个必需的单图深度指标及有效 mask；
+- 包含 Middlebury `doffs` 的 disparity-to-depth 几何；
+- 区分 metric、relative 和 alignment 状态的输出元数据规则；
+- depth-edge precision、recall 和 F1；
+- backward-flow warping、forward/backward flow consistency、遮挡 mask、时序误差及 median-scale drift；
+- PFM/标定元数据解析和协议配置约束。
+
+## Step 1 / Part 1A：Middlebury 经典双目
+
+冻结配置为 `configs/part1/middlebury_sgbm.yaml`。实验严格分为四组：`bm_fixed`（固定经验参数 BM）、`bm_tuned`（调参后 BM）、`sgbm_fixed`（固定经验参数 SGBM）和 `sgbm_tuned`（调参后 SGBM）。BM 与 SGBM 使用相同的 5 个 development scenes 选参，其余 10 个 held-out scenes 不参与调参。
+
+### 运行指令
+
+一次性复现 BM 和 SGBM 的单轮调参。BM 的 144 个候选与 SGBM 的 36 个候选分别在一次网格搜索内完成：
+
+```bash
+./scripts/part1/tune_middlebury.sh
+```
+
+如只想复现其中一个算法的调参：
+
+```bash
+./scripts/part1/tune_middlebury.sh --methods bm
+./scripts/part1/tune_middlebury.sh --methods sgbm
+```
+
+推荐用下面一条命令评估四组实验；它会同时生成逐场景原始预测、指标、可视化、理论敏感性、四组实际距离分桶对比和重载验证：
+
+```bash
+./scripts/part1/run_middlebury.sh
+```
+
+也可以分别运行四组。为避免四次运行互相覆盖汇总文件，应为每组指定不同输出目录：
+
+```bash
+./scripts/part1/run_middlebury.sh --experiments bm_fixed \
+  --output-dir outputs/part1/middlebury/single_bm_fixed
+./scripts/part1/run_middlebury.sh --experiments bm_tuned \
+  --output-dir outputs/part1/middlebury/single_bm_tuned
+./scripts/part1/run_middlebury.sh --experiments sgbm_fixed \
+  --output-dir outputs/part1/middlebury/single_sgbm_fixed
+./scripts/part1/run_middlebury.sh --experiments sgbm_tuned \
+  --output-dir outputs/part1/middlebury/single_sgbm_tuned
+```
+
+这些都是 OpenCV 经典算法的非学习式参数搜索和评估，不需要 GPU，也不会启动正式训练。
+
+### 参数与结果
+
+左右一致性阈值固定为 1 px，不参与调参。选择目标为 development scenes 上的最低宏平均 Bad-2；并依次用 disparity MAE 和 coverage 打破平局。固定/选择后的关键参数如下：
+
+| 实验组 | `block_size` | `uniqueness_ratio` | `speckle_window_size` | `texture_threshold` |
+|---|---:|---:|---:|---:|
+| `bm_fixed` | 15 | 10 | 100 | 10 |
+| `bm_tuned` | 15 | 0 | 0 | 10 |
+| `sgbm_fixed` | 5 | 10 | 100 | 不适用 |
+| `sgbm_tuned` | 3 | 0 | 0 | 不适用 |
+
+15 场景逐场景宏平均结果如下。Bad-1/2/4 的分母包含 non-occluded GT 区域内的无效预测，因此不能通过降低 coverage 获得虚假的低 bad-pixel rate；MAE/RMSE 只在有效预测处计算，必须与 coverage 一起阅读。
+
+| 实验组 | Disp. MAE (px) | Bad-1 | Bad-2 | Bad-4 | Coverage | Depth AbsRel | Depth RMSE (m) | 双向匹配时间/场景 (s) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `bm_fixed` | 0.9790 | 0.5028 | 0.4875 | 0.4793 | 0.5436 | 0.01334 | 0.1420 | 0.0392 |
+| `bm_tuned` | 1.7314 | 0.4340 | 0.4069 | 0.3899 | 0.6595 | 0.02385 | 0.2106 | 0.0241 |
+| `sgbm_fixed` | 1.0588 | 0.3735 | 0.3474 | 0.3323 | 0.6967 | 0.01226 | 0.1282 | 0.0683 |
+| `sgbm_tuned` | 1.3070 | 0.3651 | 0.3373 | 0.3203 | 0.7169 | 0.01536 | 0.1467 | 0.0557 |
+
+BM 调参后 Bad-2 从 48.75% 降至 40.69%，coverage 从 54.36% 提高到 65.95%，但有效预测处的 MAE、Depth AbsRel 和 Depth RMSE 变差；原因是更宽松的过滤保留了更多困难像素。SGBM 调参后 Bad-2 从 34.74% 小幅降至 33.73%，coverage 从 69.67% 增至 71.69%，但同样付出了有效像素误差上升的代价。主报告必须联合展示 Bad-2、coverage 和有效像素误差，不能只挑一个指标宣布“调参更好”。
+
+### 敏感性分析
+
+不应把原有的理论敏感性机械复制成四组。`sensitivity.csv/png` 对 GT disparity 注入 ±0.25/0.5/1/2 px，其结果只由相机标定和公式 `z=fB/(d+doffs)` 决定，与匹配器参数无关，所以全实验共享一份。新增的 `empirical_depth_error_by_distance.csv/png` 才是按四组分别统计实际预测的深度 MAE、disparity MAE、Bad-2 和 coverage 随 GT 距离的变化。
+
+完整正式产物位于 `outputs/part1/middlebury/frozen_v2/`：
+
+- `metrics_per_scene.csv` 与 `metrics_summary.json`：逐场景和宏平均指标；
+- 每个 `scene/experiment` 下的 `prediction.npz`、`metadata.json` 和 `visualization.png`；
+- 四张 `visualization_contact_sheet_<experiment>.jpg`；
+- `failure_zoom_Jadeplant_sgbm_tuned.png`：植物细枝、遮挡边界和低纹理区域的局部失败放大图；
+- `sensitivity.csv/png`：共享的理论/数值几何敏感性；
+- `empirical_depth_error_by_distance.csv/png`：四组实际误差与 coverage 的距离分桶对比；
+- `reload_validation.json`：60 个预测文件、1,200 个指标值的保存后重载复算门禁。
+
+单轮调参证据位于 `outputs/part1/middlebury/tuning_v2/`。旧的 `frozen_v1/`、`tuning_stage1/` 和 `tuning_stage2/` 只作为开发历史保留，不再作为当前正式结果。
+
+该步骤只进行了 OpenCV 经典匹配、非学习式参数选择和评估，没有训练模型。正式训练仍由用户启动。
+
+## 预训练模型 smoke test
+
+在 GPU Job 有效时，可运行纯推理模型门禁：
+
+```bash
+srun --jobid=12882905 --overlap \
+  conda run -n aiaa3201 python scripts/smoke_models.py
+```
+
+已验证的 A800 结果保存在 `outputs/step0/model_smoke.json`：DA-V2-S 和 Depth Pro 分别处理一张全分辨率图像；relative VDA-S 和 metric VDA-S 分别处理八帧；RAFT-Small 处理一对相同图像。所有摘要均为有限的 `float32` 输出。脚本只读取 `checkpoints/` 内的权重，不进行训练。
+
+## 候选评估协议
+
+公共协议位于 `configs/evaluation_protocol.yaml`，模型专用配置位于 `configs/part*/`。必须保持以下约束：
+
+- Depth Pro 使用原生 metric scale，以米为单位，且 `alignment: none`；
+- 经过对齐的 DA-V2 结果标记为 `aligned_relative`，不得称为 metric depth；
+- NYUv2 模型输入使用未裁剪 RGB，标准 `[45:471, 41:601]` crop 只在评估时应用；
+- NYUv2 主结果使用有效代码路径的 `0.001--10 m`、预测裁剪 `[0.001, 10]` 和逐图宏平均；
+- 另报 `[0.1, 10]` 预测裁剪敏感性结果，不与主结果混在一起；
+- 所有视频方法必须使用相同的解码帧、target FPS、分辨率、插值、mask 和逐片段固定可视化范围；
+- 时序误差使用 target-to-source backward flow 和 forward/backward consistency mask。
+
+由于视频片段、帧率和哈希尚未冻结，整个协议仍标记为 `candidate_v1`。
+
+## 工程结构与执行顺序
 
 ```text
-.
-├── README.md
-├── LICENSE
-├── requirements.txt
-├── checkpoints/
-│   └── README.md
-├── data/
-│   ├── nyuv2_sample/
-│   ├── kitti_sample/
-│   ├── videos/
-│   └── depth_results/
-├── src/
-│   ├── models/
-│   ├── datasets/
-│   ├── utils/
-│   ├── infer_image.py
-│   ├── infer_video.py
-│   ├── evaluate.py
-│   └── train.py
-├── notebooks/
-│   └── demo.ipynb
-├── results/
-│   ├── sample_depths/
-│   └── demo_videos/
-└── report/
-    └── paper.pdf
+configs/       公共协议与各 Part 配置
+src/           项目公共实现
+pipelines/     Part 1/2/3 Python 入口
+scripts/       数据准备、smoke test 与各 Part shell 入口
+tests/         项目自有单元测试和集成测试
+data/          本地数据集；只提交 manifest
+checkpoints/   本地预训练权重与 checksum manifest
+outputs/       运行输出与 Step 0 验证证据
 ```
 
-> TODO: Update this structure if the project layout differs during implementation.
+执行顺序为 Step 0 → Part 1 → Part 2 → Part 3 → Demo 与最终交付。当前 Step 1 / Part 1A 已完成；依赖自录视频的 Part 1B 暂缓。公共 evaluator 可以提前实现，但 Part 3 实验必须等待 Part 2 基线和视频协议冻结。详细门禁见 [PLAN.md](PLAN.md)，已经验证的工作记录在 [implemented.md](implemented.md)。
 
----
+## 自录视频交接
 
-## Environment Setup
-
-```bash
-conda create -n depth python=3.10 -y
-conda activate depth
-pip install -r requirements.txt
-```
-
-### Tested Environment
-
-- Python: 3.10
-- CUDA: TODO
-- GPU: TODO
-- PyTorch: TODO
-- OS: TODO
-
-> Experimental verification required: record the actual runtime environment, GPU memory usage, and compatibility of the chosen setup.
-
----
-
-## Data Preparation
-
-Create a local dataset folder similar to the following:
-
-```text
-data/
-├── nyuv2_sample/         # instructor-provided NYUv2 subset
-├── kitti_sample/         # instructor-provided KITTI subset
-├── videos/
-│   ├── static_camera/    # static-camera clip
-│   ├── moving_camera/    # moving-camera clip
-│   └── phone_clip.mp4    # custom 10–30s video
-├── depth_results/        # output directory (git-ignored)
-└── annotations/          # optional metadata or masks
-```
-
-### Recommended Practice
-
-- Use short clips with stable lighting and enough texture.
-- Keep a fixed evaluation split for fair comparisons.
-- Save raw floating-point depth maps in addition to colored visualizations.
-
-> Experimental verification required: check how different video conditions (static vs moving camera, lighting, motion blur) affect prediction quality.
-
----
-
-## Checkpoints
-
-Download the pretrained models and place them under `checkpoints/`.
-
-| Model | Purpose | Download Link |
-| --- | --- | --- |
-| Depth Anything V2 | Frame-wise depth backbone | TODO |
-| UniDepthV2 | Metric depth estimation | TODO |
-| Video Depth Anything | Temporal consistency refinement | TODO |
-| RAFT | Optional optical flow guidance | TODO |
-
----
-
-## Quick Start
-
-### Single-image depth estimation
-
-```bash
-python src/infer_image.py --input path/to/image.jpg --output results/depth.png
-```
-
-### Video depth estimation
-
-```bash
-python src/infer_video.py --input path/to/video.mp4 --output results/video_depth.mp4
-```
-
-### Evaluation
-
-```bash
-python src/evaluate.py --dataset nyuv2 --method uni_depth_v2
-```
-
-### Typical metrics reported
-
-- AbsRel
-- SqRel
-- RMSE
-- RMSE-log
-- δ1 / δ2 / δ3
-- Temporal consistency error
-- FPS / runtime
-
-> Experimental verification required: these metrics must be measured and compared across all baseline and improved methods.
-
----
-
-## Submission Requirements
-
-### 1) PDF Report (Mandatory)
-
-- Format: CVPR LaTeX template
-- Length: 6–8 pages excluding references
-- You must upload the final report to arXiv
-- Change the document status from “REVIEW version” to “CAMERA-READY version”
-- Include your arXiv ID on the first page of the Canvas submission
-
-> Experimental verification required: quantitative experiments and ablations must be included in the report with evidence, not just qualitative claims.
-
-#### Report content requirements
-
-1. Abstract & Introduction  
-   Background, motivation, problem definition, and solution overview. Include the public GitHub repository link at the end of the abstract.
-2. Related Work  
-   Review and cite at least all papers in the Recommended Reading List.
-3. Method  
-   Explain the technical roadmap clearly with diagrams and examples.
-4. Experiments  
-   Present quantitative tables, qualitative comparisons, ablation studies, and failure cases.
-5. Conclusion  
-   Summarize findings, limitations, and future work.
-
-### 2) Code (Mandatory)
-
-- Upload the code to a public GitHub repository with a clear `README.md`
-- Include dependencies, data preparation, checkpoint instructions, training/evaluation commands, and representative visual results
-- Do not submit raw code files to Canvas
-
-### 3) Depth Demo & Video (Mandatory)
-
-- Submit processed videos for all mandatory clips
-- Provide a runnable or recorded application demo
-- The demo must show the RGB input, predicted depth, and one application output such as:
-  - point cloud,
-  - click-to-measure interface,
-  - 2.5D parallax,
-  - depth-aware rendering,
-  - or obstacle warning
-- Pack outputs into `depth_results.zip`
-
-> Experimental verification required: confirm that the downstream application actually works on real input and that the depth output supports the target use case.
-
----
-
-## Important Tips for Success
-
-- Method flexibility is encouraged: the suggested roadmap is not mandatory if the final task is well addressed.
-- All three project parts are mandatory: if Part 3 does not improve the main metric, explain why with ablations and failure analysis.
-- Visual quality matters. Clean diagrams, overlays, zoomed comparisons, and failure visualizations are important.
-- The provided NYUv2/KITTI sample and mandatory video clips should be completed for a passing grade.
-- Use identical data splits, preprocessing, and evaluation settings across methods for fair comparisons.
-- Include runtime, GPU memory, and test-time refinement details in the final report.
-- Correctly cite all datasets, pretrained models, and external implementations used.
-
----
-
-## Guide to Start
-
-1. Literature review  
-   Read the recommended papers to understand pinhole geometry, monocular scale ambiguity, optical flow, and depth evaluation.
-2. Code familiarization  
-   Run the official demos for Depth Anything V2 and Video Depth Anything.
-3. Experimentation  
-   Run the methods on provided samples, save raw depth maps, and diagnose flicker or scale drift.
-4. Writing & submission  
-   Organize results, write the report, upload to arXiv, and submit required project files.
-
----
-
-## Recommended Reading List
-
-- Classical geometry: Semi-Global Matching [1], KITTI benchmark [2]
-- Monocular foundations: DPT [3], Depth Anything [4], Depth Anything V2 [5]
-- Metric depth: UniDepth [6], Depth Pro [7], UniDepthV2 [8]
-- Video depth and motion: RAFT [9], Video Depth Anything [10]
-
----
-
-## Implementation Roadmap
-
-### Part 1: Baseline — Geometry & Frame-Wise Depth
-
-#### 1. Classical Stereo: Disparity to Depth
-
-- Rectify stereo images.
-- Use OpenCV `StereoBM` or `StereoSGBM`.
-- Visualize disparity and invalid regions.
-- Convert disparity to depth with $z = fB/d$.
-- Study sensitivity to disparity errors.
-
-> Experimental verification required: quantitatively verify how disparity error propagates into depth error at different distances.
-
-#### 2. Monocular Frame Baseline
-
-- Run a relative depth model such as MiDaS, DPT, or Depth Anything V2.
-- Apply median or scale-and-shift alignment only when required by benchmark evaluation.
-- Measure temporal flicker on static-camera clips and scale drift on moving-camera clips.
-
-Expected result: frame-wise models can recover scene structure but may suffer from incorrect metric scale, unstable boundaries, and temporal flicker.
-
-> Experimental verification required: compare frame-wise depth quality and temporal stability on the provided clips.
-
-### Part 2: SOTA Reproduction — Metric & Temporally Consistent Depth
-
-#### 1. Single-Image Metric Depth
-
-- Use UniDepthV2 or Depth Pro.
-- Predict metric depth without test-set alignment when reporting official metric-depth results.
-- Compare boundary quality, scale accuracy, and domain generalization.
-
-> Experimental verification required: confirm whether metric-depth prediction provides more useful absolute scale than relative depth models.
-
-#### 2. Video Depth
-
-- Use Video Depth Anything for temporally coherent depth prediction on short clips.
-- Compare against frame-wise Depth Anything V2 under identical resolutions and evaluation settings.
-- Prefer the Small model and FP16 if GPU memory is limited.
-
-Expected result: video models reduce flicker and scale drift, although thin structures, reflective surfaces, and rapid motion remain hard cases.
-
-> Experimental verification required: measure whether the temporal model reduces flicker and scale drift in practice.
-
-### Part 3: Exploration — Calibration, Consistency & Application
-
-Possible directions:
-
-- Direction A: Flow-guided fusion with RAFT or Farneback
-- Direction B: Metric scale calibration via known-size object, camera height, or ground plane
-- Direction C: Edge-aware refinement using RGB gradients or semantic boundaries
-- Direction D: Uncertainty-aware smoothing
-- Direction E: Efficient deployment with ONNX/quantization
-- Direction F: Depth-aware downstream application
-
-> Experimental verification required: choose one direction, run controlled ablations, and verify whether the proposed improvement is genuinely beneficial.
-
-> TODO: Choose and implement one direction and report ablation results.
-
----
-
-## Dataset & Evaluation
-
-### Datasets
-
-1. Image benchmark sample (mandatory): NYUv2 indoor subset and KITTI outdoor subset  
-2. Video clips (mandatory): static-camera and moving-camera clips, plus one 10–30 second phone video  
-3. Optional but recommended: TUM RGB-D or ScanNet sequences
-
-### Metrics (Mandatory)
-
-- Metric depth accuracy: AbsRel, SqRel, RMSE, RMSE-log, δ1/δ2/δ3
-- Boundary quality: depth-edge precision/recall or similar boundary metric
-- Temporal consistency: flow-aligned temporal error and per-frame median scale drift
-- Efficiency: FPS, latency, GPU memory, model size, input resolution
-- Qualitative evaluation: RGB, depth map, point cloud or app output, and failure cases
-
-> Experimental verification required: all listed metrics must be measured and compared on the same data, not just visually inspected.
-
-> Use a fixed depth visualization range for every method on the same video clip.
-
----
-
-## Example Result Layout
-
-| RGB Input | Predicted Depth | Application Output |
-| --- | --- | --- |
-| TODO | TODO | TODO |
-| TODO | TODO | TODO |
-
-### Common Failure Cases
-
-- mirrors and reflective surfaces
-- glass and transparent materials
-- thin structures and distant small objects
-- motion blur and severe occlusions
-- sky regions and textureless areas
-
-> Experimental verification required: explicitly test and document which failure modes appear in the actual predictions and how severe they are.
-
----
-
-## References
-
-[1] Hirschmüller, H. “Stereo Processing by Semiglobal Matching and Mutual Information.” TPAMI, 2008.
-
-[2] Geiger, A., et al. “Are We Ready for Autonomous Driving? The KITTI Vision Benchmark Suite.” CVPR, 2012.
-
-[3] Ranftl, R., et al. “Vision Transformers for Dense Prediction.” ICCV, 2021.
-
-[4] Yang, L., et al. “Depth Anything: Unleashing the Power of Large-Scale Unlabeled Data.” CVPR, 2024.
-
-[5] Yang, L., et al. “Depth Anything V2.” NeurIPS, 2024.
-
-[6] Piccinelli, L., et al. “UniDepth: Universal Monocular Metric Depth Estimation.” CVPR, 2024.
-
-[7] Bochkovskii, A., et al. “Depth Pro: Sharp Monocular Metric Depth in Less Than a Second.” ICLR, 2025.
-
-[8] Piccinelli, L., et al. “UniDepthV2: Universal Monocular Metric Depth Estimation Made Simpler.” arXiv:2502.20110, 2025.
-
-[9] Teed, Z., and Deng, J. “RAFT: Recurrent All-Pairs Field Transforms for Optical Flow.” ECCV, 2020.
-
-[10] Chen, S., et al. “Video Depth Anything: Consistent Depth Estimation for Super-Long Videos.” CVPR, 2025.
-
-[11] Sturm, J., et al. “A Benchmark for the Evaluation of RGB-D SLAM Systems.” IROS, 2012.
-
-[12] Silberman, N., et al. “Indoor Segmentation and Support Inference from RGBD Images.” ECCV, 2012.
-
----
-
-## Project Status
-
-This repository is intended to serve as the project implementation and documentation for the course assignment.
-
-### TODO Checklist
-
-- [ ] Fill in team member names
-- [ ] Add public GitHub link in final report
-- [ ] Complete environment and dependency versions
-- [ ] Download required checkpoints
-- [ ] Prepare dataset folders
-- [ ] Implement inference scripts
-- [ ] Run evaluations and record metrics
-- [ ] Add result figures and failure-case analysis
-- [ ] Upload final arXiv paper and submit project files
-
-> Experimental verification required: the checklist items related to metrics, temporal consistency, and failure analysis must be completed with measurements, not assumptions.
-
----
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
----
-
-## Notes
-
-This README follows the official project instruction and is kept intentionally structured so that missing project-specific details can be filled in as TODOs while the implementation progresses.
+该事项目前按用户要求暂缓。恢复后，录制要求和固定 dev/test 划分见 `data/self_recorded/README.md` 与 `data/manifests/self_recorded_template.csv`。视频复制到项目后，应先记录 SHA256、相机元数据、解码帧数、target FPS 和精确帧索引，再开始任何 Part 3 调参。

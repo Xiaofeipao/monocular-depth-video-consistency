@@ -1,0 +1,17 @@
+schema_version: 2
+required_metadata:
+  depth_type: [metric, relative]
+  unit: [meter, arbitrary]
+  alignment: [none, median, scale_shift]
+array:
+  dtype: float32
+  dimensions: [height, width]
+  valid_pixels_finite: true
+  valid_pixels_strictly_positive: true
+validity:
+  dense_output_may_omit_mask: true
+  geometry_output_requires_boolean_mask: true
+  invalid_depth_representation: nan
+rules:
+  - "metric requires unit=meter and alignment=none"
+  - "relative requires unit=arbitrary"
