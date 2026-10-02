@@ -1,7 +1,0 @@
-{
-  "passed": true,
-  "prediction_files_checked": 60,
-  "metric_values_checked": 1200,
-  "relative_tolerance": 1e-06,
-  "absolute_tolerance": 1e-08
-}
