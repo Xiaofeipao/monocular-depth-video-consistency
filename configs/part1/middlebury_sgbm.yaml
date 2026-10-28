@@ -1,0 +1,146 @@
+protocol_status: frozen_v2
+dataset:
+  name: Middlebury Stereo v3
+  root: data/middlebury/MiddEval3/trainingQ
+  resolution: quarter
+  expected_scenes: 15
+  calibration_file: calib.txt
+  ground_truth_disparity: disp0GT.pfm
+  non_occlusion_mask: mask0nocc.png
+split:
+  development_scenes: [Adirondack, Jadeplant, Motorcycle, Pipes, PlaytableP]
+  evaluation_scenes: [ArtL, MotorcycleE, Piano, PianoL, Playroom, Playtable, Recycle, Shelves, Teddy, Vintage]
+  rule: Tune BM and SGBM only on the five declared development scenes; report all scenes and the held-out macro separately.
+geometry:
+  formula: "z = focal_length_px * baseline_m / (disparity_px + doffs_px)"
+  calibration_baseline_unit: millimeter
+  output_depth_unit: meter
+  opencv_disparity_scale: 16.0
+  invalid_depth_representation: nan_with_boolean_mask
+evaluation:
+  mask_value: 255
+  mask_name: non_occluded
+  bad_pixel_thresholds_px: [1.0, 2.0, 4.0]
+  invalid_predictions_count_as_bad: true
+  depth_bin_edges_m: [0.0, 2.0, 4.0, .inf]
+  aggregation: per_scene_macro_mean
+  disparity_threshold_unit: quarter_resolution_pixel
+
+# 四个实验组使用不同的 experiment id，避免固定参数和调参结果混淆。
+experiments:
+  bm_fixed:
+    algorithm: bm
+    parameter_source: fixed_empirical
+    parameters:
+      min_disparity: 0
+      block_size: 15
+      uniqueness_ratio: 10
+      speckle_window_size: 100
+      speckle_range: 2
+      pre_filter_cap: 31
+      texture_threshold: 10
+      disp12_max_diff: 1
+      lr_threshold_px: 1.0
+  bm_tuned:
+    algorithm: bm
+    parameter_source: tuned_on_development_scenes
+    parameters:
+      min_disparity: 0
+      block_size: 15
+      uniqueness_ratio: 0
+      speckle_window_size: 0
+      speckle_range: 2
+      pre_filter_cap: 31
+      texture_threshold: 10
+      disp12_max_diff: 1
+      lr_threshold_px: 1.0
+  sgbm_fixed:
+    algorithm: sgbm
+    parameter_source: fixed_empirical
+    parameters:
+      min_disparity: 0
+      block_size: 5
+      uniqueness_ratio: 10
+      speckle_window_size: 100
+      speckle_range: 2
+      pre_filter_cap: 63
+      disp12_max_diff: 1
+      mode: sgbm_3way
+      lr_threshold_px: 1.0
+  sgbm_tuned:
+    algorithm: sgbm
+    parameter_source: tuned_on_development_scenes
+    parameters:
+      min_disparity: 0
+      block_size: 3
+      uniqueness_ratio: 0
+      speckle_window_size: 0
+      speckle_range: 2
+      pre_filter_cap: 63
+      disp12_max_diff: 1
+      mode: sgbm_3way
+      lr_threshold_px: 1.0
+
+# BM 和 SGBM 各进行一次搜索，不再拆成 stage 1/stage 2。
+tuning:
+  objective: bad2_at_fixed_lr_threshold_1px
+  tie_breakers: [disparity_mae_px, negative_valid_coverage]
+  lr_threshold_px: 1.0
+  rationale: LR threshold is a fixed geometric consistency definition; it is not tuned because invalid-as-bad makes Bad-2 monotonic with a relaxed LR threshold.
+  bm:
+    search:
+      block_size: [5, 9, 15, 21]
+      uniqueness_ratio: [0, 5, 10, 15]
+      speckle_window_size: [0, 50, 100]
+      texture_threshold: [0, 10, 20]
+    fixed:
+      min_disparity: 0
+      speckle_range: 2
+      pre_filter_cap: 31
+      disp12_max_diff: 1
+    selection:
+      experiment: bm_tuned
+      block_size: 15
+      uniqueness_ratio: 0
+      speckle_window_size: 0
+      texture_threshold: 10
+      development_bad2: 0.3880734987067267
+      development_disparity_mae_px: 2.1643405940930043
+      development_valid_coverage: 0.6718151929452174
+      evidence: outputs/part1/middlebury/tuning_v2/bm/best.json
+  sgbm:
+    search:
+      block_size: [3, 5, 7]
+      uniqueness_ratio: [0, 5, 10, 15]
+      speckle_window_size: [0, 50, 100]
+    fixed:
+      min_disparity: 0
+      speckle_range: 2
+      pre_filter_cap: 63
+      disp12_max_diff: 1
+      mode: sgbm_3way
+    selection:
+      experiment: sgbm_tuned
+      block_size: 3
+      uniqueness_ratio: 0
+      speckle_window_size: 0
+      development_bad2: 0.29294134285087237
+      development_disparity_mae_px: 1.173806403828162
+      development_valid_coverage: 0.7436411494896432
+      evidence: outputs/part1/middlebury/tuning_v2/sgbm/best.json
+sensitivity:
+  disparity_errors_px: [0.25, 0.5, 1.0, 2.0]
+  depth_bin_width_m: 0.25
+  theoretical_scope: shared_camera_geometry
+  empirical_scope: compare_all_four_experiments
+visualization:
+  failure_zoom:
+    scene: Jadeplant
+    experiment: sgbm_tuned
+    crop_xyxy: [150, 10, 570, 350]
+outputs:
+  root: outputs/part1/middlebury
+  tuning_run: tuning_v2
+  evaluation_run: frozen_v2
+  save_npz: true
+  save_visualizations: true

@@ -1,0 +1,10 @@
+{
+  "created_at_utc": "2026-10-13T04:50:08.609832+00:00",
+  "protocol_status": "analysis_v1",
+  "sample_count": 654,
+  "formal_training_run": false,
+  "primary_tracks_test_time_alignment": "none",
+  "primary_tracks_extra_camera_information": "none",
+  "external_camera_tracks_are_diagnostic": true,
+  "another_target_domain_added": false
+}

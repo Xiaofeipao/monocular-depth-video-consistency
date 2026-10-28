@@ -1,0 +1,18 @@
+{
+  "positions_requested": 654,
+  "inferred": 654,
+  "resumed": 0,
+  "wall_seconds": 214.49164439900778,
+  "end_to_end_fps_including_io_and_save": 3.0490698219619103,
+  "environment": {
+    "torch": "2.1.1+cu121",
+    "cuda_runtime": "12.1",
+    "device": "cuda:0",
+    "precision": "float16",
+    "gpu_name": "NVIDIA RTX A6000",
+    "gpu_count_visible": 1,
+    "gpu_total_memory_bytes": 50897289216,
+    "python": "3.10.22",
+    "model_load_seconds": 9.998645724961534
+  }
+}

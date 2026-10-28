@@ -1,0 +1,97 @@
+protocol_status: analysis_v1
+random_seed: 42
+
+dataset:
+  name: NYU Depth V2 labeled
+  labeled_mat: data/nyuv2/nyu_depth_v2_labeled.mat
+  labeled_mat_sha256: 2d724b0c0ab358aa1ce5df855e5bd14a2279ab7202efe22f32a30d612dcb86aa
+  split_file: data/nyuv2/splits.mat
+  split_file_sha256: 6e081404491a8bfba2f066beaa9713ef6046f9007aa5f799f2a350506a580cee
+  split_variable: testNdxs
+  expected_test_images: 654
+
+baseline_outputs:
+  depth_pro: outputs/part2/depth_pro_nyuv2/frozen_v1
+  unidepth_v2: outputs/part2/unidepth_v2_nyuv2/frozen_v1
+
+unidepth_model:
+  repository: UniDepth
+  repository_commit: 8d8cfe4c7ee15297099983607febf0d4f32eb3d6
+  config: checkpoints/unidepth_v2_vits14/config.json
+  config_sha256: ecc1f898690debe387d10329cca5d9d66a0a447ce83c3a2a7ae3673c7ce43cfe
+  checkpoint: checkpoints/unidepth_v2_vits14/model.safetensors
+  checkpoint_sha256: 93705cb3295dd7476b44911b8a55f5215bf74e8d5eccd27cecdb1b338270a648
+
+evaluation:
+  crop:
+    convention: "Python half-open [top:bottom, left:right]"
+    top: 45
+    bottom: 471
+    left: 41
+    right: 601
+  valid_depth_m:
+    minimum: 0.001
+    maximum: 10.0
+    bounds: exclusive
+  clip_prediction_to_valid_range: true
+  aggregation: per_image_macro_mean
+  test_time_alignment: none
+
+camera_analysis:
+  reference_intrinsics_source: UniDepth/unidepth/datasets/nyuv2.py
+  reference_intrinsics_full_480x640_px:
+    - [518.8579011745019, 0.0, 325.58244941119034]
+    - [0.0, 519.4696111212749, 253.73616633400465]
+    - [0.0, 0.0, 1.0]
+  depth_pro_scalar_focal_rule: geometric_mean_fx_fy
+  depth_pro_external_track_method: exact_rescale_from_official_infer_equation
+  primary_track_extra_camera_information: none
+  external_track_extra_camera_information: calibrated_nyuv2_intrinsics
+
+boundary_analysis:
+  assignment_reference: Project3_CN_new.md section 6.2
+  primary_metric: depth_pro_official_SI_boundary_F1
+  supplemental_metric: tolerance_aware_depth_edge_precision_recall_f1
+  edge_log_threshold: 0.04879016416943205
+  edge_ratio_threshold: 1.05
+  tolerance_pixels: [1, 2, 3]
+  dilation_neighborhood: square_chebyshev
+  edge_error_band_pixels: 3
+  qualitative_selection:
+    depth_pro_advantage: 7
+    unidepth_v2_advantage: 7
+    both_low_si_f1: 6
+
+absolute_scale_analysis:
+  per_image_scale_statistic: median_prediction_over_ground_truth
+  within_scale_ratio: [0.9, 1.1]
+  depth_bins_m:
+    - [0.001, 1.0]
+    - [1.0, 2.0]
+    - [2.0, 4.0]
+    - [4.0, 6.0]
+    - [6.0, 10.0]
+  oracle_alignment:
+    enabled_for_diagnosis_only: true
+    method: divide_each_prediction_by_its_per_image_median_prediction_over_gt
+    forbidden_as_primary_result: true
+
+cross_domain_analysis:
+  add_another_target_domain: false
+  interpretation: single_target_domain_zero_shot_transfer_and_within_nyuv2_robustness
+  minimum_scene_type_images_for_ranking: 5
+  unidepth_v2_training_evidence: checkpoints/unidepth_v2_vits14/config.json
+  unidepth_v2_train_datasets: [ETH3D, Waymo]
+  unidepth_v2_validation_datasets: [IBims]
+  depth_pro_training_evidence: https://arxiv.org/abs/2410.02073
+  depth_pro_training_description: mixed_real_and_synthetic_data_exact_checkpoint_mixture_not_locally_enumerated
+  limitation: no_second_target_domain_so_multi_domain_generalization_is_not_established
+
+statistics:
+  bootstrap_resamples: 10000
+  confidence_level: 0.95
+  bootstrap_unit: image
+  seed: 42
+
+outputs:
+  root: outputs/part2/key_analysis_v1

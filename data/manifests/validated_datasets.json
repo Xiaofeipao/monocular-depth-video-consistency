@@ -1,0 +1,326 @@
+{
+  "middlebury": {
+    "root": "data/middlebury/MiddEval3/trainingQ",
+    "scene_count": 15,
+    "scenes": [
+      "Adirondack",
+      "ArtL",
+      "Jadeplant",
+      "Motorcycle",
+      "MotorcycleE",
+      "Piano",
+      "PianoL",
+      "Pipes",
+      "Playroom",
+      "Playtable",
+      "PlaytableP",
+      "Recycle",
+      "Shelves",
+      "Teddy",
+      "Vintage"
+    ],
+    "required_files_per_scene": [
+      "im0.png",
+      "im1.png",
+      "calib.txt",
+      "disp0GT.pfm",
+      "mask0nocc.png"
+    ],
+    "shape_and_geometry_validation": {
+      "Adirondack": {
+        "pfm": {
+          "width": 718,
+          "height": 496,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 1038.018,
+          "doffs_px": 53.271,
+          "baseline_mm": 176.252,
+          "width": 718,
+          "height": 496,
+          "num_disparities": 73
+        }
+      },
+      "ArtL": {
+        "pfm": {
+          "width": 347,
+          "height": 277,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 935.0,
+          "doffs_px": 50.0,
+          "baseline_mm": 160.0,
+          "width": 347,
+          "height": 277,
+          "num_disparities": 64
+        }
+      },
+      "Jadeplant": {
+        "pfm": {
+          "width": 659,
+          "height": 497,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 1823.297,
+          "doffs_px": 201.044,
+          "baseline_mm": 380.135,
+          "width": 659,
+          "height": 497,
+          "num_disparities": 160
+        }
+      },
+      "Motorcycle": {
+        "pfm": {
+          "width": 741,
+          "height": 497,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 999.421,
+          "doffs_px": 32.778,
+          "baseline_mm": 193.001,
+          "width": 741,
+          "height": 497,
+          "num_disparities": 70
+        }
+      },
+      "MotorcycleE": {
+        "pfm": {
+          "width": 741,
+          "height": 497,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 999.421,
+          "doffs_px": 32.778,
+          "baseline_mm": 193.001,
+          "width": 741,
+          "height": 497,
+          "num_disparities": 70
+        }
+      },
+      "Piano": {
+        "pfm": {
+          "width": 707,
+          "height": 481,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 713.189,
+          "doffs_px": 31.34,
+          "baseline_mm": 178.089,
+          "width": 707,
+          "height": 481,
+          "num_disparities": 65
+        }
+      },
+      "PianoL": {
+        "pfm": {
+          "width": 707,
+          "height": 481,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 713.189,
+          "doffs_px": 31.34,
+          "baseline_mm": 178.089,
+          "width": 707,
+          "height": 481,
+          "num_disparities": 65
+        }
+      },
+      "Pipes": {
+        "pfm": {
+          "width": 735,
+          "height": 485,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 989.886,
+          "doffs_px": 19.331,
+          "baseline_mm": 236.922,
+          "width": 735,
+          "height": 485,
+          "num_disparities": 75
+        }
+      },
+      "Playroom": {
+        "pfm": {
+          "width": 699,
+          "height": 476,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 1004.821,
+          "doffs_px": 69.796,
+          "baseline_mm": 342.789,
+          "width": 699,
+          "height": 476,
+          "num_disparities": 83
+        }
+      },
+      "Playtable": {
+        "pfm": {
+          "width": 680,
+          "height": 463,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 585.489,
+          "doffs_px": 26.94,
+          "baseline_mm": 193.006,
+          "width": 680,
+          "height": 463,
+          "num_disparities": 73
+        }
+      },
+      "PlaytableP": {
+        "pfm": {
+          "width": 681,
+          "height": 462,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 582.389,
+          "doffs_px": 25.07,
+          "baseline_mm": 193.006,
+          "width": 681,
+          "height": 462,
+          "num_disparities": 73
+        }
+      },
+      "Recycle": {
+        "pfm": {
+          "width": 720,
+          "height": 486,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 746.775,
+          "doffs_px": 44.112,
+          "baseline_mm": 178.232,
+          "width": 720,
+          "height": 486,
+          "num_disparities": 65
+        }
+      },
+      "Shelves": {
+        "pfm": {
+          "width": 738,
+          "height": 497,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 1349.525,
+          "doffs_px": 47.561,
+          "baseline_mm": 176.506,
+          "width": 738,
+          "height": 497,
+          "num_disparities": 60
+        }
+      },
+      "Teddy": {
+        "pfm": {
+          "width": 450,
+          "height": 375,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 1500.0,
+          "doffs_px": 52.0,
+          "baseline_mm": 80.0,
+          "width": 450,
+          "height": 375,
+          "num_disparities": 64
+        }
+      },
+      "Vintage": {
+        "pfm": {
+          "width": 722,
+          "height": 480,
+          "channels": 1,
+          "scale": 0.003922,
+          "endianness": "little"
+        },
+        "calibration": {
+          "focal_length_px": 992.854,
+          "doffs_px": 36.633,
+          "baseline_mm": 195.187,
+          "width": 722,
+          "height": 480,
+          "num_disparities": 190
+        }
+      }
+    }
+  },
+  "nyuv2": {
+    "labeled_mat": "data/nyuv2/nyu_depth_v2_labeled.mat",
+    "labeled_mat_bytes": 2972037809,
+    "labeled_mat_sha256": "2d724b0c0ab358aa1ce5df855e5bd14a2279ab7202efe22f32a30d612dcb86aa",
+    "split_file": "data/nyuv2/splits.mat",
+    "split_sha256": "6e081404491a8bfba2f066beaa9713ef6046f9007aa5f799f2a350506a580cee",
+    "train_count": 795,
+    "test_count": 654,
+    "mat_keys": [
+      "#refs#",
+      "#subsystem#",
+      "accelData",
+      "depths",
+      "images",
+      "instances",
+      "labels",
+      "names",
+      "namesToIds",
+      "rawDepthFilenames",
+      "rawDepths",
+      "rawRgbFilenames",
+      "sceneTypes",
+      "scenes"
+    ],
+    "images_shape_on_disk": [
+      1449,
+      3,
+      640,
+      480
+    ],
+    "depths_shape_on_disk": [
+      1449,
+      640,
+      480
+    ],
+    "images_dtype": "uint8",
+    "depths_dtype": "float32",
+    "indexing": "MATLAB one-based"
+  }
+}

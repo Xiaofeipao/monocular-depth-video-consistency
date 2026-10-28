@@ -1,0 +1,186 @@
+{
+  "selection_is_metric_driven_not_semantic_ground_truth": true,
+  "case_count": 20,
+  "cases": [
+    {
+      "selection_reason": "depth_pro_advantage",
+      "test_position": 21,
+      "sample_id": "test_0021_mat_0040",
+      "scene": "office_0015",
+      "scene_type": "office",
+      "depth_pro_si_boundary_f1": 0.3594759985702347,
+      "unidepth_v2_si_boundary_f1": 0.07997781371266165
+    },
+    {
+      "selection_reason": "depth_pro_advantage",
+      "test_position": 299,
+      "sample_id": "test_0299_mat_0710",
+      "scene": "bathroom_0037",
+      "scene_type": "bathroom",
+      "depth_pro_si_boundary_f1": 0.317716132449006,
+      "unidepth_v2_si_boundary_f1": 0.08330124131404638
+    },
+    {
+      "selection_reason": "depth_pro_advantage",
+      "test_position": 192,
+      "sample_id": "test_0192_mat_0477",
+      "scene": "study_0002",
+      "scene_type": "study",
+      "depth_pro_si_boundary_f1": 0.27074067684411696,
+      "unidepth_v2_si_boundary_f1": 0.036388976962639756
+    },
+    {
+      "selection_reason": "depth_pro_advantage",
+      "test_position": 113,
+      "sample_id": "test_0113_mat_0284",
+      "scene": "classroom_0001",
+      "scene_type": "classroom",
+      "depth_pro_si_boundary_f1": 0.3326496458444248,
+      "unidepth_v2_si_boundary_f1": 0.10765263506294885
+    },
+    {
+      "selection_reason": "depth_pro_advantage",
+      "test_position": 306,
+      "sample_id": "test_0306_mat_0725",
+      "scene": "bathroom_0043",
+      "scene_type": "bathroom",
+      "depth_pro_si_boundary_f1": 0.2742317618709921,
+      "unidepth_v2_si_boundary_f1": 0.05902725201874259
+    },
+    {
+      "selection_reason": "depth_pro_advantage",
+      "test_position": 189,
+      "sample_id": "test_0189_mat_0474",
+      "scene": "study_0002",
+      "scene_type": "study",
+      "depth_pro_si_boundary_f1": 0.46222559208050507,
+      "unidepth_v2_si_boundary_f1": 0.250263879848135
+    },
+    {
+      "selection_reason": "depth_pro_advantage",
+      "test_position": 208,
+      "sample_id": "test_0208_mat_0524",
+      "scene": "bedroom_0135",
+      "scene_type": "bedroom",
+      "depth_pro_si_boundary_f1": 0.3632431375754899,
+      "unidepth_v2_si_boundary_f1": 0.1534308749679488
+    },
+    {
+      "selection_reason": "unidepth_v2_advantage",
+      "test_position": 545,
+      "sample_id": "test_0545_mat_1234",
+      "scene": "living_room_0036",
+      "scene_type": "living_room",
+      "depth_pro_si_boundary_f1": 0.2785751668150953,
+      "unidepth_v2_si_boundary_f1": 0.39863525639131536
+    },
+    {
+      "selection_reason": "unidepth_v2_advantage",
+      "test_position": 275,
+      "sample_id": "test_0275_mat_0670",
+      "scene": "bathroom_0017",
+      "scene_type": "bathroom",
+      "depth_pro_si_boundary_f1": 0.03572659238715942,
+      "unidepth_v2_si_boundary_f1": 0.11664147274680352
+    },
+    {
+      "selection_reason": "unidepth_v2_advantage",
+      "test_position": 274,
+      "sample_id": "test_0274_mat_0669",
+      "scene": "bathroom_0017",
+      "scene_type": "bathroom",
+      "depth_pro_si_boundary_f1": 0.14420190780393363,
+      "unidepth_v2_si_boundary_f1": 0.2137983811993758
+    },
+    {
+      "selection_reason": "unidepth_v2_advantage",
+      "test_position": 466,
+      "sample_id": "test_0466_mat_1104",
+      "scene": "bedroom_0093",
+      "scene_type": "bedroom",
+      "depth_pro_si_boundary_f1": 0.08339771397726778,
+      "unidepth_v2_si_boundary_f1": 0.1516361289964861
+    },
+    {
+      "selection_reason": "unidepth_v2_advantage",
+      "test_position": 107,
+      "sample_id": "test_0107_mat_0273",
+      "scene": "study_room_0001",
+      "scene_type": "study_room",
+      "depth_pro_si_boundary_f1": 0.12639233575878378,
+      "unidepth_v2_si_boundary_f1": 0.1874639083628641
+    },
+    {
+      "selection_reason": "unidepth_v2_advantage",
+      "test_position": 508,
+      "sample_id": "test_0508_mat_1174",
+      "scene": "bedroom_0119",
+      "scene_type": "bedroom",
+      "depth_pro_si_boundary_f1": 0.07719107129107472,
+      "unidepth_v2_si_boundary_f1": 0.13802516773299423
+    },
+    {
+      "selection_reason": "unidepth_v2_advantage",
+      "test_position": 434,
+      "sample_id": "test_0434_mat_1039",
+      "scene": "bedroom_0070",
+      "scene_type": "bedroom",
+      "depth_pro_si_boundary_f1": 0.09062980279739492,
+      "unidepth_v2_si_boundary_f1": 0.14913265574249523
+    },
+    {
+      "selection_reason": "both_low_si_f1",
+      "test_position": 302,
+      "sample_id": "test_0302_mat_0713",
+      "scene": "bathroom_0038",
+      "scene_type": "bathroom",
+      "depth_pro_si_boundary_f1": 0.0,
+      "unidepth_v2_si_boundary_f1": 0.0
+    },
+    {
+      "selection_reason": "both_low_si_f1",
+      "test_position": 18,
+      "sample_id": "test_0018_mat_0037",
+      "scene": "office_0014",
+      "scene_type": "office",
+      "depth_pro_si_boundary_f1": 3.766681015927679e-05,
+      "unidepth_v2_si_boundary_f1": 0.0001787593213994248
+    },
+    {
+      "selection_reason": "both_low_si_f1",
+      "test_position": 56,
+      "sample_id": "test_0056_mat_0133",
+      "scene": "kitchen_0007",
+      "scene_type": "kitchen",
+      "depth_pro_si_boundary_f1": 0.0003270213031020306,
+      "unidepth_v2_si_boundary_f1": 0.0
+    },
+    {
+      "selection_reason": "both_low_si_f1",
+      "test_position": 14,
+      "sample_id": "test_0014_mat_0033",
+      "scene": "office_0013",
+      "scene_type": "office",
+      "depth_pro_si_boundary_f1": 0.0008849159816164108,
+      "unidepth_v2_si_boundary_f1": 0.0
+    },
+    {
+      "selection_reason": "both_low_si_f1",
+      "test_position": 145,
+      "sample_id": "test_0145_mat_0359",
+      "scene": "home_office_0002",
+      "scene_type": "home_office",
+      "depth_pro_si_boundary_f1": 0.0006882237273323136,
+      "unidepth_v2_si_boundary_f1": 0.0010869565217391304
+    },
+    {
+      "selection_reason": "both_low_si_f1",
+      "test_position": 618,
+      "sample_id": "test_0618_mat_1389",
+      "scene": "dining_room_0018",
+      "scene_type": "dining_room",
+      "depth_pro_si_boundary_f1": 0.0030322549692187034,
+      "unidepth_v2_si_boundary_f1": 0.0
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "created_at_utc": "2026-10-12T14:11:06.991986+00:00",
+  "config": "/home/user/cjx/3201_Project/configs/part2/depth_pro_nyuv2.yaml",
+  "config_sha256": "8fa799bf80d6f70051a664b69c4733666c911cf4535d1213ffba7a20f72cc595",
+  "protocol_status": "frozen_v1",
+  "mode": "infer-evaluate",
+  "sample_count": 654,
+  "full_test_split": true,
+  "formal_training_run": false,
+  "test_time_alignment": "none",
+  "external_focal_length_provided": false
+}

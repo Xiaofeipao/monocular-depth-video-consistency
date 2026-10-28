@@ -1,0 +1,31 @@
+middlebury:
+  input_url: https://vision.middlebury.edu/stereo/submit3/zip/MiddEval3-data-Q.zip
+  ground_truth_url: https://vision.middlebury.edu/stereo/submit3/zip/MiddEval3-GT0-Q.zip
+  resolution: quarter
+  expected_training_scenes: 15
+
+nyuv2:
+  canonical_url: https://horatio.cs.nyu.edu/mit/silberman/nyu_depth_v2/nyu_depth_v2_labeled.mat
+  downloaded_archive_url: https://www.kaggle.com/api/v1/datasets/download/wesleypan/nyu-depth-v2-labeled-mat
+  mirror_reason: Canonical host was throttled to tens of KB/s from this HPC.
+  archive_member: nyu_depth_v2_labeled.mat
+  expected_labeled_mat_bytes: 2972037809
+  official_prefix_comparison:
+    matched: true
+    compared_bytes: 5343837
+    note: The extracted mirror file matched every byte obtained directly from the canonical URL before the throttled partial download was removed.
+  split_url: https://horatio.cs.nyu.edu/mit/silberman/indoor_seg_sup/splits.mat
+  expected_train_images: 795
+  expected_test_images: 654
+
+unidepth_v2_vits14:
+  repository: https://github.com/lpiccinelli-eth/UniDepth
+  repository_commit: 8d8cfe4c7ee15297099983607febf0d4f32eb3d6
+  huggingface_repo: lpiccinelli/unidepth-v2-vits14
+  huggingface_revision: 038c238f06c87b6c2f5b3749fd51fbf442b1f218
+  download_endpoint: https://hf-mirror.com
+  files:
+    config.json:
+      sha256: ecc1f898690debe387d10329cca5d9d66a0a447ce83c3a2a7ae3673c7ce43cfe
+    model.safetensors:
+      sha256: 93705cb3295dd7476b44911b8a55f5215bf74e8d5eccd27cecdb1b338270a648

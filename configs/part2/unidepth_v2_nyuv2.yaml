@@ -1,0 +1,87 @@
+protocol_status: frozen_v1
+random_seed: 42
+dataset:
+  name: NYU Depth V2 labeled
+  labeled_mat: data/nyuv2/nyu_depth_v2_labeled.mat
+  labeled_mat_sha256: 2d724b0c0ab358aa1ce5df855e5bd14a2279ab7202efe22f32a30d612dcb86aa
+  split_file: data/nyuv2/splits.mat
+  split_file_sha256: 6e081404491a8bfba2f066beaa9713ef6046f9007aa5f799f2a350506a580cee
+  split_variable: testNdxs
+  matlab_indices_are_one_based: true
+  expected_test_images: 654
+model:
+  name: UniDepthV2-S (ViT-S/14)
+  repository: UniDepth
+  repository_commit: 8d8cfe4c7ee15297099983607febf0d4f32eb3d6
+  huggingface_repo: lpiccinelli/unidepth-v2-vits14
+  huggingface_revision: 038c238f06c87b6c2f5b3749fd51fbf442b1f218
+  config: checkpoints/unidepth_v2_vits14/config.json
+  config_sha256: ecc1f898690debe387d10329cca5d9d66a0a447ce83c3a2a7ae3673c7ce43cfe
+  checkpoint: checkpoints/unidepth_v2_vits14/model.safetensors
+  checkpoint_sha256: 93705cb3295dd7476b44911b8a55f5215bf74e8d5eccd27cecdb1b338270a648
+  precision: official_float16_autocast
+  input_rgb: full_uncropped_image
+  camera_output: intrinsics_px
+  provide_external_intrinsics: false
+  depth_type: metric
+  unit: meter
+  alignment: none
+  visualization_title: UniDepthV2-S native metric (m)
+evaluation:
+  test_time_alignment: none
+  native_scale: metric
+  unit: meter
+  crop:
+    convention: "Python half-open [top:bottom, left:right]"
+    top: 45
+    bottom: 471
+    left: 41
+    right: 601
+  valid_depth_m:
+    minimum: 0.001
+    maximum: 10.0
+    bounds: exclusive
+  clip_prediction_to_valid_range: true
+  aggregation: per_image_macro_mean
+  resize_prediction_to_ground_truth: bilinear_align_corners_false
+metrics:
+  depth: [abs_rel, sq_rel, rmse, rmse_log, delta1, delta2, delta3]
+  boundary:
+    name: depth_pro_official_SI_boundary_F1
+    implementation: ml-depth-pro/src/depth_pro/eval/boundary_metrics.py
+    threshold_min: 1.05
+    threshold_max: 1.25
+    threshold_count: 10
+statistics:
+  bootstrap_resamples: 10000
+  confidence_level: 0.95
+  bootstrap_unit: image
+  seed: 42
+efficiency:
+  warmup_iterations: 1
+  synchronize_cuda_for_timing: true
+  report: [mean_seconds, median_seconds, p95_seconds, fps, peak_gpu_memory_bytes]
+visualization:
+  audit_test_positions: [0, 326, 653]
+  failure_thresholds:
+    abs_rel:
+      operator: greater_than
+      value: 0.25
+    delta1:
+      operator: less_than
+      value: 0.60
+    si_boundary_f1:
+      operator: less_than
+      value: 0.01
+  metric_depth_range_m: [0.5, 10.0]
+  absolute_error_max_m: 2.0
+outputs:
+  root: outputs/part2/unidepth_v2_nyuv2
+  audit_run: audit3_v1
+  evaluation_run: frozen_v1
+notes:
+  - Feed the original full RGB to UniDepthV2 and apply the crop only during evaluation.
+  - Do not pass NYUv2 intrinsics or use any GT scale/shift alignment.
+  - Save raw native-metric float32 depth and the model-predicted 3x3 intrinsics matrix.
+  - Evaluate valid GT at 0.001--10 m and clip predictions to [0.001, 10] m.
+  - Use the same split, crop, metrics, bootstrap, failure thresholds, and visualization layout as Depth Pro.

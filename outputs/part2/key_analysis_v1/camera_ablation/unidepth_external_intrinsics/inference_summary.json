@@ -1,0 +1,38 @@
+{
+  "formal_training_run": false,
+  "sample_count": 654,
+  "inferred_this_invocation": 654,
+  "resumed": 0,
+  "wall_seconds_this_invocation": 36.18509386200458,
+  "mean_inference_seconds_this_invocation": 0.016058687148088824,
+  "peak_gpu_memory_bytes_this_invocation": 510163968,
+  "external_intrinsics_px": [
+    [
+      518.85791015625,
+      0.0,
+      325.58245849609375
+    ],
+    [
+      0.0,
+      519.4696044921875,
+      253.7361602783203
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "environment": {
+    "torch": "2.7.1+cu126",
+    "cuda_runtime": "12.6",
+    "device": "cuda:0",
+    "precision": "official_float16_autocast",
+    "gpu_name": "NVIDIA RTX A6000",
+    "gpu_count_visible": 1,
+    "gpu_total_memory_bytes": 50897289216,
+    "python": "3.10.21",
+    "numpy": "2.2.6",
+    "model_load_seconds": 0.48969561513513327
+  }
+}
