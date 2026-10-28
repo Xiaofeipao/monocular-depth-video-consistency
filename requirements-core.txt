@@ -1,0 +1,27 @@
+# Main environment for Depth Pro, Depth Anything V2, Video Depth Anything,
+# torchvision RAFT, evaluation, and visualization. UniDepth is intentionally
+# excluded because its NumPy/PyTorch constraints conflict with VDA's pins.
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+torch==2.1.1
+torchvision==0.16.1
+xformers==0.0.23
+numpy==1.24.0
+opencv-python-headless==4.11.0.86
+matplotlib==3.10.6
+pillow==11.3.0
+pillow-heif==1.1.0
+timm==1.0.20
+imageio==2.37.0
+imageio-ffmpeg==0.4.7
+decord==0.6.0
+einops==0.4.1
+easydict==1.13
+tqdm==4.67.1
+OpenEXR==3.3.1
+h5py==3.14.0
+scipy==1.15.3
+pandas==2.3.2
+PyYAML==6.0.2
+pytest==8.4.2
+

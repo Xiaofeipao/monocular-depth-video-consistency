@@ -1,0 +1,41 @@
+{
+  "assignment_section_6_2_compliance": {
+    "main": "official scale-invariant Boundary F1",
+    "supplement": "depth-edge precision/recall/F1",
+    "edge_ratio_threshold": 1.05,
+    "tolerance_pixels": [
+      1,
+      2,
+      3
+    ]
+  },
+  "region_error": {
+    "depth_pro": {
+      "official_si_boundary_f1_mean": 0.15927408060093043,
+      "edge_abs_rel_mean": 0.13383807642072074,
+      "nonedge_abs_rel_mean": 0.09581913719586002
+    },
+    "unidepth_v2": {
+      "official_si_boundary_f1_mean": 0.11300739651910406,
+      "edge_abs_rel_mean": 0.1549569666784382,
+      "nonedge_abs_rel_mean": 0.10904331546880601
+    }
+  },
+  "paired_f1": {
+    "tolerance_1px_depth_pro_minus_unidepth": {
+      "mean": 0.05074956228992043,
+      "lower": 0.04403711214467202,
+      "upper": 0.05761123444740698
+    },
+    "tolerance_2px_depth_pro_minus_unidepth": {
+      "mean": 0.05407874291757011,
+      "lower": 0.04700965017271165,
+      "upper": 0.06112354293375701
+    },
+    "tolerance_3px_depth_pro_minus_unidepth": {
+      "mean": 0.059279846720867405,
+      "lower": 0.05206323193213661,
+      "upper": 0.06634821689340878
+    }
+  }
+}

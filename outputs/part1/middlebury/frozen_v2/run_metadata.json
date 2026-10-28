@@ -1,0 +1,14 @@
+{
+  "created_at_utc": "2026-10-12T14:00:49.480361+00:00",
+  "config": "/home/user/cjx/3201_Project/configs/part1/middlebury_sgbm.yaml",
+  "config_sha256": "eafdc83ec9f47b8333cf1a9f46cea5b460aac6075f576bc7150c11080d6bca0f",
+  "protocol_status": "frozen_v2",
+  "experiments": [
+    "bm_fixed",
+    "bm_tuned",
+    "sgbm_fixed",
+    "sgbm_tuned"
+  ],
+  "scene_count": 15,
+  "formal_training_run": false
+}

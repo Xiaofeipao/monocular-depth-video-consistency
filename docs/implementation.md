@@ -2,12 +2,15 @@
 
 ## Scope and validation status
 
-The code covers the assignment's three parts and the application/evaluation
-infrastructure. It does not claim that experiments on real data have already
-been completed. There are no datasets, pretrained weights or model clones in
-the supplied repository. GPU setup is intentionally deferred by the user.
-The CVPR report and arXiv/GitHub publication are separate final deliverables;
-the current task implements code locally, without publishing anything.
+The code covers all three Parts. The integrated teammate branch adds frozen
+Middlebury/NYUv2 image experiments and their historical result evidence, without
+their original raw predictions or large data/weights. See `docs/current_results.md`
+for those runs; they were not re-executed during integration. Locally inspected
+DAV2/VDA source checkouts live outside this repository. Public small-data
+preparation is described in `data/public_samples/README.md`. Part 3 results
+include synthetic diagnostics; initial real GPU video runs are now recorded in
+`docs/gpu_progress_20261028.md`. The user has now
+authorized GitHub publication of the integrated code and prepared data materials.
 
 Assignment-facing entry points live in `pipelines/part1`, `pipelines/part2` and
 `pipelines/part3`, each with its own README mapping entry points to algorithm
@@ -32,8 +35,8 @@ No dependencies were installed into these existing environments.
 Core checks:
 
 ```powershell
-conda activate pytorch_env
-python -m unittest discover -s tests -v
+conda activate env_isaaclab
+python -m pytest -q
 ```
 
 The end-to-end test in `tests/test_pipeline.py` generates synthetic depth with

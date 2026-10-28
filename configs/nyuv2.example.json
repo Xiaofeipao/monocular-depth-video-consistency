@@ -1,8 +1,10 @@
 {
   "dataset": "instructor-provided NYUv2 sample; replace paths and supplied protocol",
   "protocol": {
-    "min_depth": 0.1,
+    "min_depth": 0.001,
     "max_depth": 10.0,
+    "depth_bounds": "exclusive",
+    "clip_predictions": true,
     "crop": [45, 471, 41, 601],
     "edge_threshold": 0.08,
     "edge_tolerance": 2

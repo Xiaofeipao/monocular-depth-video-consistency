@@ -26,7 +26,7 @@ def validate_manifest(path):
         if rgb.shape[:2] != depth.shape:
             raise ValueError(f"RGB/depth dimensions differ: {row['id']}")
         mask = load_depth(path.parent/row['mask'])>0 if row.get('mask') else None
-        valid = evaluation_mask(depth,protocol['min_depth'],protocol['max_depth'],mask,protocol.get('crop'))
+        valid = evaluation_mask(depth,protocol['min_depth'],protocol['max_depth'],mask,protocol.get('crop'),protocol.get('depth_bounds','inclusive'))
         records.append({"id":row['id'],"rgb_sha256":sha256(path.parent/row['rgb']),
             "depth_sha256":sha256(path.parent/row['depth']),"valid_pixels":int(valid.sum())})
     return {"manifest_sha256":sha256(path),"count":len(samples),"samples":records}
@@ -59,7 +59,7 @@ def export_nyu(mat_path,split_path,output):
             samples.append({"id":key,"rgb":f"rgb/{key}.png","depth":f"depth/{key}.npy","depth_scale":1.})
     write_json(output/'manifest.json',{"dataset":"NYUv2 standard 654 test split",
         "source_mat_sha256":sha256(mat_path),"split_sha256":sha256(split_path),
-        "protocol":{"min_depth":.1,"max_depth":10.,"crop":[45,471,41,601],
+        "protocol":{"min_depth":.001,"max_depth":10.,"depth_bounds":"exclusive","clip_predictions":True,"crop":[45,471,41,601],
                     "edge_threshold":.08,"edge_tolerance":2},"samples":samples})
     write_json(output/'validation.json',validate_manifest(output/'manifest.json'))
 

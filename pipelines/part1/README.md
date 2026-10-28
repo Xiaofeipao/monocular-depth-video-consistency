@@ -19,9 +19,9 @@ ROI 按实际静态场景设置；其他参数含义见顶层 README。
 
 ## 算法实现在哪
 
-- [src/stereo.py](../../src/stereo.py)：双目实验编排、逐场景指标和敏感性 CSV。
+- [src/stereo/run_baseline.py](../../src/stereo/run_baseline.py)：双目实验编排、逐场景指标和敏感性 CSV。
 - [src/geometry.py](../../src/geometry.py)：BM/SGBM、左右一致性、`fB/(d+doffs)`、PFM/标定读取。
-- [src/models.py](../../src/models.py)：`DepthModel` 的 `dav2` 分支。
+- [src/models/foundation.py](../../src/models/foundation.py)：`DepthModel` 的 `dav2` 分支。
 - [src/infer.py](../../src/infer.py)：公共推理、原始预测保存和固定色标输出。
 
 双目输出是米制深度；DAV2 输出是相对逆深度性质的值，不能称为原生米制深度。

@@ -1,0 +1,11 @@
+{
+  "torch": "2.1.1+cu121",
+  "cuda_runtime": "12.1",
+  "device": "cuda:0",
+  "precision": "float16",
+  "gpu_name": "NVIDIA RTX A6000",
+  "gpu_count_visible": 1,
+  "gpu_total_memory_bytes": 50897289216,
+  "python": "3.10.22",
+  "model_load_seconds": 9.998645724961534
+}

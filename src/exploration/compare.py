@@ -97,9 +97,10 @@ def select_winners(rows):
             output[metric]=[r['method'] for r in candidates if np.isclose(r[metric],optimum,rtol=1e-6,atol=1e-9)]
     eligible=[r for r in rows if r['method'] not in ('RAW','F') and r.get('temporal_log_error') is not None
               and r.get('AbsRel') is not None and r['AbsRel']<=baseline['AbsRel']+.01
+              and r.get('delta1',0)>=baseline.get('delta1',0)-.005
               and r.get('edge_F1',0)>=baseline.get('edge_F1',0)-.01]
     output['accuracy_boundary_constrained_temporal_best']=(min(eligible,key=lambda r:r['temporal_log_error'])['method'] if eligible else None)
-    output['constraint']='AbsRel <= RAW+0.01, edge_F1 >= RAW-0.01; B variants use extra measured information'
+    output['constraint']='AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information'
     return output
 
 

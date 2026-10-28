@@ -1,0 +1,64 @@
+{
+  "primary_results_remain_native_metric_without_alignment": true,
+  "oracle_scale_alignment_is_diagnostic_only": true,
+  "models": {
+    "depth_pro": {
+      "scale_ratio_mean": 0.9603877906952429,
+      "scale_ratio_median": 0.9580595195293427,
+      "scale_ratio_p05": 0.8289466440677643,
+      "scale_ratio_p95": 1.1045097768306733,
+      "images_under_0.9_fraction": 0.2217125382262997,
+      "images_within_0.9_1.1_fraction": 0.7217125382262997,
+      "images_over_1.1_fraction": 0.05657492354740061,
+      "mean_abs_log_scale_error": 0.07906895859385107,
+      "mean_signed_relative_bias": -0.03510133402360837,
+      "native_metrics": {
+        "abs_rel": 0.10047157333839377,
+        "sq_rel": 0.06400258360254008,
+        "rmse": 0.3922168142032252,
+        "rmse_log": 0.13533881856042604,
+        "delta1": 0.915173937355017,
+        "delta2": 0.9798598292097128,
+        "delta3": 0.9918777381413865
+      },
+      "oracle_scale_aligned_metrics": {
+        "abs_rel": 0.0557334820133199,
+        "sq_rel": 0.039888996847946,
+        "rmse": 0.2924880027527743,
+        "rmse_log": 0.09587549845577464,
+        "delta1": 0.9582145010737205,
+        "delta2": 0.985005073765734,
+        "delta3": 0.9935007470921349
+      }
+    },
+    "unidepth_v2": {
+      "scale_ratio_mean": 1.0436809386499795,
+      "scale_ratio_median": 1.0474258065223694,
+      "scale_ratio_p05": 0.8682460159063339,
+      "scale_ratio_p95": 1.2081784188747406,
+      "images_under_0.9_fraction": 0.07492354740061162,
+      "images_within_0.9_1.1_fraction": 0.6743119266055045,
+      "images_over_1.1_fraction": 0.25076452599388377,
+      "mean_abs_log_scale_error": 0.08202712279174937,
+      "mean_signed_relative_bias": 0.049539661061375424,
+      "native_metrics": {
+        "abs_rel": 0.11454372957333221,
+        "sq_rel": 0.06895209489957993,
+        "rmse": 0.39884995782725563,
+        "rmse_log": 0.14121805082915398,
+        "delta1": 0.8921797284727733,
+        "delta2": 0.9807310734949964,
+        "delta3": 0.9933327987804502
+      },
+      "oracle_scale_aligned_metrics": {
+        "abs_rel": 0.06038854000033069,
+        "sq_rel": 0.0388142445095828,
+        "rmse": 0.2957247606759585,
+        "rmse_log": 0.10035913776852846,
+        "delta1": 0.9494605630726253,
+        "delta2": 0.9846515381791259,
+        "delta3": 0.9932040702420436
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "dataset": "upstream Tokyo-Walk, 32 frames only, no depth GT",
+  "metric": "raw relative warp absolute error divided by fixed frame0 P95-P5; common FB mask, zero allowed; no per-frame alignment",
+  "scores": {
+    "DAV2": {
+      "reference_span": 7.40632963180542,
+      "mean": 0.006369762085077744
+    },
+    "VDA": {
+      "reference_span": 11.056855201721191,
+      "mean": 0.0042277539539481365
+    }
+  },
+  "not_metric_accuracy": true
+}

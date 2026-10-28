@@ -1,0 +1,968 @@
+{
+  "selection_rule": "outside_any_threshold",
+  "thresholds": {
+    "abs_rel": {
+      "operator": "greater_than",
+      "value": 0.25
+    },
+    "delta1": {
+      "operator": "less_than",
+      "value": 0.6
+    },
+    "si_boundary_f1": {
+      "operator": "less_than",
+      "value": 0.01
+    }
+  },
+  "failure_count": 77,
+  "cases": [
+    {
+      "test_position": 77,
+      "matlab_index_1based": 186,
+      "scene": "bedroom_0006",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1",
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.29734295978774383,
+      "delta1": 0.2454644533869886,
+      "si_boundary_f1": 0.006333573785693027
+    },
+    {
+      "test_position": 267,
+      "matlab_index_1based": 651,
+      "scene": "bathroom_0009",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1",
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.2818151006739938,
+      "delta1": 0.29358651911468814,
+      "si_boundary_f1": 0.004496156428543268
+    },
+    {
+      "test_position": 184,
+      "matlab_index_1based": 469,
+      "scene": "study_0001",
+      "scene_type": "study",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.5631974938804278,
+      "delta1": 0.08035714285714286,
+      "si_boundary_f1": 0.12351307088244991
+    },
+    {
+      "test_position": 42,
+      "matlab_index_1based": 88,
+      "scene": "bookstore_0001",
+      "scene_type": "bookstore",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.398730268112343,
+      "delta1": 0.2920900402414487,
+      "si_boundary_f1": 0.1315459481883319
+    },
+    {
+      "test_position": 201,
+      "matlab_index_1based": 517,
+      "scene": "bedroom_0133",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.38097931427017195,
+      "delta1": 0.581161971830986,
+      "si_boundary_f1": 0.0484413920914517
+    },
+    {
+      "test_position": 108,
+      "matlab_index_1based": 279,
+      "scene": "study_room_0006",
+      "scene_type": "study_room",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.3614655101236601,
+      "delta1": 0.3643318242790074,
+      "si_boundary_f1": 0.2066137359534033
+    },
+    {
+      "test_position": 310,
+      "matlab_index_1based": 731,
+      "scene": "bathroom_0046",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.34406908460670643,
+      "delta1": 0.2080776324614353,
+      "si_boundary_f1": 0.04684834618933003
+    },
+    {
+      "test_position": 52,
+      "matlab_index_1based": 128,
+      "scene": "kitchen_0005",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.343497347054694,
+      "delta1": 0.031233232729711603,
+      "si_boundary_f1": 0.01850239571656278
+    },
+    {
+      "test_position": 44,
+      "matlab_index_1based": 90,
+      "scene": "bookstore_0001",
+      "scene_type": "bookstore",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.34188238249762226,
+      "delta1": 0.46309942991281017,
+      "si_boundary_f1": 0.11063744544002095
+    },
+    {
+      "test_position": 361,
+      "matlab_index_1based": 836,
+      "scene": "kitchen_0038",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.3132173876125776,
+      "delta1": 0.5808350100603622,
+      "si_boundary_f1": 0.1249374358554727
+    },
+    {
+      "test_position": 270,
+      "matlab_index_1based": 658,
+      "scene": "bathroom_0012",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.3112931209228597,
+      "delta1": 0.1687332327297116,
+      "si_boundary_f1": 0.12946290637126243
+    },
+    {
+      "test_position": 304,
+      "matlab_index_1based": 718,
+      "scene": "bathroom_0040",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.3080180307807474,
+      "delta1": 0.3372946009389671,
+      "si_boundary_f1": 0.023946633730907493
+    },
+    {
+      "test_position": 86,
+      "matlab_index_1based": 195,
+      "scene": "kitchen_0002",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.304502498766933,
+      "delta1": 0.03324111334674715,
+      "si_boundary_f1": 0.018731089620700598
+    },
+    {
+      "test_position": 492,
+      "matlab_index_1based": 1151,
+      "scene": "bedroom_0110",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.2960371411233602,
+      "delta1": 0.009980717639168343,
+      "si_boundary_f1": 0.24990797687871175
+    },
+    {
+      "test_position": 529,
+      "matlab_index_1based": 1208,
+      "scene": "living_room_0027",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.29080484202601353,
+      "delta1": 0.38775570087189803,
+      "si_boundary_f1": 0.14843568544293617
+    },
+    {
+      "test_position": 128,
+      "matlab_index_1based": 325,
+      "scene": "classroom_0023",
+      "scene_type": "classroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.27304393417489164,
+      "delta1": 0.19522132796780683,
+      "si_boundary_f1": 0.16460981511488634
+    },
+    {
+      "test_position": 28,
+      "matlab_index_1based": 57,
+      "scene": "bedroom_0011",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.2704582563247027,
+      "delta1": 0.7540325285043595,
+      "si_boundary_f1": 0.009398857436605233
+    },
+    {
+      "test_position": 451,
+      "matlab_index_1based": 1088,
+      "scene": "bedroom_0087",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.26366245774021635,
+      "delta1": 0.5079309188464118,
+      "si_boundary_f1": 0.05197131064805165
+    },
+    {
+      "test_position": 11,
+      "matlab_index_1based": 30,
+      "scene": "office_0013",
+      "scene_type": "office",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.2589731773600908,
+      "delta1": 0.5746353118712274,
+      "si_boundary_f1": 0.30020199439675394
+    },
+    {
+      "test_position": 435,
+      "matlab_index_1based": 1048,
+      "scene": "bedroom_0073",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.253650458629821,
+      "delta1": 0.56655348759222,
+      "si_boundary_f1": 0.05124837340604975
+    },
+    {
+      "test_position": 58,
+      "matlab_index_1based": 137,
+      "scene": "kitchen_0009",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "abs_rel",
+        "delta1"
+      ],
+      "abs_rel": 0.25332932788566775,
+      "delta1": 0.4827800134138162,
+      "si_boundary_f1": 0.02526989060504854
+    },
+    {
+      "test_position": 112,
+      "matlab_index_1based": 283,
+      "scene": "bedroom_0131",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "delta1",
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.24089530305757167,
+      "delta1": 0.5214662977867203,
+      "si_boundary_f1": 0.00024036384615237782
+    },
+    {
+      "test_position": 266,
+      "matlab_index_1based": 650,
+      "scene": "bathroom_0008",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "abs_rel"
+      ],
+      "abs_rel": 0.2979309074563212,
+      "delta1": 0.6944919517102616,
+      "si_boundary_f1": 0.05748052131986839
+    },
+    {
+      "test_position": 61,
+      "matlab_index_1based": 155,
+      "scene": "living_room_0009",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "abs_rel"
+      ],
+      "abs_rel": 0.2862737311400019,
+      "delta1": 0.7458584842387659,
+      "si_boundary_f1": 0.12645230506874267
+    },
+    {
+      "test_position": 45,
+      "matlab_index_1based": 91,
+      "scene": "bookstore_0001",
+      "scene_type": "bookstore",
+      "triggered_metrics": [
+        "abs_rel"
+      ],
+      "abs_rel": 0.2834572416228668,
+      "delta1": 0.6527665995975855,
+      "si_boundary_f1": 0.1730422237395332
+    },
+    {
+      "test_position": 104,
+      "matlab_index_1based": 264,
+      "scene": "living_room_0021",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "abs_rel"
+      ],
+      "abs_rel": 0.28166025063812494,
+      "delta1": 0.6633551307847082,
+      "si_boundary_f1": 0.15681908599632188
+    },
+    {
+      "test_position": 119,
+      "matlab_index_1based": 300,
+      "scene": "classroom_0008",
+      "scene_type": "classroom",
+      "triggered_metrics": [
+        "abs_rel"
+      ],
+      "abs_rel": 0.2592606830531724,
+      "delta1": 0.6032193158953723,
+      "si_boundary_f1": 0.21395738696980174
+    },
+    {
+      "test_position": 493,
+      "matlab_index_1based": 1152,
+      "scene": "bedroom_0110",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.249734458296875,
+      "delta1": 0.04312961099932931,
+      "si_boundary_f1": 0.07556569886284503
+    },
+    {
+      "test_position": 33,
+      "matlab_index_1based": 63,
+      "scene": "bedroom_0013",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.24725364224949162,
+      "delta1": 0.6291121730382294,
+      "si_boundary_f1": 0.0019015898664092718
+    },
+    {
+      "test_position": 292,
+      "matlab_index_1based": 697,
+      "scene": "bathroom_0031",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.24659678051221937,
+      "delta1": 0.7029761904761904,
+      "si_boundary_f1": 0.006646036768288907
+    },
+    {
+      "test_position": 528,
+      "matlab_index_1based": 1207,
+      "scene": "living_room_0027",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.24120908309876332,
+      "delta1": 0.34636150234741786,
+      "si_boundary_f1": 0.14854466588850207
+    },
+    {
+      "test_position": 600,
+      "matlab_index_1based": 1339,
+      "scene": "living_room_0080",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.24040923892033417,
+      "delta1": 0.4338321596244131,
+      "si_boundary_f1": 0.052570946384924336
+    },
+    {
+      "test_position": 549,
+      "matlab_index_1based": 1249,
+      "scene": "living_room_0041",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.23725035849205808,
+      "delta1": 0.5435152582159625,
+      "si_boundary_f1": 0.3110986505754222
+    },
+    {
+      "test_position": 226,
+      "matlab_index_1based": 561,
+      "scene": "kitchen_0056",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.23706579951778914,
+      "delta1": 0.5936745472837022,
+      "si_boundary_f1": 0.049155061372063796
+    },
+    {
+      "test_position": 181,
+      "matlab_index_1based": 464,
+      "scene": "reception_room_0003",
+      "scene_type": "reception_room",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.23083953724929956,
+      "delta1": 0.4822728034875922,
+      "si_boundary_f1": 0.05502122569587713
+    },
+    {
+      "test_position": 57,
+      "matlab_index_1based": 134,
+      "scene": "kitchen_0007",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.2191119991338981,
+      "delta1": 0.5722375922199866,
+      "si_boundary_f1": 0.03130245144356559
+    },
+    {
+      "test_position": 53,
+      "matlab_index_1based": 129,
+      "scene": "kitchen_0005",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.21762532279184724,
+      "delta1": 0.8247778336686787,
+      "si_boundary_f1": 0.009250032380690103
+    },
+    {
+      "test_position": 527,
+      "matlab_index_1based": 1206,
+      "scene": "living_room_0027",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.2170877726167416,
+      "delta1": 0.3464327632461435,
+      "si_boundary_f1": 0.1109784306690623
+    },
+    {
+      "test_position": 56,
+      "matlab_index_1based": 133,
+      "scene": "kitchen_0007",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.2163812411051871,
+      "delta1": 0.7439470154258887,
+      "si_boundary_f1": 0.0
+    },
+    {
+      "test_position": 585,
+      "matlab_index_1based": 1304,
+      "scene": "living_room_0059",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.2150181773747185,
+      "delta1": 0.2932218309859155,
+      "si_boundary_f1": 0.11621245164881064
+    },
+    {
+      "test_position": 461,
+      "matlab_index_1based": 1099,
+      "scene": "bedroom_0091",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.21096205157523532,
+      "delta1": 0.48632629107981223,
+      "si_boundary_f1": 0.040302210242208085
+    },
+    {
+      "test_position": 50,
+      "matlab_index_1based": 126,
+      "scene": "kitchen_0005",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.20637128094293197,
+      "delta1": 0.5750251509054326,
+      "si_boundary_f1": 0.04151589770972111
+    },
+    {
+      "test_position": 74,
+      "matlab_index_1based": 183,
+      "scene": "bedroom_0006",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.19863345118140582,
+      "delta1": 0.718959590878605,
+      "si_boundary_f1": 0.0014437462669316954
+    },
+    {
+      "test_position": 10,
+      "matlab_index_1based": 29,
+      "scene": "office_0013",
+      "scene_type": "office",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.19683028965943247,
+      "delta1": 0.5486376592890677,
+      "si_boundary_f1": 0.14604547763012374
+    },
+    {
+      "test_position": 92,
+      "matlab_index_1based": 201,
+      "scene": "kitchen_0002",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.1951470006542044,
+      "delta1": 0.7601064721663313,
+      "si_boundary_f1": 0.009805026725519875
+    },
+    {
+      "test_position": 88,
+      "matlab_index_1based": 197,
+      "scene": "kitchen_0002",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.19385647584968005,
+      "delta1": 0.869341046277666,
+      "si_boundary_f1": 0.0021818314322631987
+    },
+    {
+      "test_position": 496,
+      "matlab_index_1based": 1155,
+      "scene": "bedroom_0111",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.1930259138469935,
+      "delta1": 0.8964788732394366,
+      "si_boundary_f1": 0.001211903739153672
+    },
+    {
+      "test_position": 75,
+      "matlab_index_1based": 184,
+      "scene": "bedroom_0006",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.1928791435396232,
+      "delta1": 0.8966675050301811,
+      "si_boundary_f1": 0.0
+    },
+    {
+      "test_position": 139,
+      "matlab_index_1based": 351,
+      "scene": "foyer_0001",
+      "scene_type": "foyer",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.18813269227823418,
+      "delta1": 0.45233903420523136,
+      "si_boundary_f1": 0.09529467138468076
+    },
+    {
+      "test_position": 450,
+      "matlab_index_1based": 1084,
+      "scene": "bedroom_0085",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.18281407333011795,
+      "delta1": 0.5507377598926895,
+      "si_boundary_f1": 0.10891199747255603
+    },
+    {
+      "test_position": 293,
+      "matlab_index_1based": 698,
+      "scene": "bathroom_0031",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "delta1"
+      ],
+      "abs_rel": 0.17621445938116184,
+      "delta1": 0.4850813212608987,
+      "si_boundary_f1": 0.07051995319248107
+    },
+    {
+      "test_position": 59,
+      "matlab_index_1based": 153,
+      "scene": "living_room_0008",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.15630831860926384,
+      "delta1": 0.8451332997987927,
+      "si_boundary_f1": 0.003898138143924561
+    },
+    {
+      "test_position": 14,
+      "matlab_index_1based": 33,
+      "scene": "office_0013",
+      "scene_type": "office",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.15283722973772684,
+      "delta1": 0.9327045606975184,
+      "si_boundary_f1": 0.0
+    },
+    {
+      "test_position": 477,
+      "matlab_index_1based": 1126,
+      "scene": "bedroom_0101",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.14814306264354302,
+      "delta1": 0.9818997317236754,
+      "si_boundary_f1": 0.007791103428967133
+    },
+    {
+      "test_position": 282,
+      "matlab_index_1based": 679,
+      "scene": "bathroom_0021",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.14656148396840205,
+      "delta1": 0.8895120724346076,
+      "si_boundary_f1": 0.0
+    },
+    {
+      "test_position": 418,
+      "matlab_index_1based": 994,
+      "scene": "bedroom_0055",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.14365411459444527,
+      "delta1": 0.9476567739771965,
+      "si_boundary_f1": 0.0034268889386265488
+    },
+    {
+      "test_position": 32,
+      "matlab_index_1based": 62,
+      "scene": "bedroom_0013",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.1318262319759954,
+      "delta1": 0.9508509389671361,
+      "si_boundary_f1": 0.0026844981129983286
+    },
+    {
+      "test_position": 301,
+      "matlab_index_1based": 712,
+      "scene": "bathroom_0038",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.13016225286871164,
+      "delta1": 0.8519994969818914,
+      "si_boundary_f1": 0.004800402579527551
+    },
+    {
+      "test_position": 618,
+      "matlab_index_1based": 1389,
+      "scene": "dining_room_0018",
+      "scene_type": "dining_room",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.09120433247562194,
+      "delta1": 0.9817027162977867,
+      "si_boundary_f1": 0.0
+    },
+    {
+      "test_position": 37,
+      "matlab_index_1based": 79,
+      "scene": "bedroom_0018",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.08878182917031952,
+      "delta1": 0.9727364185110664,
+      "si_boundary_f1": 0.009909694793206832
+    },
+    {
+      "test_position": 31,
+      "matlab_index_1based": 61,
+      "scene": "bedroom_0013",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.0802240301656681,
+      "delta1": 0.9886988598256203,
+      "si_boundary_f1": 0.005780747387624334
+    },
+    {
+      "test_position": 79,
+      "matlab_index_1based": 188,
+      "scene": "bedroom_0006",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.07334444059537457,
+      "delta1": 0.9999538900067069,
+      "si_boundary_f1": 0.0033797148661771866
+    },
+    {
+      "test_position": 302,
+      "matlab_index_1based": 713,
+      "scene": "bathroom_0038",
+      "scene_type": "bathroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.07218627099885502,
+      "delta1": 0.9912307176391684,
+      "si_boundary_f1": 0.0
+    },
+    {
+      "test_position": 23,
+      "matlab_index_1based": 42,
+      "scene": "office_0015",
+      "scene_type": "office",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.07197532271907144,
+      "delta1": 0.9997694500335346,
+      "si_boundary_f1": 0.0051358695652173915
+    },
+    {
+      "test_position": 403,
+      "matlab_index_1based": 962,
+      "scene": "bedroom_0044",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.06679029843458086,
+      "delta1": 1.0,
+      "si_boundary_f1": 0.00920957362884388
+    },
+    {
+      "test_position": 145,
+      "matlab_index_1based": 359,
+      "scene": "home_office_0002",
+      "scene_type": "home_office",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.06598466558138576,
+      "delta1": 1.0,
+      "si_boundary_f1": 0.0010869565217391304
+    },
+    {
+      "test_position": 500,
+      "matlab_index_1based": 1162,
+      "scene": "bedroom_0114",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.06549205324077095,
+      "delta1": 0.9987047283702213,
+      "si_boundary_f1": 0.0072050580188924174
+    },
+    {
+      "test_position": 484,
+      "matlab_index_1based": 1136,
+      "scene": "bedroom_0105",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.06491369615752456,
+      "delta1": 1.0,
+      "si_boundary_f1": 0.005762861685105629
+    },
+    {
+      "test_position": 18,
+      "matlab_index_1based": 37,
+      "scene": "office_0014",
+      "scene_type": "office",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.06448217259464172,
+      "delta1": 1.0,
+      "si_boundary_f1": 0.0001787593213994248
+    },
+    {
+      "test_position": 507,
+      "matlab_index_1based": 1171,
+      "scene": "bedroom_0117",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.05283521520936956,
+      "delta1": 0.9999874245472837,
+      "si_boundary_f1": 0.009247651064850726
+    },
+    {
+      "test_position": 236,
+      "matlab_index_1based": 571,
+      "scene": "kitchen_0058",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.050099210191101085,
+      "delta1": 0.995057847082495,
+      "si_boundary_f1": 0.009383434727105226
+    },
+    {
+      "test_position": 217,
+      "matlab_index_1based": 549,
+      "scene": "dining_room_0038",
+      "scene_type": "dining_room",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.041784682727523136,
+      "delta1": 0.9800469483568075,
+      "si_boundary_f1": 0.004283146709267166
+    },
+    {
+      "test_position": 632,
+      "matlab_index_1based": 1410,
+      "scene": "dining_room_0025",
+      "scene_type": "dining_room",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.039284884349147606,
+      "delta1": 0.9930876928236083,
+      "si_boundary_f1": 0.009056278330970237
+    },
+    {
+      "test_position": 588,
+      "matlab_index_1based": 1307,
+      "scene": "living_room_0060",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.03907629869373688,
+      "delta1": 0.9741448692152918,
+      "si_boundary_f1": 0.004789784055205539
+    },
+    {
+      "test_position": 407,
+      "matlab_index_1based": 970,
+      "scene": "bedroom_0048",
+      "scene_type": "bedroom",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.026542016514138178,
+      "delta1": 0.9999245472837022,
+      "si_boundary_f1": 0.005414229578093158
+    },
+    {
+      "test_position": 334,
+      "matlab_index_1based": 777,
+      "scene": "kitchen_0025",
+      "scene_type": "kitchen",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.02386525103704855,
+      "delta1": 0.9977028839704896,
+      "si_boundary_f1": 0.0027916796997184863
+    },
+    {
+      "test_position": 534,
+      "matlab_index_1based": 1216,
+      "scene": "living_room_0030",
+      "scene_type": "living_room",
+      "triggered_metrics": [
+        "si_boundary_f1"
+      ],
+      "abs_rel": 0.022727098121203056,
+      "delta1": 0.9918972166331321,
+      "si_boundary_f1": 0.0014914509790409244
+    }
+  ]
+}

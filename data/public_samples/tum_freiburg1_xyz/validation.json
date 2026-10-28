@@ -1,0 +1,102 @@
+{
+  "manifest_sha256": "6f87fafd5310dab2b231536ea5926bd6270f0f1b4e402379d7b54387a8f3c236",
+  "count": 16,
+  "samples": [
+    {
+      "id": "freiburg1_xyz_000000",
+      "rgb_sha256": "331c3fd7a3d5eefb19e3da2026625aa221ca1991f5ae30ff96060e2e3e45e368",
+      "depth_sha256": "3d2b60049ced75b1c4f468ee1ff734650e4b31ca1a535698a02a1434f41eafae",
+      "valid_pixels": 229875
+    },
+    {
+      "id": "freiburg1_xyz_000001",
+      "rgb_sha256": "a11f2cdbe8db9a88c22ec7996317f62a538d0b90ce3852e53f59a85965fb422f",
+      "depth_sha256": "5ebfa544868e8b6aec3f3edb0f9a833a08c0d65600bcc1ac32d03b83285bab00",
+      "valid_pixels": 231098
+    },
+    {
+      "id": "freiburg1_xyz_000002",
+      "rgb_sha256": "b8a9632f8aa201a83293736538ec0917d908b5595fb0a308f2d1e6c917caaad5",
+      "depth_sha256": "e145aeebbc599794704879a5fc9b21eee1523bd0a6d512e1161cef0dd8eb7f3f",
+      "valid_pixels": 225783
+    },
+    {
+      "id": "freiburg1_xyz_000003",
+      "rgb_sha256": "beded8d7716e8eb5a893b6dd84cb5a0e56015f77b3353904f7bb48b1a362b051",
+      "depth_sha256": "a5f355615f2840f98fcb42454b6b7aed6f2442f05a70f9c4812bb90d3fc51625",
+      "valid_pixels": 229854
+    },
+    {
+      "id": "freiburg1_xyz_000004",
+      "rgb_sha256": "d7fc69026bad97912a93c3d22083ae70df267737876e2806ee63f7c0cad7d196",
+      "depth_sha256": "c957680804165df000bb70df4ef6a524ec7033fd0796a7e6801bb013ffd35d3b",
+      "valid_pixels": 229392
+    },
+    {
+      "id": "freiburg1_xyz_000005",
+      "rgb_sha256": "48be03e8e2b369d348559d4f94b26811ac156f0036798092ccc0429367d09688",
+      "depth_sha256": "154fedf6cd34fdb3ca90d844c6cf088011cbb4a6994f7d87d8bb6587c0d33bb3",
+      "valid_pixels": 226213
+    },
+    {
+      "id": "freiburg1_xyz_000006",
+      "rgb_sha256": "be9ad42c30443c8c9c316dcfcb31ad5d97840c10849f9be521e3035c0e5c0c7e",
+      "depth_sha256": "cc53c137bd6d292df3e93de9ce9a3f947595b7e7ce5fb7c2aab776b010333564",
+      "valid_pixels": 232313
+    },
+    {
+      "id": "freiburg1_xyz_000007",
+      "rgb_sha256": "c3d09cdd91eb23c6407cb1969ed65e592e58f231f502b9185a0da7115ba59a68",
+      "depth_sha256": "378ee15b70099806bef82341ce47c3ffc90a963dca6f91a71e79d78b36bec440",
+      "valid_pixels": 228295
+    },
+    {
+      "id": "freiburg1_xyz_000008",
+      "rgb_sha256": "e2995d0a6183395a97da7970424d1f2a5b582d1d854f5822f23581121ae6b7c2",
+      "depth_sha256": "32a1c17984d0fd76b61a4ae109fb57709570efcce77e4a9a19bc8b2d4db495fc",
+      "valid_pixels": 231258
+    },
+    {
+      "id": "freiburg1_xyz_000009",
+      "rgb_sha256": "9360b20344b26febd3106174f07e50421d684ef8f847c4b675cd434e9163b2d5",
+      "depth_sha256": "7f931cabc8359bf8f407fd66b5f254dfa4feec8e4f94e830462f883a1fbd90ae",
+      "valid_pixels": 229652
+    },
+    {
+      "id": "freiburg1_xyz_000010",
+      "rgb_sha256": "ef7e35fd1c7b038dbdb2f17594c7e5b87c3863e6e2abad56c82964d9cf16f457",
+      "depth_sha256": "ede19876e3a3b90b8e1a74c0035263bab95f3879874628b16b48cf8d85a1a584",
+      "valid_pixels": 236570
+    },
+    {
+      "id": "freiburg1_xyz_000011",
+      "rgb_sha256": "06cf7c11d77cd7a0b20dff2f68b78c68a3d6228d043948e0ca94fe54fcf98626",
+      "depth_sha256": "a3941afc9e7191b5977bf15e05481ca39bb1fe284bba758443a51e7e2bbd07a6",
+      "valid_pixels": 228857
+    },
+    {
+      "id": "freiburg1_xyz_000012",
+      "rgb_sha256": "04c6b5a3018a8c8faf6a713466a4257360e1c9dd844c4dfb8237640a56a820b2",
+      "depth_sha256": "2d210bf2617d2b40f9b2053a80fd961db9626ea6be273da0e4a0dd55de95715e",
+      "valid_pixels": 232923
+    },
+    {
+      "id": "freiburg1_xyz_000013",
+      "rgb_sha256": "03d10b3983a93d8c2b8383a9aaea36e38fc06db482514a28cf5cb67923981522",
+      "depth_sha256": "4a68e9157c1e57cef4b225fb8e43a2000351081402d3cb02e01d7e86cd9b52d8",
+      "valid_pixels": 236610
+    },
+    {
+      "id": "freiburg1_xyz_000014",
+      "rgb_sha256": "965eefeeb53c411760fdcf86f588b4d6bdca31c914a3fbcbcc9debf97543ac87",
+      "depth_sha256": "b8b99eeee5edced5bb5b718342b35dc75794240b767e261945dd5e8ca6446e04",
+      "valid_pixels": 233497
+    },
+    {
+      "id": "freiburg1_xyz_000015",
+      "rgb_sha256": "5c1bea0eb4f344cadfc9b24028812fc6ae714bfe3e7b8b98804ddcf5672d2a89",
+      "depth_sha256": "27dfffd294cfc1a8db71b7fb2500a71eb0594c7a3e225148d97025d6c83ee488",
+      "valid_pixels": 231376
+    }
+  ]
+}

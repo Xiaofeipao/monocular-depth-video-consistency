@@ -6,7 +6,7 @@ import numpy as np
 
 from src.exploration.application import ObstacleWarning,warning_metrics
 from src.exploration.calibration import fit_scale,apply_scale
-from src.exploration.compare import DirectionProcessor,compare,load_calibration
+from src.exploration.compare import DirectionProcessor,compare,load_calibration,select_winners
 from src.exploration.edge_aware import refine_edges
 from src.exploration.efficient import ReducedFlow
 from src.exploration.uncertainty import UncertaintyFusion
@@ -14,6 +14,12 @@ from src.io import RunWriter,write_json
 
 
 class DirectionTests(unittest.TestCase):
+    def test_selection_rejects_excess_delta1_loss(self):
+        rows=[dict(method='RAW',AbsRel=.1,delta1=.9,edge_F1=.8,temporal_log_error=.03),
+              dict(method='A',AbsRel=.105,delta1=.897,edge_F1=.8,temporal_log_error=.025),
+              dict(method='D',AbsRel=.106,delta1=.89,edge_F1=.8,temporal_log_error=.02)]
+        self.assertEqual(select_winners(rows)['accuracy_boundary_constrained_temporal_best'],'A')
+
     def setUp(self):
         self.z=np.full((24,32),2.,np.float32)
         self.rgb=np.full((24,32,3),100,np.uint8)

@@ -1,0 +1,143 @@
+{
+  "synthetic": false,
+  "dataset": "TUM RGB-D freiburg1_xyz selected public smoke subset",
+  "source_manifest_sha256": "b9233e16a9598bb67ed33105f5be44c1c39bf2565bd79c15c33505bc53d10ed9",
+  "methods": [
+    {
+      "method": "RAW",
+      "extra_information": "none",
+      "AbsRel": 0.2854822106127691,
+      "RMSE": 0.3058425420655355,
+      "delta1": 0.41733440568466573,
+      "edge_F1": 0.09531913159461824,
+      "temporal_log_error": 0.02426071111112833,
+      "local_flicker": 0.016773472788433233,
+      "temporal_coverage": 0.8094937065972222,
+      "postprocess_fps": 254.71623019979097,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "A",
+      "extra_information": "none",
+      "AbsRel": 0.28596662553381513,
+      "RMSE": 0.30626804670863356,
+      "delta1": 0.41360623237425365,
+      "edge_F1": 0.09625282577666874,
+      "temporal_log_error": 0.021797083069880804,
+      "local_flicker": 0.013821854752798875,
+      "temporal_coverage": 0.8094937065972222,
+      "postprocess_fps": 3.832296685104152,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "C",
+      "extra_information": "none",
+      "AbsRel": 0.285365835807214,
+      "RMSE": 0.3052497257592568,
+      "delta1": 0.41738307355331267,
+      "edge_F1": 0.09146779516731512,
+      "temporal_log_error": 0.02398650093624989,
+      "local_flicker": 0.016408166040976842,
+      "temporal_coverage": 0.8094937065972222,
+      "postprocess_fps": 2.9476383549134897,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "D",
+      "extra_information": "none",
+      "AbsRel": 0.2863346543147272,
+      "RMSE": 0.306567518035307,
+      "delta1": 0.4095905324683984,
+      "edge_F1": 0.08995285855895598,
+      "temporal_log_error": 0.021342898967365423,
+      "local_flicker": 0.013919037207961083,
+      "temporal_coverage": 0.8094937065972222,
+      "postprocess_fps": 4.018853042450259,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "E_half",
+      "extra_information": "none",
+      "AbsRel": 0.285925046559797,
+      "RMSE": 0.30602203402170225,
+      "delta1": 0.4141107506129121,
+      "edge_F1": 0.0963039871905946,
+      "temporal_log_error": 0.0221355759849151,
+      "local_flicker": 0.014203270090123017,
+      "temporal_coverage": 0.8094937065972222,
+      "postprocess_fps": 6.768101901895918,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "E_adaptive",
+      "extra_information": "none",
+      "AbsRel": 0.28596662553381513,
+      "RMSE": 0.30626804670863356,
+      "delta1": 0.41360623237425365,
+      "edge_F1": 0.09625282577666874,
+      "temporal_log_error": 0.021797083069880804,
+      "local_flicker": 0.013821854752798875,
+      "temporal_coverage": 0.8094937065972222,
+      "postprocess_fps": 3.95217551453379,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "F",
+      "extra_information": "none",
+      "AbsRel": 0.2854822106127691,
+      "RMSE": 0.3058425420655355,
+      "delta1": 0.41733440568466573,
+      "edge_F1": 0.09531913159461824,
+      "temporal_log_error": 0.02426071111112833,
+      "local_flicker": 0.016773472788433233,
+      "temporal_coverage": 0.8094937065972222,
+      "postprocess_fps": 322.76415219965105,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    }
+  ],
+  "skipped": {
+    "B": "No independent measured calibration; test GT is not substituted",
+    "B+C+D": "No independent measured calibration; test GT is not substituted"
+  },
+  "winners": {
+    "AbsRel": [
+      "C"
+    ],
+    "edge_F1": [
+      "E_half"
+    ],
+    "temporal_log_error": [
+      "D"
+    ],
+    "postprocess_fps": [
+      "F"
+    ],
+    "accuracy_boundary_constrained_temporal_best": "A",
+    "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+  },
+  "limitations": [
+    "One run does not establish cross-domain superiority.",
+    "B variants use independent calibration information and must be reported separately.",
+    "E measures flow/postprocessing speed, not foundation-model acceleration.",
+    "F changes warnings only; depth arrays remain RAW.",
+    "No per-transition statistical significance; formal comparison needs independent clips.",
+    "A/D/E use Farneback for fusion; scoring with Farneback is not an independent-flow crosscheck."
+  ],
+  "evaluation_flow": "farneback",
+  "application_roi": null,
+  "warning_threshold_m": 1.5
+}

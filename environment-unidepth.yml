@@ -1,0 +1,10 @@
+name: aiaa3201-unidepth
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - setuptools
+  - wheel
+  - pip:
+      - -r requirements-unidepth.txt

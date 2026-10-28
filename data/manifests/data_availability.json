@@ -1,0 +1,39 @@
+{
+  "checked_date": "2026-10-28",
+  "requirements": {
+    "nyuv2_instructor": {
+      "status": "not_provided",
+      "public_substitute": "data/public_samples/nyuv2/manifest.json",
+      "public_count": 4,
+      "raw_arrays": "local_only; download on demand"
+    },
+    "kitti_instructor": {
+      "status": "not_provided",
+      "public_substitute": "data/public_samples/kitti/manifest.json",
+      "public_count": 4,
+      "split": "official val_selection_cropped, not instructor/Eigen"
+    },
+    "mandatory_static_clip": {
+      "status": "not_found_in_supplied_model_repositories",
+      "action": "deferred per user instruction"
+    },
+    "mandatory_moving_clip": {
+      "status": "not_found_in_supplied_model_repositories",
+      "action": "deferred per user instruction"
+    },
+    "phone_video_10_30_seconds": {
+      "status": "requires_user_recording",
+      "minimum_seconds": 10,
+      "maximum_seconds": 30
+    },
+    "tum_rgbd_optional": {
+      "status": "prepared_and_validated",
+      "manifest": "data/public_samples/tum_freiburg1_xyz/manifest.json",
+      "target_count": 16,
+      "role": "optional public RGB-D smoke subset",
+      "count": 16
+    }
+  },
+  "instructor_protocol": "When actual teacher subsets arrive, use separate manifests with the supplied crop/mask/max-depth; public smoke manifests are not substituted silently.",
+  "upstream_video_inventory": "upstream_video_inventory.json"
+}

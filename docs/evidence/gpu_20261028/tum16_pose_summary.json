@@ -1,0 +1,11 @@
+{
+  "pose_convention": "T_world_camera: tx ty tz qx qy qz qw; interpolated at RGB timestamp",
+  "visibility": "GT-defined rigid reprojection, z-buffer, 3cm+3% depth tolerance; not optical-flow proxy",
+  "pairs": 15,
+  "metric_means": {
+    "pose_temporal_log_error": 0.019876505927487433,
+    "pose_temporal_MAE_m": 0.025065719861619137,
+    "gt_reprojection_MAE_m": 0.009365008825164023,
+    "coverage": 0.6341555989583333
+  }
+}

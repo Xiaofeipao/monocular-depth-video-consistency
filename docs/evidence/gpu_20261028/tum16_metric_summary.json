@@ -1,0 +1,62 @@
+{
+  "depth_type": "metric",
+  "alignment": "none",
+  "clip_predictions": false,
+  "dataset_sha256": "6f87fafd5310dab2b231536ea5926bd6270f0f1b4e402379d7b54387a8f3c236",
+  "protocol": {
+    "min_depth": 0.001,
+    "max_depth": 10.0,
+    "crop": null,
+    "edge_threshold": 0.08,
+    "edge_tolerance": 2
+  },
+  "aggregation": "per_image_macro_mean",
+  "boundary_metric": "log_depth_jump_tolerant_edges (not Depth Pro SI F1)",
+  "bootstrap_samples": 0,
+  "metrics": {
+    "AbsRel": {
+      "mean": 0.2854822106127691,
+      "n": 16
+    },
+    "SqRel": {
+      "mean": 0.09077750179413571,
+      "n": 16
+    },
+    "RMSE": {
+      "mean": 0.3058425420655355,
+      "n": 16
+    },
+    "RMSE_log": {
+      "mean": 0.2542358502425429,
+      "n": 16
+    },
+    "delta1": {
+      "mean": 0.41733440568466573,
+      "n": 16
+    },
+    "delta2": {
+      "mean": 0.9871648365378889,
+      "n": 16
+    },
+    "delta3": {
+      "mean": 0.9974016293298693,
+      "n": 16
+    },
+    "valid_pixels": {
+      "mean": 230847.875,
+      "n": 16
+    },
+    "edge_precision": {
+      "mean": 0.19362132983960417,
+      "n": 16
+    },
+    "edge_recall": {
+      "mean": 0.07112519759347775,
+      "n": 16
+    },
+    "edge_F1": {
+      "mean": 0.09531913159461824,
+      "n": 16
+    }
+  }
+}

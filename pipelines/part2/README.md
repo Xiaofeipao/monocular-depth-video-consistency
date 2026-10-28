@@ -19,7 +19,7 @@ python -m src.evaluate_video --run outputs/part2/metric_static
 
 ## 算法实现在哪
 
-- [src/models.py](../../src/models.py)：`depth-pro` 和 `vda` 官方实现适配。
+- [src/models/foundation.py](../../src/models/foundation.py)：`depth-pro` 和 `vda` 官方实现适配。
 - [src/infer.py](../../src/infer.py)：公共图像/视频推理、计时和保存。
 - [src/evaluate.py](../../src/evaluate.py)：统一深度与边界评估。
 - [src/evaluate_video.py](../../src/evaluate_video.py)：统一时序评估。

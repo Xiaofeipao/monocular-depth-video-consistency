@@ -1,0 +1,77 @@
+{
+  "videos": [
+    {
+      "repository": "https://github.com/DepthAnything/Depth-Anything-V2",
+      "git_commit": "a561b849ebae10a6f5ef49e26c83cbbcd36c71bf",
+      "path": "assets/examples_video/basketball.mp4",
+      "bytes": 9714271,
+      "sha256": "3049687fa169e8383c8f90086ea457bd786e72e85584ec8b511599ebcc6cbb27",
+      "fps": 25.0,
+      "frame_count": 89,
+      "duration_seconds": 3.56,
+      "shape": [
+        4096,
+        2160
+      ],
+      "role": "upstream_demo_only",
+      "instructor_clip": false,
+      "phone_recording": false,
+      "ground_truth_depth": false
+    },
+    {
+      "repository": "https://github.com/DepthAnything/Depth-Anything-V2",
+      "git_commit": "a561b849ebae10a6f5ef49e26c83cbbcd36c71bf",
+      "path": "assets/examples_video/ferris_wheel.mp4",
+      "bytes": 5334034,
+      "sha256": "df452351def30bc0be2fef6be57e93745074954755a2b03f2b706045747a9697",
+      "fps": 23.88,
+      "frame_count": 199,
+      "duration_seconds": 8.333333333333334,
+      "shape": [
+        1080,
+        1920
+      ],
+      "role": "upstream_demo_only",
+      "instructor_clip": false,
+      "phone_recording": false,
+      "ground_truth_depth": false
+    },
+    {
+      "repository": "https://github.com/DepthAnything/Video-Depth-Anything",
+      "git_commit": "4f5ae23172ba60fd7bc11ef671cca678842c7072",
+      "path": "assets/example_videos/davis_rollercoaster.mp4",
+      "bytes": 1809560,
+      "sha256": "7268cbecd9806a1e90a416de50dc02e50b4ae01428d5971837cf679dd0c87cb8",
+      "fps": 24.0,
+      "frame_count": 70,
+      "duration_seconds": 2.9166666666666665,
+      "shape": [
+        540,
+        960
+      ],
+      "role": "upstream_demo_only",
+      "instructor_clip": false,
+      "phone_recording": false,
+      "ground_truth_depth": false
+    },
+    {
+      "repository": "https://github.com/DepthAnything/Video-Depth-Anything",
+      "git_commit": "4f5ae23172ba60fd7bc11ef671cca678842c7072",
+      "path": "assets/example_videos/Tokyo-Walk_rgb.mp4",
+      "bytes": 2251450,
+      "sha256": "097f16c33dd8c8d1d2a24d9ea31a90b76bd0ee324b958a47385183e3547a63a8",
+      "fps": 15.0,
+      "frame_count": 195,
+      "duration_seconds": 13.0,
+      "shape": [
+        720,
+        1280
+      ],
+      "role": "upstream_demo_only",
+      "instructor_clip": false,
+      "phone_recording": false,
+      "ground_truth_depth": false
+    }
+  ],
+  "note": "No instructor static/moving clips or student phone capture found in these repositories. Demo media are not republished."
+}

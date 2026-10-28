@@ -15,35 +15,49 @@ Actual runnable commands and limitations are documented below and in the
   and offline VDA adapters; Farneback/RAFT flow; inverse-depth temporal fusion
   with A0-A6 ablations; depth/boundary/temporal metrics; fixed-scale videos;
   point cloud, click measurements and submission ZIP tooling.
-- CPU verification uses the existing Anaconda `pytorch_env`. No model training
+- Initial core CPU checks used Anaconda `pytorch_env`; integrated pytest checks
+  use the existing `env_isaaclab` environment. No model training
   is needed for this training-free exploration. No existing Conda environment
   has been modified.
-- Real pretrained inference and NYUv2/KITTI/mandatory-video results are pending
-  official sources, weights and input data. Synthetic checks are software
+- The integrated `JiongxuChen` branch supplies existing Middlebury and NYUv2
+  Depth Pro/UniDepthV2 result evidence, configs and pipelines; see
+  [team results](docs/current_results.md). Those runs were produced by the teammate,
+  not rerun here; raw predictions and full datasets are not in Git.
+- Public NYUv2/KITTI smoke samples and a selected TUM RGB-D loader are available;
+  see [data preparation](data/public_samples/README.md). Instructor clips and the
+  phone recording remain missing. Synthetic Part 3 checks are software
   verification only; they are not evidence of real-world improvement.
-- CUDA setup is deferred. All commands default to CPU. Nothing is pushed to
-  GitHub by these scripts.
+- GPU is now verified on RTX 5060 Ti 16GB with `torch_py311` / PyTorch 2.12.1+cu132.
+  Real DAV2/VDA/metric-VDA and RAFT inference results are recorded in
+  [GPU progress](docs/gpu_progress_20261028.md). CLI defaults remain CPU unless
+  `--device cuda` is supplied. Pipeline scripts do not push to GitHub themselves.
 
 ## Quick start (PowerShell, from repository root)
 
 ```powershell
-conda activate pytorch_env
+conda activate env_isaaclab
 python scripts/check_environment.py
-python -m unittest discover -s tests -v
+python -m pytest -q
 ```
 
 If Conda is not on PATH, invoke your environment's `python.exe` directly.
-The core requires NumPy, OpenCV and Pillow; [requirements.txt](requirements.txt)
+The integrated core requires NumPy, OpenCV, Pillow, SciPy, Matplotlib, PyYAML and h5py; [requirements.txt](requirements.txt)
 is supplied for a new environment. Model-specific dependency instructions are
 in [checkpoints/README.md](checkpoints/README.md). Python 3.11 is recommended
 for official model stacks; this machine also has a `torch_py311` environment.
+Tests additionally need pytest (`requirements-test.txt`). Frozen GPU environments
+from the teammate remain in `environment*.yml` and `requirements-core.txt` /
+`requirements-unidepth.txt`; those are not CPU bootstrap instructions.
 
 Every output path must be new. Use another run ID when repeating a command.
 
 ## Part 1: geometry and framewise baseline
 
+组员的正式双目实验与调参入口：`pipelines.part1.run_middlebury`、
+`pipelines.part1.tune_middlebury`，配置及已有结果见 [docs/step1.md](docs/step1.md)。
+
 入口与代码归属：[pipelines/part1/README.md](pipelines/part1/README.md)。
-双目核心在 `src/geometry.py`、`src/stereo.py`；逐帧基线使用 `src/models.py` 的 DAV2 分支。
+双目核心在 `src/geometry.py`、`src/stereo/run_baseline.py`；逐帧基线使用 `src/models/foundation.py` 的 DAV2 分支。
 
 ```powershell
 python -m pipelines.part1.run_stereo --input data/MiddEval3/trainingQ --output outputs/part1/sgbm --method sgbm
@@ -58,8 +72,12 @@ the depth formula includes the principal-point offset `doffs`.
 
 ## Part 2: native metric and video models
 
+组员的冻结 NYUv2 入口：`pipelines.part2.run_depth_pro_nyuv2`、
+`pipelines.part2.run_unidepth_v2_nyuv2`、`pipelines.part2.run_key_analysis`。
+其已完成实验采用独立冻结协议，详见 [docs/step3.md](docs/step3.md)，不混入公共小样本结果。
+
 入口与代码归属：[pipelines/part2/README.md](pipelines/part2/README.md)。
-模型适配在 `src/models.py` 的 Depth Pro/VDA 分支，推理流程共用 `src/infer.py`。
+模型适配在 `src/models/foundation.py` 的 Depth Pro/VDA 分支，推理流程共用 `src/infer.py`。
 
 First create/validate a manifest using [data instructions](data/README.md).
 Paths in manifests are relative to the manifest, not the current directory.
@@ -122,10 +140,17 @@ third_party/   official model clones (ignored)
 outputs/       immutable prediction runs and evaluation outputs (ignored)
 ```
 
-`src/io.py`, `src/metrics.py`, `src/visualization.py`, `src/evaluate.py` and
+`src/io.py`, `src/metrics/video_project.py`, `src/visualization/video.py`, `src/evaluate.py` and
 `src/evaluate_video.py` are shared infrastructure for all three Parts. Existing
 `python -m src.*` commands remain supported; `pipelines.part*` makes the assignment
 ownership explicit without maintaining duplicate implementations.
+
+Both teams' APIs now share packages: `src/models/foundation.py` preserves video
+adapters, `src/metrics/video_project.py` preserves the video/Part 3 evaluator,
+`src/visualization/video.py` preserves fixed-range rendering, and
+`src/stereo/run_baseline.py` preserves the simple baseline CLI. Teammate frozen
+image metrics and official SI boundary metric remain separate named functions.
+Existing `python -m src.stereo` and `from src.models import DepthModel` still work.
 
 ## References and licenses
 

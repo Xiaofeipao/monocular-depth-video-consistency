@@ -1,0 +1,137 @@
+{
+  "synthetic": false,
+  "dataset": null,
+  "source_manifest_sha256": "09a619b4ef855db8f87b7262e9e6ef6d18621bd959f00be04b7acc6c5591a1f2",
+  "methods": [
+    {
+      "method": "RAW",
+      "extra_information": "none",
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "temporal_log_error": 0.01286748738118237,
+      "local_flicker": 0.011922114919270239,
+      "temporal_coverage": 0.9788229446684589,
+      "postprocess_fps": 470.4747678498773,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "A",
+      "extra_information": "none",
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "temporal_log_error": 0.012285494380780766,
+      "local_flicker": 0.011326729575352322,
+      "temporal_coverage": 0.9788229446684589,
+      "postprocess_fps": 7.4853219853359985,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "C",
+      "extra_information": "none",
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "temporal_log_error": 0.012704664510824987,
+      "local_flicker": 0.011777477879678049,
+      "temporal_coverage": 0.9788229446684589,
+      "postprocess_fps": 6.939715558408584,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "D",
+      "extra_information": "none",
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "temporal_log_error": 0.011550206946389328,
+      "local_flicker": 0.010607841740091961,
+      "temporal_coverage": 0.9788229446684589,
+      "postprocess_fps": 8.665792396536165,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "E_half",
+      "extra_information": "none",
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "temporal_log_error": 0.01233311741042041,
+      "local_flicker": 0.011371606870764685,
+      "temporal_coverage": 0.9788229446684589,
+      "postprocess_fps": 17.02283038175025,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "E_adaptive",
+      "extra_information": "none",
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "temporal_log_error": 0.012292939012930278,
+      "local_flicker": 0.011335119334680418,
+      "temporal_coverage": 0.9788229446684589,
+      "postprocess_fps": 10.248942981671563,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    },
+    {
+      "method": "F",
+      "extra_information": "none",
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "temporal_log_error": 0.01286748738118237,
+      "local_flicker": 0.011922114919270239,
+      "temporal_coverage": 0.9788229446684589,
+      "postprocess_fps": 723.0331239566286,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null
+    }
+  ],
+  "skipped": {
+    "B": "No independent measured calibration; test GT is not substituted",
+    "B+C+D": "No independent measured calibration; test GT is not substituted"
+  },
+  "winners": {
+    "temporal_log_error": [
+      "D"
+    ],
+    "postprocess_fps": [
+      "F"
+    ],
+    "accuracy_boundary_constrained_temporal_best": null,
+    "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+  },
+  "limitations": [
+    "One run does not establish cross-domain superiority.",
+    "B variants use independent calibration information and must be reported separately.",
+    "E measures flow/postprocessing speed, not foundation-model acceleration.",
+    "F changes warnings only; depth arrays remain RAW.",
+    "No per-transition statistical significance; formal comparison needs independent clips.",
+    "A/D/E use Farneback for fusion; scoring with Farneback is not an independent-flow crosscheck."
+  ],
+  "evaluation_flow": "farneback",
+  "application_roi": null,
+  "warning_threshold_m": 1.5
+}

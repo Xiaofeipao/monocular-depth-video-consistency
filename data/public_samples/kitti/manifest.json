@@ -1,0 +1,56 @@
+{
+  "dataset": "PUBLIC KITTI depth-completion validation selection smoke subset; NOT instructor/Eigen split",
+  "not_instructor_subset": true,
+  "source_url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_depth_selection.zip",
+  "source_bytes": 2010655006,
+  "protocol": {
+    "min_depth": 0.001,
+    "max_depth": 80.0,
+    "crop": null,
+    "input_already_cropped": true,
+    "edge_threshold": 0.08,
+    "edge_tolerance": 2
+  },
+  "samples": [
+    {
+      "id": "kitti_public_0000",
+      "rgb": "rgb/kitti_public_0000.png",
+      "depth": "depth/kitti_public_0000.png",
+      "depth_scale": 0.00390625,
+      "source_rgb": "depth_selection/val_selection_cropped/image/2011_09_26_drive_0002_sync_image_0000000005_image_02.png",
+      "source_depth": "depth_selection/val_selection_cropped/groundtruth_depth/2011_09_26_drive_0002_sync_groundtruth_depth_0000000005_image_02.png",
+      "rgb_sha256": "29fce0adcc0d2ecb45cd9262f92ee3b7fc578884379ffd68e9872afb441778ce",
+      "depth_sha256": "c91c16561c8571e17a67735c3d9211674c1cd8024fc202630f41e032fcf7c4f4"
+    },
+    {
+      "id": "kitti_public_0001",
+      "rgb": "rgb/kitti_public_0001.png",
+      "depth": "depth/kitti_public_0001.png",
+      "depth_scale": 0.00390625,
+      "source_rgb": "depth_selection/val_selection_cropped/image/2011_09_26_drive_0002_sync_image_0000000008_image_03.png",
+      "source_depth": "depth_selection/val_selection_cropped/groundtruth_depth/2011_09_26_drive_0002_sync_groundtruth_depth_0000000008_image_03.png",
+      "rgb_sha256": "726ee770c640d7544645659f28ee32cf2ea75467891f4e0f59344e6119cd46db",
+      "depth_sha256": "65d749ec03f2c304ebc80276da82ea013ea2cb11a3b6e03b4b277d1e37912448"
+    },
+    {
+      "id": "kitti_public_0002",
+      "rgb": "rgb/kitti_public_0002.png",
+      "depth": "depth/kitti_public_0002.png",
+      "depth_scale": 0.00390625,
+      "source_rgb": "depth_selection/val_selection_cropped/image/2011_09_26_drive_0002_sync_image_0000000011_image_02.png",
+      "source_depth": "depth_selection/val_selection_cropped/groundtruth_depth/2011_09_26_drive_0002_sync_groundtruth_depth_0000000011_image_02.png",
+      "rgb_sha256": "3d27d005ecbb49df22ae1282bac1cfafd24b41e6c4b35e59d818405cae8fcca4",
+      "depth_sha256": "5d010d9fae4059ab76e3bf12c0367248e25f277e60e72fe6147ba3705751a32e"
+    },
+    {
+      "id": "kitti_public_0003",
+      "rgb": "rgb/kitti_public_0003.png",
+      "depth": "depth/kitti_public_0003.png",
+      "depth_scale": 0.00390625,
+      "source_rgb": "depth_selection/val_selection_cropped/image/2011_09_26_drive_0002_sync_image_0000000014_image_03.png",
+      "source_depth": "depth_selection/val_selection_cropped/groundtruth_depth/2011_09_26_drive_0002_sync_groundtruth_depth_0000000014_image_03.png",
+      "rgb_sha256": "2e379e2f057960aeb4ccbe181bd6d3680476aed7bbaa050ffbbaa99711259e83",
+      "depth_sha256": "fade70312aded5fde8570655635cb3a3166017bfad267771884fee3ed0a25f64"
+    }
+  ]
+}

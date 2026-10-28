@@ -1,7 +1,9 @@
 # Local datasets
 
 Keep instructor-provided NYUv2/KITTI samples and the mandatory videos here.
-Do not redistribute datasets. Use the provided split/crop/mask protocol rather
+Full datasets stay local. Selected KITTI/TUM smoke samples retain upstream
+attribution and licenses; see `public_samples/README.md`. NYUv2 raw samples are
+locally downloaded, with only source manifests/hashes shared. Use the provided split/crop/mask protocol rather
 than substituting an entire public dataset for a course sample.
 
 Image manifests contain `protocol` and an ordered `samples` list, with unique

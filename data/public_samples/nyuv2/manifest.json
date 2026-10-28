@@ -1,0 +1,61 @@
+{
+  "dataset": "PUBLIC NYUv2 smoke subset from standard test split; NOT instructor-provided",
+  "not_instructor_subset": true,
+  "source_url": "https://horatio.cs.nyu.edu/mit/silberman/nyu_depth_v2/nyu_depth_v2_labeled.mat",
+  "source_bytes": 2972037809,
+  "split_url": "https://horatio.cs.nyu.edu/mit/silberman/indoor_seg_sup/splits.mat",
+  "split_sha256": "6e081404491a8bfba2f066beaa9713ef6046f9007aa5f799f2a350506a580cee",
+  "sampling": "first N indices of official testNdxs, deterministic software check only",
+  "protocol": {
+    "min_depth": 0.001,
+    "max_depth": 10.0,
+    "depth_bounds": "exclusive",
+    "clip_predictions": true,
+    "crop": [
+      45,
+      471,
+      41,
+      601
+    ],
+    "edge_threshold": 0.08,
+    "edge_tolerance": 2
+  },
+  "samples": [
+    {
+      "id": "nyu_0001",
+      "rgb": "rgb/nyu_0001.png",
+      "depth": "depth/nyu_0001.npy",
+      "depth_scale": 1.0,
+      "matlab_one_based_index": 1,
+      "rgb_sha256": "7bbc25134e0820cb8a77a230cb57f71952dad0d8833af39241aa4b8b441dead9",
+      "depth_sha256": "effcf1034c59d0d4389fc0badd78d013ec7a0572b5fd4aa76b56a66af1e41b80"
+    },
+    {
+      "id": "nyu_0002",
+      "rgb": "rgb/nyu_0002.png",
+      "depth": "depth/nyu_0002.npy",
+      "depth_scale": 1.0,
+      "matlab_one_based_index": 2,
+      "rgb_sha256": "a54d3a3df5c813a10ec3062a178e06420b117e4697949785e724ddbfd127c30c",
+      "depth_sha256": "c3b1ad459f8fb42422c5354dabc6791a8d9626eaee32653aaa6ce042ec561399"
+    },
+    {
+      "id": "nyu_0009",
+      "rgb": "rgb/nyu_0009.png",
+      "depth": "depth/nyu_0009.npy",
+      "depth_scale": 1.0,
+      "matlab_one_based_index": 9,
+      "rgb_sha256": "78f09fae547c482ec705fb70cb72b491cf1cc7048e0bdbf7f7a5eb0608658df0",
+      "depth_sha256": "0fc21e5d27677b21182b5c5dcce29e28da0ec0a664ca08451ddbfd1b6be7436a"
+    },
+    {
+      "id": "nyu_0014",
+      "rgb": "rgb/nyu_0014.png",
+      "depth": "depth/nyu_0014.npy",
+      "depth_scale": 1.0,
+      "matlab_one_based_index": 14,
+      "rgb_sha256": "8a5ab2485b82837d1573aaceed9d6b1ccc14be29a15809aeaf62252c20330ec7",
+      "depth_sha256": "1d89d549bf9b8bf4d1f5dcd2dfd4060db3811b113b187e80ee53611c35773b4e"
+    }
+  ]
+}

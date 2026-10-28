@@ -40,7 +40,7 @@ def main(argv=None):
     if source.suffix.lower() == ".json":
         manifest = json.loads(source.read_text(encoding="utf-8"))
         frames = [read_bgr(source.parent/r["rgb"]) for r in manifest["samples"]]
-        indices,fps = list(range(len(frames))),None
+        indices,fps = list(range(len(frames))),manifest.get('video',{}).get('playback_fps')
     elif source.suffix.lower() in (".jpg",".jpeg",".png",".bmp"):
         frames,indices,fps = [read_bgr(source)],[0],None
     else:
@@ -88,6 +88,8 @@ def main(argv=None):
             raise ValueError("Model smoke check failed: dimensions, NaN/Inf or negative output")
         # Relative heads can return zero; preserve raw outputs and their valid masks.
         extra["sample_id"] = manifest["samples"][i]["id"] if manifest else f"{indices[i]:06d}"
+        if manifest and 'timestamp' in manifest['samples'][i]:
+            extra['timestamp']=manifest['samples'][i]['timestamp']
         writer.add(depth,frames[i],source,indices[i],extra)
     model_seconds = sum(inference_times)*(len(frames) if a.model == "vda" else 1)
     render_run(writer.path,writer.records,a.vis_min,a.vis_max,model.metadata["unit"],fps,a.model)

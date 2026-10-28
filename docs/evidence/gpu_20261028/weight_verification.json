@@ -1,0 +1,18 @@
+{
+  "depth_anything_v2_vits.pth": {
+    "sha256": "715fade13be8f229f8a70cc02066f656f2423a59effd0579197bbf57860e1378",
+    "matches_teammate": true
+  },
+  "metric_video_depth_anything_vits.pth": {
+    "sha256": "3c28432b4e1f0d7bb31cad5151b6313b49457db5aa58d82e85bfb0f8b1311b33",
+    "matches_teammate": true
+  },
+  "raft_small_C_T_V2-01064c6d.pth": {
+    "sha256": "01064c6dba73b0fc9fc8edf772248560a00a3acfd62ac6677e9eeebad9680e27",
+    "matches_teammate": true
+  },
+  "video_depth_anything_vits.pth": {
+    "sha256": "13379300b739e659f076a59d52e9801bd8d38c541a7e71f73bbca4dcfb013609",
+    "matches_teammate": true
+  }
+}

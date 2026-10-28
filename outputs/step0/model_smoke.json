@@ -1,0 +1,75 @@
+{
+  "environment": {
+    "torch": "2.1.1+cu121",
+    "cuda_runtime": "12.1",
+    "device": "NVIDIA RTX A6000",
+    "device_count": 1
+  },
+  "depth_anything_v2_small": {
+    "shape": [
+      2268,
+      3024
+    ],
+    "dtype": "float32",
+    "finite_fraction": 1.0,
+    "minimum": 0.03964131325483322,
+    "maximum": 5.354240894317627,
+    "depth_type": "relative"
+  },
+  "depth_pro": {
+    "shape": [
+      2268,
+      3024
+    ],
+    "dtype": "float32",
+    "finite_fraction": 1.0,
+    "minimum": 0.6093443036079407,
+    "maximum": 3.0763654708862305,
+    "depth_type": "metric",
+    "unit": "meter",
+    "focal_length_px": 3361.409912109375
+  },
+  "video_depth_anything_small_relative": {
+    "shape": [
+      8,
+      2268,
+      3024
+    ],
+    "dtype": "float32",
+    "finite_fraction": 1.0,
+    "minimum": 0.6572524309158325,
+    "maximum": 10.601322174072266,
+    "depth_type": "relative",
+    "unit": "arbitrary",
+    "input_frame_count": 8,
+    "returned_fps": 1
+  },
+  "video_depth_anything_small_metric": {
+    "shape": [
+      8,
+      2268,
+      3024
+    ],
+    "dtype": "float32",
+    "finite_fraction": 1.0,
+    "minimum": 2.523547410964966,
+    "maximum": 91.14490509033203,
+    "depth_type": "metric",
+    "unit": "meter",
+    "input_frame_count": 8,
+    "returned_fps": 1
+  },
+  "raft_small": {
+    "shape": [
+      1,
+      2,
+      128,
+      128
+    ],
+    "dtype": "float32",
+    "finite_fraction": 1.0,
+    "minimum": -0.39684349298477173,
+    "maximum": 0.35825303196907043,
+    "mean_flow_magnitude_px": 0.07322196662425995
+  }
+}

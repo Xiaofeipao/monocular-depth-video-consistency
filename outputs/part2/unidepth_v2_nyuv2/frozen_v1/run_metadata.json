@@ -1,0 +1,12 @@
+{
+  "created_at_utc": "2026-10-13T04:47:20.413561+00:00",
+  "config": "/home/user/cjx/3201_Project/configs/part2/unidepth_v2_nyuv2.yaml",
+  "config_sha256": "03cb323ef00f2ba88ef9661f285c4bce660f7fcdf2fae9851ddd81e80c26ee38",
+  "protocol_status": "frozen_v1",
+  "mode": "infer-evaluate",
+  "sample_count": 654,
+  "full_test_split": true,
+  "formal_training_run": false,
+  "test_time_alignment": "none",
+  "external_intrinsics_provided": false
+}

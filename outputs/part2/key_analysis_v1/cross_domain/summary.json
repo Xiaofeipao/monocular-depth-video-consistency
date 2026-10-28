@@ -1,0 +1,185 @@
+{
+  "scope": "NYUv2 is the only target domain in this analysis",
+  "what_can_be_claimed": "zero-shot target-domain transfer and within-NYUv2 scene-type robustness",
+  "what_cannot_be_claimed": "multi-target-domain generalization; no second target dataset was evaluated",
+  "training_evidence": {
+    "add_another_target_domain": false,
+    "interpretation": "single_target_domain_zero_shot_transfer_and_within_nyuv2_robustness",
+    "minimum_scene_type_images_for_ranking": 5,
+    "unidepth_v2_training_evidence": "checkpoints/unidepth_v2_vits14/config.json",
+    "unidepth_v2_train_datasets": [
+      "ETH3D",
+      "Waymo"
+    ],
+    "unidepth_v2_validation_datasets": [
+      "IBims"
+    ],
+    "depth_pro_training_evidence": "https://arxiv.org/abs/2410.02073",
+    "depth_pro_training_description": "mixed_real_and_synthetic_data_exact_checkpoint_mixture_not_locally_enumerated",
+    "limitation": "no_second_target_domain_so_multi_domain_generalization_is_not_established"
+  },
+  "per_image_absrel_wins": {
+    "depth_pro": 373,
+    "unidepth_v2": 281,
+    "ties": 0
+  },
+  "paired_model_comparison": {
+    "depth_pro_minus_unidepth_abs_rel": {
+      "mean": -0.014072156234938437,
+      "lower": -0.020089099205821692,
+      "upper": -0.007931923803363994
+    },
+    "depth_pro_minus_unidepth_sq_rel": {
+      "mean": -0.0049495112970398365,
+      "lower": -0.012498698529480037,
+      "upper": 0.0033523673939695377
+    },
+    "depth_pro_minus_unidepth_rmse": {
+      "mean": -0.006633143624030551,
+      "lower": -0.022413724558318176,
+      "upper": 0.009619150270935338
+    },
+    "depth_pro_minus_unidepth_rmse_log": {
+      "mean": -0.005879232268727944,
+      "lower": -0.011626478587578832,
+      "upper": 3.4106848406835964e-05
+    },
+    "depth_pro_minus_unidepth_delta1": {
+      "mean": 0.022994208882243513,
+      "lower": 0.009253772347387074,
+      "upper": 0.037168978768123515
+    },
+    "depth_pro_minus_unidepth_delta2": {
+      "mean": -0.0008712442852835666,
+      "lower": -0.005073025596237977,
+      "upper": 0.002721395588105595
+    },
+    "depth_pro_minus_unidepth_delta3": {
+      "mean": -0.0014550606390637418,
+      "lower": -0.003448453046259209,
+      "upper": 0.000391288704448916
+    },
+    "depth_pro_minus_unidepth_si_boundary_f1": {
+      "mean": 0.046266684081826395,
+      "lower": 0.042100284465869275,
+      "upper": 0.05051707162287103
+    }
+  },
+  "scene_type_ranking_minimum_images": 5,
+  "worst_scene_types_by_absrel": {
+    "depth_pro": [
+      {
+        "scene_type": "bookstore",
+        "method": "depth_pro",
+        "image_count": 11,
+        "abs_rel": 0.20658715654942322,
+        "rmse": 1.1729213389524984,
+        "delta1": 0.7111064111944393,
+        "si_boundary_f1": 0.19443675771311913,
+        "failure_count": 4,
+        "failure_rate": 0.36363636363636365
+      },
+      {
+        "scene_type": "bathroom",
+        "method": "depth_pro",
+        "image_count": 58,
+        "abs_rel": 0.14326103041920654,
+        "rmse": 0.5001458981847002,
+        "delta1": 0.8225844289877194,
+        "si_boundary_f1": 0.12228736080210259,
+        "failure_count": 6,
+        "failure_rate": 0.10344827586206896
+      },
+      {
+        "scene_type": "classroom",
+        "method": "depth_pro",
+        "image_count": 23,
+        "abs_rel": 0.1232392960679718,
+        "rmse": 0.5988340221679482,
+        "delta1": 0.8512730367713527,
+        "si_boundary_f1": 0.22938224076611963,
+        "failure_count": 3,
+        "failure_rate": 0.13043478260869565
+      },
+      {
+        "scene_type": "dining_room",
+        "method": "depth_pro",
+        "image_count": 55,
+        "abs_rel": 0.11018395717367067,
+        "rmse": 0.4661063733614079,
+        "delta1": 0.9009519998780563,
+        "si_boundary_f1": 0.22637015203189276,
+        "failure_count": 4,
+        "failure_rate": 0.07272727272727272
+      },
+      {
+        "scene_type": "office",
+        "method": "depth_pro",
+        "image_count": 38,
+        "abs_rel": 0.10257530441330906,
+        "rmse": 0.431303974898777,
+        "delta1": 0.906868182780896,
+        "si_boundary_f1": 0.18033622200102706,
+        "failure_count": 4,
+        "failure_rate": 0.10526315789473684
+      }
+    ],
+    "unidepth_v2": [
+      {
+        "scene_type": "bookstore",
+        "method": "unidepth_v2",
+        "image_count": 11,
+        "abs_rel": 0.19054140763852637,
+        "rmse": 1.1384281260081117,
+        "delta1": 0.7496135906347173,
+        "si_boundary_f1": 0.12708139039617886,
+        "failure_count": 3,
+        "failure_rate": 0.2727272727272727
+      },
+      {
+        "scene_type": "bathroom",
+        "method": "unidepth_v2",
+        "image_count": 58,
+        "abs_rel": 0.14436264945521465,
+        "rmse": 0.462324140199084,
+        "delta1": 0.823093590277296,
+        "si_boundary_f1": 0.0740507973793269,
+        "failure_count": 10,
+        "failure_rate": 0.1724137931034483
+      },
+      {
+        "scene_type": "study",
+        "method": "unidepth_v2",
+        "image_count": 11,
+        "abs_rel": 0.1348060657593784,
+        "rmse": 0.3387698412666076,
+        "delta1": 0.8419780043899764,
+        "si_boundary_f1": 0.12150846693568709,
+        "failure_count": 1,
+        "failure_rate": 0.09090909090909091
+      },
+      {
+        "scene_type": "classroom",
+        "method": "unidepth_v2",
+        "image_count": 23,
+        "abs_rel": 0.13022697967719002,
+        "rmse": 0.5324914703735607,
+        "delta1": 0.8859021884932786,
+        "si_boundary_f1": 0.16316180173274164,
+        "failure_count": 2,
+        "failure_rate": 0.08695652173913043
+      },
+      {
+        "scene_type": "living_room",
+        "method": "unidepth_v2",
+        "image_count": 107,
+        "abs_rel": 0.1168793834604326,
+        "rmse": 0.46818433771233375,
+        "delta1": 0.8895010248406326,
+        "si_boundary_f1": 0.12510572696373168,
+        "failure_count": 11,
+        "failure_rate": 0.102803738317757
+      }
+    ]
+  }
+}

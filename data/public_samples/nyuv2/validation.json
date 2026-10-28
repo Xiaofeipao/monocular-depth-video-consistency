@@ -1,0 +1,30 @@
+{
+  "manifest_sha256": "43c9dd4ac1742df72ef8381f62dc1c5be250b712c3aa9e5c7cffdbe2f3286222",
+  "count": 4,
+  "samples": [
+    {
+      "id": "nyu_0001",
+      "rgb_sha256": "7bbc25134e0820cb8a77a230cb57f71952dad0d8833af39241aa4b8b441dead9",
+      "depth_sha256": "effcf1034c59d0d4389fc0badd78d013ec7a0572b5fd4aa76b56a66af1e41b80",
+      "valid_pixels": 238560
+    },
+    {
+      "id": "nyu_0002",
+      "rgb_sha256": "a54d3a3df5c813a10ec3062a178e06420b117e4697949785e724ddbfd127c30c",
+      "depth_sha256": "c3b1ad459f8fb42422c5354dabc6791a8d9626eaee32653aaa6ce042ec561399",
+      "valid_pixels": 238560
+    },
+    {
+      "id": "nyu_0009",
+      "rgb_sha256": "78f09fae547c482ec705fb70cb72b491cf1cc7048e0bdbf7f7a5eb0608658df0",
+      "depth_sha256": "0fc21e5d27677b21182b5c5dcce29e28da0ec0a664ca08451ddbfd1b6be7436a",
+      "valid_pixels": 238560
+    },
+    {
+      "id": "nyu_0014",
+      "rgb_sha256": "8a5ab2485b82837d1573aaceed9d6b1ccc14be29a15809aeaf62252c20330ec7",
+      "depth_sha256": "1d89d549bf9b8bf4d1f5dcd2dfd4060db3811b113b187e80ee53611c35773b4e",
+      "valid_pixels": 238560
+    }
+  ]
+}

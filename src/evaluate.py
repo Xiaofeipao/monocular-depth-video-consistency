@@ -10,11 +10,13 @@ from .io import load_run,load_depth,read_bgr,sha256,write_csv,write_json
 from .metrics import depth_metrics,boundary_metrics,summarize
 
 
-def evaluate_run(run,manifest,alignment="none",clip=False,bootstrap=1000):
+def evaluate_run(run,manifest,alignment="none",clip=None,bootstrap=1000):
     run,manifest = Path(run),Path(manifest)
     meta,records = load_run(run)
     dataset = json.loads(manifest.read_text(encoding="utf-8"))
     protocol = dataset["protocol"]
+    if clip is None:
+        clip=bool(protocol.get('clip_predictions',False))
     by_id = {r["sample_id"]:r for r in records}
     ids = [r["id"] for r in dataset["samples"]]
     if len(by_id) != len(records) or len(ids) != len(set(ids)) or set(ids) != set(by_id):
@@ -35,7 +37,7 @@ def evaluate_run(run,manifest,alignment="none",clip=False,bootstrap=1000):
         mask = load_depth(manifest.parent/sample["mask"]) > 0 if sample.get("mask") else None
         scores,aligned,valid = depth_metrics(pred,gt,minimum=protocol["min_depth"],maximum=protocol["max_depth"],
             mask=mask,crop=protocol.get("crop"),alignment=alignment,depth_type=meta["depth_type"],
-            representation=meta["representation"],clip=clip)
+            representation=meta["representation"],clip=clip,bounds=protocol.get('depth_bounds','inclusive'))
         scores.update(boundary_metrics(aligned,gt,valid,protocol.get("edge_threshold",.08),protocol.get("edge_tolerance",2)))
         rows.append({"sample_id":sample["id"],**scores})
     tag = "native" if alignment == "none" else f"aligned_{alignment}"
@@ -58,7 +60,7 @@ def main(argv=None):
     p.add_argument("--run",required=True)
     p.add_argument("--manifest",required=True)
     p.add_argument("--alignment",choices=["none","median","scale_shift"],default="none")
-    p.add_argument("--clip-predictions",action="store_true",help="Enable only if the supplied protocol requires clipping")
+    p.add_argument("--clip-predictions",action="store_true",default=None,help="By default follow manifest protocol; enable only if supplied protocol requires clipping")
     a = p.parse_args(argv)
     rows = evaluate_run(a.run,a.manifest,a.alignment,a.clip_predictions)
     print(f"Evaluated {len(rows)} samples")
