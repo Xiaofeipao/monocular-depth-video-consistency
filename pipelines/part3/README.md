@@ -73,7 +73,18 @@ python -m scripts.compare_part3_synthetic --output outputs/part3/directions_synt
 F 的额外确认帧可能提高稳定性但推迟报警；不能只看 F1 而忽略 recall。
 预警评分要求 ROI 每帧都有完整有效 GT；对稀疏 KITTI 或包含 crop 外区域的 ROI，
 保留预警输出但明确跳过应用评分，避免用不同像素集合的分位数作比较。
-合成结果只能验证算法行为；真实数据、正式模型推理和 GPU 性能尚未完成。
+合成结果只能验证算法行为。后续已完成真实 CUDA 推理和短 TUM RGB-D 对照，
+见 [GPU 记录](../../docs/gpu_progress_20261028.md)；尚未完成正式全量基准。
+
+## 保留原版的优化实验
+
+显式传入 `--methods` 可比较 `A_conservative`（历史权重上限 0.2）、
+`C_fast`（3×3 邻域）、`D_guarded`（权重上限 0.25、log-depth 更新上限 0.01、
+深度边缘保护）、`E_local`（8×8 分块变化触发全分辨率光流）、
+`F_coverage`（ROI 有效比例至少 50%，缺测清空连续确认计数）。
+这些预设是工程探索，不是独立验证集调出的最优参数；原版默认配置继续保留。
+支持位姿的 RGB-D manifest 现在同时报告 GT 定义可见像素上的位姿时序误差，
+避免只依赖同一种光流做融合和评分。B 不允许重复地标充当多个独立测点。
 
 本轮具体数值、原有 A 的失败原因和各方向负结果见
 [Part 3 实验记录](../../docs/part3_experiment_notes.md)。

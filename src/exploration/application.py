@@ -3,19 +3,24 @@ import numpy as np
 
 
 class ObstacleWarning:
-    def __init__(self, threshold_m=1.5, near_fraction=.05, exit_margin_m=.15, confirmations=2):
+    def __init__(self, threshold_m=1.5, near_fraction=.05, exit_margin_m=.15, confirmations=2, min_coverage=0.):
         if threshold_m<=0 or not 0<near_fraction<=1 or exit_margin_m<0 or confirmations<1:
             raise ValueError('Invalid warning settings')
         self.threshold,self.fraction,self.margin = threshold_m,near_fraction,exit_margin_m
         self.confirmations = confirmations
+        if not 0 <= min_coverage <= 1:
+            raise ValueError('min_coverage must be in [0,1]')
+        self.min_coverage = min_coverage
         self.state,self.pending = False,0
 
     def step(self, depth, roi=None):
         values = depth if roi is None else depth[roi[0]:roi[1],roi[2]:roi[3]]
         valid = np.isfinite(values)&(values>0)
-        if not valid.any():
+        coverage = float(valid.mean()) if valid.size else 0.
+        if not valid.any() or coverage < self.min_coverage:
             # Missing data must never be represented as a safe measurement.
-            return {'warning':None,'near_distance_m':None,'coverage':0.}
+            self.pending = 0
+            return {'warning':None,'near_distance_m':None,'coverage':coverage}
         distance = float(np.quantile(values[valid],self.fraction))
         threshold = self.threshold+self.margin if self.state else self.threshold
         desired = distance < threshold

@@ -9,22 +9,17 @@ from .metrics.pose import pose_temporal_metrics
 from .metrics import evaluation_mask
 
 
-def main(argv=None):
-    p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--run',required=True)
-    p.add_argument('--manifest',required=True)
-    a=p.parse_args(argv)
-    run,manifest=Path(a.run),Path(a.manifest)
+def evaluate_pose_run(run, manifest):
+    """Score an already image-validated run, without repeating native evaluation."""
+    run,manifest=Path(run),Path(manifest)
     data=json.loads(manifest.read_text(encoding='utf-8'))
     meta,records=load_run(run)
-    if meta['depth_type']!='metric': p.error('GT-pose metric evaluation requires native metric depth')
-    # Also checks exact input RGB, sample IDs and frozen depth hashes.
-    evaluate_run(run,manifest,bootstrap=0)
+    if meta['depth_type']!='metric': raise ValueError('GT-pose metric evaluation requires native metric depth')
     samples={s['id']:s for s in data['samples']}
     intrinsics=json.loads((manifest.parent/data['intrinsics']).read_text(encoding='utf-8'))
     rows=[]
     def ground_truth(sample):
-        gt=load_depth(manifest.parent/sample['depth'],sample['depth_scale'])
+        gt=load_depth(manifest.parent/sample['depth'],sample.get('depth_scale',1.))
         mask=load_depth(manifest.parent/sample['mask'])>0 if sample.get('mask') else None
         protocol=data['protocol']
         valid=evaluation_mask(gt,protocol['min_depth'],protocol['max_depth'],mask,protocol.get('crop'),protocol.get('depth_bounds','inclusive'))
@@ -40,10 +35,22 @@ def main(argv=None):
     directory=run/'evaluation'/'rgbd_pose'
     directory.mkdir(parents=True,exist_ok=False)
     write_csv(directory/'per_pair.csv',rows)
-    write_json(directory/'summary.json',{'pose_convention':data['pose_convention'],
+    summary={'pose_convention':data['pose_convention'],
         'visibility':'GT-defined rigid reprojection, z-buffer, 3cm+3% depth tolerance; not optical-flow proxy',
         'pairs':len(rows),'metric_means':{key:sum(r[key] for r in rows if r[key] is not None)/sum(r[key] is not None for r in rows)
-            for key in ('pose_temporal_log_error','pose_temporal_MAE_m','gt_reprojection_MAE_m','coverage') if any(r[key] is not None for r in rows)}})
+            for key in ('pose_temporal_log_error','pose_temporal_MAE_m','gt_reprojection_MAE_m','coverage') if any(r[key] is not None for r in rows)}}
+    write_json(directory/'summary.json',summary)
+    return summary
+
+
+def main(argv=None):
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--run',required=True)
+    p.add_argument('--manifest',required=True)
+    a=p.parse_args(argv)
+    # Checks exact input RGB, sample IDs and frozen depth hashes before pose scoring.
+    evaluate_run(a.run,a.manifest,bootstrap=0)
+    evaluate_pose_run(a.run,a.manifest)
 
 
 if __name__=='__main__': main()

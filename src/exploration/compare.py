@@ -21,6 +21,8 @@ from .uncertainty import UncertaintyFusion
 
 
 METHODS = ('RAW','A','B','C','D','E_half','E_adaptive','F','B+C+D')
+OPTIMIZED_METHODS = ('A_conservative','C_fast','D_guarded','E_local','F_coverage')
+ALL_METHODS = METHODS + OPTIMIZED_METHODS
 
 
 def load_calibration(path, test_records):
@@ -35,11 +37,16 @@ def load_calibration(path, test_records):
     by_id={r['sample_id']:r for r in records}
     test_ids={r['sample_id'] for r in test_records}
     predicted,measured=[],[]
+    seen=set()
     for point in config['points']:
         sample_id=point['sample_id']
         if sample_id in test_ids:
             raise ValueError('Calibration/test frame IDs overlap: forbidden test-time calibration')
         record=by_id[sample_id]
+        observation=(sample_id,int(point['x']),int(point['y']))
+        if observation in seen:
+            raise ValueError('Duplicate calibration landmark is not independent')
+        seen.add(observation)
         file=run/'depth'/f"{record['id']}.npy"
         if sha256(file)!=record['depth_sha256']:
             raise ValueError('Calibration prediction has changed')
@@ -53,14 +60,14 @@ def load_calibration(path, test_records):
 
 class DirectionProcessor:
     def __init__(self, method, calibration=None):
-        if method not in METHODS:
+        if method not in ALL_METHODS:
             raise ValueError('Unknown direction')
         if ('B' in method) and calibration is None:
             raise ValueError('B requires independent measured calibration')
         self.method,self.calibration=method,calibration
-        self.flow=ReducedFlow(.5,adaptive=method=='E_adaptive') if method.startswith('E_') else FarnebackFlow()
-        self.temporal=TemporalFusion(FusionConfig()) if method in ('A','E_half','E_adaptive') else None
-        self.uncertainty=UncertaintyFusion() if method in ('D','B+C+D') else None
+        self.flow=ReducedFlow(.5,adaptive=method in ('E_adaptive','E_local'),local_motion=method=='E_local') if method.startswith('E_') else FarnebackFlow()
+        self.temporal=TemporalFusion(FusionConfig(alpha=.2 if method=='A_conservative' else .4)) if method in ('A','A_conservative','E_half','E_adaptive','E_local') else None
+        self.uncertainty=(UncertaintyFusion(alpha_max=.25,max_log_update=.01,edge_threshold=.08) if method=='D_guarded' else UncertaintyFusion()) if method in ('D','D_guarded','B+C+D') else None
         self.previous=None
         self.weights=[]
 
@@ -70,8 +77,8 @@ class DirectionProcessor:
         debug={}
         if method in ('B','B+C+D'):
             result=apply_scale(result,self.calibration['scale'])
-        if method in ('C','B+C+D'):
-            result=refine_edges(result,rgb)
+        if method in ('C','C_fast','B+C+D'):
+            result=refine_edges(result,rgb,radius=1 if method=='C_fast' else 2)
         if self.temporal or self.uncertainty:
             forward=backward=None
             if self.previous is not None:
@@ -95,11 +102,13 @@ def select_winners(rows):
         if candidates:
             optimum=(max if maximum else min)(r[metric] for r in candidates)
             output[metric]=[r['method'] for r in candidates if np.isclose(r[metric],optimum,rtol=1e-6,atol=1e-9)]
-    eligible=[r for r in rows if r['method'] not in ('RAW','F') and r.get('temporal_log_error') is not None
+    eligible=[r for r in rows if r['method'] not in ('RAW','F','F_coverage') and r.get('temporal_log_error') is not None
               and r.get('AbsRel') is not None and r['AbsRel']<=baseline['AbsRel']+.01
               and r.get('delta1',0)>=baseline.get('delta1',0)-.005
               and r.get('edge_F1',0)>=baseline.get('edge_F1',0)-.01]
     output['accuracy_boundary_constrained_temporal_best']=(min(eligible,key=lambda r:r['temporal_log_error'])['method'] if eligible else None)
+    pose_eligible=[r for r in eligible if r.get('pose_temporal_log_error') is not None]
+    output['accuracy_boundary_constrained_pose_best']=(min(pose_eligible,key=lambda r:r['pose_temporal_log_error'])['method'] if pose_eligible else None)
     output['constraint']='AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information'
     return output
 
@@ -150,7 +159,7 @@ def compare(run, output, manifest=None, calibration=None, methods=METHODS, repea
     rows,skipped=[],{}
     synthetic=bool(meta.get('synthetic'))
     for method in methods:
-        if method not in METHODS:
+        if method not in ALL_METHODS:
             raise ValueError(f'Unknown method {method}')
         if 'B' in method and calibrated is None:
             skipped[method]='No independent measured calibration; test GT is not substituted'
@@ -160,8 +169,9 @@ def compare(run, output, manifest=None, calibration=None, methods=METHODS, repea
         times=[]
         for repeat in range(repeats+1):
             processor=DirectionProcessor(method,calibrated)
-            warning=ObstacleWarning(warning_threshold,confirmations=2 if method=='F' else 1,
-                                    exit_margin_m=.15 if method=='F' else 0.)
+            warning=ObstacleWarning(warning_threshold,confirmations=2 if method in ('F','F_coverage') else 1,
+                                    exit_margin_m=.15 if method in ('F','F_coverage') else 0.,
+                                    min_coverage=.5 if method=='F_coverage' else 0.)
             begin=time.perf_counter()
             results,alerts=[],[]
             for depth,rgb in zip(depths,frames):
@@ -193,10 +203,11 @@ def compare(run, output, manifest=None, calibration=None, methods=METHODS, repea
         writer.finish(runtime)
         render_run(writer.path,writer.records,*meta['visualization_range'],meta['unit'],meta['fps'],f'{method}'+(' SYNTHETIC' if synthetic else ''))
         temporal=[temporal_metrics(results[i-1],results[i],*fields[i-1]) for i in range(1,len(results))]
-        write_json(writer.path/'warnings.json',{'roi':roi,'threshold_m':warning_threshold,'hysteresis':method=='F','frames':alerts})
+        write_json(writer.path/'warnings.json',{'roi':roi,'threshold_m':warning_threshold,'hysteresis':method in ('F','F_coverage'),'min_coverage':.5 if method=='F_coverage' else 0.,'frames':alerts})
         row={'method':method,'extra_information':derived['extra_information'],'AbsRel':None,'RMSE':None,'delta1':None,'edge_F1':None,
              'temporal_log_error':None,'local_flicker':None,'temporal_coverage':None,
-             'postprocess_fps':runtime['postprocess_fps'],'warning_F1':None,'warning_recall':None,'warning_accuracy':None}
+            'postprocess_fps':runtime['postprocess_fps'],'warning_F1':None,'warning_recall':None,'warning_accuracy':None,
+            'pose_temporal_log_error':None,'pose_temporal_MAE_m':None}
         for metric,out_key in [('temporal_log_error','temporal_log_error'),('local_flicker','local_flicker'),('coverage','temporal_coverage')]:
             values=[r[metric] for r in temporal if r[metric] is not None]
             row[out_key]=float(np.mean(values)) if values else None
@@ -207,6 +218,11 @@ def compare(run, output, manifest=None, calibration=None, methods=METHODS, repea
             scores=evaluate_run(writer.path,manifest,bootstrap=0)
             for key in ('AbsRel','RMSE','delta1','edge_F1'):
                 row[key]=float(np.mean([r[key] for r in scores]))
+            if dataset.get('pose_convention') and all('pose_world_camera' in s for s in dataset['samples']):
+                from ..evaluate_rgbd import evaluate_pose_run
+                pose=evaluate_pose_run(writer.path,manifest)['metric_means']
+                for key in ('pose_temporal_log_error','pose_temporal_MAE_m'):
+                    row[key]=pose.get(key)
             regions=[d if roi is None else d[roi[0]:roi[1],roi[2]:roi[3]] for d in targets]
             if not all(np.isfinite(region).all() for region in regions):
                 # A percentile over sparse LiDAR GT cannot be compared to a
@@ -242,7 +258,7 @@ def main(argv=None):
     p.add_argument('--output',required=True)
     p.add_argument('--manifest')
     p.add_argument('--calibration')
-    p.add_argument('--methods',nargs='+',choices=METHODS,default=list(METHODS))
+    p.add_argument('--methods',nargs='+',choices=ALL_METHODS,default=list(METHODS))
     p.add_argument('--repeats',type=int,default=3)
     p.add_argument('--evaluation-flow',choices=['farneback','raft'],default='farneback')
     p.add_argument('--flow-checkpoint')

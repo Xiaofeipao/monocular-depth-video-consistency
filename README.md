@@ -11,6 +11,9 @@ Actual runnable commands and limitations are documented below and in the
 
 ## Current status
 
+See the [integration release and A–F contributions](docs/release_20261028.md)
+and [subsequent optimization review](docs/part3_optimization_20261028.md).
+
 - Implemented: BM/SGBM + left/right check + metric conversion; DAV2, Depth Pro
   and offline VDA adapters; Farneback/RAFT flow; inverse-depth temporal fusion
   with A0-A6 ablations; depth/boundary/temporal metrics; fixed-scale videos;
