@@ -10,7 +10,7 @@ Part 1B 先建立逐帧深度基线，观察同一场景的预测是否闪烁、
 
 ## 2. 项目说明要求什么
 
-以 [最新版课程 PDF](<AIAA3201_Project3_Monocular_Metric_Depth_Video_Consistency_Spring2027 (1).pdf>) 为准，[中文译文](Project3_CN_new.md)辅助阅读。
+
 
 | 原文位置 | 要求 | 本计划的对应工作 |
 |---|---|---|
