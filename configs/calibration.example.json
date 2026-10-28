@@ -1,0 +1,9 @@
+{
+  "source": "independent_measured_landmarks",
+  "run": "../outputs/part2/calibration_video",
+  "points": [
+    {"sample_id": "calibration_frame_01", "x": 100, "y": 100, "depth_m": 1.0},
+    {"sample_id": "calibration_frame_02", "x": 150, "y": 100, "depth_m": 2.0},
+    {"sample_id": "calibration_frame_03", "x": 200, "y": 100, "depth_m": 3.0}
+  ]
+}

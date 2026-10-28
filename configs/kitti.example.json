@@ -1,0 +1,7 @@
+{
+  "dataset": "instructor-provided KITTI sample; use the supplied crop and split",
+  "protocol": {"min_depth": 0.1, "max_depth": 80.0, "crop": null, "edge_threshold": 0.08, "edge_tolerance": 2},
+  "samples": [
+    {"id": "kitti_0001", "rgb": "../data/kitti/rgb/0001.png", "depth": "../data/kitti/depth/0001.png", "depth_scale": 0.00390625}
+  ]
+}

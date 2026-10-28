@@ -1,0 +1,13 @@
+{
+  "dataset": "instructor-provided NYUv2 sample; replace paths and supplied protocol",
+  "protocol": {
+    "min_depth": 0.1,
+    "max_depth": 10.0,
+    "crop": [45, 471, 41, 601],
+    "edge_threshold": 0.08,
+    "edge_tolerance": 2
+  },
+  "samples": [
+    {"id": "nyu_0001", "rgb": "../data/nyuv2/rgb/0001.png", "depth": "../data/nyuv2/depth/0001.npy", "depth_scale": 1.0}
+  ]
+}

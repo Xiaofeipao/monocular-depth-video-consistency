@@ -1,0 +1,9 @@
+{
+  "runs": [
+    {"name": "static", "path": "../outputs/part3/static_A6", "role": "static_camera"},
+    {"name": "moving", "path": "../outputs/part3/moving_A6", "role": "moving_camera"},
+    {"name": "phone", "path": "../outputs/part3/phone_A6", "role": "phone_video"}
+  ],
+  "demo": "../outputs/demo",
+  "notes": "Replace examples with the actual mandatory clip list and recording notes."
+}

@@ -209,6 +209,18 @@ tempCodeRunnerFile.py
 # PyPI configuration file
 .pypirc
 
+# Local inputs, model sources and reproducible generated runs
+outputs/
+third_party/
+checkpoints/*
+!checkpoints/README.md
+data/*
+!data/README.md
+*.pth
+*.pt
+depth_results.zip
+tmp/
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
