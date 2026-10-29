@@ -4,7 +4,7 @@
 on the same cached CUDA metric VDA predictions from `gpu_20261028`.
 The source manifest hash is recorded in each JSON. These are real inputs,
 not synthetic depth. Protocols and caveats are in
-[the optimization review](../../part3_optimization_20261028.md).
+[the optimization review](../../part3_results.md).
 
 TUM/Tokyo jobs overlapped: raw postprocess FPS and automatic FPS winner fields
 are exploratory, subject to CPU contention, and must not support speed claims.

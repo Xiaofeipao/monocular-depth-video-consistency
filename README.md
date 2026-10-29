@@ -11,40 +11,20 @@ Actual runnable commands and limitations are documented below and in the
 
 ## Current status
 
-The Spring 2027 assignment now specifies Middlebury quarter-resolution and
-NYUv2 labeled benchmarks. See the [current requirements audit](docs/requirements_audit_spring2027.md)
-for completed work, verified downloads and remaining submission items; older
-notes about missing instructor NYUv2/KITTI subsets refer to an earlier brief.
+The required Middlebury quarter-resolution and NYUv2 labeled datasets and model
+weights are downloaded and verified locally. Full stereo experiments and both
+654-image metric-depth GPU baselines are evaluated. C is the main Part 3
+exploration; C_cuda provides equivalent GPU processing, with A as a temporal
+supplement. Self-recorded video and final submission materials remain required.
 
-Full datasets/checkpoints have now been downloaded and verified locally, and
-both 654-image GPU baselines and fixed-parameter image refinement were evaluated;
-see [full benchmark results and reproduction](docs/full_benchmark_20261029.md).
-The [saved relative-video reproduction bundle](artifacts/relative_video_demo/README.md)
-includes original predictions, rendered videos, per-pair scoring and checksums.
+- [Project status and missing data](docs/project_status.md)
+- [Benchmark results and reproduction](docs/benchmark_results.md)
+- [Part 3 results and direction selection](docs/part3_results.md)
+- [Assignment requirements](docs/course_overview.md)
+- [Complete saved-video replay bundle](artifacts/relative_video_demo/README.md)
 
-See the [integration release and A–F contributions](docs/release_20261028.md)
-and [subsequent optimization review](docs/part3_optimization_20261028.md).
-The [CUDA follow-up](docs/part3_cuda_20261029.md) verifies the unchanged C filter
-formula on two temporal segments and measures its GPU postprocessing speedup.
-
-- Implemented: BM/SGBM + left/right check + metric conversion; DAV2, Depth Pro
-  and offline VDA adapters; Farneback/RAFT flow; inverse-depth temporal fusion
-  with A0-A6 ablations; depth/boundary/temporal metrics; fixed-scale videos;
-  point cloud, click measurements and submission ZIP tooling.
-- Core CPU checks and integrated pytest checks run in a Python environment
-  with the project dependencies. No model training is needed for this exploration.
-- The integrated `JiongxuChen` branch supplies existing Middlebury and NYUv2
-  Depth Pro/UniDepthV2 result evidence, configs and pipelines; see
-  [team results](docs/current_results.md). Those runs were produced by the teammate,
-  not rerun here; raw predictions and full datasets are not in Git.
-- Full Middlebury/NYUv2 acquisition is validated; public NYUv2/KITTI smoke samples
-  and a TUM RGB-D loader are also available. See [data preparation](data/README.md).
-  Self-recorded video remains missing. Synthetic Part 3 checks are software
-  verification only; they are not evidence of real-world improvement.
-- GPU execution is verified with CUDA-enabled PyTorch on the test device `CUDA_GPU_A`.
-  Real DAV2/VDA/metric-VDA and RAFT inference results are recorded in
-  [GPU progress](docs/gpu_progress_20261028.md). CLI defaults remain CPU unless
-  `--device cuda` is supplied. Pipeline scripts do not push to GitHub themselves.
+Tests: 101 passed. Dataset/weight hashes and source versions are recorded in
+`data/manifests/`. Large datasets and weights stay local.
 
 ## Quick start (PowerShell, from repository root)
 
@@ -60,15 +40,14 @@ is supplied for a new environment. Model-specific dependency instructions are
 in [checkpoints/README.md](checkpoints/README.md). Python 3.11 is recommended
 for official model stacks. `depth-project` above is an example environment name;
 replace it with the name of your configured environment.
-Tests additionally need pytest (`requirements-test.txt`). Frozen GPU environments
-from the teammate remain in `environment*.yml` and `requirements-core.txt` /
+Tests additionally need pytest (`requirements-test.txt`). Model-specific dependency configurations remain in `environment*.yml` and `requirements-core.txt` /
 `requirements-unidepth.txt`; those are not CPU bootstrap instructions.
 
 Every output path must be new. Use another run ID when repeating a command.
 
 ## Part 1: geometry and framewise baseline
 
-组员的正式双目实验与调参入口：`pipelines.part1.run_middlebury`、
+双目实验与调参入口：`pipelines.part1.run_middlebury`、
 `pipelines.part1.tune_middlebury`，配置及已有结果见 [docs/step1.md](docs/step1.md)。
 
 入口与代码归属：[pipelines/part1/README.md](pipelines/part1/README.md)。
@@ -87,7 +66,7 @@ the depth formula includes the principal-point offset `doffs`.
 
 ## Part 2: native metric and video models
 
-组员的冻结 NYUv2 入口：`pipelines.part2.run_depth_pro_nyuv2`、
+NYUv2 基准入口：`pipelines.part2.run_depth_pro_nyuv2`、
 `pipelines.part2.run_unidepth_v2_nyuv2`、`pipelines.part2.run_key_analysis`。
 其已完成实验采用独立冻结协议，详见 [docs/step3.md](docs/step3.md)，不混入公共小样本结果。
 

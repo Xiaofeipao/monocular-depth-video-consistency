@@ -2,14 +2,11 @@
 
 ## Scope and validation status
 
-The code covers all three Parts. The integrated teammate branch adds frozen
-Middlebury/NYUv2 image experiments and their historical result evidence, without
-their original raw predictions or large data/weights. See `docs/current_results.md`
-for those runs; they were not re-executed during integration. Locally inspected
-DAV2/VDA source checkouts live outside this repository. Public small-data
-preparation is described in `data/public_samples/README.md`. Part 3 results
-include synthetic diagnostics; initial real GPU video runs are now recorded in
-`docs/gpu_progress_20261028.md`.
+The code covers all three Parts. Full Middlebury experiments and both NYUv2
+654-image GPU baselines are evaluated. See [current status](project_status.md),
+[benchmark results](benchmark_results.md) and [Part 3 results](part3_results.md).
+Source repositories and pretrained weights are configured separately; hashes
+and versions are recorded in `data/manifests/`.
 
 Assignment-facing entry points live in `pipelines/part1`, `pipelines/part2` and
 `pipelines/part3`, each with its own README mapping entry points to algorithm
@@ -23,8 +20,7 @@ Use a Python environment with the dependencies in `requirements.txt` and
 `requirements-test.txt` for core evaluation and tests. Python 3.11 is recommended
 for official model stacks; install a CUDA-enabled PyTorch build compatible with
 your hardware and satisfy each upstream repository's additional dependencies.
-Public experiment notes use `CUDA_GPU_A` as a device alias and omit personal
-environment names and machine-specific paths.
+Use relative project paths in reproduction commands.
 
 `python scripts/check_environment.py` reports the environment you actually use.
 

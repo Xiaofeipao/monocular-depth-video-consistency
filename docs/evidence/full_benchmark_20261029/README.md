@@ -24,4 +24,4 @@ three audit positions and then selects descending AbsRel. Full failure
 classification remains available locally. This changes display cost only.
 Regression tests: 101 passed.
 
-See [results, interpretation and reproduction](../../full_benchmark_20261029.md).
+See [results, interpretation and reproduction](../../benchmark_results.md).

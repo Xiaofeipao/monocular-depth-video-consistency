@@ -12,7 +12,7 @@
 - `acceptance.json`: derived checks against the numerical/metric tolerances and
   speedup >1.1; it does not replace or edit the measured observations.
 
-See [scope, commands and limitations](../../part3_cuda_20261029.md).
+See [scope, commands and limitations](../../part3_results.md).
 No accuracy improvement over C is claimed: this is a faster, numerically
 equivalent implementation. The later segment was not used to tune parameters,
 but shares TUM fr1/xyz's scene and therefore is not an independent dataset.
