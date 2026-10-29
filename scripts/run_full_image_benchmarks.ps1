@@ -3,6 +3,7 @@ param(
     [string]$Output = 'outputs/full_image_benchmark'
 )
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'project_cache.ps1')
 function Invoke-ProjectPython([string[]]$Arguments) {
     & $Python @Arguments
     if ($LASTEXITCODE -ne 0) { throw "Pipeline failed: $Arguments" }

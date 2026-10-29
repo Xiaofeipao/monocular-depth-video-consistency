@@ -29,6 +29,7 @@ Tests: 101 passed. Dataset/weight hashes and source versions are recorded in
 ## Quick start (PowerShell, from repository root)
 
 ```powershell
+. ./scripts/project_cache.ps1
 conda activate depth-project
 python scripts/check_environment.py
 python -m pytest -q

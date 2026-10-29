@@ -230,6 +230,7 @@ data/public_samples/nyuv2/*
 .workbuddy/
 .runtime/
 .runtime_depthpro/
+.project_cache/
 *.pth
 *.pt
 depth_results.zip

@@ -7,6 +7,7 @@ param(
     [int]$MaxFrames = 32
 )
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'project_cache.ps1')
 if (Test-Path -LiteralPath $Output) { throw 'Choose a new output directory' }
 $env:PYTHONPATH = (Join-Path $PSScriptRoot '..\.runtime') + [IO.Path]::PathSeparator + $env:PYTHONPATH
 function Invoke-CheckedPython([string[]]$Arguments) {
