@@ -1,0 +1,47 @@
+{
+  "assignment": "Spring 2027, section 6.1",
+  "archives": [
+    {
+      "file": "data/downloads/MiddEval3-data-Q.zip",
+      "bytes": 30937533,
+      "sha256": "a1411f283b523541e0d2e8b3a1dd6618974a0e539aea0122490791a041fffc09",
+      "crc_valid": true,
+      "url": "https://vision.middlebury.edu/stereo/submit3/zip/MiddEval3-data-Q.zip"
+    },
+    {
+      "file": "data/downloads/MiddEval3-GT0-Q.zip",
+      "bytes": 13555667,
+      "sha256": "489b6a4015951a3c865aa54c0f37dcb648b5d0efad8019264e22499cef35ca45",
+      "crc_valid": true,
+      "url": "https://vision.middlebury.edu/stereo/submit3/zip/MiddEval3-GT0-Q.zip"
+    }
+  ],
+  "training_scenes": [
+    "Adirondack",
+    "ArtL",
+    "Jadeplant",
+    "Motorcycle",
+    "MotorcycleE",
+    "Piano",
+    "PianoL",
+    "Pipes",
+    "Playroom",
+    "Playtable",
+    "PlaytableP",
+    "Recycle",
+    "Shelves",
+    "Teddy",
+    "Vintage"
+  ],
+  "training_pairs": 15,
+  "nyuv2": {
+    "direct_url_accessible": true,
+    "full_file_downloaded": true,
+    "expected_bytes": 2972037809,
+    "probe_bytes": 1048576,
+    "probe_header": "MATLAB 7.3 MAT-file",
+    "official_test_images": 654,
+    "sha256": "2d724b0c0ab358aa1ce5df855e5bd14a2279ab7202efe22f32a30d612dcb86aa",
+    "file": "data/nyuv2/nyu_depth_v2_labeled.mat"
+  }
+}

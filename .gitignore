@@ -229,6 +229,7 @@ data/public_samples/nyuv2/*
 !data/public_samples/nyuv2/README.md
 .workbuddy/
 .runtime/
+.runtime_depthpro/
 *.pth
 *.pt
 depth_results.zip

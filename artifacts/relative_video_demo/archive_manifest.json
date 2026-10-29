@@ -1,0 +1,22 @@
+{
+  "archive": "relative_video_demo.zip",
+  "bytes": 77995744,
+  "sha256": "e567a48cd3656a38531aa240bf5611492355419c86cfd6c76efd9acfaf2cce67",
+  "parts": [
+    {
+      "file": "relative_video_demo.zip.part001",
+      "bytes": 33554432,
+      "sha256": "4581445c4fe76d2be77e603113dd805bce0c5d3a913c8c76f90539e1f2181ed4"
+    },
+    {
+      "file": "relative_video_demo.zip.part002",
+      "bytes": 33554432,
+      "sha256": "135a0c657f3f3a3f5a07d7a737101c9c72462b50db326628581e94862427eedc"
+    },
+    {
+      "file": "relative_video_demo.zip.part003",
+      "bytes": 10886880,
+      "sha256": "f3a8a489f41b96f725185d2929848bd87a0aa8f1163258b18b32355eca882715"
+    }
+  ]
+}

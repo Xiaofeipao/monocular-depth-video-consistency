@@ -1,0 +1,84 @@
+{
+  "protocol_status": "frozen_v1",
+  "image_count": 654,
+  "aggregation": "per_image_macro_mean",
+  "depth_type": "metric",
+  "unit": "meter",
+  "alignment": "none",
+  "extra_camera_information": "none",
+  "camera_output": "intrinsics_px",
+  "macro_mean": {
+    "abs_rel": 0.1145413645787274,
+    "sq_rel": 0.06894646258989916,
+    "rmse": 0.39882060739776776,
+    "rmse_log": 0.14121705467277482,
+    "delta1": 0.8923646812065051,
+    "delta2": 0.9807101528641778,
+    "delta3": 0.9933267610248648,
+    "si_boundary_f1": 0.1130096085054967
+  },
+  "bootstrap_95_ci": {
+    "abs_rel": {
+      "lower": 0.10960216685859042,
+      "upper": 0.11971047756562231
+    },
+    "sq_rel": {
+      "lower": 0.061983996961542026,
+      "upper": 0.07647161178286248
+    },
+    "rmse": {
+      "lower": 0.3781665544544873,
+      "upper": 0.4205027804338759
+    },
+    "rmse_log": {
+      "lower": 0.1353955836848937,
+      "upper": 0.14733181919930294
+    },
+    "delta1": {
+      "lower": 0.879992319808248,
+      "upper": 0.9041986116495098
+    },
+    "delta2": {
+      "lower": 0.9773146554851535,
+      "upper": 0.9840065160009496
+    },
+    "delta3": {
+      "lower": 0.9913907341859518,
+      "upper": 0.9950631450207359
+    },
+    "si_boundary_f1": {
+      "lower": 0.10723271139663815,
+      "upper": 0.11885297035551318
+    }
+  },
+  "efficiency": {
+    "mean_seconds": 0.05419524969418014,
+    "median_seconds": 0.04941499999995358,
+    "p95_seconds": 0.08828716499999704,
+    "fps_from_mean_inference_time": 18.451801691899703,
+    "peak_gpu_memory_bytes": 535040000
+  },
+  "intrinsics_source": "model_prediction",
+  "intrinsics_px": {
+    "fx_px": {
+      "mean": 544.7838951367486,
+      "minimum": 138.82679748535156,
+      "maximum": 644.83447265625
+    },
+    "fy_px": {
+      "mean": 545.8650644284869,
+      "minimum": 140.60047912597656,
+      "maximum": 645.5433349609375
+    },
+    "cx_px": {
+      "mean": 322.28560421444956,
+      "minimum": 321.37109375,
+      "maximum": 323.572265625
+    },
+    "cy_px": {
+      "mean": 246.6929136503727,
+      "minimum": 243.92333984375,
+      "maximum": 252.65625
+    }
+  }
+}

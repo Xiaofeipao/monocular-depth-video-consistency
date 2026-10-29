@@ -11,6 +11,17 @@ Actual runnable commands and limitations are documented below and in the
 
 ## Current status
 
+The Spring 2027 assignment now specifies Middlebury quarter-resolution and
+NYUv2 labeled benchmarks. See the [current requirements audit](docs/requirements_audit_spring2027.md)
+for completed work, verified downloads and remaining submission items; older
+notes about missing instructor NYUv2/KITTI subsets refer to an earlier brief.
+
+Full datasets/checkpoints have now been downloaded and verified locally, and
+both 654-image GPU baselines and fixed-parameter image refinement were evaluated;
+see [full benchmark results and reproduction](docs/full_benchmark_20261029.md).
+The [saved relative-video reproduction bundle](artifacts/relative_video_demo/README.md)
+includes original predictions, rendered videos, per-pair scoring and checksums.
+
 See the [integration release and A–F contributions](docs/release_20261028.md)
 and [subsequent optimization review](docs/part3_optimization_20261028.md).
 The [CUDA follow-up](docs/part3_cuda_20261029.md) verifies the unchanged C filter
@@ -26,9 +37,9 @@ formula on two temporal segments and measures its GPU postprocessing speedup.
   Depth Pro/UniDepthV2 result evidence, configs and pipelines; see
   [team results](docs/current_results.md). Those runs were produced by the teammate,
   not rerun here; raw predictions and full datasets are not in Git.
-- Public NYUv2/KITTI smoke samples and a selected TUM RGB-D loader are available;
-  see [data preparation](data/public_samples/README.md). Instructor clips and the
-  phone recording remain missing. Synthetic Part 3 checks are software
+- Full Middlebury/NYUv2 acquisition is validated; public NYUv2/KITTI smoke samples
+  and a TUM RGB-D loader are also available. See [data preparation](data/README.md).
+  Self-recorded video remains missing. Synthetic Part 3 checks are software
   verification only; they are not evidence of real-world improvement.
 - GPU execution is verified with CUDA-enabled PyTorch on the test device `CUDA_GPU_A`.
   Real DAV2/VDA/metric-VDA and RAFT inference results are recorded in

@@ -531,7 +531,20 @@ def evaluate_saved_predictions(
     failure_by_position = {
         int(item["test_position"]): item for item in failures
     }
-    for position in positions:
+    panel_positions=list(positions)
+    maximum_panels=config['visualization'].get('max_panels')
+    if maximum_panels is not None:
+        if not isinstance(maximum_panels,int) or maximum_panels<1:
+            raise ValueError('visualization.max_panels must be a positive integer')
+        # Display selection only; metrics and failure classification still use
+        # every requested image. Reserve audits before worst-error examples.
+        priority=[int(p) for p in config['visualization']['audit_test_positions'] if int(p) in row_by_position]
+        priority.extend(int(row['test_position']) for row in sorted(rows,key=lambda row:float(row['abs_rel']),reverse=True))
+        panel_positions=list(dict.fromkeys(priority))[:maximum_panels]
+    (visualization_dir/'selection.json').write_text(json.dumps({
+        'scored_images':len(rows),'max_panels':maximum_panels,
+        'visualized_test_positions':panel_positions,'policy':'audit positions then descending AbsRel; metrics unchanged'},indent=2))
+    for position in panel_positions:
         sample = dataset.get_test_sample(position)
         stem = prediction_stem(position, sample.matlab_index_1based)
         if position in prediction_cache:
@@ -571,6 +584,7 @@ def evaluate_saved_predictions(
     failure_visualization_paths = [
         visualization_path_by_position[int(item["test_position"])]
         for item in failures
+        if int(item['test_position']) in visualization_path_by_position
     ]
     if failure_visualization_paths:
         save_contact_sheet(contact_sheet_path, failure_visualization_paths)

@@ -3,9 +3,29 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+from functools import lru_cache
+import importlib.util
+from pathlib import Path
 
 import numpy as np
 from scipy.ndimage import binary_dilation
+
+
+@lru_cache(maxsize=1)
+def _official_si_boundary():
+    # Import the standalone official evaluator without importing the network,
+    # CUDA or model-specific dependencies into CPU metric-only workflows.
+    root=Path(__file__).resolve().parents[2]
+    sources=[root/'third_party/ml-depth-pro/src/depth_pro/eval/boundary_metrics.py',
+             root/'ml-depth-pro/src/depth_pro/eval/boundary_metrics.py']
+    for source in sources:
+        if source.is_file():
+            spec=importlib.util.spec_from_file_location('_official_depth_pro_boundary',source)
+            module=importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return module.SI_boundary_F1
+    from depth_pro.eval.boundary_metrics import SI_boundary_F1
+    return SI_boundary_F1
 
 
 def depth_edge_map(
@@ -194,7 +214,7 @@ def compute_depth_pro_si_boundary_f1(
     if not 1.0 < threshold_min <= threshold_max or threshold_count <= 0:
         raise ValueError("Invalid SI boundary threshold sweep")
 
-    from depth_pro.eval.boundary_metrics import SI_boundary_F1
+    SI_boundary_F1 = _official_si_boundary()
 
     return float(
         SI_boundary_F1(

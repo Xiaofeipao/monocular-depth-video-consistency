@@ -43,7 +43,11 @@ def test_empty_boundary_maps_are_a_perfect_match() -> None:
 
 
 def test_depth_pro_si_boundary_f1_is_perfect_for_identical_depth() -> None:
-    pytest.importorskip('depth_pro.eval.boundary_metrics', reason='Official Depth Pro source is an optional external dependency')
+    from src.metrics.boundary import _official_si_boundary
+    try:
+        _official_si_boundary()
+    except ModuleNotFoundError:
+        pytest.skip('Official Depth Pro evaluator source is an optional external dependency')
     # A center discontinuity exercises all four directional terms used by the
     # official implementation. A one-direction-only edge intentionally scores
     # 0.25 because upstream averages left/top/right/bottom terms separately.

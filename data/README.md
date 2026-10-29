@@ -1,6 +1,7 @@
 # Local datasets
 
-Keep instructor-provided NYUv2/KITTI samples and the mandatory videos here.
+The Spring 2027 mandatory datasets are Middlebury quarter-resolution and
+NYUv2 labeled with the standard split; keep self-recorded videos here as well.
 Full datasets stay local. Selected KITTI/TUM smoke samples retain upstream
 attribution and licenses; see `public_samples/README.md`. NYUv2 raw samples are
 locally downloaded, with only source manifests/hashes shared. Use the provided split/crop/mask protocol rather
