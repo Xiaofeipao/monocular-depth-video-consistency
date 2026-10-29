@@ -1,6 +1,6 @@
 # GPU progress: 2026-10-28
 
-RTX 5060 Ti 16GB, torch_py311 Python environment, PyTorch 2.12.1+cu132.
+Test device: `CUDA_GPU_A`, using a Python environment with CUDA-enabled PyTorch.
 CUDA was actually used for DAV2, relative VDA, metric VDA and RAFT-Small inference.
 Additional einops/easydict/tqdm dependencies are project-local `.runtime`; no
 PyTorch downgrade or environment replacement was performed.
@@ -51,7 +51,7 @@ are aligned-relative smoke results, not native metric or full benchmark results.
 Reproduction (after preparing the four checkpoints):
 
 ```powershell
-./scripts/run_gpu_video.ps1 -Python D:/Anaconda/envs/torch_py311/python.exe -DAV2Repo D:/Depth-Anything-V2 -VDARepo D:/Video-Depth-Anything -Video D:/Video-Depth-Anything/assets/example_videos/Tokyo-Walk_rgb.mp4 -Output outputs/gpu_repeat
+./scripts/run_gpu_video.ps1 -Python python -DAV2Repo third_party/Depth-Anything-V2 -VDARepo third_party/Video-Depth-Anything -Video third_party/Video-Depth-Anything/assets/example_videos/Tokyo-Walk_rgb.mp4 -Output outputs/gpu_repeat
 ```
 
 TUM acquisition and the earlier Git integration/publishing task are tracked

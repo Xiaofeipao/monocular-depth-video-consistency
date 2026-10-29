@@ -20,7 +20,7 @@ Middlebury scenes must contain `im0.png`, `im1.png`, `calib.txt`, and optionally
 `disp0GT.pfm`, `mask0nocc.png`. The images must already be rectified. Baseline
 in Middlebury calibration is converted from millimetres to metres; doffs is used.
 
-Optional full NYUv2 conversion (requires scipy and h5py in torch_py311):
+Optional full NYUv2 conversion (requires scipy and h5py in the active environment):
 
 ```powershell
 python -m src.prepare_data nyu --mat data/nyu_depth_v2_labeled.mat --split data/splits.mat --output data/nyu654

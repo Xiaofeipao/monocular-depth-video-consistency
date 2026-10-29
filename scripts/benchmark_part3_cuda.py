@@ -1,7 +1,6 @@
 """Serial, fixed-thread C versus C_cuda benchmark with numerical equivalence checks."""
 import argparse
 from pathlib import Path
-import platform
 import sys
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
@@ -67,8 +66,9 @@ def main():
         timings[name]=json.loads((Path(a.output)/name/'timing.json').read_text())
     result=dict(numerical_checks=checks,real_max_relative_difference=max_relative,
         cpu_threads=cv2.getNumThreads(),torch_threads=torch.get_num_threads(),serial_methods=True,
-        python=platform.python_version(),torch=torch.__version__,cuda=torch.version.cuda,
-        gpu=torch.cuda.get_device_name(0),peak_cuda_allocated_bytes=torch.cuda.max_memory_allocated(),
+        python='Python 3.x',torch='CUDA-enabled PyTorch',cuda='available',
+        gpu='CUDA_GPU_A',environment_details='Machine identity and exact environment versions omitted in public reports',
+        peak_cuda_allocated_bytes=torch.cuda.max_memory_allocated(),
         timings=timings,
         speedup_vs_C=timings['C']['mean_seconds']/timings['C_cuda']['mean_seconds'],
         scope='Same FP32 5x5 formula; processing plus warning, includes CPU/GPU transfers; excludes model, decode, I/O and scoring',

@@ -1,7 +1,9 @@
 # C_cuda acceptance evidence
 
-- `tum16` and `holdout32`: unedited comparison JSON/CSV and CUDA numerical/timing
+- `tum16` and `holdout32`: comparison JSON/CSV and CUDA numerical/timing
   checks from serial fixed-thread experiments, one warmup plus five repeats.
+  Numeric observations are unchanged; public environment fields use generic
+  descriptions and the device alias `CUDA_GPU_A`.
 - `holdout_source_manifest.json`: source hashes, timestamps, poses and protocol
   for reconstructing the later clip; relative RGB/depth paths refer to the
   prepared local dataset, not this documentation directory. Rebuild it using

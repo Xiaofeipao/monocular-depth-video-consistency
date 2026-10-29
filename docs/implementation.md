@@ -9,8 +9,7 @@ for those runs; they were not re-executed during integration. Locally inspected
 DAV2/VDA source checkouts live outside this repository. Public small-data
 preparation is described in `data/public_samples/README.md`. Part 3 results
 include synthetic diagnostics; initial real GPU video runs are now recorded in
-`docs/gpu_progress_20261028.md`. The user has now
-authorized GitHub publication of the integrated code and prepared data materials.
+`docs/gpu_progress_20261028.md`.
 
 Assignment-facing entry points live in `pipelines/part1`, `pipelines/part2` and
 `pipelines/part3`, each with its own README mapping entry points to algorithm
@@ -20,22 +19,19 @@ by Part. Existing `python -m src.*` commands below remain supported.
 
 ## Environments
 
-Existing environments inspected on this machine:
-
-- `pytorch_env`: Python 3.13.5, PyTorch 2.12.1 CPU, NumPy, OpenCV, Pillow and
-  SciPy present. Core CPU testing uses this environment; no pytest required.
-- `torch_py311`: Python 3.11.15, PyTorch 2.12.1+cu132, torchvision, OpenCV,
-  NumPy, h5py and SciPy present. A better candidate for official models after
-  satisfying each upstream dependency set. CUDA was not available at inspection.
-- Both lack timm/einops; full official-model compatibility is not verified.
+Use a Python environment with the dependencies in `requirements.txt` and
+`requirements-test.txt` for core evaluation and tests. Python 3.11 is recommended
+for official model stacks; install a CUDA-enabled PyTorch build compatible with
+your hardware and satisfy each upstream repository's additional dependencies.
+Public experiment notes use `CUDA_GPU_A` as a device alias and omit personal
+environment names and machine-specific paths.
 
 `python scripts/check_environment.py` reports the environment you actually use.
-No dependencies were installed into these existing environments.
 
 Core checks:
 
 ```powershell
-conda activate env_isaaclab
+conda activate depth-project  # example environment name; replace as needed
 python -m pytest -q
 ```
 

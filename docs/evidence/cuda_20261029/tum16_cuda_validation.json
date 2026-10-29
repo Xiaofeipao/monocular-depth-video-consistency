@@ -21,10 +21,11 @@
   "cpu_threads": 1,
   "torch_threads": 1,
   "serial_methods": true,
-  "python": "3.11.15",
-  "torch": "2.12.1+cu132",
-  "cuda": "13.2",
-  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "python": "Python 3.x",
+  "torch": "CUDA-enabled PyTorch",
+  "cuda": "available",
+  "gpu": "CUDA_GPU_A",
+  "environment_details": "Machine identity and exact environment versions omitted in public reports",
   "timings": {
     "C": {
       "scope": "postprocessing + warning compute, including its flow; excludes backbone/decode/I/O/evaluation",

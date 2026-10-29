@@ -56,8 +56,8 @@ TUM 导入：RGB/深度最近时间戳一对一匹配（20ms），位姿按 RGB 
 ## 复现和验证
 
 组员冻结环境与当前 Windows Conda 环境分开记录；未用一个依赖文件覆盖对方环境。
-此次 CPU 测试使用已有 `env_isaaclab`（自带 pytest），下载/数据整理使用 `torch_py311`；
-没有安装依赖或运行训练/GPU 推理。
+本次整合时 CPU 测试使用带 pytest 的 Python 环境，下载/数据整理使用具备相应依赖的环境；
+整合阶段没有运行训练/GPU 推理，后续 GPU 实验另见对应记录。
 
 ```powershell
 python -m pytest -q

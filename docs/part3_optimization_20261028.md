@@ -41,7 +41,7 @@ TUM RAW 位姿 log-error 0.019877；A 0.018674；E-half 0.018448，约改善 7.2
 ## 复现与证据
 
 ```powershell
-D:/Anaconda/envs/torch_py311/python.exe -m src.exploration.compare --run outputs/gpu_20261028/metric_vda_tum16 --manifest data/public_samples/tum_freiburg1_xyz/manifest.json --output outputs/optimization_repeat/tum16 --methods RAW A A_conservative C C_fast D D_guarded E_half E_adaptive E_local F F_coverage --repeats 3
+python -m src.exploration.compare --run outputs/gpu_20261028/metric_vda_tum16 --manifest data/public_samples/tum_freiburg1_xyz/manifest.json --output outputs/optimization_repeat/tum16 --methods RAW A A_conservative C C_fast D D_guarded E_half E_adaptive E_local F F_coverage --repeats 3
 ```
 
 每个方法一轮预热、三轮计时；TUM 与 Tokyo 两个探索任务存在并发资源竞争，

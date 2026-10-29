@@ -18,7 +18,7 @@
 命令：
 
 ```powershell
-conda activate pytorch_env
+conda activate depth-project  # 示例环境名，按实际配置替换
 python -m scripts.compare_part3_synthetic --output outputs/part3/directions_synthetic_new
 ```
 

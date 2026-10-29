@@ -75,7 +75,7 @@ UniDepthV2-S 使用 `lpiccinelli/unidepth-v2-vits14`，revision 固定为 `038c2
 
 ### 当前运行效率
 
-数值来自各 baseline 的 `metrics_summary.json.efficiency` 与 `inference_summary.json`；模型加载时间单独记录。两条运行记录中的 GPU 都为 NVIDIA RTX A6000，PyTorch/精度模式分别为 `2.1.1+cu121/float16` 与 `2.7.1+cu126/official_float16_autocast`。内部输入处理和环境有差异，此处报告各自实际耗时，不称为统一设置下的公平速度排名。
+数值来自各 baseline 的 `metrics_summary.json.efficiency` 与 `inference_summary.json`；模型加载时间单独记录。两条历史基线使用同一测试设备，统一记作 `CUDA_GPU_B`；精度模式分别为 `float16` 与 `official_float16_autocast`，依赖配置见对应环境文件。内部输入处理和环境有差异，此处报告各自实际耗时，不称为统一设置下的公平速度排名。
 
 
 | 模型 | 平均 (s/图) | 中位数 (s) | P95 (s) | 模型 FPS | 峰值 GPU bytes | 端到端 FPS | 模型加载 (s) |

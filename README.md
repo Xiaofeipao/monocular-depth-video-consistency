@@ -20,10 +20,8 @@ formula on two temporal segments and measures its GPU postprocessing speedup.
   and offline VDA adapters; Farneback/RAFT flow; inverse-depth temporal fusion
   with A0-A6 ablations; depth/boundary/temporal metrics; fixed-scale videos;
   point cloud, click measurements and submission ZIP tooling.
-- Initial core CPU checks used Anaconda `pytorch_env`; integrated pytest checks
-  use the existing `env_isaaclab` environment. No model training
-  is needed for this training-free exploration. No existing Conda environment
-  has been modified.
+- Core CPU checks and integrated pytest checks run in a Python environment
+  with the project dependencies. No model training is needed for this exploration.
 - The integrated `JiongxuChen` branch supplies existing Middlebury and NYUv2
   Depth Pro/UniDepthV2 result evidence, configs and pipelines; see
   [team results](docs/current_results.md). Those runs were produced by the teammate,
@@ -32,7 +30,7 @@ formula on two temporal segments and measures its GPU postprocessing speedup.
   see [data preparation](data/public_samples/README.md). Instructor clips and the
   phone recording remain missing. Synthetic Part 3 checks are software
   verification only; they are not evidence of real-world improvement.
-- GPU is now verified on RTX 5060 Ti 16GB with `torch_py311` / PyTorch 2.12.1+cu132.
+- GPU execution is verified with CUDA-enabled PyTorch on the test device `CUDA_GPU_A`.
   Real DAV2/VDA/metric-VDA and RAFT inference results are recorded in
   [GPU progress](docs/gpu_progress_20261028.md). CLI defaults remain CPU unless
   `--device cuda` is supplied. Pipeline scripts do not push to GitHub themselves.
@@ -40,7 +38,7 @@ formula on two temporal segments and measures its GPU postprocessing speedup.
 ## Quick start (PowerShell, from repository root)
 
 ```powershell
-conda activate env_isaaclab
+conda activate depth-project
 python scripts/check_environment.py
 python -m pytest -q
 ```
@@ -49,7 +47,8 @@ If Conda is not on PATH, invoke your environment's `python.exe` directly.
 The integrated core requires NumPy, OpenCV, Pillow, SciPy, Matplotlib, PyYAML and h5py; [requirements.txt](requirements.txt)
 is supplied for a new environment. Model-specific dependency instructions are
 in [checkpoints/README.md](checkpoints/README.md). Python 3.11 is recommended
-for official model stacks; this machine also has a `torch_py311` environment.
+for official model stacks. `depth-project` above is an example environment name;
+replace it with the name of your configured environment.
 Tests additionally need pytest (`requirements-test.txt`). Frozen GPU environments
 from the teammate remain in `environment*.yml` and `requirements-core.txt` /
 `requirements-unidepth.txt`; those are not CPU bootstrap instructions.
