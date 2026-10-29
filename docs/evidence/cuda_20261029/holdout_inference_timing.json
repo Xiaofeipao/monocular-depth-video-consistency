@@ -1,0 +1,14 @@
+{
+  "model_seconds": 4.366311199999927,
+  "model_fps": 7.328840876023801,
+  "model_latency_ms": 136.44722499999773,
+  "p50_ms": 136.44722499999773,
+  "p95_ms": 136.44722499999773,
+  "latency_kind": "offline_amortized",
+  "end_to_end_seconds": 15.685777400000006,
+  "end_to_end_fps": 2.0400646511788434,
+  "peak_gpu_bytes": 4968001024,
+  "frames": 32,
+  "warmup": 1,
+  "includes_model_load": true
+}

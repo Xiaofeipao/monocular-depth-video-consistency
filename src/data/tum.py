@@ -229,8 +229,8 @@ def _member_bytes(archive,name):
         return source.read()
 
 
-def prepare_sequence(archive_path,output,sequence='freiburg1_xyz',max_frames=16,target_fps=10.,max_difference=.02,max_pose_gap=.05):
-    if sequence not in TUM_SOURCES or max_frames<2 or target_fps<=0:
+def prepare_sequence(archive_path,output,sequence='freiburg1_xyz',max_frames=16,target_fps=10.,max_difference=.02,max_pose_gap=.05,start_seconds=0.):
+    if sequence not in TUM_SOURCES or max_frames<2 or target_fps<=0 or not np.isfinite(start_seconds) or start_seconds<0:
         raise ValueError('Unsupported sequence or invalid sampling parameters')
     archive_path,output=Path(archive_path),Path(output)
     if output.exists():
@@ -242,7 +242,7 @@ def prepare_sequence(archive_path,output,sequence='freiburg1_xyz',max_frames=16,
         poses=read_table(text['groundtruth.txt'],8)
         pairs=associate(rgb,depth,max_difference)
         selected=[]
-        next_stamp=-np.inf
+        next_stamp=rgb[0][0]+start_seconds
         for color,depth_row in pairs:
             stamp=color[0]
             if stamp+1e-7<next_stamp:
@@ -286,7 +286,8 @@ def prepare_sequence(archive_path,output,sequence='freiburg1_xyz',max_frames=16,
             from src.io import load_depth,write_image
             depth_m=load_depth(output/'depth'/f'{key}.png',1/5000.)
             write_image(output/'valid'/f'{key}.png',(np.isfinite(depth_m)&(depth_m>0)).astype(np.uint8)*255)
-            samples.append({'id':f'{sequence}_{key}','rgb':f'rgb/{key}.png','depth':f'depth/{key}.png',
+            sample_id=f'{sequence}_{key}' if start_seconds==0 else f'{sequence}_t{color[0]:.6f}'
+            samples.append({'id':sample_id,'rgb':f'rgb/{key}.png','depth':f'depth/{key}.png',
                 'mask':f'valid/{key}.png','depth_scale':1/5000.,'timestamp':color[0],'depth_timestamp':d[0],
                 'rgb_depth_difference_seconds':abs(color[0]-d[0]),'pose_world_camera':pose,
                 'source_rgb':color[1][0],'source_depth':d[1][0],
@@ -298,7 +299,7 @@ def prepare_sequence(archive_path,output,sequence='freiburg1_xyz',max_frames=16,
     manifest={'dataset':f'TUM RGB-D {sequence} selected public smoke subset','role':'optional_rgbd_video',
         'not_instructor_subset':True,'not_mandatory_clip':True,'sequence':sequence,
         'source_url':source_urls(sequence)[0],'format_reference':FORMAT_URL,'archive_sha256':sha256(archive_path),
-        'sampling':{'target_fps':target_fps,'max_rgb_depth_difference_seconds':max_difference,'max_pose_gap_seconds':max_pose_gap,
+        'sampling':{'target_fps':target_fps,'start_seconds':start_seconds,'max_rgb_depth_difference_seconds':max_difference,'max_pose_gap_seconds':max_pose_gap,
                     'actual_timestamps':[s['timestamp'] for s in samples],'uniform_frame_rate':False},
         'pose_convention':'T_world_camera: tx ty tz qx qy qz qw; interpolated at RGB timestamp',
         'video':{'playback_fps':target_fps,'timestamp_policy':'Actual sample timestamps for evaluation; nominal FPS for visualization only'},

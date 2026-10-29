@@ -1,0 +1,66 @@
+{
+  "numerical_checks": [
+    {
+      "case": "odd_grid",
+      "max_relative_difference": 4.76837158203125e-07
+    },
+    {
+      "case": "tiny",
+      "max_relative_difference": 1.1920928955078125e-07
+    },
+    {
+      "case": "single",
+      "max_relative_difference": 0.0
+    },
+    {
+      "case": "thin_structure",
+      "max_relative_difference": 0.0
+    }
+  ],
+  "real_max_relative_difference": 7.748603820800781e-07,
+  "cpu_threads": 1,
+  "torch_threads": 1,
+  "serial_methods": true,
+  "python": "3.11.15",
+  "torch": "2.12.1+cu132",
+  "cuda": "13.2",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "timings": {
+    "C": {
+      "scope": "postprocessing + warning compute, including its flow; excludes backbone/decode/I/O/evaluation",
+      "repeat_seconds": [
+        4.781054600003699,
+        4.254868800002441,
+        3.9765734000029624,
+        4.0203201999975136,
+        3.9947914999938803
+      ],
+      "mean_seconds": 4.2055217000001,
+      "postprocess_fps": 3.8045220406304456,
+      "cpu": true,
+      "device": "cpu",
+      "host_device_transfers_included": false
+    },
+    "C_cuda": {
+      "scope": "postprocessing + warning compute, including its flow; excludes backbone/decode/I/O/evaluation",
+      "repeat_seconds": [
+        0.17703769999934593,
+        0.17207809999672463,
+        0.17518890000064857,
+        0.17220490000181599,
+        0.1802536000031978
+      ],
+      "mean_seconds": 0.1753526400003466,
+      "postprocess_fps": 91.24470552578151,
+      "cpu": false,
+      "device": "cuda",
+      "host_device_transfers_included": true
+    }
+  },
+  "speedup_vs_C": 23.983224318674573,
+  "scope": "Same FP32 5x5 formula; processing plus warning, includes CPU/GPU transfers; excludes model, decode, I/O and scoring",
+  "limitations": [
+    "One GPU and fixed CPU thread setting; no cross-machine performance claim.",
+    "Later TUM segment is disjoint in time, but belongs to the same scene and sequence."
+  ]
+}

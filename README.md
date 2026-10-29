@@ -13,6 +13,8 @@ Actual runnable commands and limitations are documented below and in the
 
 See the [integration release and A–F contributions](docs/release_20261028.md)
 and [subsequent optimization review](docs/part3_optimization_20261028.md).
+The [CUDA follow-up](docs/part3_cuda_20261029.md) verifies the unchanged C filter
+formula on two temporal segments and measures its GPU postprocessing speedup.
 
 - Implemented: BM/SGBM + left/right check + metric conversion; DAV2, Depth Pro
   and offline VDA adapters; Farneback/RAFT flow; inverse-depth temporal fusion

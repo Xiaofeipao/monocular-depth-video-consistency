@@ -1,0 +1,89 @@
+{
+  "synthetic": false,
+  "dataset": "TUM RGB-D freiburg1_xyz selected public smoke subset",
+  "source_manifest_sha256": "6fec6da5bf3a87467bf7e35444134389a829468346ef9bea5072f9b13b60b92c",
+  "methods": [
+    {
+      "method": "RAW",
+      "extra_information": "none",
+      "AbsRel": 0.1356576446328405,
+      "RMSE": 0.25177604913989415,
+      "delta1": 0.8830702714554264,
+      "edge_F1": 0.16968264896590446,
+      "temporal_log_error": 0.03802858479321003,
+      "local_flicker": 0.03298681316476676,
+      "temporal_coverage": 0.5845279947916667,
+      "postprocess_fps": 402.1896208419816,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null,
+      "pose_temporal_log_error": 0.025077539330254667,
+      "pose_temporal_MAE_m": 0.03534144534537493
+    },
+    {
+      "method": "C",
+      "extra_information": "none",
+      "AbsRel": 0.1354468115033199,
+      "RMSE": 0.25072191249513986,
+      "delta1": 0.8831860488802289,
+      "edge_F1": 0.16609397003415288,
+      "temporal_log_error": 0.03772146089543258,
+      "local_flicker": 0.032655908455771786,
+      "temporal_coverage": 0.5845279947916667,
+      "postprocess_fps": 4.01331034442316,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null,
+      "pose_temporal_log_error": 0.024821427287668747,
+      "pose_temporal_MAE_m": 0.03488030032697251
+    },
+    {
+      "method": "C_cuda",
+      "extra_information": "none",
+      "AbsRel": 0.13544681159475142,
+      "RMSE": 0.250721912832631,
+      "delta1": 0.8831861850202984,
+      "edge_F1": 0.16609397003415288,
+      "temporal_log_error": 0.037721461195859216,
+      "local_flicker": 0.032655908846326416,
+      "temporal_coverage": 0.5845279947916667,
+      "postprocess_fps": 90.28736493233824,
+      "warning_F1": null,
+      "warning_recall": null,
+      "warning_accuracy": null,
+      "pose_temporal_log_error": 0.024821427354861834,
+      "pose_temporal_MAE_m": 0.034880300394531966
+    }
+  ],
+  "skipped": {},
+  "winners": {
+    "AbsRel": [
+      "C",
+      "C_cuda"
+    ],
+    "edge_F1": [
+      "RAW"
+    ],
+    "temporal_log_error": [
+      "C",
+      "C_cuda"
+    ],
+    "postprocess_fps": [
+      "RAW"
+    ],
+    "accuracy_boundary_constrained_temporal_best": "C",
+    "accuracy_boundary_constrained_pose_best": "C",
+    "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+  },
+  "limitations": [
+    "One run does not establish cross-domain superiority.",
+    "B variants use independent calibration information and must be reported separately.",
+    "E measures flow/postprocessing speed, not foundation-model acceleration.",
+    "F changes warnings only; depth arrays remain RAW.",
+    "No per-transition statistical significance; formal comparison needs independent clips.",
+    "A/D/E use Farneback for fusion; scoring with Farneback is not an independent-flow crosscheck."
+  ],
+  "evaluation_flow": "farneback",
+  "application_roi": null,
+  "warning_threshold_m": 1.5
+}

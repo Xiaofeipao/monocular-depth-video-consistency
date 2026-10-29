@@ -16,6 +16,7 @@ def main():
     p.add_argument('--output',required=True)
     p.add_argument('--frames',type=int,default=16)
     p.add_argument('--fps',type=float,default=10)
+    p.add_argument('--start-seconds',type=float,default=0.,help='Offset from first RGB timestamp for a disjoint later clip')
     a=p.parse_args()
     archive=Path(a.archive or f'data/downloads/rgbd_dataset_{a.sequence}.tgz')
     if a.download and not archive.exists():
@@ -24,7 +25,7 @@ def main():
             download_xyz_ranges(archive)
         else:
             download_sequence(a.sequence,archive)
-    manifest=prepare_sequence(archive,a.output,a.sequence,a.frames,a.fps)
+    manifest=prepare_sequence(archive,a.output,a.sequence,a.frames,a.fps,start_seconds=a.start_seconds)
     print(f"Prepared {len(manifest['samples'])} timestamp-associated RGB/depth/pose frames")
 
 

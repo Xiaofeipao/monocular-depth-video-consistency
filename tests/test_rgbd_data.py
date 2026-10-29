@@ -73,8 +73,10 @@ class RGBDDataTests(unittest.TestCase):
             rgb=np.full((8,10,3),100,np.uint8)
             depth=np.full((8,10),10000,np.uint16)
             depth[0,0]=0
-            files={'rgb.txt':'1.0 rgb/one.png\n1.1 rgb/two.png\n','depth.txt':'1.002 depth/one.png\n1.102 depth/two.png\n',
-                   'groundtruth.txt':'\n'.join(f'{t:.2f} 0 0 0 0 0 0 1' for t in np.arange(.98,1.141,.02))}
+            names=('one','two','three','four')
+            files={'rgb.txt':'\n'.join(f'{1+i*.1:.3f} rgb/{name}.png' for i,name in enumerate(names)),
+                   'depth.txt':'\n'.join(f'{1.002+i*.1:.3f} depth/{name}.png' for i,name in enumerate(names)),
+                   'groundtruth.txt':'\n'.join(f'{t:.2f} 0 0 0 0 0 0 1' for t in np.arange(.98,1.341,.02))}
             with tarfile.open(archive,'w:gz') as tar:
                 for filename,value in list(files.items()):
                     data=value.encode()
@@ -82,7 +84,7 @@ class RGBDDataTests(unittest.TestCase):
                     tar.addfile(member,io.BytesIO(data))
                 for kind,image in [('rgb',rgb),('depth',depth)]:
                     ok,buffer=cv2.imencode('.png',image); self.assertTrue(ok)
-                    for name in ('one','two'):
+                    for name in names:
                         member=tarfile.TarInfo(prefix+kind+'/'+name+'.png'); member.size=len(buffer)
                         tar.addfile(member,io.BytesIO(buffer.tobytes()))
             manifest=prepare_sequence(archive,root/'prepared',max_frames=2)
@@ -90,6 +92,12 @@ class RGBDDataTests(unittest.TestCase):
             self.assertEqual(manifest['samples'][0]['depth_scale'],.0002)
             np.testing.assert_array_equal(pose_matrix(manifest['samples'][0]['pose_world_camera']),np.eye(4))
             self.assertTrue((root/'prepared/validation.json').exists())
+            later=prepare_sequence(archive,root/'later',max_frames=2,start_seconds=.2)
+            self.assertGreaterEqual(later['samples'][0]['timestamp'],1.2)
+            self.assertTrue({s['timestamp'] for s in manifest['samples']}.isdisjoint(s['timestamp'] for s in later['samples']))
+            self.assertTrue({s['id'] for s in manifest['samples']}.isdisjoint(s['id'] for s in later['samples']))
+            with self.assertRaises(ValueError):
+                prepare_sequence(archive,root/'invalid',start_seconds=-1.)
 
 
 if __name__=='__main__': unittest.main()

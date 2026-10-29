@@ -15,13 +15,13 @@ from ..temporal import TemporalFusion,FusionConfig
 from ..visualization import render_run
 from .application import ObstacleWarning,warning_metrics
 from .calibration import fit_scale,apply_scale
-from .edge_aware import refine_edges
+from .edge_aware import refine_edges,CUDAEdgeRefiner
 from .efficient import ReducedFlow
 from .uncertainty import UncertaintyFusion
 
 
 METHODS = ('RAW','A','B','C','D','E_half','E_adaptive','F','B+C+D')
-OPTIMIZED_METHODS = ('A_conservative','C_fast','D_guarded','E_local','F_coverage')
+OPTIMIZED_METHODS = ('A_conservative','C_fast','C_cuda','D_guarded','E_local','F_coverage')
 ALL_METHODS = METHODS + OPTIMIZED_METHODS
 
 
@@ -65,6 +65,7 @@ class DirectionProcessor:
         if ('B' in method) and calibration is None:
             raise ValueError('B requires independent measured calibration')
         self.method,self.calibration=method,calibration
+        self.cuda_refiner=CUDAEdgeRefiner() if method=='C_cuda' else None
         self.flow=ReducedFlow(.5,adaptive=method in ('E_adaptive','E_local'),local_motion=method=='E_local') if method.startswith('E_') else FarnebackFlow()
         self.temporal=TemporalFusion(FusionConfig(alpha=.2 if method=='A_conservative' else .4)) if method in ('A','A_conservative','E_half','E_adaptive','E_local') else None
         self.uncertainty=(UncertaintyFusion(alpha_max=.25,max_log_update=.01,edge_threshold=.08) if method=='D_guarded' else UncertaintyFusion()) if method in ('D','D_guarded','B+C+D') else None
@@ -79,6 +80,8 @@ class DirectionProcessor:
             result=apply_scale(result,self.calibration['scale'])
         if method in ('C','C_fast','B+C+D'):
             result=refine_edges(result,rgb,radius=1 if method=='C_fast' else 2)
+        if self.cuda_refiner is not None:
+            result=self.cuda_refiner(result,rgb)
         if self.temporal or self.uncertainty:
             forward=backward=None
             if self.previous is not None:
@@ -195,7 +198,9 @@ def compare(run, output, manifest=None, calibration=None, methods=METHODS, repea
             writer.add(result,rgb,record['source'],record['source_index'],extra)
         runtime={'scope':'postprocessing + warning compute, including its flow; excludes backbone/decode/I/O/evaluation',
                  'repeat_seconds':times,'mean_seconds':float(np.mean(times)),
-                 'postprocess_fps':len(records)/float(np.mean(times)),'cpu':True}
+                 'postprocess_fps':len(records)/float(np.mean(times)),'cpu':method!='C_cuda',
+                 'device':'cuda' if method=='C_cuda' else 'cpu',
+                 'host_device_transfers_included':method=='C_cuda'}
         write_json(writer.path/'processing_diagnostics.json',{
             'history_resets':processor.temporal.resets if processor.temporal else None,
             'mean_history_weight':float(np.mean(processor.weights)) if processor.weights else None,
