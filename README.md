@@ -1,8 +1,10 @@
 # AIAA 3201：Step 0、Part 1A 与 Part 2A
 
+本分支保存公共基础、Middlebury BM/SGBM，以及 NYUv2 上 Depth Pro、UniDepthV2-S 两条原生米制基线和四项关键分析。
+
 ## Part1B 看docs/step2.md, Part2B 看step4.md
 
-本分支保存公共基础、Middlebury BM/SGBM，以及 NYUv2 上 Depth Pro、UniDepthV2-S 两条原生米制基线和四项关键分析。
+self-record参数: 16*9, 1920x1080, 30fps
 
 ## 阅读与复现
 
