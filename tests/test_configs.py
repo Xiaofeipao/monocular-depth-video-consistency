@@ -71,10 +71,14 @@ def test_part2_key_analysis_preserves_primary_protocol_and_scope() -> None:
 
 
 def test_video_tracks_are_not_mixed() -> None:
-    config = load_yaml("configs/part2/video_depth_anything.yaml")
-    assert config["relative_track"]["unit"] == "arbitrary"
-    assert config["metric_track"]["unit"] == "meter"
-    assert config["metric_track"]["alignment"] == "none"
+    from src.video.runner import load_config
+    config = load_config(PROJECT_ROOT / "configs/part2/video_depth_anything.yaml")
+    assert config["schema_version"] == "relative_video_v1"
+    assert config["evaluation"]["alignment"] == "none"
+    assert set(config['models']) == {'dav2','vda'}
+    assert config['input']['max_long_edge'] == 960
+    assert "metric_track" not in config
+    assert "streaming" not in config
 
 
 def test_shared_candidate_protocol_preserves_native_metric_scale() -> None:

@@ -1,0 +1,40 @@
+protocol: dav2_nyuv2_aligned_relative_v1
+dataset:
+  labeled_mat: data/nyuv2/nyu_depth_v2_labeled.mat
+  labeled_mat_sha256: 2d724b0c0ab358aa1ce5df855e5bd14a2279ab7202efe22f32a30d612dcb86aa
+  split_file: data/nyuv2/splits.mat
+  split_file_sha256: 6e081404491a8bfba2f066beaa9713ef6046f9007aa5f799f2a350506a580cee
+  expected_test_images: 654
+model:
+  repository: Depth-Anything-V2
+  commit: a561b849ebae10a6f5ef49e26c83cbbcd36c71bf
+  checkpoint: checkpoints/depth_anything_v2/depth_anything_v2_vits.pth
+  checkpoint_sha256: 715fade13be8f229f8a70cc02066f656f2423a59effd0579197bbf57860e1378
+runtime:
+  device: cuda:0
+  precision: float16
+  torch_threads: 4
+  seed: 42
+inference:
+  input_size: 518
+  warmup: 1
+  timing_repeats: 3
+evaluation:
+  label: aligned_relative
+  crop: [45, 471, 41, 601]  # Python半开区间top,bottom,left,right
+  minimum_depth_m: 0.001
+  maximum_depth_m: 10.0
+  alignment: nonnegative_scale_shift_least_squares
+  alignment_domain: inverse_depth
+  alignment_scope: per_image_evaluation_crop_valid_gt
+  degenerate_fit: constant_mean_inverse_gt
+  nonpositive_inverse: clip_to_inverse_depth_bounds_keep_all_valid_gt
+  aggregation: per_image_macro_mean
+statistics:
+  bootstrap_resamples: 10000
+  seed: 42
+visualization:
+  audit_positions: [0, 326, 653]
+  worst_count: 6
+  depth_range_m: [0.5, 10.0]
+# GT只进入独立评估阶段，不进入DA-V2推理。此轨道不能称为native metric。

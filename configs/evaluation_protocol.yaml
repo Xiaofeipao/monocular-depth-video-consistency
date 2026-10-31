@@ -1,7 +1,7 @@
 protocol_status: candidate_v1
 status_notes:
   - NYUv2 follows the effective official evaluator implementation at 0.001--10 m; predictions are clipped to [0.001, 10] m for metric computation.
-  - Video frame rate and fixed test clips cannot be frozen until self-recorded and mandatory clips are available.
+  - 视频relative主协议见configs/video/relative_video.yaml，各片段独立冻结；公开工程检查不替代自录与指定片段。
 
 reproducibility:
   random_seed: 42
@@ -35,9 +35,10 @@ nyuv2:
     test_time_alignment: none
     unit: meter
   relative_diagnostic_track:
+    implementation_configuration: configs/part1/dav2_nyuv2.yaml
     label: aligned_relative
     alignment_domain: inverse_depth
-    alignment_method: scale_shift_least_squares
+    alignment_method: nonnegative_scale_shift_least_squares
     alignment_scope: per_image
     unit: arbitrary
   mandatory_metrics: [abs_rel, sq_rel, rmse, rmse_log, delta1, delta2, delta3]
@@ -50,14 +51,17 @@ boundary:
   note: Custom reasonable boundary definition allowed by the brief; report parameters with results.
 
 video:
-  target_fps: pending_clip_freeze
+  active_relative_configuration: configs/video/relative_video.yaml
+  target_fps: 10.0
+  freeze_scope: per_clip_manifest_and_protocol_json
   frame_selection: identical_across_methods
   resize_and_interpolation: identical_across_methods
   visualization_range: fixed_per_clip
   flow_convention: backward_target_to_source_dx_dy
   occlusion_mask: raft_forward_backward_cycle_consistency
   flow_cycle_threshold_px: 1.0
-  temporal_metrics: [temporal_abs_rel, temporal_rmse, temporal_rmse_log]
+  temporal_metrics: [fixed_span_warp_mae, fixed_span_warp_rmse]
+  positive_depth_auxiliary_metrics_only: [temporal_abs_rel, temporal_rmse, temporal_rmse_log]
   scale_drift:
     statistic: per_frame_median_depth_ratio
     reference_frame: 0

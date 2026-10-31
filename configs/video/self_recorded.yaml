@@ -1,0 +1,46 @@
+# 按视频运行的共同科学协议。三类视频共用输入、模型和评价单位。
+schema_version: relative_video_v1
+protocol_status: clip_workflow_v1
+input:
+  target_fps: 10.0
+  max_long_edge: 960
+runtime:
+  device: cuda:0
+  precision: float16
+  seed: 42
+  torch_threads: 4
+inference:
+  input_size: 518
+  warmup: 1
+  timing_repeats: 3
+models:
+  dav2:
+    repository: Depth-Anything-V2
+    commit: a561b849ebae10a6f5ef49e26c83cbbcd36c71bf
+    checkpoint: checkpoints/depth_anything_v2/depth_anything_v2_vits.pth
+    sha256: 715fade13be8f229f8a70cc02066f656f2423a59effd0579197bbf57860e1378
+  vda:
+    repository: Video-Depth-Anything
+    commit: 4f5ae23172ba60fd7bc11ef671cca678842c7072
+    checkpoint: checkpoints/video_depth_anything/video_depth_anything_vits.pth
+    sha256: 13379300b739e659f076a59d52e9801bd8d38c541a7e71f73bbca4dcfb013609
+flow:
+  backend: raft_small
+  checkpoint: checkpoints/torchvision/hub/checkpoints/raft_small_C_T_V2-01064c6d.pth
+  sha256: 01064c6dba73b0fc9fc8edf772248560a00a3acfd62ac6677e9eeebad9680e27
+  iterations: 12
+  max_long_edge: null
+evaluation:
+  alignment: none
+  reference_index: 0
+  percentile_low: 5.0
+  percentile_high: 95.0
+  fb_threshold_px: 1.0
+  minimum_coverage: 0.05
+visualization:
+  colormap: turbo
+  raw_range: [0.0, 50.0]
+  normalized_range: [0.0, 1.0]
+  difference_range: [0.0, 0.1]
+  generate_report: true
+  generate_video: true
