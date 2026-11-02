@@ -142,8 +142,9 @@ class RunWriter:
         depth = np.asarray(depth,np.float32)
         if depth.ndim != 2 or depth.shape != rgb.shape[:2]:
             raise ValueError("Depth and RGB dimensions must match")
-        valid = np.isfinite(depth) & (depth > 0)
-        if not valid.any():
+        relative=self.metadata['depth_type']=='relative'
+        valid = np.isfinite(depth) & ((depth >= 0) if relative else (depth > 0))
+        if not valid.any() or not (depth[valid]>0).any():
             raise ValueError("Prediction has no valid positive values")
         key = f"{len(self.records):06d}"
         np.save(self.path/"depth"/f"{key}.npy",depth)

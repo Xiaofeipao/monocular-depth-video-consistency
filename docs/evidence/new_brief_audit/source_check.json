@@ -1,0 +1,20 @@
+{
+  "brief": "Project_3__Monocular_Metric_Depth_Estimation_and_Video_Consistency.pdf",
+  "brief_pages": 5,
+  "brief_sha256": "ea65076917e87febb0c3c67773b9fc6edf304e2821a74266a03f22ef33abc226",
+  "official_clip": {
+    "url": "https://github.com/DepthAnything/Video-Depth-Anything/raw/refs/heads/main/assets/example_videos/davis_rollercoaster.mp4",
+    "bytes": 1809560,
+    "sha256": "7268cbecd9806a1e90a416de50dc02e50b4ae01428d5971837cf679dd0c87cb8",
+    "reported_frames": 70,
+    "decoded_frames": 70,
+    "fps": 24.0,
+    "first_100_available": false,
+    "matches_local_clone": true
+  },
+  "clone_git_blob_sha": "f385e1bb30f90b48e0c6a8f485b8ff4862f082a5",
+  "public_repository": {
+    "url": "https://github.com/Xiaofeipao/monocular-depth-video-consistency",
+    "anonymous_http_status": 200
+  }
+}

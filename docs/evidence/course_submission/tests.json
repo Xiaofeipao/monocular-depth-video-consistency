@@ -1,0 +1,5 @@
+{
+  "passed": 113,
+  "command": "python -m pytest tests -q",
+  "log_sha256": "ec903661fa40075cb395305200a2ce300bb64bea43ab91c76854d402f5cd5c86"
+}

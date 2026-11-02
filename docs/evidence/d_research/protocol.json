@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "development": [
+    "freiburg1_desk"
+  ],
+  "heldout": [
+    "freiburg1_rpy",
+    "freiburg3_sitting_static",
+    "freiburg3_walking_xyz"
+  ],
+  "reference_only": [
+    "tum_xyz_early",
+    "tum_xyz_late"
+  ],
+  "phone_demonstration": [
+    "landscape_static",
+    "moving",
+    "portrait_static",
+    "static_with_people_moving"
+  ],
+  "frames": 64,
+  "fps": 5,
+  "input_size": 518,
+  "max_side": 448,
+  "precision": "fp32",
+  "camera_protocol": "TUM recommended ROS-default registered PNG convention, 525/525/319.5/239.5; depth /5000, no extra depth scaling",
+  "guard": {
+    "AbsRel_max_increase": 0.01,
+    "delta1_max_drop": 0.005,
+    "edge_F1_max_drop": 0.01
+  },
+  "candidates": [
+    {
+      "alpha_max": 0.25,
+      "minimum_coverage": 0.02
+    },
+    {
+      "alpha_max": 0.45,
+      "minimum_coverage": 0.02
+    },
+    {
+      "alpha_max": 0.7,
+      "minimum_coverage": 0.02
+    },
+    {
+      "alpha_max": 0.25,
+      "minimum_coverage": 0.02,
+      "edge_threshold": 0.08
+    },
+    {
+      "alpha_max": 0.45,
+      "minimum_coverage": 0.02,
+      "edge_threshold": 0.08
+    },
+    {
+      "alpha_max": 0.7,
+      "minimum_coverage": 0.02,
+      "edge_threshold": 0.08
+    }
+  ],
+  "selection": "Lowest development macro pose-log-error among candidates passing all depth/boundary guards; fallback RAW. Freeze before heldout inference.",
+  "evaluation": "Per-frame depth/boundary, per-pair common-mask Farneback + independent RAFT, GT-only pose reprojection, no GT scale fitting. No frame-level significance claims.",
+  "timing": "Fusion-only, flow-inclusive postprocessing and warmed offline RGB-file-to-compressed-depth pipeline measured separately; 1 warmup + 3 repeats, batch VDA is not streaming latency."
+}

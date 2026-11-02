@@ -1,0 +1,255 @@
+{
+  "name": "static_with_people_moving",
+  "kind": "phone",
+  "frames": 64,
+  "recipes": {
+    "RAW": {},
+    "A": {},
+    "D_temporal": {
+      "use_confidence": false,
+      "enable_reset": false
+    },
+    "D_confidence": {
+      "enable_reset": false
+    },
+    "D": {},
+    "E_half": {},
+    "C": {},
+    "D_tuned": {
+      "alpha_max": 0.7,
+      "minimum_coverage": 0.02
+    }
+  },
+  "methods": [
+    {
+      "method": "RAW",
+      "fusion_seconds": 0.019735599999876285,
+      "fusion_repeat_seconds": [
+        0.01945389999946201,
+        0.019735599999876285,
+        0.02023619999999937
+      ],
+      "flow_seconds": 0,
+      "postprocess_seconds": 0.019735599999876285,
+      "postprocess_fps": 3242.8707513529453,
+      "resets": 0,
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "RAW_reference_edge_F1": 1.0,
+      "RAW_log_change": 0.0,
+      "farneback_warp_proxy": 0.008148292907410197,
+      "raft_warp_proxy": 0.007235731170069249,
+      "pose_temporal_log_error": null,
+      "guard_passed": null
+    },
+    {
+      "method": "A",
+      "fusion_seconds": 0.8422017000002597,
+      "fusion_repeat_seconds": [
+        0.8422017000002597,
+        0.822414000000208,
+        0.8735128000007535
+      ],
+      "flow_seconds": 2.1039304999994783,
+      "postprocess_seconds": 2.946132199999738,
+      "postprocess_fps": 21.72339720532761,
+      "resets": 0,
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "RAW_reference_edge_F1": 0.9999868846484652,
+      "RAW_log_change": 0.0010968260171466682,
+      "farneback_warp_proxy": 0.007467750609586281,
+      "raft_warp_proxy": 0.006632799164406837,
+      "pose_temporal_log_error": null,
+      "guard_passed": null
+    },
+    {
+      "method": "D_temporal",
+      "fusion_seconds": 0.7364211000003706,
+      "fusion_repeat_seconds": [
+        0.8535235999997894,
+        0.7253679000004922,
+        0.7364211000003706
+      ],
+      "flow_seconds": 2.1039304999994783,
+      "postprocess_seconds": 2.840351599999849,
+      "postprocess_fps": 22.532421690329958,
+      "resets": 0,
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "RAW_reference_edge_F1": 0.9992750064574676,
+      "RAW_log_change": 0.00250970935303485,
+      "farneback_warp_proxy": 0.0066227849447242325,
+      "raft_warp_proxy": 0.006048988848407235,
+      "pose_temporal_log_error": null,
+      "guard_passed": null
+    },
+    {
+      "method": "D_confidence",
+      "fusion_seconds": 0.7777020000003176,
+      "fusion_repeat_seconds": [
+        0.776210799999717,
+        0.7777020000003176,
+        0.7861415999996098
+      ],
+      "flow_seconds": 2.1039304999994783,
+      "postprocess_seconds": 2.881632499999796,
+      "postprocess_fps": 22.20963290773703,
+      "resets": 0,
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "RAW_reference_edge_F1": 0.9995498083254106,
+      "RAW_log_change": 0.001540517045668821,
+      "farneback_warp_proxy": 0.0071074367493450166,
+      "raft_warp_proxy": 0.006441485389904488,
+      "pose_temporal_log_error": null,
+      "guard_passed": null
+    },
+    {
+      "method": "D",
+      "fusion_seconds": 1.6535315999999511,
+      "fusion_repeat_seconds": [
+        1.0685681999993903,
+        1.6535315999999511,
+        1.6763877999992474
+      ],
+      "flow_seconds": 2.1039304999994783,
+      "postprocess_seconds": 3.7574620999994295,
+      "postprocess_fps": 17.03277326470165,
+      "resets": 0,
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "RAW_reference_edge_F1": 0.9995498083254106,
+      "RAW_log_change": 0.001540517045668821,
+      "farneback_warp_proxy": 0.0071074367493450166,
+      "raft_warp_proxy": 0.006441485389904488,
+      "pose_temporal_log_error": null,
+      "guard_passed": null
+    },
+    {
+      "method": "E_half",
+      "fusion_seconds": 1.5478439999997136,
+      "fusion_repeat_seconds": [
+        1.5753529000003255,
+        1.5478439999997136,
+        1.5198301000000356
+      ],
+      "flow_seconds": 0.7424725000000763,
+      "postprocess_seconds": 2.29031649999979,
+      "postprocess_fps": 27.943736160485187,
+      "resets": 0,
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "RAW_reference_edge_F1": 0.999992857001468,
+      "RAW_log_change": 0.0010915038037637714,
+      "farneback_warp_proxy": 0.007525823577972395,
+      "raft_warp_proxy": 0.006647775818165096,
+      "pose_temporal_log_error": null,
+      "guard_passed": null
+    },
+    {
+      "method": "C",
+      "fusion_seconds": 3.781402800000251,
+      "fusion_repeat_seconds": [
+        3.733654299999216,
+        3.781402800000251,
+        3.7974616000001333
+      ],
+      "flow_seconds": 0,
+      "postprocess_seconds": 3.781402800000251,
+      "postprocess_fps": 16.92493589944868,
+      "resets": 0,
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "RAW_reference_edge_F1": 0.9911260562554571,
+      "RAW_log_change": 0.0043120039263158105,
+      "farneback_warp_proxy": 0.007989458063439954,
+      "raft_warp_proxy": 0.007078087206796876,
+      "pose_temporal_log_error": null,
+      "guard_passed": null
+    },
+    {
+      "method": "D_tuned",
+      "fusion_seconds": 0.9180828999997175,
+      "fusion_repeat_seconds": [
+        0.9180828999997175,
+        0.8886838000007629,
+        0.9921294000005219
+      ],
+      "flow_seconds": 2.1039304999994783,
+      "postprocess_seconds": 3.022013399999196,
+      "postprocess_fps": 21.17793389004067,
+      "resets": 0,
+      "AbsRel": null,
+      "RMSE": null,
+      "delta1": null,
+      "edge_F1": null,
+      "RAW_reference_edge_F1": 0.9995498083254106,
+      "RAW_log_change": 0.001540517045668821,
+      "farneback_warp_proxy": 0.0071074367493450166,
+      "raft_warp_proxy": 0.006441485389904488,
+      "pose_temporal_log_error": null,
+      "guard_passed": null
+    }
+  ],
+  "baseline": "outputs\\extended_video_validation_gpu518\\static_with_people_moving\\baseline",
+  "baseline_manifest_sha256": "d1260caea78d1f90f1c9d4573f9b4e2ccdfbc7baffa087f008865684bc03b2f8",
+  "input_manifest_sha256": "0d12430efcfb56b7463e356647db16b7cabf22cb027c8c595cbdbd97f8653453",
+  "predictions_sha256": "b968729615074da3f8a024dffbc933709593d1db93027e8b6346018682a94f0f",
+  "prediction_locations": {
+    "RAW": {
+      "run": "outputs\\extended_video_validation_gpu518\\static_with_people_moving\\baseline",
+      "manifest_sha256": "d1260caea78d1f90f1c9d4573f9b4e2ccdfbc7baffa087f008865684bc03b2f8"
+    },
+    "A": {
+      "run": "outputs\\extended_video_validation_gpu518\\static_with_people_moving\\directions\\A",
+      "manifest_sha256": "ac498e86d7afde543f06ee9e2b7b4c63eb34a4242688de9aff6a56d1beacfafb"
+    },
+    "D_temporal": {
+      "npz_key": "D_temporal"
+    },
+    "D_confidence": {
+      "npz_key": "D_confidence"
+    },
+    "D": {
+      "npz_key": "D_confidence"
+    },
+    "E_half": {
+      "run": "outputs\\extended_video_validation_gpu518\\static_with_people_moving\\directions\\E_half",
+      "manifest_sha256": "8b8e3ea0a249b36b0dec98706c8d29c434b722581f456c04f5bbd912bcea7d6d"
+    },
+    "C": {
+      "run": "outputs\\extended_video_validation_gpu518\\static_with_people_moving\\directions\\C",
+      "manifest_sha256": "1b46459e1ecbc65900d006a9dfd4337f8c0ac1fc9c7d6835ff6dc880a70e1110"
+    },
+    "D_tuned": {
+      "npz_key": "D_confidence"
+    }
+  },
+  "flow_repeat_seconds": {
+    "full": [
+      2.1249163000002227,
+      2.1039304999994783,
+      2.068554999999833
+    ],
+    "half": [
+      0.7600413999998636,
+      0.7424725000000763,
+      0.5326924999999392
+    ]
+  }
+}

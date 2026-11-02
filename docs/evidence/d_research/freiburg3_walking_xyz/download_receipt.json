@@ -1,0 +1,9 @@
+{
+  "sequence": "freiburg3_walking_xyz",
+  "source_url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg3/rgbd_dataset_freiburg3_walking_xyz.tgz",
+  "full_archive_sha256": "1459e9488ac0e61a2ec80dfbc35cfb77942f6d8eabded1c8d26a70be650d0e1d",
+  "retained_original_manifest_sha256": "87a750b1b16425f0b9c22525dee49c07e0b15bdd732c36a4ab1387c54eb7ec0e",
+  "resized_manifest_sha256": "4ce0352e11f28890279d6f542237fa6a3e3e0f135763075baec2fe8e207db20a",
+  "retained_samples": 64,
+  "storage": "Original selected PNGs + timestamp/pose tables retained; full acquisition archive temporary"
+}

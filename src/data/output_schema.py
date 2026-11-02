@@ -20,7 +20,9 @@ def validate_depth_output(
     """Raise ``ValueError`` when an output violates the shared contract.
 
     Dense model outputs may omit ``valid_mask`` and must then be finite and
-    positive everywhere. Geometry pipelines may provide a boolean mask; only
+    positive everywhere for metric depth. Relative inverse-depth-like heads
+    may include zero endpoints but must contain some positive signal.
+    Geometry pipelines may provide a boolean mask; only
     valid pixels must be finite and positive, while invalid pixels may be NaN.
     """
 
@@ -45,7 +47,8 @@ def validate_depth_output(
             raise ValueError("Valid mask contains no valid pixels")
     if not np.all(np.isfinite(depth[valid])):
         raise ValueError("Valid raw depth contains NaN or infinite values")
-    if np.any(depth[valid] <= 0):
+    relative=metadata.get('depth_type')=='relative'
+    if np.any(depth[valid] < 0) or (not relative and np.any(depth[valid] <= 0)) or not np.any(depth[valid]>0):
         raise ValueError("Valid raw depth must be strictly positive")
 
     depth_type = metadata.get("depth_type")

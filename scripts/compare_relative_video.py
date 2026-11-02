@@ -58,7 +58,7 @@ def main():
             row[name]=float(np.mean(abs(old[mask]-d[i][mask]))/span)
         rows.append(row)
         np.savez_compressed(out/'flow_masks'/f'{i-1:06d}_{i:06d}.npz',forward=forward,backward=backward,common_mask=mask,fb_error=error)
-    report=dict(dataset='relative_video_demo, 32 frames only, no depth GT',
+    report=dict(dataset=f'paired saved predictions, {len(frames)} frames, no depth GT',
         metric='raw relative warp absolute error divided by fixed frame0 P95-P5; common FB mask, zero allowed; no per-frame alignment',
         scores={name:dict(reference_span=span,mean=float(np.mean([r[name] for r in rows]))) for name,span in zip(('DAV2','VDA'),spans)},
         not_metric_accuracy=True)
@@ -70,7 +70,7 @@ def main():
         farneback=dict(pyr_scale=.5,levels=3,winsize=21,iterations=3,poly_n=5,poly_sigma=1.2,flags=0),
         warp='cv2.remap INTER_LINEAR, BORDER_CONSTANT=0; current-to-previous backward flow',
         mask='common forward/backward Euclidean error <=1px, inside source bounds, finite current and fully finite interpolated previous for both models; zero allowed',
-        aggregation='equal-weight arithmetic mean of 31 per-pair mean absolute errors, divided by model-specific fixed reference span',
+        aggregation=f'equal-weight arithmetic mean of {len(rows)} per-pair mean absolute errors, divided by model-specific fixed reference span',
         alignment='none; no inversion, no scale/shift fitting, no GT',opencv=cv2.__version__,numpy=np.__version__))
     print(report)
 

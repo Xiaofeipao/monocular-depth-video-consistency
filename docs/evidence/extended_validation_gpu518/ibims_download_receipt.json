@@ -1,0 +1,19 @@
+{
+  "url": "https://huggingface.co/datasets/Ruicheng/monocular-geometry-evaluation/resolve/main/iBims-1.zip",
+  "bytes": 40777195,
+  "sha256": "27346601aa4c157afd3b8b8de1a9682587ca05844591051dfc702e64a5859402",
+  "hub_entry": {
+    "type": "file",
+    "oid": "23337752d108bc2bab32bc4f1171664872d1bf01",
+    "size": 40777195,
+    "lfs": {
+      "oid": "27346601aa4c157afd3b8b8de1a9682587ca05844591051dfc702e64a5859402",
+      "size": 40777195,
+      "pointerSize": 133
+    },
+    "xetHash": "e2a84196a3f0267f84a41631a359478682a0f6c0f1df6997c6ece92551f467a8",
+    "path": "iBims-1.zip"
+  },
+  "processed_mirror": true,
+  "not_original_MAT": true
+}

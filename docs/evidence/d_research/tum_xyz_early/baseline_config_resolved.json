@@ -1,0 +1,18 @@
+{
+  "input": "outputs\\extended_video_validation_gpu518\\sample_inputs\\tum_xyz_early\\manifest.json",
+  "output": "outputs\\extended_video_validation_gpu518\\tum_xyz_early\\baseline",
+  "model": "vda",
+  "repo": "third_party/Video-Depth-Anything",
+  "checkpoint": "checkpoints/metric_video_depth_anything_vits.pth",
+  "encoder": "vits",
+  "metric": true,
+  "device": "cuda",
+  "fp16": false,
+  "input_size": 518,
+  "fps": null,
+  "max_frames": null,
+  "max_side": null,
+  "vis_min": 0.1,
+  "vis_max": 10.0,
+  "warmup": 0
+}

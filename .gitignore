@@ -230,6 +230,7 @@ data/public_samples/nyuv2/*
 .workbuddy/
 .runtime/
 .runtime_depthpro/
+.runtime_tests/
 .project_cache/
 *.pth
 *.pt

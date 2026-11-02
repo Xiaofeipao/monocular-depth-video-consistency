@@ -1,0 +1,89 @@
+{
+  "A": {
+    "ablation": 6,
+    "alpha": 0.4,
+    "fb_threshold": 1.0,
+    "rgb_threshold": 0.12,
+    "depth_threshold": 0.2,
+    "edge_threshold": 0.08,
+    "scale_shrink": 1.0,
+    "max_log_scale": 0.1,
+    "minimum_reliable": 0.02,
+    "scene_cut_threshold": 0.35,
+    "domain": "inverse"
+  },
+  "A_conservative": {
+    "ablation": 6,
+    "alpha": 0.2,
+    "fb_threshold": 1.0,
+    "rgb_threshold": 0.12,
+    "depth_threshold": 0.2,
+    "edge_threshold": 0.08,
+    "scale_shrink": 1.0,
+    "max_log_scale": 0.1,
+    "minimum_reliable": 0.02,
+    "scene_cut_threshold": 0.35,
+    "domain": "inverse"
+  },
+  "C": {
+    "radius": 2,
+    "sigma_rgb": 0.1,
+    "sigma_log": 0.18,
+    "sigma_space": 1.5
+  },
+  "D": {
+    "alpha_max": 0.7,
+    "max_log_update": null,
+    "edge_threshold": null
+  },
+  "D_guarded": {
+    "alpha_max": 0.25,
+    "max_log_update": 0.01,
+    "edge_threshold": 0.08
+  },
+  "E_half": {
+    "fusion": {
+      "ablation": 6,
+      "alpha": 0.4,
+      "fb_threshold": 1.0,
+      "rgb_threshold": 0.12,
+      "depth_threshold": 0.2,
+      "edge_threshold": 0.08,
+      "scale_shrink": 1.0,
+      "max_log_scale": 0.1,
+      "minimum_reliable": 0.02,
+      "scene_cut_threshold": 0.35,
+      "domain": "inverse"
+    },
+    "flow_scale": 0.5,
+    "adaptive": false
+  },
+  "E_local": {
+    "fusion": {
+      "ablation": 6,
+      "alpha": 0.4,
+      "fb_threshold": 1.0,
+      "rgb_threshold": 0.12,
+      "depth_threshold": 0.2,
+      "edge_threshold": 0.08,
+      "scale_shrink": 1.0,
+      "max_log_scale": 0.1,
+      "minimum_reliable": 0.02,
+      "scene_cut_threshold": 0.35,
+      "domain": "inverse"
+    },
+    "flow_scale": 0.5,
+    "adaptive": true,
+    "local_motion": true,
+    "motion_threshold": 0.06
+  },
+  "source_sha256": {
+    "scripts/compare_self_recorded_part3.py": "e16728a36f97ed012b2ea5cddd8d1f81dd691368369e6428a649a046602d504c",
+    "src/exploration/compare.py": "fd6ef543f15580c8878983cc9c686d809fdee3dd632202ae256c788e133dd3a4",
+    "src/exploration/edge_aware.py": "2e82b54a7c40edba41171e900f72db1184482bac3cf3bbe98be05c283de7c4c4",
+    "src/exploration/uncertainty.py": "5745436ea7a8d7247159a170cb4cf43ba75ffc4f6c2d61168f411d864ea637cd",
+    "src/exploration/efficient.py": "4d5f12af2aa71b054f20ecdfde512eca16611669eda3c3c1c1ad56f1971b02fc",
+    "src/temporal.py": "6bc940edacf340a1b4d55c47645908818ca45471b5035a4295511bf0b88c60a5",
+    "src/flow.py": "d17aca5585ef3e8ab01a7545b149eddc5de287018b6b83f21faca95e80891a3d"
+  }
+}

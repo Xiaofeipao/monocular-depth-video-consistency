@@ -1,0 +1,63 @@
+{
+  "metric_depth": {
+    "alignment": "none",
+    "prediction_clipping": false,
+    "GT_range_m": [
+      0.1,
+      10
+    ],
+    "crop": null,
+    "aggregation": "frame macro means then clip macro means"
+  },
+  "fusion_flow": {
+    "name": "Farneback",
+    "pyr_scale": 0.5,
+    "levels": 3,
+    "winsize": 21,
+    "iterations": 3,
+    "poly_n": 5,
+    "poly_sigma": 1.2,
+    "flags": 0
+  },
+  "E_half_flow_scale": 0.5,
+  "independent_flow": {
+    "name": "torchvision RAFT Small C_T_V2",
+    "checkpoint_sha256": "01064c6dba73b0fc9fc8edf772248560a00a3acfd62ac6677e9eeebad9680e27",
+    "updates": 12,
+    "min_side": 128,
+    "multiple_of": 8
+  },
+  "flow_mask": {
+    "forward_backward_error_max_px": 1.0,
+    "common_across_methods": true,
+    "source": "RGB flow and finite positive identical prediction support",
+    "warp": "current-to-previous bilinear sampling"
+  },
+  "pose": {
+    "visibility": "GT-only z-buffer, not method-dependent",
+    "absolute_tolerance_m": 0.03,
+    "relative_tolerance": 0.03,
+    "model_receives_camera": false
+  },
+  "boundary": {
+    "name": "log-depth jump tolerant F1, not Depth Pro SI F1",
+    "log_threshold": 0.08,
+    "tolerance_px": 2
+  },
+  "region_diagnostics": {
+    "GT_boundary_band_radius_px": 2,
+    "RAFT_photo_mismatch_threshold": 0.12
+  },
+  "fr3_calibration_sensitivity": {
+    "exploratory": true,
+    "evaluation_only": true,
+    "full_RGB": {
+      "fx": 535.4,
+      "fy": 539.2,
+      "cx": 320.1,
+      "cy": 247.6
+    },
+    "resize": "pixel-center-aware",
+    "used_for_parameter_selection": false
+  }
+}

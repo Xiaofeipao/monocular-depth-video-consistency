@@ -1,0 +1,77 @@
+{
+  "model_load_seconds": 2.574270200000683,
+  "methods": [
+    {
+      "clip": "freiburg3_walking_xyz",
+      "method": "RAW",
+      "frames": 64,
+      "median_total_seconds": 6.116448400000081,
+      "median_fps": 10.463588640754192
+    },
+    {
+      "clip": "freiburg3_walking_xyz",
+      "method": "A",
+      "frames": 64,
+      "median_total_seconds": 10.50103080000008,
+      "median_fps": 6.094639775744636
+    },
+    {
+      "clip": "freiburg3_walking_xyz",
+      "method": "D",
+      "frames": 64,
+      "median_total_seconds": 11.494418700000097,
+      "median_fps": 5.5679196721796345
+    },
+    {
+      "clip": "freiburg3_walking_xyz",
+      "method": "E_half",
+      "frames": 64,
+      "median_total_seconds": 9.0687252000007,
+      "median_fps": 7.057221228844277
+    },
+    {
+      "clip": "freiburg3_walking_xyz",
+      "method": "D_tuned",
+      "frames": 64,
+      "median_total_seconds": 12.036910400000124,
+      "median_fps": 5.316979014814245
+    },
+    {
+      "clip": "moving",
+      "method": "RAW",
+      "frames": 64,
+      "median_total_seconds": 8.039507800000138,
+      "median_fps": 7.960686349480114
+    },
+    {
+      "clip": "moving",
+      "method": "A",
+      "frames": 64,
+      "median_total_seconds": 11.76607469999999,
+      "median_fps": 5.439367132353839
+    },
+    {
+      "clip": "moving",
+      "method": "D",
+      "frames": 64,
+      "median_total_seconds": 11.162338699999964,
+      "median_fps": 5.733565493761644
+    },
+    {
+      "clip": "moving",
+      "method": "E_half",
+      "frames": 64,
+      "median_total_seconds": 9.394372000000658,
+      "median_fps": 6.812589495071679
+    },
+    {
+      "clip": "moving",
+      "method": "D_tuned",
+      "frames": 64,
+      "median_total_seconds": 11.217358500000046,
+      "median_fps": 5.705443041692903
+    }
+  ],
+  "protocol": "1 warmup + 3 repeats; inactive CUDA cache released at clip/method boundaries outside timing; warmed model; saved RGB PNG read + offline 518 FP32 VDA + freshly computed CPU flow/fusion + compressed depth write; excludes initial model load, source video extraction, display, application alerts and evaluation",
+  "selection_sha256": "97cbb7f5f36b53e5f42be25f4d4a0a8c9b8a4dc5d73cc2f1084b537f45fe5b46"
+}

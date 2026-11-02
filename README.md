@@ -15,15 +15,21 @@ The required Middlebury quarter-resolution and NYUv2 labeled datasets and model
 weights are downloaded and verified locally. Full stereo experiments and both
 654-image metric-depth GPU baselines are evaluated. C is the main Part 3
 exploration; C_cuda provides equivalent GPU processing, with A as a temporal
-supplement. Self-recorded video and final submission materials remain required.
+supplement. Self-recorded clips and extra datasets are optional extensions.
+The rollercoaster relative-video comparison, provided-image application, three
+difficult cases and non-report delivery ZIP are prepared. The official clip has
+70 genuine frames although the brief requests 100; this exception still needs
+course confirmation. The academic report is paused at the user's request.
 
-- [Project status and missing data](docs/project_status.md)
+- [Non-report delivery, media and reproduction](docs/course_delivery.md)
+- [Project status and remaining items](docs/project_status.md)
+- [Current assignment compliance and the clip-length discrepancy](docs/new_brief_compliance.md)
 - [Benchmark results and reproduction](docs/benchmark_results.md)
 - [Part 3 results and direction selection](docs/part3_results.md)
 - [Assignment requirements](docs/course_overview.md)
 - [Complete saved-video replay bundle](artifacts/relative_video_demo/README.md)
 
-Tests: 101 passed. Dataset/weight hashes and source versions are recorded in
+Tests: 113 passed with CUDA; final CPU recheck: 112 passed, 1 CUDA-only skipped. Dataset/weight hashes and source versions are recorded in
 `data/manifests/`. Large datasets and weights stay local.
 
 ## Quick start (PowerShell, from repository root)
@@ -157,3 +163,11 @@ Model APIs follow the official [Depth Anything V2](https://github.com/DepthAnyth
 implementations. RAFT uses [torchvision](https://docs.pytorch.org/vision/stable/models/raft.html).
 Third-party source and weights retain their own licenses and are not bundled.
 Original project code is covered by [LICENSE](LICENSE).
+
+## Representative provided-image application
+
+![NYUv2 depth-aware blur using unchanged and refined depth](docs/figures/course_delivery/nyu_application.png)
+
+The course archive is local and includes private self-recorded previews; it is not
+committed to the public repository. See the delivery guide for source-length
+limitations, raw arrays, CPU replay, failure cases and checksum verification.

@@ -1,0 +1,23 @@
+{
+  "observed_phone_RAW_fps": [
+    [
+      "0",
+      "0.78"
+    ],
+    [
+      "1",
+      "0.79"
+    ],
+    [
+      "2",
+      "0.79"
+    ],
+    [
+      "3",
+      "0.79"
+    ]
+  ],
+  "condition": "Same warm model process after TUM landscape repetitions; device memory nearly full; interrupted before completing phone methods",
+  "status": "Exploratory failure observation; not used for the main method speed comparison",
+  "next_check": "Clear inactive CUDA allocator cache at clip/method boundaries and repeat"
+}

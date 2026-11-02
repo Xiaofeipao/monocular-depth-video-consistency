@@ -1,0 +1,405 @@
+{
+  "name": "freiburg1_desk",
+  "kind": "development",
+  "frames": 64,
+  "recipes": {
+    "RAW": {},
+    "A": {},
+    "D_temporal": {
+      "use_confidence": false,
+      "enable_reset": false
+    },
+    "D_confidence": {
+      "enable_reset": false
+    },
+    "D": {},
+    "E_half": {},
+    "C": {},
+    "D_candidate_0": {
+      "alpha_max": 0.25,
+      "minimum_coverage": 0.02
+    },
+    "D_candidate_1": {
+      "alpha_max": 0.45,
+      "minimum_coverage": 0.02
+    },
+    "D_candidate_2": {
+      "alpha_max": 0.7,
+      "minimum_coverage": 0.02
+    },
+    "D_candidate_3": {
+      "alpha_max": 0.25,
+      "minimum_coverage": 0.02,
+      "edge_threshold": 0.08
+    },
+    "D_candidate_4": {
+      "alpha_max": 0.45,
+      "minimum_coverage": 0.02,
+      "edge_threshold": 0.08
+    },
+    "D_candidate_5": {
+      "alpha_max": 0.7,
+      "minimum_coverage": 0.02,
+      "edge_threshold": 0.08
+    }
+  },
+  "methods": [
+    {
+      "method": "RAW",
+      "fusion_seconds": 0.02625899999975445,
+      "fusion_repeat_seconds": [
+        0.026281100000232982,
+        0.02625899999975445,
+        0.025792699999783508
+      ],
+      "flow_seconds": 0,
+      "postprocess_seconds": 0.02625899999975445,
+      "postprocess_fps": 2437.2596062530356,
+      "resets": 0,
+      "AbsRel": 0.12133041067777267,
+      "RMSE": 0.20319298975840014,
+      "delta1": 0.9037171099835325,
+      "edge_F1": 0.179983942158315,
+      "RAW_reference_edge_F1": 1.0,
+      "RAW_log_change": 0.0,
+      "farneback_warp_proxy": 0.08637462248877874,
+      "raft_warp_proxy": 0.052836856257820884,
+      "pose_temporal_log_error": 0.04649595953138383,
+      "guard_passed": true
+    },
+    {
+      "method": "A",
+      "fusion_seconds": 1.325336999999763,
+      "fusion_repeat_seconds": [
+        1.325336999999763,
+        1.5114605999997366,
+        1.299864399999933
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 4.791854499999772,
+      "postprocess_fps": 13.355998184002257,
+      "resets": 1,
+      "AbsRel": 0.12084119437551791,
+      "RMSE": 0.2028928222965702,
+      "delta1": 0.9048059885377205,
+      "edge_F1": 0.1802676290534187,
+      "RAW_reference_edge_F1": 0.9998959754561556,
+      "RAW_log_change": 0.0017965081251531956,
+      "farneback_warp_proxy": 0.0834897801516548,
+      "raft_warp_proxy": 0.051952520636693825,
+      "pose_temporal_log_error": 0.04593948583066007,
+      "guard_passed": true
+    },
+    {
+      "method": "D_temporal",
+      "fusion_seconds": 1.2240716999999677,
+      "fusion_repeat_seconds": [
+        1.2450751999999738,
+        1.2026614000001246,
+        1.2240716999999677
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 4.690589199999977,
+      "postprocess_fps": 13.644341312174666,
+      "resets": 0,
+      "AbsRel": 0.11954307020774224,
+      "RMSE": 0.2016350906126642,
+      "delta1": 0.9082291084493769,
+      "edge_F1": 0.17826137989148216,
+      "RAW_reference_edge_F1": 0.9948939322748809,
+      "RAW_log_change": 0.0050588583735589054,
+      "farneback_warp_proxy": 0.07809211343290313,
+      "raft_warp_proxy": 0.05038007336949545,
+      "pose_temporal_log_error": 0.04524988207576018,
+      "guard_passed": true
+    },
+    {
+      "method": "D_confidence",
+      "fusion_seconds": 1.3739166999998815,
+      "fusion_repeat_seconds": [
+        1.4857781999999133,
+        1.3739166999998815,
+        1.312032100000124
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 4.8404341999998906,
+      "postprocess_fps": 13.22195434450931,
+      "resets": 0,
+      "AbsRel": 0.12037539530459485,
+      "RMSE": 0.20226219147084568,
+      "delta1": 0.9061727883513024,
+      "edge_F1": 0.17845703624707865,
+      "RAW_reference_edge_F1": 0.9981150400149247,
+      "RAW_log_change": 0.0025613197799430054,
+      "farneback_warp_proxy": 0.08198571154877307,
+      "raft_warp_proxy": 0.05139146810249677,
+      "pose_temporal_log_error": 0.045574163382192376,
+      "guard_passed": true
+    },
+    {
+      "method": "D",
+      "fusion_seconds": 1.5482271000000765,
+      "fusion_repeat_seconds": [
+        2.0447415999997247,
+        1.5482271000000765,
+        1.5362153000000944
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 5.0147446000000855,
+      "postprocess_fps": 12.762364807172615,
+      "resets": 1,
+      "AbsRel": 0.120368609971824,
+      "RMSE": 0.20225491739587034,
+      "delta1": 0.9061765329423763,
+      "edge_F1": 0.1784563036197453,
+      "RAW_reference_edge_F1": 0.9981609375043259,
+      "RAW_log_change": 0.002560053898832848,
+      "farneback_warp_proxy": 0.08200276776083879,
+      "raft_warp_proxy": 0.05139057489023322,
+      "pose_temporal_log_error": 0.04557537760582106,
+      "guard_passed": true
+    },
+    {
+      "method": "E_half",
+      "fusion_seconds": 1.2972486999997273,
+      "fusion_repeat_seconds": [
+        1.3558391999999913,
+        1.2861840000000484,
+        1.2972486999997273
+      ],
+      "flow_seconds": 1.0042210999999952,
+      "postprocess_seconds": 2.3014697999997225,
+      "postprocess_fps": 27.808316233394727,
+      "resets": 1,
+      "AbsRel": 0.12091928617180782,
+      "RMSE": 0.2029360429400633,
+      "delta1": 0.9044935748870784,
+      "edge_F1": 0.18006050014786068,
+      "RAW_reference_edge_F1": 0.9998992970917385,
+      "RAW_log_change": 0.0016128160832522553,
+      "farneback_warp_proxy": 0.08477333912418948,
+      "raft_warp_proxy": 0.051815733550086854,
+      "pose_temporal_log_error": 0.04579984106396068,
+      "guard_passed": true
+    },
+    {
+      "method": "C",
+      "fusion_seconds": 6.344638800000212,
+      "fusion_repeat_seconds": [
+        6.290977099999964,
+        7.254625600000054,
+        6.344638800000212
+      ],
+      "flow_seconds": 0,
+      "postprocess_seconds": 6.344638800000212,
+      "postprocess_fps": 10.08725666148211,
+      "resets": 0,
+      "AbsRel": 0.12116270703205029,
+      "RMSE": 0.20232489679431204,
+      "delta1": 0.9040136144096067,
+      "edge_F1": 0.17286637459600443,
+      "RAW_reference_edge_F1": 0.9775484338059448,
+      "RAW_log_change": 0.0021851070487173274,
+      "farneback_warp_proxy": 0.08603468895076759,
+      "raft_warp_proxy": 0.05257351244134562,
+      "pose_temporal_log_error": 0.04622419500488577,
+      "guard_passed": true
+    },
+    {
+      "method": "D_candidate_0",
+      "fusion_seconds": 1.5686930000001666,
+      "fusion_repeat_seconds": [
+        1.7205348000002232,
+        1.5686930000001666,
+        1.4925423999998202
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 5.035210500000176,
+      "postprocess_fps": 12.710491448172379,
+      "resets": 1,
+      "AbsRel": 0.12037796683540461,
+      "RMSE": 0.2022881583228021,
+      "delta1": 0.9061651894317099,
+      "edge_F1": 0.1782304644980544,
+      "RAW_reference_edge_F1": 0.9986827543463135,
+      "RAW_log_change": 0.002524669339436514,
+      "farneback_warp_proxy": 0.08207341224428207,
+      "raft_warp_proxy": 0.05140690743509266,
+      "pose_temporal_log_error": 0.0455854902272156,
+      "guard_passed": true
+    },
+    {
+      "method": "D_candidate_1",
+      "fusion_seconds": 1.5139588000001822,
+      "fusion_repeat_seconds": [
+        1.6805873999996948,
+        1.5139588000001822,
+        1.4993521000001238
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 4.980476300000191,
+      "postprocess_fps": 12.850176598571013,
+      "resets": 1,
+      "AbsRel": 0.12037016477136042,
+      "RMSE": 0.20226095668353683,
+      "delta1": 0.9061748502629576,
+      "edge_F1": 0.17838128496541708,
+      "RAW_reference_edge_F1": 0.9983365897448695,
+      "RAW_log_change": 0.0025543841215949215,
+      "farneback_warp_proxy": 0.08201429706125979,
+      "raft_warp_proxy": 0.05139315336765278,
+      "pose_temporal_log_error": 0.0455776541657562,
+      "guard_passed": true
+    },
+    {
+      "method": "D_candidate_2",
+      "fusion_seconds": 1.6136458999999377,
+      "fusion_repeat_seconds": [
+        1.7631262999998398,
+        1.4903622000001633,
+        1.6136458999999377
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 5.080163399999947,
+      "postprocess_fps": 12.598019977074099,
+      "resets": 1,
+      "AbsRel": 0.120368609971824,
+      "RMSE": 0.20225491739587034,
+      "delta1": 0.9061765329423763,
+      "edge_F1": 0.1784563036197453,
+      "RAW_reference_edge_F1": 0.9981609375043259,
+      "RAW_log_change": 0.002560053898832848,
+      "farneback_warp_proxy": 0.08200276776083879,
+      "raft_warp_proxy": 0.05139057489023322,
+      "pose_temporal_log_error": 0.04557537760582106,
+      "guard_passed": true
+    },
+    {
+      "method": "D_candidate_3",
+      "fusion_seconds": 1.6281065000002855,
+      "fusion_repeat_seconds": [
+        1.6281065000002855,
+        1.5570321999998669,
+        1.735945399999764
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 5.0946240000002945,
+      "postprocess_fps": 12.56226170959747,
+      "resets": 1,
+      "AbsRel": 0.1203935327679619,
+      "RMSE": 0.2023694574455376,
+      "delta1": 0.9061384853836506,
+      "edge_F1": 0.18092893567963775,
+      "RAW_reference_edge_F1": 0.9994964968777951,
+      "RAW_log_change": 0.00243811663813176,
+      "farneback_warp_proxy": 0.08226052426274806,
+      "raft_warp_proxy": 0.05144604427059964,
+      "pose_temporal_log_error": 0.04561114738206005,
+      "guard_passed": true
+    },
+    {
+      "method": "D_candidate_4",
+      "fusion_seconds": 1.766047599999638,
+      "fusion_repeat_seconds": [
+        1.5519060999999965,
+        1.821829400000297,
+        1.766047599999638
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 5.232565099999647,
+      "postprocess_fps": 12.231094841037777,
+      "resets": 1,
+      "AbsRel": 0.12039037197922797,
+      "RMSE": 0.20236498882117868,
+      "delta1": 0.9061431466349721,
+      "edge_F1": 0.1810459207629609,
+      "RAW_reference_edge_F1": 0.9993471740863955,
+      "RAW_log_change": 0.0024520453966943023,
+      "farneback_warp_proxy": 0.08223444196794714,
+      "raft_warp_proxy": 0.05143926412399326,
+      "pose_temporal_log_error": 0.04560870045995551,
+      "guard_passed": true
+    },
+    {
+      "method": "D_candidate_5",
+      "fusion_seconds": 1.671090599999843,
+      "fusion_repeat_seconds": [
+        1.671090599999843,
+        1.761934999999994,
+        1.5228376999998545
+      ],
+      "flow_seconds": 3.466517500000009,
+      "postprocess_seconds": 5.137608099999852,
+      "postprocess_fps": 12.457158808979969,
+      "resets": 1,
+      "AbsRel": 0.12039019235961372,
+      "RMSE": 0.20236474564535534,
+      "delta1": 0.9061431240358494,
+      "edge_F1": 0.18113418165302497,
+      "RAW_reference_edge_F1": 0.9992867226884771,
+      "RAW_log_change": 0.0024528538815502543,
+      "farneback_warp_proxy": 0.08223278832340998,
+      "raft_warp_proxy": 0.05143868092388388,
+      "pose_temporal_log_error": 0.045608476594277865,
+      "guard_passed": true
+    }
+  ],
+  "baseline": "outputs\\d_research\\freiburg1_desk\\baseline",
+  "baseline_manifest_sha256": "c485dc20222151a2bfcfb74a3528199c472b5b8bc7e15957dfbb2cb1fd5ed651",
+  "input_manifest_sha256": "090e711189f8aa77837d3b99d045f9b36fb33b963d562003f00f7c551af8eae4",
+  "predictions_sha256": "2285f4aca79a1d4dd850b84024020be35313b874fc801e03e88396a2a0295bf6",
+  "prediction_locations": {
+    "RAW": {
+      "run": "outputs\\d_research\\freiburg1_desk\\baseline",
+      "manifest_sha256": "c485dc20222151a2bfcfb74a3528199c472b5b8bc7e15957dfbb2cb1fd5ed651"
+    },
+    "A": {
+      "npz_key": "A"
+    },
+    "D_temporal": {
+      "npz_key": "D_temporal"
+    },
+    "D_confidence": {
+      "npz_key": "D_confidence"
+    },
+    "D": {
+      "npz_key": "D"
+    },
+    "E_half": {
+      "npz_key": "E_half"
+    },
+    "C": {
+      "npz_key": "C"
+    },
+    "D_candidate_0": {
+      "npz_key": "D_candidate_0"
+    },
+    "D_candidate_1": {
+      "npz_key": "D_candidate_1"
+    },
+    "D_candidate_2": {
+      "npz_key": "D"
+    },
+    "D_candidate_3": {
+      "npz_key": "D_candidate_3"
+    },
+    "D_candidate_4": {
+      "npz_key": "D_candidate_4"
+    },
+    "D_candidate_5": {
+      "npz_key": "D_candidate_5"
+    }
+  },
+  "flow_repeat_seconds": {
+    "full": [
+      3.3741556999998465,
+      3.466517500000009,
+      3.6039221999999427
+    ],
+    "half": [
+      0.8710826000001362,
+      1.0244254999997793,
+      1.0042210999999952
+    ]
+  }
+}

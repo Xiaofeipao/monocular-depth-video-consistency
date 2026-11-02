@@ -1,0 +1,15 @@
+{
+  "frames": 70,
+  "requested_frames": 100,
+  "fps": 24.0,
+  "source_sha256": "7268cbecd9806a1e90a416de50dc02e50b4ae01428d5971837cf679dd0c87cb8",
+  "same_RGB_verified": true,
+  "source_length_exception": true,
+  "course_confirmation_pending": true,
+  "report_included": false,
+  "archive": "depth_results.zip",
+  "bytes": 99878459,
+  "sha256": "356b82d84faf14be4e971665cdafb563f0c8476c8ebd2702f1aae4c4b7e140b6",
+  "member_checksums_verified": 530,
+  "cpu_replay_verified": true
+}

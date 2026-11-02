@@ -1,0 +1,49 @@
+{
+  "metrics": {
+    "farneback": {
+      "RAW": {
+        "near_overlap_or_join": 0.002855220356852644,
+        "outside_join_region": 0.002289404769221114
+      },
+      "A": {
+        "near_overlap_or_join": 0.002546578432278087,
+        "outside_join_region": 0.0019419996404192513
+      },
+      "C": {
+        "near_overlap_or_join": 0.0027726170050704647,
+        "outside_join_region": 0.0021911116808445916
+      },
+      "D": {
+        "near_overlap_or_join": 0.0022395094533243943,
+        "outside_join_region": 0.0016878558478007715
+      },
+      "E_half": {
+        "near_overlap_or_join": 0.0025516796676028105,
+        "outside_join_region": 0.0019496401228631536
+      }
+    },
+    "raft": {
+      "RAW": {
+        "near_overlap_or_join": 0.003223199862986803,
+        "outside_join_region": 0.0027718529467367463
+      },
+      "A": {
+        "near_overlap_or_join": 0.0029134296217105454,
+        "outside_join_region": 0.0024627513950690625
+      },
+      "C": {
+        "near_overlap_or_join": 0.0031131887808442116,
+        "outside_join_region": 0.0026380549650639297
+      },
+      "D": {
+        "near_overlap_or_join": 0.0026991176483635274,
+        "outside_join_region": 0.002294889935809705
+      },
+      "E_half": {
+        "near_overlap_or_join": 0.0029131982915310394,
+        "outside_join_region": 0.00246340607603391
+      }
+    }
+  },
+  "note": "Near official overlap/join regions 24..32 and 46..54. Scene motion also varies across time; not a causal stitch-artifact metric."
+}

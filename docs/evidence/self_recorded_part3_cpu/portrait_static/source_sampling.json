@@ -1,0 +1,105 @@
+{
+  "video": {
+    "playback_fps": 5
+  },
+  "source": "data\\self-recorded\\portrait static.mp4",
+  "source_sha256": "cf4ec35025e867e68cdb0fa430a8e81e520b38278f033b1ac87fe72dd2e2cd14",
+  "samples": [
+    {
+      "id": "000000",
+      "rgb": "000000.png",
+      "source_index": 200,
+      "timestamp": 6.666426303854876
+    },
+    {
+      "id": "000001",
+      "rgb": "000001.png",
+      "source_index": 206,
+      "timestamp": 6.8664190929705216
+    },
+    {
+      "id": "000002",
+      "rgb": "000002.png",
+      "source_index": 212,
+      "timestamp": 7.066411882086168
+    },
+    {
+      "id": "000003",
+      "rgb": "000003.png",
+      "source_index": 218,
+      "timestamp": 7.266404671201815
+    },
+    {
+      "id": "000004",
+      "rgb": "000004.png",
+      "source_index": 224,
+      "timestamp": 7.46639746031746
+    },
+    {
+      "id": "000005",
+      "rgb": "000005.png",
+      "source_index": 230,
+      "timestamp": 7.666390249433107
+    },
+    {
+      "id": "000006",
+      "rgb": "000006.png",
+      "source_index": 236,
+      "timestamp": 7.866383038548753
+    },
+    {
+      "id": "000007",
+      "rgb": "000007.png",
+      "source_index": 242,
+      "timestamp": 8.0663758276644
+    },
+    {
+      "id": "000008",
+      "rgb": "000008.png",
+      "source_index": 248,
+      "timestamp": 8.266368616780046
+    },
+    {
+      "id": "000009",
+      "rgb": "000009.png",
+      "source_index": 254,
+      "timestamp": 8.466361405895691
+    },
+    {
+      "id": "000010",
+      "rgb": "000010.png",
+      "source_index": 260,
+      "timestamp": 8.666354195011339
+    },
+    {
+      "id": "000011",
+      "rgb": "000011.png",
+      "source_index": 266,
+      "timestamp": 8.866346984126984
+    },
+    {
+      "id": "000012",
+      "rgb": "000012.png",
+      "source_index": 272,
+      "timestamp": 9.06633977324263
+    },
+    {
+      "id": "000013",
+      "rgb": "000013.png",
+      "source_index": 278,
+      "timestamp": 9.266332562358278
+    },
+    {
+      "id": "000014",
+      "rgb": "000014.png",
+      "source_index": 284,
+      "timestamp": 9.466325351473923
+    },
+    {
+      "id": "000015",
+      "rgb": "000015.png",
+      "source_index": 290,
+      "timestamp": 9.666318140589569
+    }
+  ]
+}

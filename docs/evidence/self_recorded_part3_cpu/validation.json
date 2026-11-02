@@ -1,0 +1,10 @@
+{
+  "all_passed": true,
+  "checks": {
+    "baseline_predictions": 64,
+    "derived_predictions": 512,
+    "flow_pairs": 120,
+    "videos": 4
+  },
+  "notes": "CPU only; RAW identical to metric VDA; all methods use identical RGB; hashes/finite depths/parent provenance/common-mask equality/CSV aggregates/video decodes verified."
+}

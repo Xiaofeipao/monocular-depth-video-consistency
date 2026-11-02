@@ -1,0 +1,6 @@
+{
+  "passed": 112,
+  "skipped": 1,
+  "skip_reason": "CUDA was unavailable during final CPU recheck; same CUDA-only test passed in prior 113-test run",
+  "test_log_sha256": "38608cda6ef80a52d5e3602d508c881a363700025455549effe4d02be9224b03"
+}

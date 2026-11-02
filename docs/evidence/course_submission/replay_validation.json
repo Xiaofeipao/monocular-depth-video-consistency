@@ -1,0 +1,11 @@
+{
+  "verified": true,
+  "frames": 70,
+  "fps": 24.0,
+  "model_loading_required": false,
+  "method_manifest_sha256": {
+    "dav2_relative": "6f2bda8a55e7300aa4df97b5b40662fc04c83f65515919201470aeb36861584d",
+    "vda_relative": "db3ba55448f0c4184c70e3eb84cee46a36e83bcbbc9a5a475289d84ae8c42a56"
+  },
+  "scope": "Actual extracted ZIP payload replayed using standalone numpy/OpenCV script; manifests identify the checked payload independently of archive wrapper changes"
+}

@@ -1,0 +1,9 @@
+{
+  "all_passed": true,
+  "counts": {
+    "baseline_predictions": 374,
+    "derived_predictions": 1870,
+    "flow_pairs": 736,
+    "videos": 6
+  }
+}

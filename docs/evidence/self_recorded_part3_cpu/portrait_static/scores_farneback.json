@@ -1,0 +1,50 @@
+{
+  "RAW": {
+    "temporal_log_error": 0.001886136643588543,
+    "warp_MAE_m": 0.007051218735675017,
+    "coverage": 0.9938509778911566,
+    "reduction_vs_RAW_pct": 0.0
+  },
+  "A": {
+    "temporal_log_error": 0.0015487210902695855,
+    "warp_MAE_m": 0.005958462227135896,
+    "coverage": 0.9938509778911566,
+    "reduction_vs_RAW_pct": 17.889242249013005
+  },
+  "A_conservative": {
+    "temporal_log_error": 0.0017018542547399798,
+    "warp_MAE_m": 0.006454790135224661,
+    "coverage": 0.9938509778911566,
+    "reduction_vs_RAW_pct": 9.770362580833458
+  },
+  "C": {
+    "temporal_log_error": 0.0018199571408331395,
+    "warp_MAE_m": 0.006723731011152268,
+    "coverage": 0.9938509778911566,
+    "reduction_vs_RAW_pct": 3.508733207658332
+  },
+  "D": {
+    "temporal_log_error": 0.0014534134805823365,
+    "warp_MAE_m": 0.005381748173385858,
+    "coverage": 0.9938509778911566,
+    "reduction_vs_RAW_pct": 22.942301899342354
+  },
+  "D_guarded": {
+    "temporal_log_error": 0.0016310274678592882,
+    "warp_MAE_m": 0.006192256261905034,
+    "coverage": 0.9938509778911566,
+    "reduction_vs_RAW_pct": 13.525487487687371
+  },
+  "E_half": {
+    "temporal_log_error": 0.0015539679365853469,
+    "warp_MAE_m": 0.005978924284378687,
+    "coverage": 0.9938509778911566,
+    "reduction_vs_RAW_pct": 17.611062704938252
+  },
+  "E_local": {
+    "temporal_log_error": 0.0015539679365853469,
+    "warp_MAE_m": 0.005978924284378687,
+    "coverage": 0.9938509778911566,
+    "reduction_vs_RAW_pct": 17.611062704938252
+  }
+}

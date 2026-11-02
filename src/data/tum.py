@@ -21,6 +21,8 @@ from src.prepare_data import validate_manifest
 TUM_SOURCES={
     'freiburg1_xyz': 'freiburg1',
     'freiburg1_desk': 'freiburg1',
+    'freiburg1_rpy': 'freiburg1',
+    'freiburg3_walking_xyz': 'freiburg3',
     'freiburg3_sitting_static': 'freiburg3',
 }
 FORMAT_URL='https://cvg.cit.tum.de/data/datasets/rgbd-dataset/file_formats'

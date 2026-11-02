@@ -1,0 +1,125 @@
+[
+  {
+    "case": 1,
+    "category": "large_metric_error",
+    "sample_id": "test_0003_mat_0014",
+    "test_position": 3,
+    "scene": "office_0007",
+    "selection": "Post-hoc failure visualization, not parameter selection",
+    "source_prediction_sha256": "cd7a9f917edcb8ff038ddeca72bf85c3b7af6b2a2cd17541a33953cc031529eb",
+    "zoom_top_bottom_left_right": [
+      121,
+      241,
+      236,
+      356
+    ],
+    "metrics": [
+      {
+        "method": "RAW",
+        "abs_rel": 0.5255524562039039,
+        "sq_rel": 1.6494423650911745,
+        "rmse": 2.1844047244809577,
+        "rmse_log": 0.4747991639041939,
+        "delta1": 0.48188715627095907,
+        "delta2": 0.7264126425217975,
+        "delta3": 0.8136024480214621,
+        "valid_pixels": 238560,
+        "si_boundary_f1": 0.030939582986500416
+      },
+      {
+        "method": "C",
+        "abs_rel": 0.5253633823348172,
+        "sq_rel": 1.647945227685525,
+        "rmse": 2.183480039264055,
+        "rmse_log": 0.4746204782600333,
+        "delta1": 0.48158115358819586,
+        "delta2": 0.7263246143527834,
+        "delta3": 0.8137156270959088,
+        "valid_pixels": 238560,
+        "si_boundary_f1": 0.03234516906467418
+      }
+    ]
+  },
+  {
+    "case": 2,
+    "category": "boundary_recovery_difficulty",
+    "sample_id": "test_0018_mat_0037",
+    "test_position": 18,
+    "scene": "office_0014",
+    "selection": "Post-hoc failure visualization, not parameter selection",
+    "source_prediction_sha256": "ac7aa8cc81d544871d7193e69a8c70b1132886099cd8617d4217fb631f71ab0b",
+    "zoom_top_bottom_left_right": [
+      261,
+      381,
+      151,
+      271
+    ],
+    "metrics": [
+      {
+        "method": "RAW",
+        "abs_rel": 0.193468482734495,
+        "sq_rel": 0.11926180149902796,
+        "rmse": 0.6299515375484165,
+        "rmse_log": 0.21948091177454845,
+        "delta1": 0.6396629778672032,
+        "delta2": 0.9994466800804829,
+        "delta3": 1.0,
+        "valid_pixels": 238560,
+        "si_boundary_f1": 3.766681015927679e-05
+      },
+      {
+        "method": "C",
+        "abs_rel": 0.19348290904424015,
+        "sq_rel": 0.11926121635906332,
+        "rmse": 0.6299534787819477,
+        "rmse_log": 0.21946623077891197,
+        "delta1": 0.6390886988598257,
+        "delta2": 0.9995598591549296,
+        "delta3": 1.0,
+        "valid_pixels": 238560,
+        "si_boundary_f1": 0.0
+      }
+    ]
+  },
+  {
+    "case": 3,
+    "category": "refinement_boundary_regression",
+    "sample_id": "test_0209_mat_0525",
+    "test_position": 209,
+    "scene": "bedroom_0135",
+    "selection": "Post-hoc failure visualization, not parameter selection",
+    "source_prediction_sha256": "bdfb66830e7853f6471705880f36a2c69a49293025a4391afd48a2912d67049b",
+    "zoom_top_bottom_left_right": [
+      337,
+      457,
+      41,
+      161
+    ],
+    "metrics": [
+      {
+        "method": "RAW",
+        "abs_rel": 0.18781905822487557,
+        "sq_rel": 0.08867190859259329,
+        "rmse": 0.46543631826036586,
+        "rmse_log": 0.21388818767781176,
+        "delta1": 0.6540786384976526,
+        "delta2": 0.9985286720321932,
+        "delta3": 1.0,
+        "valid_pixels": 238560,
+        "si_boundary_f1": 0.17502416263774967
+      },
+      {
+        "method": "C",
+        "abs_rel": 0.1878331361306562,
+        "sq_rel": 0.08869921619907169,
+        "rmse": 0.4655322031848971,
+        "rmse_log": 0.21390096723179744,
+        "delta1": 0.6536510731052985,
+        "delta2": 0.998520288397049,
+        "delta3": 1.0,
+        "valid_pixels": 238560,
+        "si_boundary_f1": 0.11955928512632366
+      }
+    ]
+  }
+]

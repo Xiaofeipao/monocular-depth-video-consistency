@@ -1,0 +1,93 @@
+{
+  "metrics": {
+    "RAW": {
+      "p95_abs_log_change_vs_RAW": 0.0,
+      "RAW_edge_retention_within_1px": 1.0,
+      "edge_count_ratio_vs_RAW": 1.0,
+      "postprocess_fps": 1982.275157944524,
+      "repeat_seconds": [
+        0.008291199992527254,
+        0.008151299989549443,
+        0.007772099997964688
+      ]
+    },
+    "A": {
+      "p95_abs_log_change_vs_RAW": 0.0018058024579659104,
+      "RAW_edge_retention_within_1px": 1.0,
+      "edge_count_ratio_vs_RAW": 1.0002132674329456,
+      "postprocess_fps": 22.183123440109018,
+      "repeat_seconds": [
+        0.740022099998896,
+        0.7094331999978749,
+        0.7143518000084441
+      ]
+    },
+    "A_conservative": {
+      "p95_abs_log_change_vs_RAW": 0.0008618452411610633,
+      "RAW_edge_retention_within_1px": 1.0,
+      "edge_count_ratio_vs_RAW": 1.0001123142386703,
+      "postprocess_fps": 22.506885348561052,
+      "repeat_seconds": [
+        0.6988621000054991,
+        0.6860001000022748,
+        0.747818499992718
+      ]
+    },
+    "C": {
+      "p95_abs_log_change_vs_RAW": 0.021100737620145082,
+      "RAW_edge_retention_within_1px": 0.9526107300261013,
+      "edge_count_ratio_vs_RAW": 0.8200079211091833,
+      "postprocess_fps": 15.021919797562427,
+      "repeat_seconds": [
+        0.9926714000030188,
+        1.0919054000114556,
+        1.1107537999923807
+      ]
+    },
+    "D": {
+      "p95_abs_log_change_vs_RAW": 0.0016900007904041559,
+      "RAW_edge_retention_within_1px": 0.9993376113907949,
+      "edge_count_ratio_vs_RAW": 0.9993338760278105,
+      "postprocess_fps": 21.220415259669654,
+      "repeat_seconds": [
+        0.7834087999945041,
+        0.7383490000065649,
+        0.7402148999972269
+      ]
+    },
+    "D_guarded": {
+      "p95_abs_log_change_vs_RAW": 0.0013197293737903237,
+      "RAW_edge_retention_within_1px": 1.0,
+      "edge_count_ratio_vs_RAW": 1.0001687926678104,
+      "postprocess_fps": 20.90959891730698,
+      "repeat_seconds": [
+        0.7718415999988792,
+        0.7605065999960061,
+        0.7632482000044547
+      ]
+    },
+    "E_half": {
+      "p95_abs_log_change_vs_RAW": 0.0017977678216993809,
+      "RAW_edge_retention_within_1px": 1.0,
+      "edge_count_ratio_vs_RAW": 1.000202084752681,
+      "postprocess_fps": 47.47648158590521,
+      "repeat_seconds": [
+        0.33761989999038633,
+        0.33021990000270307,
+        0.34318709999206476
+      ]
+    },
+    "E_local": {
+      "p95_abs_log_change_vs_RAW": 0.0017977678216993809,
+      "RAW_edge_retention_within_1px": 1.0,
+      "edge_count_ratio_vs_RAW": 1.000202084752681,
+      "postprocess_fps": 40.972457375423645,
+      "repeat_seconds": [
+        0.39498559999628924,
+        0.3935007999971276,
+        0.3830323000001954
+      ]
+    }
+  },
+  "caveat": "RAW edges are a reference, NOT ground truth. Edge retention does not measure boundary accuracy. P95 samples every 16th valid pixel per frame. Timing excludes backbone, decode, I/O, evaluation; includes flow and warning compute; 1 OpenCV thread."
+}

@@ -1,0 +1,834 @@
+[
+  {
+    "id": "000000",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 0,
+    "rgb_sha256": "cf272b903ba3c08bc2d57592423a1882566c915f18c611deb05a27c0a7c1d156",
+    "depth_sha256": "994e8b6caf333c99eacf0b26c813e75d62fa73373f27ad0f55ba93c6fcdb8e32",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000000",
+    "timestamp": 2.633239987562189
+  },
+  {
+    "id": "000001",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 1,
+    "rgb_sha256": "18085f3c3afda8840b96a38004ec4fb87ba9320626093525ea63a9b0801ecc53",
+    "depth_sha256": "05b91ea4327b6c4dafdd7c0b5cd52768c5373d0ad1888a51c15cfb3b45fc4542",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000001",
+    "timestamp": 2.83323289800995
+  },
+  {
+    "id": "000002",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 2,
+    "rgb_sha256": "5cd3dcbfc1d671870873f1cd6be1bd64c33130ed14f017d98730243891aa94f2",
+    "depth_sha256": "dd440a1d75696c4cceae641fdb1d45ae60a8396192ab0000967887287f70bcbd",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000002",
+    "timestamp": 3.0332258084577113
+  },
+  {
+    "id": "000003",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 3,
+    "rgb_sha256": "b816cc499632873a7be09bee6225470edbe6aa48be69e515522b30e92837d48e",
+    "depth_sha256": "56905b78da81c7a983e240e1cd7148a1c34c148c4998c0fd34e3162adab21554",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000003",
+    "timestamp": 3.233218718905473
+  },
+  {
+    "id": "000004",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 4,
+    "rgb_sha256": "7c5b3901974a8fde2b413db5bda0eba1f32aff29f50dcb9d2f115cbdbc1e7a10",
+    "depth_sha256": "4dcfacd8e93cd0f7c86600cc9c03bbfede1923b927edc76c351b59215f849ea6",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000004",
+    "timestamp": 3.433211629353234
+  },
+  {
+    "id": "000005",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 5,
+    "rgb_sha256": "37c556bb39d54025b498f432c5ce45376f17272bb03bf60d59a69eeee3d0834f",
+    "depth_sha256": "7e22849d13ac2361ce515032f371470b396a6c80c41dcbf21d09c3185c1bda24",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000005",
+    "timestamp": 3.633204539800995
+  },
+  {
+    "id": "000006",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 6,
+    "rgb_sha256": "19458a2b23ab65bc78663c509c061609962dbcf3742ce0f7c31498f6373d265e",
+    "depth_sha256": "199281309b9985918f8d23327d1348f553e8a3d50ef8c7be4f2be692db2195d7",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000006",
+    "timestamp": 3.8331974502487562
+  },
+  {
+    "id": "000007",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 7,
+    "rgb_sha256": "ed7fec9cc0bb00c9930307d884328b464c943e1445deea2caa328800994e6ee2",
+    "depth_sha256": "0a13c06a2a338883aad596f2a42884e2fde155e53b2ea3e8d3db2b1cdf0a9a9f",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000007",
+    "timestamp": 4.033190360696517
+  },
+  {
+    "id": "000008",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 8,
+    "rgb_sha256": "7b6a241301c8f392b0168f636c0cc5836381fe38fe64ebe2ca339eaa75b7356a",
+    "depth_sha256": "228eec49c4b10fd45b714009f002d68ca4c8562d77089d9e9cddc74c4e2b73af",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000008",
+    "timestamp": 4.233183271144279
+  },
+  {
+    "id": "000009",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 9,
+    "rgb_sha256": "7714ec0451362d1801410f0cc6ef51620a43a69ce15ccd38faceacfe6ddf215d",
+    "depth_sha256": "9a947f27b5a0b32667b62353ea69489ba70e2d02793e624e70160d3ecb38d473",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000009",
+    "timestamp": 4.43317618159204
+  },
+  {
+    "id": "000010",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 10,
+    "rgb_sha256": "c4856efe23f3b9e0a34f5ada3c0246a924f951e7a3a35d39e2f28ea614352487",
+    "depth_sha256": "9491e6880a02266aa19fa30ecea3f302950fa50b539d7fb9a82e0ae279fee03d",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000010",
+    "timestamp": 4.633169092039801
+  },
+  {
+    "id": "000011",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 11,
+    "rgb_sha256": "ab4dd9ff149a485286f73bea4e2e531375d1ebaef2eb1ca457ee4adc2e9ed8f8",
+    "depth_sha256": "b46d69db2b67d4c7771a1c1d31cbd8a67e288a382af934f3f897bafafe118a6e",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000011",
+    "timestamp": 4.833162002487562
+  },
+  {
+    "id": "000012",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 12,
+    "rgb_sha256": "94ea7003834ce42cb2fae6f8cad8a4c57526d6fb1befce11df047a274da5fee8",
+    "depth_sha256": "0cfb83018ac6719df055ed8f4bdf6f5fa0574d91acd31babd2c6b071ec1bf67a",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000012",
+    "timestamp": 5.0331549129353235
+  },
+  {
+    "id": "000013",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 13,
+    "rgb_sha256": "9dccd5cf90626425648e3e97103bc90758646cc349a5cd0694f56fc076ae65e9",
+    "depth_sha256": "ec136e2a1100a5bd33161373efe8434a1fc2ed4011fd02bedfa599114d87bf01",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000013",
+    "timestamp": 5.233147823383085
+  },
+  {
+    "id": "000014",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 14,
+    "rgb_sha256": "1de0e9f3198c421882fd3b37da9e5e32c6a19b98aa9082e27dbef2d4f0249823",
+    "depth_sha256": "5b56bd41dca61870967930815d0f8411897c0be6f8f52959890bdf88cc082bd8",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000014",
+    "timestamp": 5.433140733830846
+  },
+  {
+    "id": "000015",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 15,
+    "rgb_sha256": "accb00163c1802161c97cd9e39af6468f29b9cc4975e7d37c4d2911e31e5ac34",
+    "depth_sha256": "2dc0b9da14bcdae0537ba6f787ea1742e646705295a63f3f9d8e33dd9646e60c",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000015",
+    "timestamp": 5.633133644278607
+  },
+  {
+    "id": "000016",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 16,
+    "rgb_sha256": "c789b7b49db9c7733792e34a48ff740788d5d80fdfa9ac1d930e00d97ebe2666",
+    "depth_sha256": "f0ebe36cb1154b40af82824a9eeb005aab0cd9ce0a246a53dd0f05c5b308fb5a",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000016",
+    "timestamp": 5.833126554726368
+  },
+  {
+    "id": "000017",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 17,
+    "rgb_sha256": "ce26ba5477be3c2a50db2d53265791114af08016892422e93d347a13ebdd4355",
+    "depth_sha256": "82f77717bd63a94e0eb5073dd4a24c60611ff589348a0700014104e9f7aefc42",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000017",
+    "timestamp": 6.03311946517413
+  },
+  {
+    "id": "000018",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 18,
+    "rgb_sha256": "caa2ac42369b5ad8228ce3555ce3217edc807039286504b449a6e185e9c51140",
+    "depth_sha256": "b2628a8abd93715fc3f5b104bbd4e52890737260e050e3dc5972b092f0fa6825",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000018",
+    "timestamp": 6.23311237562189
+  },
+  {
+    "id": "000019",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 19,
+    "rgb_sha256": "6b36eeaf70f17858084f430bca875651a7df3911fb3f2452fc823ad1c982d7fc",
+    "depth_sha256": "cf651fc5f64dd1de1e4b2248b3e9d5d2c485aa2ac4202804cad4529cdf91160b",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000019",
+    "timestamp": 6.433105286069652
+  },
+  {
+    "id": "000020",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 20,
+    "rgb_sha256": "672cde3d9433c508e9d87165e58449e6f949808ccdb04f7654bb6f239cfc503a",
+    "depth_sha256": "39830cc4f3bf1a90ead631c965d5c55c058b98d498b382d6d2c4d2eee38dfe9a",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000020",
+    "timestamp": 6.633098196517413
+  },
+  {
+    "id": "000021",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 21,
+    "rgb_sha256": "8e77aa1b0179ed1ef9bb7f10302617ef1f55f59a63a3b5d3d340882a7fe62695",
+    "depth_sha256": "b11b7e4138208d43a5b7a623afeec764cbfab4f89ad76ffd14a2861741355e8e",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000021",
+    "timestamp": 6.833091106965174
+  },
+  {
+    "id": "000022",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 22,
+    "rgb_sha256": "151f486f6df4b185da4249d5f7eef9ccad20c2a35f603b0f0bb5b80bfa22cdac",
+    "depth_sha256": "595c4d0265afb62f5feea8aa9e3ddd749151254b48ff0ff2726d65c8fd9e3925",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000022",
+    "timestamp": 7.033084017412936
+  },
+  {
+    "id": "000023",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 23,
+    "rgb_sha256": "bbbce5640baf9baf1c0a1598320c175b2c790b429943a0228f6ab259197c9d8e",
+    "depth_sha256": "e3a91b44a51a4d5e197f5bba7c6c961ad3d8b9a793e0f28bb1fb76caea283301",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000023",
+    "timestamp": 7.233076927860696
+  },
+  {
+    "id": "000024",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 24,
+    "rgb_sha256": "eda902c890ac75acbbc9060dbf536134bb40633378a26c4caef03b0d0de2025e",
+    "depth_sha256": "89813a33e2a45399b82104907c65eaf4f8ae501a05df4e2b504f98bc64c06040",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000024",
+    "timestamp": 7.433069838308458
+  },
+  {
+    "id": "000025",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 25,
+    "rgb_sha256": "8a229231fedaca3e753c02d369b513e1f7c001fb6acab00049f9210ef892471c",
+    "depth_sha256": "ae8f60950dfc7f2594973ccd3b3188119234924ef56c8940a8443b545e9f51bd",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000025",
+    "timestamp": 7.633062748756219
+  },
+  {
+    "id": "000026",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 26,
+    "rgb_sha256": "14b6da2c5a6a34e0fcb337c7c14ec80de147b076c9f2e5e5ffd9c90b23898a56",
+    "depth_sha256": "46ab69d11bc7fe5e4e3020c17477fcc204da2516db41a65da6557f27b95dcb27",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000026",
+    "timestamp": 7.83305565920398
+  },
+  {
+    "id": "000027",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 27,
+    "rgb_sha256": "4d91ba2a58022fa5ffff29082699646d9fbd63a242e263f06b0f860a15779584",
+    "depth_sha256": "eb3b0eeccd1c9bbf3ac460b2b5e8167a79abb74a4c6e59a532d06aec5044861e",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000027",
+    "timestamp": 8.033048569651742
+  },
+  {
+    "id": "000028",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 28,
+    "rgb_sha256": "e1ddf3c02d9398e04eded979dbfa8676eacba866b381b01f54590d8a2c0c01f3",
+    "depth_sha256": "e0f1e8069da4773ad9efe45d10c9447923144ab71dd342b56f5d477a22dd9039",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000028",
+    "timestamp": 8.233041480099503
+  },
+  {
+    "id": "000029",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 29,
+    "rgb_sha256": "7b2c7ad9b64feb73968153697f6f3eb834f7d5ca3c9a5e8849a823f247804aa4",
+    "depth_sha256": "3547a367dec8cd0c1c31735e0e7b12b959cfd743c8f7e19c7f258bbbf63b4763",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000029",
+    "timestamp": 8.433034390547263
+  },
+  {
+    "id": "000030",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 30,
+    "rgb_sha256": "289610613be84e146795cfe9d820495bc0746e1695d06ea2c92f1b14cd2eaeaf",
+    "depth_sha256": "4f3c6a11f7336785dbf7b12f94de7d223e5639ce51576950338494a5a0a72fb8",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000030",
+    "timestamp": 8.633027300995025
+  },
+  {
+    "id": "000031",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 31,
+    "rgb_sha256": "238089af07a194482c0a0455b7ee66d914119c9df2b5206ab8a68133448755f2",
+    "depth_sha256": "5121aca0cbad73134d377150510ed4a2f3399791fe9f0f2cb18e14107b1a670d",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000031",
+    "timestamp": 8.833020211442786
+  },
+  {
+    "id": "000032",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 32,
+    "rgb_sha256": "7838caa7c99abb4fd3419c56ba7c433622e3885dbeec5d8ae13ab1ad2bfd7f1b",
+    "depth_sha256": "3932d741ee73c04f5078925b23ce23f47ee47a952a0727b4bbe88c8bbe917333",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000032",
+    "timestamp": 9.033013121890548
+  },
+  {
+    "id": "000033",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 33,
+    "rgb_sha256": "56015c1e72b6a7915beb7b2d1e6df27b49e063f7fa7887b468a5394eb624353b",
+    "depth_sha256": "48064666e40f52372d22ba0c9474cd5492f640b46bc8fbe13f62e87617a86c51",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000033",
+    "timestamp": 9.233006032338308
+  },
+  {
+    "id": "000034",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 34,
+    "rgb_sha256": "0ddd2a017536532b69a182c7f8ccf4822536378fa8976688e9ad69127ddf5c25",
+    "depth_sha256": "23804286bfcc854308c0fc5688e4b67fa89bce2291129d98782f9248353bc937",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000034",
+    "timestamp": 9.43299894278607
+  },
+  {
+    "id": "000035",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 35,
+    "rgb_sha256": "b4362929433bee2a47dc5470ec0f0555fe64cbe4541264c3ca67c4bba9680fc5",
+    "depth_sha256": "eca08623c0d29ab95a8684ec85bdb411f70c75253e38379035f0eb9ec05c95ed",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000035",
+    "timestamp": 9.63299185323383
+  },
+  {
+    "id": "000036",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 36,
+    "rgb_sha256": "eaf6ae34ad5764a9b74c06bfe34b37af6f29e0fa48128e6685ce35a96d0120eb",
+    "depth_sha256": "e4f7cae7c9402a79c2e9e9029083fa49ed5c7f7364dafacd9dccbdc40cfd7b3a",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000036",
+    "timestamp": 9.832984763681592
+  },
+  {
+    "id": "000037",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 37,
+    "rgb_sha256": "1277bb7bf8ae74aed171c7d3aab4dc3f64bbb6a4467b1535da76d5461e68637b",
+    "depth_sha256": "1ca7805506a0c9bb1cd1b57d5c4b3edf49f5a1c010ccb9e4ed974189f7dc3e6f",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000037",
+    "timestamp": 10.032977674129354
+  },
+  {
+    "id": "000038",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 38,
+    "rgb_sha256": "f6bdc70f510c8319fe9e81466490798df2a3ac85f48587c4ea6d7f3946ff50fd",
+    "depth_sha256": "2ad3f8b6ba1951fa766c53a3a95bfb7f72f93c67b5ec4ad6e8d52844024541a3",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000038",
+    "timestamp": 10.232970584577114
+  },
+  {
+    "id": "000039",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 39,
+    "rgb_sha256": "119cc281b5cd38c65ea39849f6b503e9edf60ff242fae8b25101ac20741a3909",
+    "depth_sha256": "8bcb6917535bbc0c6228d4d0b4c7f114ab07c7040ca30b2ee37a77abb95f2cf9",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000039",
+    "timestamp": 10.432963495024875
+  },
+  {
+    "id": "000040",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 40,
+    "rgb_sha256": "7ec990d379378236411dcc4d70f3f25045333ec312f896c4895cc2d313e14672",
+    "depth_sha256": "1d97c181dc00a5d08f81ef28c1100a0603f4e2bc27a9433ab5210822f80f9170",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000040",
+    "timestamp": 10.632956405472637
+  },
+  {
+    "id": "000041",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 41,
+    "rgb_sha256": "93f3be1241d9ffba810c4410ecc636109d55758e7ab8a298c66fce079079c0ce",
+    "depth_sha256": "c841e3a54d7bb977b91460b8c4db8b939fc569019998ed0807d4f03e5ca0b63b",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000041",
+    "timestamp": 10.832949315920398
+  },
+  {
+    "id": "000042",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 42,
+    "rgb_sha256": "90f2ed1d9a8785ba1e0596b7940dd8f0f25472921d43d4a2c7c6ca336a2926ca",
+    "depth_sha256": "f233a7aee52ed802682bf06b606610c35cd6f855793fc5c5e185ac2e6dffd8d3",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000042",
+    "timestamp": 11.03294222636816
+  },
+  {
+    "id": "000043",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 43,
+    "rgb_sha256": "d23925fd0dd6b289cd227cf96dd07764c6de26aca9f32cc920e96d976e28a5d4",
+    "depth_sha256": "6dcbb3fdaded1810079e34871fb88552fa4737b797202cd8c12743ba95aab534",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000043",
+    "timestamp": 11.23293513681592
+  },
+  {
+    "id": "000044",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 44,
+    "rgb_sha256": "008dbac2bdb7c9050aacae043c0ef4a4e0f4b9bf1bd3100f0c60bc88517b1e24",
+    "depth_sha256": "8109a4c838d3fb789123ff6cf19beff9d8732628fb6d8bea4863a9c86cfd1351",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000044",
+    "timestamp": 11.432928047263681
+  },
+  {
+    "id": "000045",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 45,
+    "rgb_sha256": "2c124afae63a7d950fb4150ca6c0529a2ff4e1d6ed134442b7d5337582442642",
+    "depth_sha256": "ee332d5be22e4f9d539b03f4e3514c1556f3d1187ae895de56908e05228b320a",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000045",
+    "timestamp": 11.632920957711443
+  },
+  {
+    "id": "000046",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 46,
+    "rgb_sha256": "154469cf1b23c044e0892c7cc05e6d352d4ae5028e81e87c4d966c27f38cd986",
+    "depth_sha256": "84de8e08afc7d38b5434c049b51fce7bf49c00a3d6e401fb591dd1c11ee3ebe1",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000046",
+    "timestamp": 11.832913868159205
+  },
+  {
+    "id": "000047",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 47,
+    "rgb_sha256": "a2236ab657d064354b9b355e9d9f8042023c7b653b9eab016442dd67ecf3dfee",
+    "depth_sha256": "f09a4bc9d8c7770b9878269706025800250f5a83645de0fbdbc0ce66155c0f14",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000047",
+    "timestamp": 12.032906778606966
+  },
+  {
+    "id": "000048",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 48,
+    "rgb_sha256": "2b4642eba51f2ca3e2a50fc6eaa8bc36c6044a5ea1249efcd3e4a8e0298333a5",
+    "depth_sha256": "ba28ce8d41f9d5aac4515d253e2abc95214a063e44a708b482ca6b9a68a7e539",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000048",
+    "timestamp": 12.232899689054726
+  },
+  {
+    "id": "000049",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 49,
+    "rgb_sha256": "45f6f45082ff873c5ec4f624755fdfe1b4ffe9bb20bab6021916fd2fa88dbea7",
+    "depth_sha256": "d3247df44d7bc713960d85b2f126c61246a0cd24322aa1cd07bc21329121c760",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000049",
+    "timestamp": 12.432892599502487
+  },
+  {
+    "id": "000050",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 50,
+    "rgb_sha256": "9f0ba0f8485b4ca4a2ace9a3713aa6e18ced993f8b33bc59cbf73ed1e1c2a57d",
+    "depth_sha256": "e3d9e5067b3e8cbc0f0262cea5fe10ba0861719bb3b5d2918bce1544c83cdf08",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000050",
+    "timestamp": 12.632885509950249
+  },
+  {
+    "id": "000051",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 51,
+    "rgb_sha256": "f3a05df8249e5772eef6c5a92ce55adab9ded06e6f3412d15cd277d462e8a6df",
+    "depth_sha256": "84e1df0da3182f1d32a2f5f9ed198dcfdee0aaefac8d08434df8c7749404b0b6",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000051",
+    "timestamp": 12.83287842039801
+  },
+  {
+    "id": "000052",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 52,
+    "rgb_sha256": "f9b4866b2c3ef376c73e89f0d6d3c20495ce2c30b53bd203a47daa5ae05e4a98",
+    "depth_sha256": "eec04c37d903cd22c55c17bb45435ce90acb1262442124456e61df171c6be056",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000052",
+    "timestamp": 13.03287133084577
+  },
+  {
+    "id": "000053",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 53,
+    "rgb_sha256": "13134eaf2f0d70faa4144529fbc62d89ced0df2769b9763194d8b2e48af2d23d",
+    "depth_sha256": "6e81becd93f347e803fffbb644152bada9016d8b7b3eb9b969eac62355cf7819",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000053",
+    "timestamp": 13.232864241293532
+  },
+  {
+    "id": "000054",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 54,
+    "rgb_sha256": "39f7e4b3e2a8be822660893235ecb0c4d706d81143c7190d27827e495d4781e7",
+    "depth_sha256": "9ee199eb5ddb3f5afc6fafcba500f111231cba6b2fa282d04a14e75e3b68a7d8",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000054",
+    "timestamp": 13.432857151741294
+  },
+  {
+    "id": "000055",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 55,
+    "rgb_sha256": "daa4f2748d187bfbdaf5c2e8c43da5453a4fa2d9b56b5b50bfc45653ba909342",
+    "depth_sha256": "edc9b9ac1028c3c2bb1a3bd71e0b1c4fb8f0296524a5c0732670f8588455f7f0",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000055",
+    "timestamp": 13.632850062189055
+  },
+  {
+    "id": "000056",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 56,
+    "rgb_sha256": "9bba7f61aba6772e1263060f6de09667779badd6b510788c879907e3be8e01e9",
+    "depth_sha256": "24335ec0b3df6fe5c5a2f4b33d1535677d1000fc2d99e291bbb17dc8cfe7efb2",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000056",
+    "timestamp": 13.832842972636817
+  },
+  {
+    "id": "000057",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 57,
+    "rgb_sha256": "e32f832d862dfe181359c88e79dd42e7bc7736359cbfc2fff449bf6c05faf9c3",
+    "depth_sha256": "ae7f51e6bc1c6a8eb9a53a8714cbe60484bb0df52aa5131227f56c1054027276",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000057",
+    "timestamp": 14.032835883084577
+  },
+  {
+    "id": "000058",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 58,
+    "rgb_sha256": "55c83a0d4690e99d87675bc0923881811d01436a300328bbd20357f9918454be",
+    "depth_sha256": "d4391d4151f3d320fe573a6060788c8afdcf76c11f52618b629a12b1d7949d5e",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000058",
+    "timestamp": 14.232828793532338
+  },
+  {
+    "id": "000059",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 59,
+    "rgb_sha256": "7b7d7000f20a63e281c5dff3bc5c578521507529283b2cf063031e0e61b34eae",
+    "depth_sha256": "f55e2e31650e1972f52c6edddebbb24b27111b1cff4f89aa0ba33aa81d5b2fda",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000059",
+    "timestamp": 14.4328217039801
+  },
+  {
+    "id": "000060",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 60,
+    "rgb_sha256": "556ad78c8968a600741cf6401d47208fd8cc0bb6c0e06b85bbd719fd49e6d03f",
+    "depth_sha256": "de7be2a97fbac440be88236d50474dfa74e275620025e032ea3c809d0767e8f0",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000060",
+    "timestamp": 14.632814614427861
+  },
+  {
+    "id": "000061",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 61,
+    "rgb_sha256": "abdcb8ff4bb060253ec3c840f8f42db065cc1e5ebeb0949f090681fcd36a7799",
+    "depth_sha256": "cea3a75f81ca65ed0a49d8e483aa26014492234a1adb9c465b6e267a042325a2",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000061",
+    "timestamp": 14.832807524875623
+  },
+  {
+    "id": "000062",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 62,
+    "rgb_sha256": "94aad25b5b0b3b68c61c897668ca81f4b560fc81f635936697da437196f007f2",
+    "depth_sha256": "414134fb47804bc2cc65589515d55cd9352ea385db0d4649e3a238ca398be894",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000062",
+    "timestamp": 15.032800435323383
+  },
+  {
+    "id": "000063",
+    "source": "outputs\\extended_video_validation_gpu518\\self_inputs\\static_with_people_moving\\input\\samples.json",
+    "source_index": 63,
+    "rgb_sha256": "0f0d4a27d229939723cf635597f4b1570784b026332a61492a6d81aaf1490adf",
+    "depth_sha256": "dc84acb560d7c9c827397cc822f69ca4b3e8f769e0eba2b4e8e0b290f2a4b38e",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000063",
+    "timestamp": 15.232793345771144
+  }
+]

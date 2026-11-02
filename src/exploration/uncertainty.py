@@ -18,10 +18,20 @@ def local_variance(depth):
 
 
 class UncertaintyFusion:
-    def __init__(self, alpha_max=.7, max_log_update=None, edge_threshold=None):
+    def __init__(self, alpha_max=.7, max_log_update=None, edge_threshold=None,
+                 use_confidence=True, enable_reset=True, minimum_coverage=0.,
+                 scene_cut_threshold=.35, fixed_weight=.4):
         if not 0<=alpha_max<=1:
             raise ValueError('alpha_max must be in [0,1]')
         self.alpha_max = alpha_max
+        if not 0<=minimum_coverage<=1 or not 0<=fixed_weight<=1:
+            raise ValueError('Coverage and fixed weight must be in [0,1]')
+        if not np.isfinite(scene_cut_threshold) or scene_cut_threshold<=0:
+            raise ValueError('Scene cut threshold must be positive')
+        self.use_confidence,self.enable_reset=use_confidence,enable_reset
+        self.minimum_coverage,self.scene_cut_threshold=minimum_coverage,scene_cut_threshold
+        self.fixed_weight=fixed_weight
+        self.resets=0
         if max_log_update is not None and (not np.isfinite(max_log_update) or max_log_update <= 0):
             raise ValueError('max_log_update must be positive and finite')
         if edge_threshold is not None and (not np.isfinite(edge_threshold) or edge_threshold <= 0):
@@ -31,16 +41,19 @@ class UncertaintyFusion:
 
     def step(self, depth, rgb, forward=None, backward=None, variance=None):
         depth = np.asarray(depth,np.float32)
-        current = local_variance(depth) if variance is None else np.asarray(variance,np.float32)
+        current = (local_variance(depth) if self.use_confidence else np.ones_like(depth)) if variance is None else np.asarray(variance,np.float32)
         valid = np.isfinite(depth)&(depth>0)
         if current.shape != depth.shape or not np.isfinite(current[valid]).all() or (current[valid]<=0).any():
             raise ValueError('Uncertainty must be positive finite log-depth variance on valid pixels')
         output = depth.copy()
         weight = np.zeros_like(depth)
+        reset=False; coverage=0.
         if self.depth is not None:
+            if self.depth.shape!=depth.shape or self.rgb.shape!=rgb.shape:
+                raise ValueError('Reset fusion before changing frame dimensions')
             if forward is None or backward is None:
                 raise ValueError('Uncertainty fusion requires bidirectional flow')
-            if np.mean(np.abs(rgb.astype(float)-self.rgb.astype(float)))/255 < .35:
+            if not self.enable_reset or np.mean(np.abs(rgb.astype(float)-self.rgb.astype(float)))/255 < self.scene_cut_threshold:
                 previous_valid = np.isfinite(self.depth)&(self.depth>0)&np.isfinite(self.variance)
                 inverse = np.zeros_like(depth)
                 np.divide(1,self.depth,out=inverse,where=previous_valid)
@@ -68,10 +81,20 @@ class UncertaintyFusion:
                     edge[:-1,:] |= dy
                     edge |= ~valid
                     mask &= ~cv2.dilate(edge.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
+                coverage=float(mask.mean())
+                if self.enable_reset and coverage<self.minimum_coverage:
+                    self.resets+=1
+                    output[~valid]=np.nan
+                    current[~valid]=np.inf
+                    self.depth,self.rgb,self.variance=output.copy(),rgb.copy(),current.copy()
+                    return output,{'uncertainty':current,'weight':weight,'reset':True,'coverage':coverage}
                 # Estimate which observation is less reliable. Process variance
                 # prevents historical certainty from growing indefinitely.
                 ratio = np.zeros_like(depth)
-                np.divide(current,current+old_var+2e-4,out=ratio,where=mask)
+                if self.use_confidence:
+                    np.divide(current,current+old_var+2e-4,out=ratio,where=mask)
+                else:
+                    ratio[mask]=self.fixed_weight
                 weight[mask] = np.minimum(self.alpha_max,ratio[mask])*np.exp(-photo[mask]/.12-fb_error[mask])
                 safe = np.where(valid,depth,1)
                 output = 1/((1-weight)/safe+weight*np.where(mask,old_inverse,1/safe))
@@ -85,7 +108,10 @@ class UncertaintyFusion:
                     weight = np.minimum(weight,np.maximum(actual,0))
                     output = 1/((1-weight)/safe+weight*np.where(mask,old_inverse,1/safe))
                 current = (1-weight)**2*np.where(valid,current,0)+weight**2*old_var+1e-4
+            else:
+                reset=True
+                self.resets+=1
         output[~valid] = np.nan
         current[~valid] = np.inf
         self.depth,self.rgb,self.variance = output.copy(),rgb.copy(),current.copy()
-        return output,{'uncertainty':current,'weight':weight}
+        return output,{'uncertainty':current,'weight':weight,'reset':reset,'coverage':coverage}

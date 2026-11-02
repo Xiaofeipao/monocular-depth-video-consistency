@@ -1,0 +1,20 @@
+{
+  "scripts/research_direction_d.py": "27e9ae8025f78186e79c876d33cb09c3a954b10e8cda48032e4f534b1168d257",
+  "scripts/benchmark_d_pipeline.py": "fb03674f26a5df3f4118ce39527d95e1d12711f26c92854976752a1e8e349ac0",
+  "scripts/analyze_d_research.py": "0232eee86e24f2cc2ceb664d11d51cf4470ae6ac5b8b9b16049962696400d5d2",
+  "scripts/prepare_d_research_data.py": "09b52c6efc8907b171569de8faa6050fe30c799b49f0619dfe50f6f52c24ab3c",
+  "scripts/run_d_research.ps1": "d69656cc610c184001924afed95eb3cc7fbcbb2fd4190e286f88a8e180d288c8",
+  "scripts/check_d_legacy_parity.py": "1938b452b5134f44ee12b665b55d4933f1b6a86ef2f6f0391e08675557e8585e",
+  "scripts/run_extended_video_validation.py": "8602ea1beab8d596c8d67094b587e64d9e8bb55810a2edc23154d5f8a6d3d411",
+  "pipelines/part3/research_d.py": "a1ca20176edff288c10b01fbb2147854ce70a58b6a69811b70c78a28246a43ed",
+  "src/exploration/uncertainty.py": "a43e1d6fc9676260249cd926e063e01f114e0b8edffb215dcbdeef81ebbbe9fa",
+  "src/metrics/pose.py": "e0bddec6f64d8a39f4bc5c03b4de158b58d24f18d08d5675753290e2cf11698d",
+  "configs/part3/d_research.json": "bcd90b36965c10e6e311f3b4ccf0c783218f206c51343b9240b58ba2b12b5a60",
+  "src/models/foundation.py": "ca90f738dae8b00e0f616bb5a00ab962ca2ebc50cc9ac672c9b46422b6ec4429",
+  "src/exploration/efficient.py": "4d5f12af2aa71b054f20ecdfde512eca16611669eda3c3c1c1ad56f1971b02fc",
+  "src/exploration/edge_aware.py": "2e82b54a7c40edba41171e900f72db1184482bac3cf3bbe98be05c283de7c4c4",
+  "src/flow.py": "d17aca5585ef3e8ab01a7545b149eddc5de287018b6b83f21faca95e80891a3d",
+  "src/temporal.py": "6bc940edacf340a1b4d55c47645908818ca45471b5035a4295511bf0b88c60a5",
+  "src/metrics/video_project.py": "c855a0968193d1eb4f8c6fab64fb0ba3645a4351faecf1f36ea578e333520120",
+  "src/data/tum.py": "bcd66a8d4d086ffe8bc2bdd44fcdc4ea9f5a233d0455ed095abf7848127af874"
+}

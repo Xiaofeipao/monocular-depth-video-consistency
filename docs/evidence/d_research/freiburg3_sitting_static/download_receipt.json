@@ -1,0 +1,9 @@
+{
+  "sequence": "freiburg3_sitting_static",
+  "source_url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg3/rgbd_dataset_freiburg3_sitting_static.tgz",
+  "full_archive_sha256": "6239d4b7f6edcab719b51c76434acdc238d03dad666758b51e6046992a7c3914",
+  "retained_original_manifest_sha256": "3b3d7afae32c559772834edc3bb68db06c39eea510acac6df92f113847f0b0f1",
+  "resized_manifest_sha256": "a0ca77759450c7d12f4c6422177807f588967bd6d7bdab1c20c1c6c1461c124c",
+  "retained_samples": 64,
+  "storage": "Original selected PNGs + timestamp/pose tables retained; full acquisition archive temporary"
+}

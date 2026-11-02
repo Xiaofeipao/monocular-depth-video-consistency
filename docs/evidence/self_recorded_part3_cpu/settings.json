@@ -1,0 +1,43 @@
+{
+  "device": "cpu",
+  "precision": "fp32",
+  "methods": [
+    "RAW",
+    "A",
+    "A_conservative",
+    "C",
+    "D",
+    "D_guarded",
+    "E_half",
+    "E_local"
+  ],
+  "input_size": 252,
+  "RGB_max_side": 448,
+  "frames": 16,
+  "fps": 5,
+  "representation": "metric depth, meters; native metric VDA Small",
+  "display_range_m": [
+    0.1,
+    10
+  ],
+  "repeats": 3,
+  "warmup_passes": 1,
+  "evaluation": "same common FB-consistent mask <=1 px for all methods, finite positive depth, bilinear warp; equal-weight mean of 15 transition log errors; no GT or scale fitting",
+  "farneback": {
+    "pyr_scale": 0.5,
+    "levels": 3,
+    "winsize": 21,
+    "iterations": 3,
+    "poly_n": 5,
+    "poly_sigma": 1.2,
+    "flags": 0
+  },
+  "independent_crosscheck": "torchvision RAFT-Small CPU local checkpoint, default 12 updates, [-1,1] RGB, min 128 / next-multiple-of-8 resize, flow rescaled to saved RGB",
+  "raft_checkpoint_sha256": "01064c6dba73b0fc9fc8edf772248560a00a3acfd62ac6677e9eeebad9680e27",
+  "limits": [
+    "No depth/pose GT: no AbsRel, delta1, true boundary F1 or metric scale-drift conclusion.",
+    "Farneback scoring shares fusion flow; RAFT provides independent-flow crosscheck, not GT.",
+    "Short central excerpts; official VDA pads 16 to 32, no long-video window transition test.",
+    "Dynamic objects are not segmented. Smoothing can improve temporal score but harm detail."
+  ]
+}

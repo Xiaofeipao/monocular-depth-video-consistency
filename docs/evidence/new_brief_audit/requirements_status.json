@@ -1,0 +1,84 @@
+{
+  "scope": "Current non-report completion using existing data; academic report paused; 70/100 source exception disclosed",
+  "checks": [
+    {
+      "item": "Middlebury geometry and 15 scenes",
+      "status": "implemented_and_evaluated",
+      "evidence": "docs/evidence/full_benchmark_20261029/middlebury/"
+    },
+    {
+      "item": "Middlebury full finite-positive GT scoring",
+      "status": "completed_rescoring"
+    },
+    {
+      "item": "NYUv2 metric model",
+      "status": "completed",
+      "test_images": 654,
+      "GT_field": "depths",
+      "RGB_transform": "transpose(2,1,0)",
+      "depth_transform": "transpose",
+      "crop": [
+        45,
+        471,
+        41,
+        601
+      ],
+      "prediction_clipping": true,
+      "GT_alignment": "none",
+      "evidence": "docs/evidence/full_benchmark_20261029/"
+    },
+    {
+      "item": "Required relative-video source length",
+      "status": "brief_asset_discrepancy",
+      "requested": 100,
+      "official_actual": 70,
+      "fps": 24
+    },
+    {
+      "item": "DAV2 and VDA relative on designated clip",
+      "status": "completed_all_70_genuine_frames_source_exception_pending"
+    },
+    {
+      "item": "One Part 3 improvement",
+      "status": "research_evidence_available",
+      "example": "C paired NYUv2 results; D/E extra development/heldout studies"
+    },
+    {
+      "item": "Application on provided image or clip",
+      "status": "completed_NYU_application",
+      "existing_extra_example": "outputs/gpu_20261028/demo_tum16/"
+    },
+    {
+      "item": "CVPR 6-8 page report excluding references",
+      "status": "paused_by_user"
+    },
+    {
+      "item": "Three actual difficult cases from provided data",
+      "status": "completed_with_GT_predictions_zooms_and_notes"
+    },
+    {
+      "item": "depth_results.zip",
+      "status": "completed_local_verified"
+    },
+    {
+      "item": "Submission packager and manifest",
+      "status": "updated_course_2027_roles",
+      "evidence": [
+        "src/package_submission.py",
+        "configs/submission.example.json"
+      ]
+    },
+    {
+      "item": "Public GitHub",
+      "status": "publicly_accessible_latest_local_changes_pending_sync"
+    },
+    {
+      "item": "ArXiv",
+      "status": "optional"
+    },
+    {
+      "item": "Self-recorded and additional datasets",
+      "status": "optional_extensions"
+    }
+  ]
+}

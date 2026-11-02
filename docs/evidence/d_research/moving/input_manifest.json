@@ -1,0 +1,394 @@
+{
+  "video": {
+    "playback_fps": 5
+  },
+  "max_side": 448,
+  "source": "data\\self-recorded\\moving.mp4",
+  "source_sha256": "1eb8421746bd9a05097fb79403a7df5b410ff8d7936ff7c9052e0ccc667084ad",
+  "samples": [
+    {
+      "id": "000000",
+      "rgb": "000000.png",
+      "source_index": 195,
+      "timestamp": 6.491403771131339
+    },
+    {
+      "id": "000001",
+      "rgb": "000001.png",
+      "source_index": 201,
+      "timestamp": 6.691139271781535
+    },
+    {
+      "id": "000002",
+      "rgb": "000002.png",
+      "source_index": 207,
+      "timestamp": 6.890874772431729
+    },
+    {
+      "id": "000003",
+      "rgb": "000003.png",
+      "source_index": 213,
+      "timestamp": 7.090610273081925
+    },
+    {
+      "id": "000004",
+      "rgb": "000004.png",
+      "source_index": 219,
+      "timestamp": 7.29034577373212
+    },
+    {
+      "id": "000005",
+      "rgb": "000005.png",
+      "source_index": 225,
+      "timestamp": 7.490081274382315
+    },
+    {
+      "id": "000006",
+      "rgb": "000006.png",
+      "source_index": 231,
+      "timestamp": 7.68981677503251
+    },
+    {
+      "id": "000007",
+      "rgb": "000007.png",
+      "source_index": 237,
+      "timestamp": 7.889552275682705
+    },
+    {
+      "id": "000008",
+      "rgb": "000008.png",
+      "source_index": 243,
+      "timestamp": 8.0892877763329
+    },
+    {
+      "id": "000009",
+      "rgb": "000009.png",
+      "source_index": 249,
+      "timestamp": 8.289023276983094
+    },
+    {
+      "id": "000010",
+      "rgb": "000010.png",
+      "source_index": 255,
+      "timestamp": 8.48875877763329
+    },
+    {
+      "id": "000011",
+      "rgb": "000011.png",
+      "source_index": 261,
+      "timestamp": 8.688494278283486
+    },
+    {
+      "id": "000012",
+      "rgb": "000012.png",
+      "source_index": 267,
+      "timestamp": 8.888229778933681
+    },
+    {
+      "id": "000013",
+      "rgb": "000013.png",
+      "source_index": 273,
+      "timestamp": 9.087965279583875
+    },
+    {
+      "id": "000014",
+      "rgb": "000014.png",
+      "source_index": 279,
+      "timestamp": 9.28770078023407
+    },
+    {
+      "id": "000015",
+      "rgb": "000015.png",
+      "source_index": 285,
+      "timestamp": 9.487436280884266
+    },
+    {
+      "id": "000016",
+      "rgb": "000016.png",
+      "source_index": 291,
+      "timestamp": 9.687171781534461
+    },
+    {
+      "id": "000017",
+      "rgb": "000017.png",
+      "source_index": 297,
+      "timestamp": 9.886907282184655
+    },
+    {
+      "id": "000018",
+      "rgb": "000018.png",
+      "source_index": 303,
+      "timestamp": 10.08664278283485
+    },
+    {
+      "id": "000019",
+      "rgb": "000019.png",
+      "source_index": 309,
+      "timestamp": 10.286378283485046
+    },
+    {
+      "id": "000020",
+      "rgb": "000020.png",
+      "source_index": 315,
+      "timestamp": 10.486113784135242
+    },
+    {
+      "id": "000021",
+      "rgb": "000021.png",
+      "source_index": 321,
+      "timestamp": 10.685849284785435
+    },
+    {
+      "id": "000022",
+      "rgb": "000022.png",
+      "source_index": 327,
+      "timestamp": 10.885584785435631
+    },
+    {
+      "id": "000023",
+      "rgb": "000023.png",
+      "source_index": 333,
+      "timestamp": 11.085320286085826
+    },
+    {
+      "id": "000024",
+      "rgb": "000024.png",
+      "source_index": 339,
+      "timestamp": 11.285055786736022
+    },
+    {
+      "id": "000025",
+      "rgb": "000025.png",
+      "source_index": 345,
+      "timestamp": 11.484791287386216
+    },
+    {
+      "id": "000026",
+      "rgb": "000026.png",
+      "source_index": 351,
+      "timestamp": 11.684526788036411
+    },
+    {
+      "id": "000027",
+      "rgb": "000027.png",
+      "source_index": 357,
+      "timestamp": 11.884262288686607
+    },
+    {
+      "id": "000028",
+      "rgb": "000028.png",
+      "source_index": 363,
+      "timestamp": 12.083997789336802
+    },
+    {
+      "id": "000029",
+      "rgb": "000029.png",
+      "source_index": 369,
+      "timestamp": 12.283733289986996
+    },
+    {
+      "id": "000030",
+      "rgb": "000030.png",
+      "source_index": 375,
+      "timestamp": 12.483468790637192
+    },
+    {
+      "id": "000031",
+      "rgb": "000031.png",
+      "source_index": 381,
+      "timestamp": 12.683204291287387
+    },
+    {
+      "id": "000032",
+      "rgb": "000032.png",
+      "source_index": 388,
+      "timestamp": 12.916229042045947
+    },
+    {
+      "id": "000033",
+      "rgb": "000033.png",
+      "source_index": 394,
+      "timestamp": 13.115964542696142
+    },
+    {
+      "id": "000034",
+      "rgb": "000034.png",
+      "source_index": 400,
+      "timestamp": 13.315700043346338
+    },
+    {
+      "id": "000035",
+      "rgb": "000035.png",
+      "source_index": 406,
+      "timestamp": 13.515435543996533
+    },
+    {
+      "id": "000036",
+      "rgb": "000036.png",
+      "source_index": 412,
+      "timestamp": 13.715171044646727
+    },
+    {
+      "id": "000037",
+      "rgb": "000037.png",
+      "source_index": 418,
+      "timestamp": 13.914906545296923
+    },
+    {
+      "id": "000038",
+      "rgb": "000038.png",
+      "source_index": 424,
+      "timestamp": 14.114642045947118
+    },
+    {
+      "id": "000039",
+      "rgb": "000039.png",
+      "source_index": 430,
+      "timestamp": 14.314377546597314
+    },
+    {
+      "id": "000040",
+      "rgb": "000040.png",
+      "source_index": 436,
+      "timestamp": 14.514113047247507
+    },
+    {
+      "id": "000041",
+      "rgb": "000041.png",
+      "source_index": 442,
+      "timestamp": 14.713848547897703
+    },
+    {
+      "id": "000042",
+      "rgb": "000042.png",
+      "source_index": 448,
+      "timestamp": 14.913584048547898
+    },
+    {
+      "id": "000043",
+      "rgb": "000043.png",
+      "source_index": 454,
+      "timestamp": 15.113319549198094
+    },
+    {
+      "id": "000044",
+      "rgb": "000044.png",
+      "source_index": 460,
+      "timestamp": 15.313055049848288
+    },
+    {
+      "id": "000045",
+      "rgb": "000045.png",
+      "source_index": 466,
+      "timestamp": 15.512790550498483
+    },
+    {
+      "id": "000046",
+      "rgb": "000046.png",
+      "source_index": 472,
+      "timestamp": 15.712526051148679
+    },
+    {
+      "id": "000047",
+      "rgb": "000047.png",
+      "source_index": 478,
+      "timestamp": 15.912261551798874
+    },
+    {
+      "id": "000048",
+      "rgb": "000048.png",
+      "source_index": 484,
+      "timestamp": 16.11199705244907
+    },
+    {
+      "id": "000049",
+      "rgb": "000049.png",
+      "source_index": 490,
+      "timestamp": 16.311732553099265
+    },
+    {
+      "id": "000050",
+      "rgb": "000050.png",
+      "source_index": 496,
+      "timestamp": 16.511468053749457
+    },
+    {
+      "id": "000051",
+      "rgb": "000051.png",
+      "source_index": 502,
+      "timestamp": 16.711203554399653
+    },
+    {
+      "id": "000052",
+      "rgb": "000052.png",
+      "source_index": 508,
+      "timestamp": 16.910939055049848
+    },
+    {
+      "id": "000053",
+      "rgb": "000053.png",
+      "source_index": 514,
+      "timestamp": 17.110674555700044
+    },
+    {
+      "id": "000054",
+      "rgb": "000054.png",
+      "source_index": 520,
+      "timestamp": 17.31041005635024
+    },
+    {
+      "id": "000055",
+      "rgb": "000055.png",
+      "source_index": 526,
+      "timestamp": 17.510145557000435
+    },
+    {
+      "id": "000056",
+      "rgb": "000056.png",
+      "source_index": 532,
+      "timestamp": 17.70988105765063
+    },
+    {
+      "id": "000057",
+      "rgb": "000057.png",
+      "source_index": 538,
+      "timestamp": 17.909616558300826
+    },
+    {
+      "id": "000058",
+      "rgb": "000058.png",
+      "source_index": 544,
+      "timestamp": 18.109352058951018
+    },
+    {
+      "id": "000059",
+      "rgb": "000059.png",
+      "source_index": 550,
+      "timestamp": 18.309087559601213
+    },
+    {
+      "id": "000060",
+      "rgb": "000060.png",
+      "source_index": 556,
+      "timestamp": 18.50882306025141
+    },
+    {
+      "id": "000061",
+      "rgb": "000061.png",
+      "source_index": 562,
+      "timestamp": 18.708558560901604
+    },
+    {
+      "id": "000062",
+      "rgb": "000062.png",
+      "source_index": 568,
+      "timestamp": 18.9082940615518
+    },
+    {
+      "id": "000063",
+      "rgb": "000063.png",
+      "source_index": 574,
+      "timestamp": 19.108029562201995
+    }
+  ]
+}

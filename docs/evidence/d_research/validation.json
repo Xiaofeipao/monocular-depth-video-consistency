@@ -1,0 +1,11 @@
+{
+  "all_passed": true,
+  "counts": {
+    "clips": 10,
+    "RGB_frames": 630,
+    "logical_predictions": 5360,
+    "videos": 10,
+    "flow_pairs": 1240
+  },
+  "selection_sha256": "97cbb7f5f36b53e5f42be25f4d4a0a8c9b8a4dc5d73cc2f1084b537f45fe5b46"
+}

@@ -1,0 +1,26 @@
+{
+  "model": "depth-pro",
+  "device": "cuda",
+  "precision": "fp32",
+  "limit": 100,
+  "input_manifest_sha256": "3f4b85b3cc872aa2f87e0d52fc878e8f2e1c5698cd3a19c2798678f1afaf0b11",
+  "native_metric": true,
+  "provide_camera": false,
+  "alignment": "none",
+  "metric_valid_range_m": [
+    0.1,
+    10
+  ],
+  "metric_prediction_clipping": [
+    0.1,
+    10
+  ],
+  "boundary": "masked_official_ratio_SI_F1: both adjacent GT pixels valid; NOT unmasked paper F1",
+  "C": {
+    "radius": 2,
+    "sigma_rgb": 0.1,
+    "sigma_log": 0.18,
+    "sigma_space": 1.5
+  },
+  "mirror_caveat": "JPEG RGB / log-quantized PNG depth; original masks/edges are not all present. Not the original MAT or exact paper protocol."
+}

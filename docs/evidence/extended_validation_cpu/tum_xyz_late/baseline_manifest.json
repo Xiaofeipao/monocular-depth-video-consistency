@@ -1,0 +1,704 @@
+[
+  {
+    "id": "000000",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 0,
+    "rgb_sha256": "18b048e81e57310498e97827ac06fbda94a0102fc7123d0ce0f2864d96aa6a92",
+    "depth_sha256": "008ced1095de7420300a099c37d5ef68d1eae160fa74b12ee00e5a03a0b025b2",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031117.179264",
+    "timestamp": 1305031117.179264
+  },
+  {
+    "id": "000001",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 1,
+    "rgb_sha256": "138dd4e8b5c50a382f541862d8fbaacc82bec262b69a584c6d7662409a60512e",
+    "depth_sha256": "7ff5ccf3d71886206cb3132b81a98a69565834460567f1199e56aca61d9e522f",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031117.379454",
+    "timestamp": 1305031117.379454
+  },
+  {
+    "id": "000002",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 2,
+    "rgb_sha256": "b62b05e4075e03989997509844bb9f4b8428a6b1ad9c7654fb164e3ae92ed7d4",
+    "depth_sha256": "517acba63e7c1eeb6d194ff61afc204796ab594fd3a198a500ed966c5d3d61ec",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031117.611159",
+    "timestamp": 1305031117.611159
+  },
+  {
+    "id": "000003",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 3,
+    "rgb_sha256": "13200f76df571538b3b14d1f78b11181c127f6be62b2e749632929f248f10342",
+    "depth_sha256": "9b8b6817fb026cb07e16849e1561297b2f58c7be986cad0fa43219c9d5a78ff7",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031117.811320",
+    "timestamp": 1305031117.81132
+  },
+  {
+    "id": "000004",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 4,
+    "rgb_sha256": "ce2f886f048c21116ae86e5b75a8dbb4ff28d0ec0ececb1d2cf7fc5e79056169",
+    "depth_sha256": "f4a480a45ea51e331b51daabfa03af338e3b6551d3b634b760643d6156627dbe",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031118.043521",
+    "timestamp": 1305031118.043521
+  },
+  {
+    "id": "000005",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 5,
+    "rgb_sha256": "6139f97f9cb54c3e4e7abcff60cfff505c909bb22e9eea8bfd98bee188559a99",
+    "depth_sha256": "afcc82680de11470d19747b8067cc6852703d9dad4660d8ebe74bc74ba44a938",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031118.279194",
+    "timestamp": 1305031118.279194
+  },
+  {
+    "id": "000006",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 6,
+    "rgb_sha256": "115b8761ce20b7b1491145a8cdc1f54447b3187d3b47b7a0c39f35a60f1ebd0e",
+    "depth_sha256": "9b4c27208a68bff2122311b965f14d899bd13764e85ccd9e62a8b14f2a190043",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031118.479285",
+    "timestamp": 1305031118.479285
+  },
+  {
+    "id": "000007",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 7,
+    "rgb_sha256": "c723ffebbd7bd73f3939f8b9a1d789df0067227d53caa27a0ce2f8545b8ad2fa",
+    "depth_sha256": "dc3f930903b7730cb70cd9b2d249830bcb7da54a0136c45b358e683eda9553a7",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031118.679295",
+    "timestamp": 1305031118.679295
+  },
+  {
+    "id": "000008",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 8,
+    "rgb_sha256": "8404ae97d2042c1c6e723259776aa12401b2b469e521587633f30ae897532612",
+    "depth_sha256": "2a0cc627089d4226084672dd046b5f18a5e5999a6c68439914171419008d7982",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031118.911177",
+    "timestamp": 1305031118.911177
+  },
+  {
+    "id": "000009",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 9,
+    "rgb_sha256": "743209aaf9b1c2f50a74fa332b4a55655786b520088cbeff233876d83ff899ca",
+    "depth_sha256": "e360ea9bcc998a6314091c3401fe44fa0b79508e2fdaea6394b6e5156fb7095d",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031119.111328",
+    "timestamp": 1305031119.111328
+  },
+  {
+    "id": "000010",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 10,
+    "rgb_sha256": "be32763e81da752492d71c372a41a7b15b891be52c68968fa809df912798c7af",
+    "depth_sha256": "7bc281743ff63caa0722b16d5dd84047c6bafc1fc4e409f51186c0ee4bcb170e",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031119.347741",
+    "timestamp": 1305031119.347741
+  },
+  {
+    "id": "000011",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 11,
+    "rgb_sha256": "03eda471c9d698cdabca111a9597696b722e6af76df57a6b1dd408f74ec8c655",
+    "depth_sha256": "7f9265a29ec14c1a22d0e494016b13b954856f3e0a559a8d2ac6f67e7fe7570e",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031119.579559",
+    "timestamp": 1305031119.579559
+  },
+  {
+    "id": "000012",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 12,
+    "rgb_sha256": "c0d96ec15c16880f1b041dc89d1558764f8b5a6a6842369e737c87baafdf1c55",
+    "depth_sha256": "3ae52c26e4c7beeb569b5c7a674890522e556b31908439c2946466d5981582ed",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031119.814537",
+    "timestamp": 1305031119.814537
+  },
+  {
+    "id": "000013",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 13,
+    "rgb_sha256": "6b8c1ac9d2e1755e11a34179ed4aaaf4cabcbab404cbc2fc4ff46335c637daea",
+    "depth_sha256": "2fa9adc6ba90c203d3c7996c4b7d5163315de5e8a389a7c087802fea6bcd4489",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031120.015264",
+    "timestamp": 1305031120.015264
+  },
+  {
+    "id": "000014",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 14,
+    "rgb_sha256": "b6afa9367d9c5d37137e28ca3141b3803cd7aa7bb0f01c65600d45d5290df4f9",
+    "depth_sha256": "3ff3aa326cb0cf206fec5704177fc5aa238c763438eb45db004659a31a84ab2f",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031120.248003",
+    "timestamp": 1305031120.248003
+  },
+  {
+    "id": "000015",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 15,
+    "rgb_sha256": "0744f04dfa9fc3a573848fa654b4365d31f1b9a930375dd302732503485a4212",
+    "depth_sha256": "5ea6eafef18a07868a950b698daa46f43622a97a6946d3316bfcd75ae1db9fee",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031120.479432",
+    "timestamp": 1305031120.479432
+  },
+  {
+    "id": "000016",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 16,
+    "rgb_sha256": "8e1bb662a3f1197f3fb39daae143b7e11983ee2657010f0b175f7473ab4d0e81",
+    "depth_sha256": "4468be4442341b8685083cda3ba1910af7d5802e1e539b4ee932f1004e09a088",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031120.714522",
+    "timestamp": 1305031120.714522
+  },
+  {
+    "id": "000017",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 17,
+    "rgb_sha256": "ce81834c4a745a7d1a794865bc578c852a61a85a07cae902da1f0ff62369d7f4",
+    "depth_sha256": "73d25e13653bf027dc7c5bc46c56503e907357512cbb003e55787f3aa7604c47",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031120.915444",
+    "timestamp": 1305031120.915444
+  },
+  {
+    "id": "000018",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 18,
+    "rgb_sha256": "6c95a752eab05c9b8e998c5babcfb9cff216b78b8848371ef4dc6523e27383df",
+    "depth_sha256": "4fc9eb87956f3828035b28130cd5853bd0440c04406e5e171d420f0726153f06",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031121.147331",
+    "timestamp": 1305031121.147331
+  },
+  {
+    "id": "000019",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 19,
+    "rgb_sha256": "974d4d683c398d6944ea293ee83822c1351a2a6906c387d1cc3c796b2fc85bfd",
+    "depth_sha256": "a6c6d44a3e47b47897c0f7b41658cd34414227324e1efe5eb93c81a7467aa8b8",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031121.347517",
+    "timestamp": 1305031121.347517
+  },
+  {
+    "id": "000020",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 20,
+    "rgb_sha256": "53b74cd2facb99dacab4b3ee6a4dde09812b5c63fc86c9f6476391d8c314784b",
+    "depth_sha256": "3d2a8b75e1936b29a4267a10ed143509c29a748f8e92e018d72f7a921e030cba",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031121.583204",
+    "timestamp": 1305031121.583204
+  },
+  {
+    "id": "000021",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 21,
+    "rgb_sha256": "0aece14bce9b02ed3a713e7da5ab30f8dc7618716c2dcc5ce8fdda4703950cb8",
+    "depth_sha256": "ad03f6052bf9ec6a2b8e626f54407afb672414c2531f8b4a8d47d1c1cb68d0c0",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031121.811540",
+    "timestamp": 1305031121.81154
+  },
+  {
+    "id": "000022",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 22,
+    "rgb_sha256": "cf8871cbcbb6b85d17fd72423b7f06fa19127c39b61d90409058ecab1773e9af",
+    "depth_sha256": "e9be1d62deb0b8ef4747868b2170a944ddad6c773a8cf5e2cd584b4e721f481c",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031122.014256",
+    "timestamp": 1305031122.014256
+  },
+  {
+    "id": "000023",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 23,
+    "rgb_sha256": "531183d4ca8e2e782fc8dfc47eae8bbc0416ffbae84b3ec115e65ff744c9d12f",
+    "depth_sha256": "ffebb223e074d3959a6c1dff493a053c3a3b119c353bbd221363e7ca156475ed",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031122.214959",
+    "timestamp": 1305031122.214959
+  },
+  {
+    "id": "000024",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 24,
+    "rgb_sha256": "46d0d0b369579e983f3819b3ef8d2355ba29208a663ac82f38afd0fc28827dd5",
+    "depth_sha256": "0e7d1101b25e39df3e0b498cab54964cc0644eee3251690ac6ffda5604f07b17",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031122.414997",
+    "timestamp": 1305031122.414997
+  },
+  {
+    "id": "000025",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 25,
+    "rgb_sha256": "45dd508ba4fb3480158027d59e1bc71872ba82f87b4b586e648df8c459119468",
+    "depth_sha256": "51ae93a40bcaa411b9924e169609201bc23c6ba9297941b96062a9dc1897e4fe",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031122.648788",
+    "timestamp": 1305031122.648788
+  },
+  {
+    "id": "000026",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 26,
+    "rgb_sha256": "9e024f698d764077395b2a7764c50c30fca6dc6c14dc29a9429b8d137769fd3a",
+    "depth_sha256": "ef5a1555194e50bea394231785660346b97e3e8361cf7e3322d0ca064da13fc5",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031122.851418",
+    "timestamp": 1305031122.851418
+  },
+  {
+    "id": "000027",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 27,
+    "rgb_sha256": "08810fab56388828ab9f15e8bce50daa935376ccfde6aae5e8600eedfb92a949",
+    "depth_sha256": "d3548cf07b750bfe116639302cbed7108ab275662afa881bc2b50ed1bec8c5c7",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031123.051827",
+    "timestamp": 1305031123.051827
+  },
+  {
+    "id": "000028",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 28,
+    "rgb_sha256": "52107f2eb42a2a03c04169a85b12582955081cd2bf3194ecf40464d1f92109ca",
+    "depth_sha256": "a8105dc17278599e30709c270a7d90057e73296a607f521346696c95bd243d8a",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031123.282347",
+    "timestamp": 1305031123.282347
+  },
+  {
+    "id": "000029",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 29,
+    "rgb_sha256": "19de5ec3a2a4b03fb4856c2209ce6441707345fa0da329519def494740adc4fb",
+    "depth_sha256": "5c75741d5bd99ef6093b2529dc480ac8e00d35efbfea1ec4a6540bf7e606cbdd",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031123.483594",
+    "timestamp": 1305031123.483594
+  },
+  {
+    "id": "000030",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 30,
+    "rgb_sha256": "43b0316863f741a6d0671684941e253f5aedeb577816bdb848f0390054aba6d4",
+    "depth_sha256": "632e39a677010a5f4e471a85114f94837f11542f7703dac95ff8d0009485d273",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031123.683753",
+    "timestamp": 1305031123.683753
+  },
+  {
+    "id": "000031",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 31,
+    "rgb_sha256": "2fbd78606cba49552f390eaedb937a58b5eaf0ece6d6089fd0d0a465e25afbac",
+    "depth_sha256": "d4b00471c9cefc0c1b3968160caa70b2ca55494f2ef3802b48e70b6157be13f3",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031123.883786",
+    "timestamp": 1305031123.883786
+  },
+  {
+    "id": "000032",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 32,
+    "rgb_sha256": "e5c7a9f935817513b4f4372eb1cfae0e68b675b987d894bd299e83e115523c7d",
+    "depth_sha256": "29ea380e795579e180ae981026bcdfc290491d4391c5b89a7805c28174580d58",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031124.083837",
+    "timestamp": 1305031124.083837
+  },
+  {
+    "id": "000033",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 33,
+    "rgb_sha256": "8811dd3a61978f901ddfc245e16c99786f2ac5ca7a1ab8aa6e12a56034547652",
+    "depth_sha256": "9ef1e814fe6a45a3c87779e4db8b73db6c4ceeab6a6face50623beb020a85dfd",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031124.311361",
+    "timestamp": 1305031124.311361
+  },
+  {
+    "id": "000034",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 34,
+    "rgb_sha256": "5e257619f215383d715c76e2062ed28421cb90b17958b5668df842222382f964",
+    "depth_sha256": "72ca80939a2a7d3144951153f9e0446f9c41e00155b885a9084398bffef9f573",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031124.550437",
+    "timestamp": 1305031124.550437
+  },
+  {
+    "id": "000035",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 35,
+    "rgb_sha256": "80eb2869071d078d1f5efe1e7a082abff751ad34d3eca73e4786c5b4d7fc4f0f",
+    "depth_sha256": "2ad592043d8f4cb753e840b3f4bf30d0bc2776c401f98f5cb375e8c811443610",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031124.779365",
+    "timestamp": 1305031124.779365
+  },
+  {
+    "id": "000036",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 36,
+    "rgb_sha256": "5ff2cec95b39f358bb7b4263bcd4eb150cdd4caa5b0c822eaa2e34059bb65866",
+    "depth_sha256": "b2eccd25cbe5f74a8f43703300e5af89dd5b96f14d130274ce5b78a078a3a9ff",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031124.979438",
+    "timestamp": 1305031124.979438
+  },
+  {
+    "id": "000037",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 37,
+    "rgb_sha256": "6520c7db853f869ac3c41f1b6d06f271a44032d3cfa51bc566c6150b159c2a28",
+    "depth_sha256": "53183823b5fa9138156b42d0929281f2ebdb3953a0b41d90924229e4633b7e62",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031125.211320",
+    "timestamp": 1305031125.21132
+  },
+  {
+    "id": "000038",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 38,
+    "rgb_sha256": "156e01a1dbe8ccafb4fc43fb267b61abd310e2fff7d15547ecf8c2c2d9084c27",
+    "depth_sha256": "3f27ccaf5387455512138c273ef77e08392d6ec7c55afab20b87e07f014e3855",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031125.411335",
+    "timestamp": 1305031125.411335
+  },
+  {
+    "id": "000039",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 39,
+    "rgb_sha256": "3f99df2c8324752bb230c671ab48a4e91caac75c903b731d1113b6b61d0cea10",
+    "depth_sha256": "739a8e857cf50905c21d264fb11a31e476b1b090021a135521af1fd394e2476c",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031125.611533",
+    "timestamp": 1305031125.611533
+  },
+  {
+    "id": "000040",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 40,
+    "rgb_sha256": "6297285160e9c0e94281fa8d376256faac2a93c1a73515da1211eeaa5363b922",
+    "depth_sha256": "39a3f57f83349f39e890162cf000614aeb9663e6b0d4c28d1c4f802971841094",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031125.811573",
+    "timestamp": 1305031125.811573
+  },
+  {
+    "id": "000041",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 41,
+    "rgb_sha256": "0d61c8dc501d6e95b77fbbf11b7082aee2a4a969afec60d9c17eaeb77ee61ec8",
+    "depth_sha256": "1c4aea836c3808a0e3c7a53991cdf5ecf6f5861f719b43dd758205f5da9340b6",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031126.047324",
+    "timestamp": 1305031126.047324
+  },
+  {
+    "id": "000042",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 42,
+    "rgb_sha256": "c293937d5e7d6f392a5de6b5668ffde1c774055a868bdaa94d49c668f2baa770",
+    "depth_sha256": "2d03dbae5e06244fdf53bd917b2b484df031ad3ad5199fd302faec1379a77676",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031126.279363",
+    "timestamp": 1305031126.279363
+  },
+  {
+    "id": "000043",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 43,
+    "rgb_sha256": "efdc9a0960d23ed6b239a83073fbeef58478b992efe3aafb6b1823e24ce2cf76",
+    "depth_sha256": "0785ff9ead38922d43ed6a6245f390ab2adb0b1f78bc15f4ede5837be7cab78f",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031126.479533",
+    "timestamp": 1305031126.479533
+  },
+  {
+    "id": "000044",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 44,
+    "rgb_sha256": "336cbe2f878c02a63dd16de323a4dd4b62196e2f5fa09670b002888955daf074",
+    "depth_sha256": "ec7463214a61b216ae64276a373c6e535b67e5bd476d7b8f3cb1e2bade495619",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031126.711583",
+    "timestamp": 1305031126.711583
+  },
+  {
+    "id": "000045",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 45,
+    "rgb_sha256": "4a2ceba24f9531ff63d7aa1a11506b181942fde99348f69b745c0593133ea5b9",
+    "depth_sha256": "74f2e01d7dfbd0ecf5fc38830dcae5826c10a68c1973f34fdd323a4f47bd7b7d",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031126.947437",
+    "timestamp": 1305031126.947437
+  },
+  {
+    "id": "000046",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 46,
+    "rgb_sha256": "9e5143babbf0f872e714d51a5094fcfda74f9ba35f3510c2109e92af8a6592b0",
+    "depth_sha256": "482d275bc6a36ea2aaf57f465f474afb9827f62feaa01def95be8fc0559d88e3",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031127.179349",
+    "timestamp": 1305031127.179349
+  },
+  {
+    "id": "000047",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 47,
+    "rgb_sha256": "18e63277cbe216051240024d8346152fe277d69260956edfa270b57d2b5369a3",
+    "depth_sha256": "50100291589effd30e2cd3b1e04759829dad39e84b5da3031ab6e947c309ff36",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031127.411371",
+    "timestamp": 1305031127.411371
+  },
+  {
+    "id": "000048",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 48,
+    "rgb_sha256": "493c813eb8252c09884d3a3a15ac80a80af3e400da2f700eafca62144cb08902",
+    "depth_sha256": "ed87a21d62542450d00a7d286c895a4f29a7328adfbf90fb961dba0e1e4f463a",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031127.647358",
+    "timestamp": 1305031127.647358
+  },
+  {
+    "id": "000049",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 49,
+    "rgb_sha256": "21072360c53525fe9d7913bf92e02bf9a49e478a071858ccbc3a5af09a1bc9bd",
+    "depth_sha256": "23c251d81e37591e61e53756846206de2f4d70b9bd8a09a9d8b085c7d66e5caa",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031127.847366",
+    "timestamp": 1305031127.847366
+  },
+  {
+    "id": "000050",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 50,
+    "rgb_sha256": "fd6b3e183e0ffc538cbb5e0622aa54f150f04430b8d84760bdd6072babc5b120",
+    "depth_sha256": "084d69a25fcf694a7b4b5d381051a72bebe0335c7c1a354dced6648fe6eddede",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031128.047369",
+    "timestamp": 1305031128.047369
+  },
+  {
+    "id": "000051",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 51,
+    "rgb_sha256": "d21749b5ce21296b68ea7428b52f487e5c597ee341568597dbefb8bd6ede61df",
+    "depth_sha256": "12261e3739ff5da3745a0df99b503c4fc20600fef54fd5cc14d8fa960a50c929",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031128.247480",
+    "timestamp": 1305031128.24748
+  },
+  {
+    "id": "000052",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 52,
+    "rgb_sha256": "519ca29f3ecebf2b3bf5195de8c7ebcf630ccaea2a9e0e2c13746e4d855c5165",
+    "depth_sha256": "f6d77750dda1fb19f801aaec23d9e18814e59e7e0776799e13c720080b070d40",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031128.479296",
+    "timestamp": 1305031128.479296
+  },
+  {
+    "id": "000053",
+    "source": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+    "source_index": 53,
+    "rgb_sha256": "244fc57f28141a7af70b9678c7f0620cc095a25e5636e8d59371590da72fd2b6",
+    "depth_sha256": "c9ed9731df811ff1d10c2cf9d54ad33fc616feea869fa4297addb408960256ef",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg1_xyz_t1305031128.711457",
+    "timestamp": 1305031128.711457
+  }
+]

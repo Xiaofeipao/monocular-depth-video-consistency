@@ -1,0 +1,19 @@
+{
+  "samples": 654,
+  "means": {
+    "C_no_RGB": {
+      "abs_rel": 0.10035111532479181,
+      "rmse": 0.3914525439586317,
+      "delta1": 0.9154619677801775,
+      "si_boundary_f1": 0.13702521801527376
+    },
+    "C_no_depth_gate": {
+      "abs_rel": 0.10026574739789018,
+      "rmse": 0.39066799749510756,
+      "delta1": 0.9154603782224436,
+      "si_boundary_f1": 0.16970138343194804
+    }
+  },
+  "selection": "Fixed component removal, no test-time parameter search; primary C defaults unchanged",
+  "protocol": "Filled NYU depth; native metric; crop [45:471,41:601]; .001<GT<10; clip prediction; image macro mean"
+}

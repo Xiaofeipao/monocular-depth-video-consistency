@@ -1,0 +1,9 @@
+{
+  "sequence": "freiburg1_desk",
+  "source_url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_desk.tgz",
+  "full_archive_sha256": "e983d6830916e66dc4a46a71368046b149b283de87769690e7aa4e0b9483530c",
+  "retained_original_manifest_sha256": "be036ed4d52d8663bffae64a3bb408a844f8e390d0b41c44dbf37ade1badb40c",
+  "resized_manifest_sha256": "090e711189f8aa77837d3b99d045f9b36fb33b963d562003f00f7c551af8eae4",
+  "retained_samples": 64,
+  "storage": "Original selected PNGs + timestamp/pose tables retained; full acquisition archive temporary"
+}

@@ -1,0 +1,12 @@
+{
+  "development": "freiburg1_desk",
+  "selected": "D_candidate_2",
+  "params": {
+    "alpha_max": 0.7,
+    "minimum_coverage": 0.02
+  },
+  "fallback_RAW": false,
+  "protocol_sha256": "71b747194dd3bef2fdff1d6e1a7f9e0835b45846d34541abcb7073edaad7bfde",
+  "development_summary_sha256": "f0eba76252da82cf85311f49674d50eb869ca351c603418e61271d247b38d58c",
+  "reason": "Development only; minimum pose error among guarded candidates; no heldout input to selection"
+}

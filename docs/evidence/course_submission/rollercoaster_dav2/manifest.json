@@ -1,0 +1,912 @@
+[
+  {
+    "id": "000000",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 0,
+    "rgb_sha256": "de190142847ee441219776acb329e58b68dc753e9af7b5760488340ee7d8beb2",
+    "depth_sha256": "0495cd947bb38af88a01ed786386aa0e4fb03c42e92e7e72118fbc83909303af",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000000",
+    "timestamp": 0.0
+  },
+  {
+    "id": "000001",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 1,
+    "rgb_sha256": "afec2607f5722a6f4a1704c7e7dcc987516b141acfae7e98aeff05ef3ef96eba",
+    "depth_sha256": "4413d150215298c16356142c65ba34848aae1d591c88da57a7a9ce8a66d7bbf5",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000001",
+    "timestamp": 0.041666666666666664
+  },
+  {
+    "id": "000002",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 2,
+    "rgb_sha256": "e15e695d43986bb0e31ed8dab8bc364d5e6e5815e74351afa103ce2ff5a9c8b8",
+    "depth_sha256": "e2997a094c8d0608f62c2bdb6aafe4d54b7729bcbdacc687ce8cb15c268e8488",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000002",
+    "timestamp": 0.08333333333333333
+  },
+  {
+    "id": "000003",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 3,
+    "rgb_sha256": "66af220d5883ed96ba4d784a5a6c841c44ca7adf3b256493628dc0bc2d180534",
+    "depth_sha256": "1e79dfc9180c3b5077d5c592f1c809a42b08dbda91bd5d327ac3e3afcad259f5",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000003",
+    "timestamp": 0.125
+  },
+  {
+    "id": "000004",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 4,
+    "rgb_sha256": "df2e76ec2ef013a2c2de7c1f5efc20850897465711735ece9a713e89efff9e77",
+    "depth_sha256": "64d92ea8ad469ef04edee587fce8162eade2ee9823ab4716f7e54983ec09d966",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000004",
+    "timestamp": 0.16666666666666666
+  },
+  {
+    "id": "000005",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 5,
+    "rgb_sha256": "5c38419c89a5c337527bb79d7fc5b4c122037fe15ce26453dfbc9934fd67c6d0",
+    "depth_sha256": "5499a7fce900af6f243ef42e7c0db1a715f8521ef044fa9bb33491515a0ff8e2",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000005",
+    "timestamp": 0.20833333333333334
+  },
+  {
+    "id": "000006",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 6,
+    "rgb_sha256": "46fd0e2bbc737cf9b379f5bdd9801897db0a15d5972a7bd205006a73ee4b59bc",
+    "depth_sha256": "d6509c5b677a92c2070e70c744b7b367b49d6334c610037d35c15346b4c7b740",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000006",
+    "timestamp": 0.25
+  },
+  {
+    "id": "000007",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 7,
+    "rgb_sha256": "210c201269b51c27d0211ed577de03d6efd9422c1dd0f43959f9a47d21b98d19",
+    "depth_sha256": "d14687023c48c8af8cef2db15bb350cb1c21541290b0c59dd737a72bdbdea3e0",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000007",
+    "timestamp": 0.2916666666666667
+  },
+  {
+    "id": "000008",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 8,
+    "rgb_sha256": "6bf7225a53017537771ec526826bcc72dc95298774f9e808fd72269faebddd73",
+    "depth_sha256": "e056c1a6ab300dbf1a7f4f7471229784f1093fb8a99cde72055f98db9ad1f5bf",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000008",
+    "timestamp": 0.3333333333333333
+  },
+  {
+    "id": "000009",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 9,
+    "rgb_sha256": "3a177da6115c2ef694c725e7720a73a438ae2e32e4a518632a8fa852f53d3eb5",
+    "depth_sha256": "55630743e9e3ce0e9057f7e0c8e0892a0d202c63c6c2c2646d221bd83fcbfd55",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000009",
+    "timestamp": 0.375
+  },
+  {
+    "id": "000010",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 10,
+    "rgb_sha256": "5ccf6d00709760ee8e7e81acf68895991aed29bb4f8f273628e02a702f3762f3",
+    "depth_sha256": "4296966bb992e12298fcca227aec4d38165d3c60a3becafbf456a62a4ae892be",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000010",
+    "timestamp": 0.4166666666666667
+  },
+  {
+    "id": "000011",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 11,
+    "rgb_sha256": "d8f842ac6c1d5807f7cef15236d4b9a9b571d04d972d8ee63f243ac5a5c08b85",
+    "depth_sha256": "078f40864a72be4f251c3e02607b4ca057f3bd7e77ec6329cfdf689001f5163f",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000011",
+    "timestamp": 0.4583333333333333
+  },
+  {
+    "id": "000012",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 12,
+    "rgb_sha256": "82257e5078c8347a98395f839a1498a4974e4c11ef0b63604aad60cf83f255c2",
+    "depth_sha256": "6b4d41f5df8b0a88fdd298af1a491a1554d69b55cd7334c4d30ecc9a69a91787",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000012",
+    "timestamp": 0.5
+  },
+  {
+    "id": "000013",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 13,
+    "rgb_sha256": "2e97acf4ebfe9131347cc363120acd9ffdb931c4e09bc199ec09b65a6cade1c7",
+    "depth_sha256": "5c696e6936a7b93eb04ea72bba084d39eac9b015e8289dc2389a74d95f0769ab",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000013",
+    "timestamp": 0.5416666666666666
+  },
+  {
+    "id": "000014",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 14,
+    "rgb_sha256": "6deb340b9168a0ed3eb1223224f5df6e7fc5979a4d7666b2741ac47603070e2f",
+    "depth_sha256": "b87a7b5d938cacffbcad302bec7f510dd726116da20ccc182d6871377295730f",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000014",
+    "timestamp": 0.5833333333333334
+  },
+  {
+    "id": "000015",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 15,
+    "rgb_sha256": "7fbe47b6c3ff0445d8d1766eac155402ec30a071c3c54725d28b23585ac2cc75",
+    "depth_sha256": "ae9380151dae35fe337c288154ef9ac123ebe7f3c16b8c3562688b9f810a9c86",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000015",
+    "timestamp": 0.625
+  },
+  {
+    "id": "000016",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 16,
+    "rgb_sha256": "399e0795df1a080d835a9287b94c4a01c8bacd2054387b18dfe1f2ad30e6180e",
+    "depth_sha256": "fee7f4a33bab6ef5fc7a61c19ed20299d57dfaaf929f26fac57fb4163cce23c3",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000016",
+    "timestamp": 0.6666666666666666
+  },
+  {
+    "id": "000017",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 17,
+    "rgb_sha256": "cc074507be06980951aa6c050d9bf91e272879094671ce75e50690c760c3e473",
+    "depth_sha256": "d30c1007cde8fc255273eb4d8981295875aaa387bc8744b38b7511b547778197",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000017",
+    "timestamp": 0.7083333333333334
+  },
+  {
+    "id": "000018",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 18,
+    "rgb_sha256": "35e7feeb970567302698016ccb9260eca183ff0a2be6d6303ee76ceab388b571",
+    "depth_sha256": "a2bf074b9ea148ba2116f7b1255803bf9089c3f2b2c846813b411bfd62b34a6e",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000018",
+    "timestamp": 0.75
+  },
+  {
+    "id": "000019",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 19,
+    "rgb_sha256": "890f4086fbd1d2232585265f2ad712abb92447d2a114b814ab2263f870a5d429",
+    "depth_sha256": "63b9878eee743fcc52ed4631441042f46cf5a1f1bbd61b2f87cb9fad5f83946d",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000019",
+    "timestamp": 0.7916666666666666
+  },
+  {
+    "id": "000020",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 20,
+    "rgb_sha256": "2abb178cc5d1bab1d416857a31526c10c18858c3fce61795d35f8ce282b8b9a2",
+    "depth_sha256": "e3314919073187a84f1868a55400259f852c6137600a3d26d1a393628cac1f28",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000020",
+    "timestamp": 0.8333333333333334
+  },
+  {
+    "id": "000021",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 21,
+    "rgb_sha256": "1671732f4fd2d6bbf2cff8771a6e03f562e972ad685fe54bbc92bb047d56da87",
+    "depth_sha256": "3070c800c32e3a0482a7292697990555142a1e4a65bba685e4473d3b5ed41e40",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000021",
+    "timestamp": 0.875
+  },
+  {
+    "id": "000022",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 22,
+    "rgb_sha256": "489a61997567b418b72ea0eb8faa6c016f2615b5c684fdea1f867da741e9af96",
+    "depth_sha256": "4af560f7fdad795a6e596c523e099aab3570c46608e786bed109ac8f16a5ea82",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000022",
+    "timestamp": 0.9166666666666666
+  },
+  {
+    "id": "000023",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 23,
+    "rgb_sha256": "233b1783727c7c5f96df18b6b0dd8358a031b52dc415a937fe3e327b0058c589",
+    "depth_sha256": "90f5758545114bbda2b3245095d5da20ff441e7b2437c678471709bf5a7b7a8b",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000023",
+    "timestamp": 0.9583333333333334
+  },
+  {
+    "id": "000024",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 24,
+    "rgb_sha256": "2bf4944276e47895c9eb52a9643dd4d780e2239150887be4f429735c76c23c83",
+    "depth_sha256": "8762e1305b0f2228c99be377afbb9c3370b4dca224ce216d701194179ffb47f2",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000024",
+    "timestamp": 1.0
+  },
+  {
+    "id": "000025",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 25,
+    "rgb_sha256": "2f0e9f17c2247dc89177f861bf8c77864157d0acc0d3f132a79dc6059af2be05",
+    "depth_sha256": "1286abf07746c9859e5b401de63528c3dcfdd08cc145ee43b1932ce8e40c79ea",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000025",
+    "timestamp": 1.0416666666666667
+  },
+  {
+    "id": "000026",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 26,
+    "rgb_sha256": "d83fe76562ba87236b55416e88260f5b1ee1bb39c727f7175aab843504d4403a",
+    "depth_sha256": "9c4e769c62ab3523c5db2a99383f2168abefe3e2f643ff2063f4c15f268750b6",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000026",
+    "timestamp": 1.0833333333333333
+  },
+  {
+    "id": "000027",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 27,
+    "rgb_sha256": "0a1e6869a861829525cffc93f855049a3959c8591faae79a9390be4cf693970b",
+    "depth_sha256": "336c88ae587efa0fa8da12c158aac48e3dfd8f879d19cbba9ade9485c050c15f",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000027",
+    "timestamp": 1.125
+  },
+  {
+    "id": "000028",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 28,
+    "rgb_sha256": "08e85a0ebac1761c5583b632ea493eb460a2d006bdcf7697701b81a6e5940dfe",
+    "depth_sha256": "dfca0f1c6839ca672985b5495d658e0226b32e28036c40f1add1acd8ede0c247",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000028",
+    "timestamp": 1.1666666666666667
+  },
+  {
+    "id": "000029",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 29,
+    "rgb_sha256": "c36024bfd11a446651902aa57ebf43ca4c06cb3610662b6c249fc0f147bb45cf",
+    "depth_sha256": "49a652a29a2066ee0f566c060ab4ad8800a21953460cfffa2332611db0883ec2",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000029",
+    "timestamp": 1.2083333333333333
+  },
+  {
+    "id": "000030",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 30,
+    "rgb_sha256": "96c488061202b8b58b7dc9c18b7e1dfb2e2ec4867cfaef302300ca61c4ed56ea",
+    "depth_sha256": "8c792123219650aced00f51f199bf4ce65f1646d2a5524cbba39819c31e86f81",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000030",
+    "timestamp": 1.25
+  },
+  {
+    "id": "000031",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 31,
+    "rgb_sha256": "b0f75125c2762b7aa19ca21a71eb666200f59ec20eb839c2738d4f609f7b2ab8",
+    "depth_sha256": "93122b88962952c5e46dfde0d72b40ba6a21d6119f10c8fb7e0fb04f0da9d0e5",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000031",
+    "timestamp": 1.2916666666666667
+  },
+  {
+    "id": "000032",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 32,
+    "rgb_sha256": "d7889f350677265d429659d1bbc669065ab37133f2d742417c5659c3b743f86b",
+    "depth_sha256": "101a5d7cea27be9278ca0d64f98a9e7e30737074deb8511af4dfce38647a2eee",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000032",
+    "timestamp": 1.3333333333333333
+  },
+  {
+    "id": "000033",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 33,
+    "rgb_sha256": "ca397fa6ae867255deaaa4f29fb0043025a8f1f49c2aae2120ff44e91e14c80f",
+    "depth_sha256": "f9cea50beb3a3d987713c0a8be11ac579d859cec930edc010bb74af7402b311e",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000033",
+    "timestamp": 1.375
+  },
+  {
+    "id": "000034",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 34,
+    "rgb_sha256": "c3b39271d1bec867858dbd681c79fb0c5011c7a2b3cfa7bd0b9f1f6c5b99a258",
+    "depth_sha256": "8cb594b3ed26dff2eecb53c7615f890c2e1d1ccf1eb40ce57b2e27af9283288f",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000034",
+    "timestamp": 1.4166666666666667
+  },
+  {
+    "id": "000035",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 35,
+    "rgb_sha256": "55d42a0d2e4d2b109b0c590a66e9cf0230826008fd3167ebeb9397a59c6cd5cf",
+    "depth_sha256": "74934cd25bda8ebb80eb2d8a1113ffe6ffa208586e83b75decfda96415ee7f1d",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000035",
+    "timestamp": 1.4583333333333333
+  },
+  {
+    "id": "000036",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 36,
+    "rgb_sha256": "2dbe270b16553c1f5c683652b61a044b0761b205230828f64d3d4fac8cbd7fdf",
+    "depth_sha256": "dd53889dc45809506a7d36d4cc878b6a15760729dd759890e98e2d922371a704",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000036",
+    "timestamp": 1.5
+  },
+  {
+    "id": "000037",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 37,
+    "rgb_sha256": "cf6fdd6fc0987b03560985ae17c312020209081142b79c1499b05c6b3072a80c",
+    "depth_sha256": "8f3c072ff6c952e065b4e3b880680482e80eb22ad748d83de986920bdfa383c0",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000037",
+    "timestamp": 1.5416666666666667
+  },
+  {
+    "id": "000038",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 38,
+    "rgb_sha256": "2d3e299e9590d580de82b0290251b1af03fedd8c19b9b8858895d551299dddae",
+    "depth_sha256": "9369599a632a2ac811627505204ced1d540e65d31dcdb6e6629b4345b074db8f",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000038",
+    "timestamp": 1.5833333333333333
+  },
+  {
+    "id": "000039",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 39,
+    "rgb_sha256": "a983369d9d110711f4d20a94b9e16e7bf6f53a79775405e671da46e3b3bb33cc",
+    "depth_sha256": "f0a3c6e83160c4404765302ecbd7e991bc9b5210971d57318b5afdf753bf4389",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000039",
+    "timestamp": 1.625
+  },
+  {
+    "id": "000040",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 40,
+    "rgb_sha256": "404366248e241003c58f7073160d52fa78bfad64929109acac09ab6b62c47def",
+    "depth_sha256": "c59e6d633703c11a5fa9fbc07ca3802b206bc82cb37154372841929b890e5650",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000040",
+    "timestamp": 1.6666666666666667
+  },
+  {
+    "id": "000041",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 41,
+    "rgb_sha256": "eaa766e4f7d314696648a89959d0ed14a975262faa4f230986497e6b902638fd",
+    "depth_sha256": "5aca22b8669f02fdf1f452048ced4c04fe9de65645134cd81d4a261250479f14",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000041",
+    "timestamp": 1.7083333333333333
+  },
+  {
+    "id": "000042",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 42,
+    "rgb_sha256": "ae386f9844f22d052701462b9f8fcc9cf8b79fdfaf16d0b4ab091c7cec03df9a",
+    "depth_sha256": "14ba61dfb1e55d3fb9aa7699f2a20e699bf5c145d10ac4e88ee40e0c5f28ec1c",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000042",
+    "timestamp": 1.75
+  },
+  {
+    "id": "000043",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 43,
+    "rgb_sha256": "3d88bc157641ece01948321fa71d57aac252a22389285616338496d757641fff",
+    "depth_sha256": "654fb2c9731d2e63f41a9eacd35714aded518876e466caaef5d0b6d765e4c8e5",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000043",
+    "timestamp": 1.7916666666666667
+  },
+  {
+    "id": "000044",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 44,
+    "rgb_sha256": "fef7680ac784bbbcb13ccce7d13dcfcf11159969e4dfc69fc0c104a4819eb334",
+    "depth_sha256": "668cab4c4634261371980994221240fcae7b7ab0b2fc884eadf2764de7d49518",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000044",
+    "timestamp": 1.8333333333333333
+  },
+  {
+    "id": "000045",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 45,
+    "rgb_sha256": "96e0c1baa5ba4e8b7774f8db6ec63a1315a493f62e8210efeb6a7eb7a0e6b323",
+    "depth_sha256": "1df6a952abbd61e18e1117302487c085e6fb4cf4bb9ae5c560669fa6a32f5eff",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000045",
+    "timestamp": 1.875
+  },
+  {
+    "id": "000046",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 46,
+    "rgb_sha256": "b1405d537840aef45b2a4e230704017f3a4881bd121c65bc56d7b20ffd58e20e",
+    "depth_sha256": "882efa5c1e7dc9c412a539d78a7c33143ad47f4610521f1d3f3ee8db2fcfb365",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000046",
+    "timestamp": 1.9166666666666667
+  },
+  {
+    "id": "000047",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 47,
+    "rgb_sha256": "2a106bb917df6fbed845aa226ec5a8eb5edcfc8a7bc02c8aca8ebd5f9def1dfe",
+    "depth_sha256": "e355e03e246091ce34d8afa1099dc3c860cde936e9ca5bade3f578abd4be9c9b",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000047",
+    "timestamp": 1.9583333333333333
+  },
+  {
+    "id": "000048",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 48,
+    "rgb_sha256": "22df96a52e351d09a5a5c135868b8caa33e5831559d0b392589fc7534c215050",
+    "depth_sha256": "fd846f12ed288422baf097c1352ca4f05f77ce1d28ceabdbefbcad2d79957c26",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000048",
+    "timestamp": 2.0
+  },
+  {
+    "id": "000049",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 49,
+    "rgb_sha256": "f3dbe795837b4ad7417a688f8713a00316ed6ecc91032f8682ab0d7eb77d448a",
+    "depth_sha256": "1319fad33f9b09b04834ad9faa016e52c05dd67372c99c818b1c3adc979c14fc",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000049",
+    "timestamp": 2.0416666666666665
+  },
+  {
+    "id": "000050",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 50,
+    "rgb_sha256": "898b26059dc446b757207e5e925b09be44e05070c4a1911938bb98be96fef8a0",
+    "depth_sha256": "b94166f3ee491a41c9280e8ba8a9e8378ed169b3f4e60dd6ef01396ca51097be",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000050",
+    "timestamp": 2.0833333333333335
+  },
+  {
+    "id": "000051",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 51,
+    "rgb_sha256": "de6619ea32cdd00702ae5f0b4151c84ec8ca33bf024da4fd198558ee9a92e2af",
+    "depth_sha256": "705446a7b802c5dbcd159d1bb993ca1a8a92bbbffa92107dcb7adc31699eadcd",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000051",
+    "timestamp": 2.125
+  },
+  {
+    "id": "000052",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 52,
+    "rgb_sha256": "aed35a82eabfbcc7127e6d330ee5be9abec5bb9522e6a0e804c73c1669908429",
+    "depth_sha256": "1019dff77995ec08c38dd034f82764918217df8f96c9ade74ad5e932ae2e68e8",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000052",
+    "timestamp": 2.1666666666666665
+  },
+  {
+    "id": "000053",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 53,
+    "rgb_sha256": "106c4b7e6c002809a521ebac7eaf5e521980158f43b7041b7d512979dcc82ed3",
+    "depth_sha256": "aa760485d7c9a4a1afe0f3e8cc11b17958a7ac74d7aabd89e70c684660eafe1f",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000053",
+    "timestamp": 2.2083333333333335
+  },
+  {
+    "id": "000054",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 54,
+    "rgb_sha256": "0e2e3725053d46472f58f20cfc62572556d0ab85119be8562c46848764df1986",
+    "depth_sha256": "4193d0b8df4b58f2c3f7e886102b66379bbcab2b6490a299411bf050278757ee",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000054",
+    "timestamp": 2.25
+  },
+  {
+    "id": "000055",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 55,
+    "rgb_sha256": "e51a1212229c2d622cdcdc4cdb0409d6f7e2e584e405de93b6fbb66d5bb78071",
+    "depth_sha256": "bc5b349e89fc5371c770d3cf4d1b26581fb95f96d4bceff9ef37fc3228d38267",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000055",
+    "timestamp": 2.2916666666666665
+  },
+  {
+    "id": "000056",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 56,
+    "rgb_sha256": "d231f2afe3cab1d4b53f24316359cafecf05edfdcfe62268e71c203b6a4236ac",
+    "depth_sha256": "af2fee20c83b2cc604080abc00d945069d363998d2d683eef8521d8f865306bd",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000056",
+    "timestamp": 2.3333333333333335
+  },
+  {
+    "id": "000057",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 57,
+    "rgb_sha256": "761db43f28567b9f39e4db6b767394d98c021c616f22a67bdae9ca4a5cda6dc2",
+    "depth_sha256": "9e50cbc59aa94b69d6c08a700669f35178ba5dc7a60ba7837cab3049eb54715e",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000057",
+    "timestamp": 2.375
+  },
+  {
+    "id": "000058",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 58,
+    "rgb_sha256": "e047c97a1d6aedcb2b6fddbe8740f5ca958b741532d7221fc66a7cb81d967645",
+    "depth_sha256": "1ecb4d4af96ad95ec0fd0d8659c4114250e92b4b9e4d3a719ea4c718e43d5f81",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000058",
+    "timestamp": 2.4166666666666665
+  },
+  {
+    "id": "000059",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 59,
+    "rgb_sha256": "6b9a10de31926c0e2e3208b41e0f6a3923c0139417bab5471c33b4baf0fc8fd6",
+    "depth_sha256": "38c0596ab0b9fed0b404a61286f117054d243666bd3950845e606c1b19b06fa4",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000059",
+    "timestamp": 2.4583333333333335
+  },
+  {
+    "id": "000060",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 60,
+    "rgb_sha256": "6633368da616cd2632a2cd035d1da12508c0b0f497f93cdcdc206b9029ca763d",
+    "depth_sha256": "57edad3a1c69a2c51e5067cff09db0e1d459b1a312376d348c3bd4891d603490",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000060",
+    "timestamp": 2.5
+  },
+  {
+    "id": "000061",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 61,
+    "rgb_sha256": "b9f355a8fa8b55ce672eeb3ffe2d4d82eaa7bcc6760fe376246dd546ecfa6669",
+    "depth_sha256": "661858c5ae750aa588c1a48a3815b5a9312c2a062961399847d643e3dfd0432d",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000061",
+    "timestamp": 2.5416666666666665
+  },
+  {
+    "id": "000062",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 62,
+    "rgb_sha256": "83914cfafc04be2999d0cfe642ce37c541b2a8cc2cb39f9c3b6b276324264a28",
+    "depth_sha256": "13b45e2ece23df869a31da41dfc496b8d844c7a0aad8396910ac9dd013e68f7f",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000062",
+    "timestamp": 2.5833333333333335
+  },
+  {
+    "id": "000063",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 63,
+    "rgb_sha256": "be1aab295234408f058547f6fa5be96c3e5d170c8e1e147f664c2854430cb974",
+    "depth_sha256": "91e8babec7015b89aa6556691b99d6699679cf6f45fcb8b076a7ede14e86cc19",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000063",
+    "timestamp": 2.625
+  },
+  {
+    "id": "000064",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 64,
+    "rgb_sha256": "411a07ac79092a1130cefd928cfb1ecacf0e52916aef8842fdd82ddbccae9daa",
+    "depth_sha256": "9a1f2578cba31f7bf6f4983bb8c5dfc4396dee10246a5e8ad4da6d0ecc4a62d7",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000064",
+    "timestamp": 2.6666666666666665
+  },
+  {
+    "id": "000065",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 65,
+    "rgb_sha256": "c535876ea7648e0e952cbd17efdda04a1ecded4251a564340dc35ac90072310b",
+    "depth_sha256": "0ab0e441230b98257bf263cda3a866ea3e182d9cd910f93494ec4450af05faf4",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000065",
+    "timestamp": 2.7083333333333335
+  },
+  {
+    "id": "000066",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 66,
+    "rgb_sha256": "4f0692c80373f2ca136c5d9f3c6bde27db424c1468d335e1eec8104880e1d953",
+    "depth_sha256": "051fb687533c5b9b8f5ae522893922a3e02498f1e292ed38a68eeaeeb0ec3288",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000066",
+    "timestamp": 2.75
+  },
+  {
+    "id": "000067",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 67,
+    "rgb_sha256": "753104850119e728b21a0de24f76ff9fb9a6ff5abcfb8202db0790f58e9bd177",
+    "depth_sha256": "e8c0f7af21c47f58a63bd3623e2bd1f0d366b313a3fc33b3d37193106c1dbd50",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000067",
+    "timestamp": 2.7916666666666665
+  },
+  {
+    "id": "000068",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 68,
+    "rgb_sha256": "f30e0347293a375dd90b23a69859852f0f116670a776e84447d3b061e0a9790f",
+    "depth_sha256": "bc6b934e25518a705f29f06fc05115dca0081fbf954423819a9e8429b63eeb50",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000068",
+    "timestamp": 2.8333333333333335
+  },
+  {
+    "id": "000069",
+    "source": "third_party/Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4",
+    "source_index": 69,
+    "rgb_sha256": "f5555f2b5e1eef32c9bcf6f45fe0ec92dcc64cae44a57832b4666a3f03d27c1a",
+    "depth_sha256": "018cdd56cbc98f57ac0fe55f8c999b3f080b62837499104966c59857245a45b0",
+    "shape": [
+      360,
+      640
+    ],
+    "sample_id": "000069",
+    "timestamp": 2.875
+  }
+]

@@ -1,0 +1,834 @@
+[
+  {
+    "id": "000000",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 0,
+    "rgb_sha256": "17d4c982d228132f768f7b86b5569ce36f26e562de38c48aee2c34f88e170d4f",
+    "depth_sha256": "5470a9c15733bceb74a429f9e5a4eec22f0ff22daccc2c3aedf95679317f3c22",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000000",
+    "timestamp": 1.866599365079365
+  },
+  {
+    "id": "000001",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 1,
+    "rgb_sha256": "be3dce8e8a73c2f9c9d2cb66d4fce46271813b286d1881d5b0bc5e7804941d2a",
+    "depth_sha256": "c8f88bae90ac4edba1f82f618f24cd40e38a138ce70cf27aa4acb62694ac8526",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000001",
+    "timestamp": 2.0665921541950114
+  },
+  {
+    "id": "000002",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 2,
+    "rgb_sha256": "ce1621414e0e0c64c76c3ad16fad7112d73f38bfa4c7f4d194c00d737570d321",
+    "depth_sha256": "66b7b67b487ebcb56e68768b7d58f5351b2da8994672e9c1917f4fc4b54645f2",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000002",
+    "timestamp": 2.2665849433106575
+  },
+  {
+    "id": "000003",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 3,
+    "rgb_sha256": "db4e903ebf542fc0d27e846f873ba9133048c970656215ef23631c4421cc781c",
+    "depth_sha256": "ee63cc4243a817a55e19fc4f814fe6ace91e129695a8dbe0ff6752000a2fc082",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000003",
+    "timestamp": 2.466577732426304
+  },
+  {
+    "id": "000004",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 4,
+    "rgb_sha256": "4e78ada02b79a330d597c66cd5cba0ca10aad9d813ab0ea823698300762d0490",
+    "depth_sha256": "5190e1f7d459fc45091ca00a16252664b19e52acd00cf97c5f602bd81283176d",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000004",
+    "timestamp": 2.66657052154195
+  },
+  {
+    "id": "000005",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 5,
+    "rgb_sha256": "2108313e8417d48c07c27077bdd0e71cdeed285c91d1b31bbff6db08d169da90",
+    "depth_sha256": "03f1f27a3814286b7a3e821279fa8b0bde515af7a8d4850a7b59833c1e84ff8f",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000005",
+    "timestamp": 2.8665633106575967
+  },
+  {
+    "id": "000006",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 6,
+    "rgb_sha256": "c17ad13470e181a76c9eff32d4b5368d13068abd533b6e62f130f2828c80ad2a",
+    "depth_sha256": "16947d8f2fe6eb9fed0ea1277c70b18fec93e4932008bf080a9e0f49112b9231",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000006",
+    "timestamp": 3.066556099773243
+  },
+  {
+    "id": "000007",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 7,
+    "rgb_sha256": "7e8cb5ccc32af00436f44d55fd871fb14dcbd09c57cc95dcd6920d64cb2f10f8",
+    "depth_sha256": "2773271fc173b7aed1caeb9f4de2791e8f4b2cb92e86af1393fa32e8c538a59b",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000007",
+    "timestamp": 3.266548888888889
+  },
+  {
+    "id": "000008",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 8,
+    "rgb_sha256": "0244d9b62c70851673332a2c99f0618883d182591f8e6041c4ce5a82c1d69354",
+    "depth_sha256": "e057fb17e396e3883346c3d50c1697d951e01cd821cf5028a93cd28ab6565378",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000008",
+    "timestamp": 3.4665416780045355
+  },
+  {
+    "id": "000009",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 9,
+    "rgb_sha256": "05de3b9a52537485811887039e137ca04e8cbfc81f6c9b172eab65bda5481471",
+    "depth_sha256": "458a7e527a419dfe49637227fb599180c954734982d960f741c12f4b5af9209c",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000009",
+    "timestamp": 3.6665344671201816
+  },
+  {
+    "id": "000010",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 10,
+    "rgb_sha256": "dff3033f70e5e003fe7ce430acdade3b1419562e2f17f136be61365f381d19ba",
+    "depth_sha256": "4b82d1ab644167d6f979708764c2f2a35c63a1cca6c11cfe07fba512233f2582",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000010",
+    "timestamp": 3.8665272562358277
+  },
+  {
+    "id": "000011",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 11,
+    "rgb_sha256": "e958dc31fb3a23d934108260ce31feda22c0288f0577debacc6485e94a6a83d4",
+    "depth_sha256": "917335008531161afe80734d81a600dc4246269806be385ddfd00adba3b4e8f2",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000011",
+    "timestamp": 4.066520045351474
+  },
+  {
+    "id": "000012",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 12,
+    "rgb_sha256": "94292b70c81e3c53d29c3176fca023171e876e5aef60b8c25749a39e494533be",
+    "depth_sha256": "666275b82c4e04809083b3d0e0d80fc856167448b4e19dcc98a15b0700a8b896",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000012",
+    "timestamp": 4.266512834467121
+  },
+  {
+    "id": "000013",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 13,
+    "rgb_sha256": "90a6d56a891eb8e76c2b5d28c5a0b9dd178fc4a00a938305200d1a70c518e98e",
+    "depth_sha256": "1233aa66e3fcf30d577f72fe301f128683fb5fe1c13701e3b1eafc973cb0760b",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000013",
+    "timestamp": 4.4665056235827665
+  },
+  {
+    "id": "000014",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 14,
+    "rgb_sha256": "5be7f826637bb974e6487cef56c880a27ee4ae447bb0c6c608727d5237e8189c",
+    "depth_sha256": "19b30a15412757574f67a1da5daa20020b225689a3bb408a4bcc9360960a6015",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000014",
+    "timestamp": 4.666498412698413
+  },
+  {
+    "id": "000015",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 15,
+    "rgb_sha256": "0e892e42c835d02a4ed41ffd770e9915a8aae9265b09e0e65f4b2e6df1c2b80c",
+    "depth_sha256": "588df23a15ca640567f5a178e3db74dbfde8a4ec15bce338a66d5e7d0681c565",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000015",
+    "timestamp": 4.86649120181406
+  },
+  {
+    "id": "000016",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 16,
+    "rgb_sha256": "18b8805ab315083a127db94418ce50589c6b7bb87ecf3bc8a2c9eda19c2f5515",
+    "depth_sha256": "9f9e014396b35ad4616e98cc7bd8366fabcba7991094a5785e48055ecd5a2887",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000016",
+    "timestamp": 5.066483990929705
+  },
+  {
+    "id": "000017",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 17,
+    "rgb_sha256": "02d72e4d053d6c22d96bd31b63536c44efa6c670b560bc779dba310b124c2fbb",
+    "depth_sha256": "61a4426ad5b4f2f67b96aaa265405c6a12689d40bda51609e0c6cb608857d926",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000017",
+    "timestamp": 5.266476780045352
+  },
+  {
+    "id": "000018",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 18,
+    "rgb_sha256": "8caefd426979b59d5cca6e7df182384aac11ae928f25c37fb3c810034dc8da37",
+    "depth_sha256": "b415eafa6d073578184793672bd070889968ac3667c2a06f3d9995cba41dd2b6",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000018",
+    "timestamp": 5.466469569160998
+  },
+  {
+    "id": "000019",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 19,
+    "rgb_sha256": "351a32d313293493a776646e5835a34e6176e2cb833e6d6c24f4e4461a4fb8f8",
+    "depth_sha256": "077858af1ec4c52b5579097c1da2d27bbd325238033891ffba0637be9c6e0200",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000019",
+    "timestamp": 5.666462358276644
+  },
+  {
+    "id": "000020",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 20,
+    "rgb_sha256": "7c4588e9769eba1c69bdc854b3ab7a71187d4db7858c6ebe56b2895bcd8593db",
+    "depth_sha256": "49c55855aa26fbad0bcd4c8d7ddb2928f08a29276541bf6578ea47c66da28971",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000020",
+    "timestamp": 5.866455147392291
+  },
+  {
+    "id": "000021",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 21,
+    "rgb_sha256": "108a90bebf639173fdaf5f39d88021db39bfc7f1562e3b066029c30a0030b1cb",
+    "depth_sha256": "45ded81469b9a960588b35b842aea05e3c7428cb26b2743417d5b421690c6e25",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000021",
+    "timestamp": 6.066447936507937
+  },
+  {
+    "id": "000022",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 22,
+    "rgb_sha256": "688f1873c8b52f0b91fed5c40aa6efe1c118e96d8db69cfd0e08242e8c4b0d47",
+    "depth_sha256": "e2393bf2c6ef469d24a61fb6f04a3df66687e116728c88927f87ff795e6e49d5",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000022",
+    "timestamp": 6.266440725623583
+  },
+  {
+    "id": "000023",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 23,
+    "rgb_sha256": "1f9fafb3f0ca64e0d03b7b749630203d437bc2ae5126e995888b3973cdb5f56b",
+    "depth_sha256": "92843ef820aa8f8031366984cefbacba4740925149f14f9813340b63ca870f5a",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000023",
+    "timestamp": 6.466433514739229
+  },
+  {
+    "id": "000024",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 24,
+    "rgb_sha256": "b66bec9f895bfd0de0b58c883b0fd6515b8c42496bc19a970877def4402365bb",
+    "depth_sha256": "f049fe2d807217f40b8a8053b51008f6411979a33c4ce8f8ad994dd661219184",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000024",
+    "timestamp": 6.666426303854876
+  },
+  {
+    "id": "000025",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 25,
+    "rgb_sha256": "4885c89a900086fde16e66f78cb1426a1fca17f3424f23d4b10f74de351ab24e",
+    "depth_sha256": "68ec3d5aaafab15babdd840b6a3ad6e11d850da4f9b66956df4fd149e4fdf84d",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000025",
+    "timestamp": 6.8664190929705216
+  },
+  {
+    "id": "000026",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 26,
+    "rgb_sha256": "546c0c4d40918e00e02503b224e43a92a0dbc0da07c7e83b20d2dc374fc657c1",
+    "depth_sha256": "7f274b96d246077e87a83285e3d975724f03d89e06dba1e888e2d353fe8a1feb",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000026",
+    "timestamp": 7.066411882086168
+  },
+  {
+    "id": "000027",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 27,
+    "rgb_sha256": "f74902c069b7fd1586e3e7328c2c37eae211c0c6f12c91634d79a7a9dd120fa0",
+    "depth_sha256": "f3dc0400a8c71333bc959b40e37296aaa01a863b9f8b3111bf4038bec7f54ece",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000027",
+    "timestamp": 7.266404671201815
+  },
+  {
+    "id": "000028",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 28,
+    "rgb_sha256": "a421420b2761295f2db7d4a1fbac3bc0cecd33fd662c7add5cb72b4f86a48c4b",
+    "depth_sha256": "f7bc1344b557754232a79839974458de1a837acc78a6c8e7790206584e44d1bb",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000028",
+    "timestamp": 7.46639746031746
+  },
+  {
+    "id": "000029",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 29,
+    "rgb_sha256": "b634f75525ea2fc2f38f462952c13b4f1605402f781697891c61616955464758",
+    "depth_sha256": "14a89f28862b7b33d3bd7ecc8e6769461fbbc7f5f91c4db70a97c938bb469c56",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000029",
+    "timestamp": 7.666390249433107
+  },
+  {
+    "id": "000030",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 30,
+    "rgb_sha256": "e9de56e082a21cbc2f8fa7020d21c8c30e3888f4545b11814330dc0d47f29b05",
+    "depth_sha256": "25b078c7e1575d6f67f55ed035e99bc25bf0990edac30a5c62828eeaa7fb8d83",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000030",
+    "timestamp": 7.866383038548753
+  },
+  {
+    "id": "000031",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 31,
+    "rgb_sha256": "081b83efed759399d3ea880ad54b63ba6e3a6e9767b47a7be796b7fe00af3a54",
+    "depth_sha256": "81b9ddc8146e1f6ebf25e990e17b5bd165e06164d9983ec341712916fbfffff5",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000031",
+    "timestamp": 8.0663758276644
+  },
+  {
+    "id": "000032",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 32,
+    "rgb_sha256": "0eca8445b2e2b7f97c7551b64c67aafd2e91aee4fd2fe7e0bd2d083d209b41d7",
+    "depth_sha256": "4f306f361a4ca80ee88cd9bbaae737ef67942ae436a43079829e362d7c9b4217",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000032",
+    "timestamp": 8.266368616780046
+  },
+  {
+    "id": "000033",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 33,
+    "rgb_sha256": "6203dcf69667096f517d9b7ada22c3c735121e33f58035cc886c8c94912ba1cd",
+    "depth_sha256": "8fd8293992a9f2b6dfae67d8dfb0bdd7779324a2a09f512d11fabd5546f6d6d6",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000033",
+    "timestamp": 8.466361405895691
+  },
+  {
+    "id": "000034",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 34,
+    "rgb_sha256": "d3b2bf0dce3cbc750b2ae9f9ec7503a9a49e6b91466d111961058a75384e5179",
+    "depth_sha256": "260d7f7c500c3b4b8548b3c2617ed08b6109d42697aae58854186118df340bd7",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000034",
+    "timestamp": 8.666354195011339
+  },
+  {
+    "id": "000035",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 35,
+    "rgb_sha256": "7288124f9767367c731cc24f3da57d9db48b43d123312b5bb1a846562a135177",
+    "depth_sha256": "84d64887ebd3c11ca74afd5ad5b1a27c09d264a09f04bf7eedc6479f5f522207",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000035",
+    "timestamp": 8.866346984126984
+  },
+  {
+    "id": "000036",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 36,
+    "rgb_sha256": "47eb69e7704b8452d2b777caf975b770f68a48ead59a0676dde6e78cfd1f26b6",
+    "depth_sha256": "189bd47e562bd92f06a5e80ec0571e2d1deb903563974f057bcf537047035e30",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000036",
+    "timestamp": 9.06633977324263
+  },
+  {
+    "id": "000037",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 37,
+    "rgb_sha256": "292a5943f915bc24cd805d63225bbc662558be4c59b38127d7abd9bfaa2dbcb8",
+    "depth_sha256": "92ade1d4bbacb73947c93e78cfef849b98f4f8dc170ad56077d9e7cd36909689",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000037",
+    "timestamp": 9.266332562358278
+  },
+  {
+    "id": "000038",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 38,
+    "rgb_sha256": "68507b9d222ccb5c83969dbb82d8d65769d9a6815754814d0a778b6834db198d",
+    "depth_sha256": "3b32ecf9d0f0fbab7c46bff6611a177580c9c1b7c7c4f6b26e0f80468eed5eef",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000038",
+    "timestamp": 9.466325351473923
+  },
+  {
+    "id": "000039",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 39,
+    "rgb_sha256": "60689369e4e36c168659aa0e388216aabd48732f05a9431fdb49521528123576",
+    "depth_sha256": "093efb942dd277e61b38a69441839bd1fc0d7a640e04a6e3fb86bab7e11775cb",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000039",
+    "timestamp": 9.666318140589569
+  },
+  {
+    "id": "000040",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 40,
+    "rgb_sha256": "cf193d66ea49cff84c2a0755213f9939ce8b44b78fe881ac3daf82760f8e64fc",
+    "depth_sha256": "52fecc4120f985fe98507129529b03e1cf6c4be2f72217373cb05287c540e80e",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000040",
+    "timestamp": 9.866310929705216
+  },
+  {
+    "id": "000041",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 41,
+    "rgb_sha256": "88ec8296f6d53d1f05d310d7c1c28f52e7172db81fdc75e9c9a1929071a18fdb",
+    "depth_sha256": "d4820f7f170eb85f62dbb0ce5891a09910ba24c866534ca0bb61c59b54a43901",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000041",
+    "timestamp": 10.066303718820862
+  },
+  {
+    "id": "000042",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 42,
+    "rgb_sha256": "de4c48744a3c0a4f7e7f44a8727cb501cd5c649b9e45776f709bfb2b892e6a97",
+    "depth_sha256": "e58d3d252b7b52a2a8a220a880fcd5d9211d86f973064eef80f3453a0434b6b6",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000042",
+    "timestamp": 10.266296507936508
+  },
+  {
+    "id": "000043",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 43,
+    "rgb_sha256": "e3254446331d2dc6201099f97ce6d8a20fa1e85fd57eac3d7e95d0ceaac8b7ca",
+    "depth_sha256": "dbcd57575fce9666af43e9abcb93e20eb63b40f3c37585fad0bde1ab2489517c",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000043",
+    "timestamp": 10.466289297052155
+  },
+  {
+    "id": "000044",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 44,
+    "rgb_sha256": "3a1c11dd5511435b04ad348319b022c242979b1af05f4eae6e85eb0cd49ae028",
+    "depth_sha256": "97b6363fd3310a52c01bdd3c03f18bb04e486bf73cae70d201695ac513dec49c",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000044",
+    "timestamp": 10.6662820861678
+  },
+  {
+    "id": "000045",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 45,
+    "rgb_sha256": "d68ac5f79e16374b45641b1858e0a1a567f93fd3caed66a262e9ebc23fe0ebe3",
+    "depth_sha256": "2d063c6811bf4bf481736cc1ebd75d83c82c3e2db3566de725e83c70b032370f",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000045",
+    "timestamp": 10.866274875283448
+  },
+  {
+    "id": "000046",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 46,
+    "rgb_sha256": "9f35014dabfc2b927ffcca9186fa3f4196c6b70ac29e25e568606560a5952c0b",
+    "depth_sha256": "4bf7bf7619ccc945f4697bbe63a4c99a86d3b6a203863f0b2edbb3cb34cf6670",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000046",
+    "timestamp": 11.066267664399094
+  },
+  {
+    "id": "000047",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 47,
+    "rgb_sha256": "89af44e3e855735d577db09b7b58b7bb45bb439eb852acd65d4d4197890ba616",
+    "depth_sha256": "ea8a4aaff4bb656012fd73464b405781319ff4cd67c0dec2e92f4d770db795c5",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000047",
+    "timestamp": 11.26626045351474
+  },
+  {
+    "id": "000048",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 48,
+    "rgb_sha256": "0dcb6ad299830d4eed263df40d405a32d02c701d9730097cc224917748f8c8ed",
+    "depth_sha256": "d7d25fa611990bec1d20d8406da9f5977dd69fab0d68321f21797d610b38ea2e",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000048",
+    "timestamp": 11.466253242630387
+  },
+  {
+    "id": "000049",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 49,
+    "rgb_sha256": "509da422e91fcd1cba93f5dda7f7fae4901ae554e41840a117dad5101c203e4c",
+    "depth_sha256": "d45b6de907b9f38b8e7ebda8f364f7c16e44df86362dba9eda52e41a4f9b8cf9",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000049",
+    "timestamp": 11.666246031746033
+  },
+  {
+    "id": "000050",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 50,
+    "rgb_sha256": "e23a3b78084d05ebd5e7a3e5b59c9e0ffc67087109994aa8b98bd479363d6632",
+    "depth_sha256": "9e74bdc8418cfffd4805cf014f04af613d29505883c4feec7d9d89a9c7498770",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000050",
+    "timestamp": 11.866238820861678
+  },
+  {
+    "id": "000051",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 51,
+    "rgb_sha256": "c358eb710f3834f588c887e408894b5defd80b3d850c8688a18d95450688f8d3",
+    "depth_sha256": "ec645e942d1cfa1090d832bc72de6e43cd2539b3082f90330321e372009e2a80",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000051",
+    "timestamp": 12.066231609977326
+  },
+  {
+    "id": "000052",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 52,
+    "rgb_sha256": "e6253e5f5a6033dddb74a5bc47689cfcab94ad725ed5403b8c070749729aa0b6",
+    "depth_sha256": "6e073ed01d04cee10fd107aeee534ac8ba0531e12fb2f62b8eddf059f752523d",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000052",
+    "timestamp": 12.266224399092971
+  },
+  {
+    "id": "000053",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 53,
+    "rgb_sha256": "1ba0f77647b35d894917964350bc688e2086c53f26c176857c2996eafca2fd55",
+    "depth_sha256": "113578f5fa48b629d21de3f7959e9d916d03f41fd15b76fabc20602d160d38f9",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000053",
+    "timestamp": 12.466217188208617
+  },
+  {
+    "id": "000054",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 54,
+    "rgb_sha256": "e12e854b0ecb9f270402ae7acf13b060b51c6abf3c889c2e41d7ec43dce92c81",
+    "depth_sha256": "0824aea3efc76e6c4ea86a0643a516a301880f3a145bf226b3f03e8349277b82",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000054",
+    "timestamp": 12.666209977324264
+  },
+  {
+    "id": "000055",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 55,
+    "rgb_sha256": "c5b69eaa07b6083e03cf8695ef82524a02fdc54bb3a3719fde62d5b046be942b",
+    "depth_sha256": "cf19704d95555dded05166e7a9ded8af609aeb53f692f03d48bdb0b312032808",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000055",
+    "timestamp": 12.86620276643991
+  },
+  {
+    "id": "000056",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 56,
+    "rgb_sha256": "ee813e3d479edd060c6cd957293837bfc09aaeeaadc31d34ab871cdceced051c",
+    "depth_sha256": "57db941a352728f0276ae5e0bb1981ab6b6a6f3dd782097e3b494801106b1602",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000056",
+    "timestamp": 13.066195555555556
+  },
+  {
+    "id": "000057",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 57,
+    "rgb_sha256": "41648cb52a4d136950a24f93de9ab8aa7c0469bd6354d58cc49f6f433652b3d1",
+    "depth_sha256": "498c2161583415957a0af00857e772f2d4225ce1d6f0f1a8fecf593ea330b097",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000057",
+    "timestamp": 13.266188344671203
+  },
+  {
+    "id": "000058",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 58,
+    "rgb_sha256": "92061c0a4eac0f3f38a57972c9ac6ce6b6fa60d33bf8ef9d83969b5c2b80ce08",
+    "depth_sha256": "4689b9203f6ba3ca95dc0f5d74041c5c11b8c1c16db4041d4d7bc9d29528d4cc",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000058",
+    "timestamp": 13.466181133786849
+  },
+  {
+    "id": "000059",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 59,
+    "rgb_sha256": "97fb5f912e199a6900c7f5cc130de32572d09b693254c8d36d6bc42de40734cd",
+    "depth_sha256": "10e4674c2ecb94fb932a2c4417df8b9acf25711a8af50579f4d63a9378e2d38a",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000059",
+    "timestamp": 13.666173922902495
+  },
+  {
+    "id": "000060",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 60,
+    "rgb_sha256": "d0228d163b8f073859d622ee1f1841bd96e51a40d130d6465630e5b81c80b0c0",
+    "depth_sha256": "fb03e8c2275aa09006489ef9694103f4884b7349f683aa358edae83a43a895e0",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000060",
+    "timestamp": 13.866166712018142
+  },
+  {
+    "id": "000061",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 61,
+    "rgb_sha256": "699a5bd0500d62b2ea72543b46d66aec6fdcc02d8e79c1e57106407590deeea9",
+    "depth_sha256": "47bcf1bb69580815fcbf4469a1a608d854a1586f5c43dd43d0b8bfa9088edddc",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000061",
+    "timestamp": 14.066159501133788
+  },
+  {
+    "id": "000062",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 62,
+    "rgb_sha256": "a22fc801f6c6cb91d705bc4c583988e51d74fcc9f4b8877d35e7ed29f428c6b0",
+    "depth_sha256": "4a881dbd306ce7ec4a318d036e069c07dff08a21c6dfdf538a91109d9323e5c5",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000062",
+    "timestamp": 14.266152290249433
+  },
+  {
+    "id": "000063",
+    "source": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+    "source_index": 63,
+    "rgb_sha256": "cc773f9a471462f3c34384e6d84cf9cbedc21e1465cfbe954de5c29a1931a7c4",
+    "depth_sha256": "c26490b7b013d9aa3189401d2d8ea89b16c26d54bf0fc4e62be3cef0aa648eda",
+    "shape": [
+      448,
+      252
+    ],
+    "sample_id": "000063",
+    "timestamp": 14.46614507936508
+  }
+]

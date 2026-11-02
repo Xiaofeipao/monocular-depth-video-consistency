@@ -1,0 +1,105 @@
+{
+  "video": {
+    "playback_fps": 5
+  },
+  "source": "data\\self-recorded\\moving.mp4",
+  "source_sha256": "1eb8421746bd9a05097fb79403a7df5b410ff8d7936ff7c9052e0ccc667084ad",
+  "samples": [
+    {
+      "id": "000000",
+      "rgb": "000000.png",
+      "source_index": 339,
+      "timestamp": 11.285055786736022
+    },
+    {
+      "id": "000001",
+      "rgb": "000001.png",
+      "source_index": 345,
+      "timestamp": 11.484791287386216
+    },
+    {
+      "id": "000002",
+      "rgb": "000002.png",
+      "source_index": 351,
+      "timestamp": 11.684526788036411
+    },
+    {
+      "id": "000003",
+      "rgb": "000003.png",
+      "source_index": 357,
+      "timestamp": 11.884262288686607
+    },
+    {
+      "id": "000004",
+      "rgb": "000004.png",
+      "source_index": 363,
+      "timestamp": 12.083997789336802
+    },
+    {
+      "id": "000005",
+      "rgb": "000005.png",
+      "source_index": 369,
+      "timestamp": 12.283733289986996
+    },
+    {
+      "id": "000006",
+      "rgb": "000006.png",
+      "source_index": 375,
+      "timestamp": 12.483468790637192
+    },
+    {
+      "id": "000007",
+      "rgb": "000007.png",
+      "source_index": 381,
+      "timestamp": 12.683204291287387
+    },
+    {
+      "id": "000008",
+      "rgb": "000008.png",
+      "source_index": 388,
+      "timestamp": 12.916229042045947
+    },
+    {
+      "id": "000009",
+      "rgb": "000009.png",
+      "source_index": 394,
+      "timestamp": 13.115964542696142
+    },
+    {
+      "id": "000010",
+      "rgb": "000010.png",
+      "source_index": 400,
+      "timestamp": 13.315700043346338
+    },
+    {
+      "id": "000011",
+      "rgb": "000011.png",
+      "source_index": 406,
+      "timestamp": 13.515435543996533
+    },
+    {
+      "id": "000012",
+      "rgb": "000012.png",
+      "source_index": 412,
+      "timestamp": 13.715171044646727
+    },
+    {
+      "id": "000013",
+      "rgb": "000013.png",
+      "source_index": 418,
+      "timestamp": 13.914906545296923
+    },
+    {
+      "id": "000014",
+      "rgb": "000014.png",
+      "source_index": 424,
+      "timestamp": 14.114642045947118
+    },
+    {
+      "id": "000015",
+      "rgb": "000015.png",
+      "source_index": 430,
+      "timestamp": 14.314377546597314
+    }
+  ]
+}

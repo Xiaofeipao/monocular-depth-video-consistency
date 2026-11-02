@@ -1,0 +1,9 @@
+{
+  "runner": "pytest",
+  "version": "8.4.2",
+  "passed": 108,
+  "failed": 0,
+  "command": "python -m pytest tests -q --basetemp outputs/test_tmp_d_research",
+  "test_dependencies": "project-local .runtime_tests; experiment environment unchanged",
+  "log_sha256": "bfdf7a91608cb199aeb2b63e77d493203c08bc67cddfa5777792ff7fe9c53e12"
+}

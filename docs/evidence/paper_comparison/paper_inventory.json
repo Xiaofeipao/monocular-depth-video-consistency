@@ -1,0 +1,181 @@
+{
+  "research_papers": [
+    {
+      "file": "docs/papers/A_benchmark_for_the_evaluation_of_RGB-D_SLAM_systems.pdf",
+      "sha256": "0ea0eb8819ed3d4f3699f5cf67bb6160b586c581c848c940cad17b510e6c17e7",
+      "pages": 8,
+      "key_method_result_pages": [
+        1,
+        6,
+        7
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Local image-only paper: read rendered metric pages plus author-hosted searchable PDF."
+    },
+    {
+      "file": "docs/papers/Are_we_ready_for_autonomous_driving_The_KITTI_vision_benchmark_suite.pdf",
+      "sha256": "dcf742e40767433f8f5f8d864ad566214aa7bae0027bcc9116c18853f3d928fa",
+      "pages": 8,
+      "key_method_result_pages": [
+        1,
+        3,
+        5,
+        6,
+        7
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/Depth Anything Unleashing the Power of LargeScale Unlabeled Data.pdf",
+      "sha256": "0722925c00359fb560135cb3ed3d3fef53c43c90ccea43526a52ec12338331aa",
+      "pages": 18,
+      "key_method_result_pages": [
+        1,
+        5,
+        6,
+        7,
+        9
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/Depth Anything V2.pdf",
+      "sha256": "b156a023aa9a5e33bda60489962af809a67e748797d4357c790d063739fed2d7",
+      "pages": 30,
+      "key_method_result_pages": [
+        1,
+        2,
+        8,
+        9,
+        12,
+        16
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/Depth Pro Sharp Monocular Metric Depth in Less Than a Second.pdf",
+      "sha256": "1108db233e3082286a522961a869f1c24bbf0f7b967aa85dc346809c294ac9af",
+      "pages": 36,
+      "key_method_result_pages": [
+        1,
+        6,
+        7,
+        8,
+        21,
+        22,
+        25,
+        26,
+        27,
+        28,
+        31,
+        33
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/Indoor Segmentation and Support Inference from RGBD Images.pdf",
+      "sha256": "6d593e00f8ac14fd9fcc9c8da252e648da78f9068615afa14d1d4c003459649a",
+      "pages": 15,
+      "key_method_result_pages": [
+        1,
+        3,
+        10,
+        11,
+        12
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/RAFT Recurrent All-Pairs Field Transforms for Optical Flow.pdf",
+      "sha256": "32526df4111c7521f1b523964594c65e0ccb6885bcb3f5680fb43fe197c4edeb",
+      "pages": 21,
+      "key_method_result_pages": [
+        1,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/Stereo_Processing_by_Semiglobal_Matching_and_Mutual_Information.pdf",
+      "sha256": "426b101561965f6542fa5f2d7066f572e7b0577fc04480e6232a32f9a11d68f8",
+      "pages": 14,
+      "key_method_result_pages": [
+        1,
+        9,
+        10
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/UniDepth Universal Monocular Metric Depth Estimation.pdf",
+      "sha256": "1b14ce7174dabdf2dbc6c9b75ce2e893b02dfeb4321a9dd6f900e30c994595ba",
+      "pages": 18,
+      "key_method_result_pages": [
+        1,
+        5,
+        6
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/UniDepthV2 Universal Monocular Metric Depth Estimation Made.pdf",
+      "sha256": "1a76d9b246451eaa9dd47b9e0cc552234b3749d7d9b87b26a582b5bbd17b4b69",
+      "pages": 14,
+      "key_method_result_pages": [
+        1,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/Video Depth Anything Consistent Depth Estimation for Super-Long.pdf",
+      "sha256": "233de4c7c2193a54600ec640c38db4f99a57c6d7ce78e563e1b0ce80aac88fcc",
+      "pages": 16,
+      "key_method_result_pages": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        11,
+        12,
+        13
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    },
+    {
+      "file": "docs/papers/Vision Transformers for Dense Prediction.pdf",
+      "sha256": "ecd8826047fcd4e5e36ead0e1eb72e884c2e0a01cf62f01d247473d91beeb403",
+      "pages": 15,
+      "key_method_result_pages": [
+        1,
+        5,
+        6
+      ],
+      "page_numbering": "physical PDF page, 1-based",
+      "notes": "Main experiment/protocol text inspected; key difficult tables rendered where needed."
+    }
+  ],
+  "assignment_pdf_excluded_from_method_rankings": true,
+  "total_papers": 12,
+  "total_pages": 213
+}

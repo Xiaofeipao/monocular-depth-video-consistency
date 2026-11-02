@@ -1,0 +1,28 @@
+{
+  "device": "cpu",
+  "precision": "fp32",
+  "frames": 64,
+  "fps": 5,
+  "input_size": 252,
+  "max_side": 448,
+  "methods": [
+    "RAW",
+    "A",
+    "C",
+    "D",
+    "E_half"
+  ],
+  "display_range": [
+    0.1,
+    10
+  ],
+  "repeats": 3,
+  "warmup": 1,
+  "limitations": [
+    "Same four phone clips are one physical scene, not four independent environments.",
+    "Warp proxy includes real z changes for moving cameras/objects; RAFT is not pose compensation.",
+    "TUM GT-pose reprojection separately compensates rigid camera geometry.",
+    "No test GT fitting; shared frozen processing parameters; no test-set search.",
+    "E accelerates A postprocessing, not the Part 2 backbone."
+  ]
+}

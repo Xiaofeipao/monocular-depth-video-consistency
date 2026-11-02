@@ -1,0 +1,66 @@
+{
+  "protocol": "Course full finite positive GT; original prediction validity incl. LR consistency; MAE on valid predictions, coverage denominator all GT; non-occluded retained separately",
+  "means": {
+    "all_positive_GT": {
+      "bm_fixed": {
+        "scenes": 15,
+        "macro_disparity_mae_px": 1.3038434691676977,
+        "macro_valid_coverage": 0.49337005169720183,
+        "pooled_disparity_mae_px": 1.1867438001716892,
+        "pooled_valid_coverage": 0.495126700552332
+      },
+      "bm_tuned": {
+        "scenes": 15,
+        "macro_disparity_mae_px": 2.2549088404997275,
+        "macro_valid_coverage": 0.6055759285592005,
+        "pooled_disparity_mae_px": 2.063157923703628,
+        "pooled_valid_coverage": 0.6092614276898655
+      },
+      "sgbm_fixed": {
+        "scenes": 15,
+        "macro_disparity_mae_px": 1.3825627218309424,
+        "macro_valid_coverage": 0.6336855599347192,
+        "pooled_disparity_mae_px": 1.2500715559272146,
+        "pooled_valid_coverage": 0.6382018355825653
+      },
+      "sgbm_tuned": {
+        "scenes": 15,
+        "macro_disparity_mae_px": 1.686873612195837,
+        "macro_valid_coverage": 0.652530387843331,
+        "pooled_disparity_mae_px": 1.5079426646014271,
+        "pooled_valid_coverage": 0.6569549564872297
+      }
+    },
+    "non_occluded": {
+      "bm_fixed": {
+        "scenes": 15,
+        "macro_disparity_mae_px": 0.9790182810919639,
+        "macro_valid_coverage": 0.543560039101519,
+        "pooled_disparity_mae_px": 0.8871426705177284,
+        "pooled_valid_coverage": 0.5436386673069801
+      },
+      "bm_tuned": {
+        "scenes": 15,
+        "macro_disparity_mae_px": 1.731400538937782,
+        "macro_valid_coverage": 0.6594842901060117,
+        "pooled_disparity_mae_px": 1.5826191693079814,
+        "pooled_valid_coverage": 0.6615176861826165
+      },
+      "sgbm_fixed": {
+        "scenes": 15,
+        "macro_disparity_mae_px": 1.0587535544461757,
+        "macro_valid_coverage": 0.6966939250439883,
+        "pooled_disparity_mae_px": 0.9532701599738387,
+        "pooled_valid_coverage": 0.6998986335445526
+      },
+      "sgbm_tuned": {
+        "scenes": 15,
+        "macro_disparity_mae_px": 1.307015561428136,
+        "macro_valid_coverage": 0.7168935922221646,
+        "pooled_disparity_mae_px": 1.1676281206844235,
+        "pooled_valid_coverage": 0.7198668603441413
+      }
+    }
+  },
+  "matching_rerun": false
+}

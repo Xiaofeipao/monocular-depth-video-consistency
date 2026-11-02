@@ -1,0 +1,14 @@
+{
+  "scripts/complete_submission_video.py": "87e101dd9595053cd6a3e028392f777b929b4ca1d20fffc6a29bbc01918da095",
+  "scripts/build_course_media.py": "5259cc1cbb857088028d4cf7b2e1675bf01721e82f500b24ff517b241ac5a7f1",
+  "scripts/rescore_course_stereo.py": "5bca1d9ba998089b88a4695b10999bf086916e669554c64887b4d502360b8895",
+  "scripts/ablate_course_refinement.py": "681334664ffba4614239ac340f0254322aef21ae5c0eb4a807add65d4645c51c",
+  "scripts/prepare_course_delivery.py": "01a99dc3cb0def7613e34d8ede9f5b3a31887db9a469089a987ad978ed6f9eac",
+  "scripts/replay_course_video.py": "57aa0ef8320449f973964736b76d050828d1e87d9b850214d004974e5f2862c9",
+  "scripts/run_course_delivery.ps1": "cfa18e0cf1f55038cfa507110d598c8dcd120702c73cf473380ad9fc8e8a9ba3",
+  "src/package_submission.py": "5df74aa662bf70d7d69f0b2ff4cfb2f4e037c944b86f2840406f4296b6c181b1",
+  "src/exploration/edge_aware.py": "ec3faa33e73b11aebccbaf00b63c763ca3461d7fb51d2758d07ae866e426216c",
+  "src/io.py": "3b135d44bcc234ec62f15e83d9ecda337cc3faad58baf86e4c35df11b2b903e0",
+  "src/data/output_schema.py": "68224dc2f931756255ddd158be406b07f50e8b5ea310c089de017a7349067434",
+  "configs/submission.example.json": "c55cdb90635d6bf4add7fbbd638938286e3b803a37c2a30b30a22dfa7474d52e"
+}

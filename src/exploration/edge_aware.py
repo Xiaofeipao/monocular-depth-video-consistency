@@ -37,11 +37,13 @@ class CUDAEdgeRefiner:
     Host transfers and the synchronizing output copy belong to processing time.
     No learned parameters, lower-resolution approximation or half precision.
     """
-    def __init__(self):
+    def __init__(self, use_rgb_guidance=True, use_depth_guidance=True):
         import torch
         if not torch.cuda.is_available():
             raise RuntimeError('C_cuda requires a CUDA-capable PyTorch environment')
         self.torch = torch
+        self.use_rgb_guidance=use_rgb_guidance
+        self.use_depth_guidance=use_depth_guidance
 
     def __call__(self, depth, rgb):
         torch = self.torch
@@ -66,7 +68,10 @@ class CUDAEdgeRefiner:
             logs = neighbours(logd[None])[0]
             offsets = torch.arange(-2,3,device='cuda',dtype=torch.float32)
             spatial = (offsets[:,None]**2+offsets[None,:]**2).reshape(25,1,1)/(2*1.5**2)
-            weight = torch.exp(-spatial-rgb_error/(2*.10**2)-(logs-logd)**2/(2*.18**2))
+            weight = torch.exp(-spatial-(rgb_error/(2*.10**2) if self.use_rgb_guidance else 0)
+                               -((logs-logd)**2/(2*.18**2) if self.use_depth_guidance else 0))
+            if not self.use_rgb_guidance and not self.use_depth_guidance:
+                weight=weight.expand(25,h,w).clone()
             weight *= neighbours(valid.float()[None])[0]*valid
             total = (weight*neighbours(inverse[None])[0]).sum(dim=0)
             denominator = weight.sum(dim=0)

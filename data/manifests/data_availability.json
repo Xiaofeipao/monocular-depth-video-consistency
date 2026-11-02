@@ -1,5 +1,5 @@
 {
-  "checked_date": "2026-10-29",
+  "checked_date": "2026-11-02",
   "brief": "Spring 2027",
   "requirements": {
     "middlebury": {
@@ -17,7 +17,11 @@
       "manifest": "full_model_assets.json"
     },
     "self_recorded_video": {
-      "status": "requires_user_recording",
+      "status": "four_local_clips_available_full_video_evaluation_pending",
+      "root": "data/self-recorded",
+      "validated_excerpt_frames_per_clip": 64,
+      "validation_tracks": ["CPU FP32 / 252", "GPU FP32 / 518"],
+      "clips": ["landscape static.mp4", "portrait static.mp4", "static with people moving.mp4", "moving.mp4"],
       "tests": [
         "static-camera flicker",
         "moving-camera drift"
@@ -26,7 +30,9 @@
   },
   "optional_data": [
     "public KITTI smoke subset",
-    "TUM RGB-D smoke subset"
+    "TUM RGB-D freiburg1_xyz archive; two synchronized excerpts (64/54 frames)",
+    "iBims-1 MoGe processed mirror: 100 images; not original MAT/paper protocol",
+    "TUM D study: fr1_desk development; fr1_rpy/fr3_sitting_static/fr3_walking_xyz heldout; 64 synchronized samples per sequence"
   ],
   "upstream_video_inventory": "upstream_video_inventory.json"
 }

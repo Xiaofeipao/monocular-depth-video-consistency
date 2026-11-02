@@ -1,0 +1,11 @@
+{
+  "scripts/run_extended_video_validation.py": "8602ea1beab8d596c8d67094b587e64d9e8bb55810a2edc23154d5f8a6d3d411",
+  "scripts/run_ibims_refinement_cpu.py": "6eb3667515beea2554679bdff7606121fb7caf2bc031224ee898e754b19bb3fb",
+  "scripts/summarize_extended_validation.py": "1733bd54a716048b5fc822a70e4631f2cdf08cb47bbe1cdb239678b51011f5cf",
+  "scripts/compare_video_resolutions.py": "e939134f0753e1171b8338793386dcd44ebc582d90ef5aeec7c041a5cfe94e14",
+  "src/infer.py": "47635634fb5b9daec630c6c491817721ade7ef6a11ba92a103bb1d2691fff788",
+  "src/models/foundation.py": "ca90f738dae8b00e0f616bb5a00ab962ca2ebc50cc9ac672c9b46422b6ec4429",
+  "src/flow.py": "d17aca5585ef3e8ab01a7545b149eddc5de287018b6b83f21faca95e80891a3d",
+  "src/exploration/compare.py": "fd6ef543f15580c8878983cc9c686d809fdee3dd632202ae256c788e133dd3a4",
+  "src/exploration/edge_aware.py": "2e82b54a7c40edba41171e900f72db1184482bac3cf3bbe98be05c283de7c4c4"
+}

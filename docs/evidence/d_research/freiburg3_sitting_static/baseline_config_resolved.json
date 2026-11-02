@@ -1,0 +1,18 @@
+{
+  "input": "data\\public_samples\\d_research\\freiburg3_sitting_static\\manifest.json",
+  "output": "outputs\\d_research\\freiburg3_sitting_static\\baseline",
+  "model": "vda",
+  "repo": "third_party/Video-Depth-Anything",
+  "checkpoint": "checkpoints/metric_video_depth_anything_vits.pth",
+  "encoder": "vits",
+  "metric": true,
+  "device": "cuda",
+  "fp16": false,
+  "input_size": 518,
+  "fps": null,
+  "max_frames": null,
+  "max_side": null,
+  "vis_min": 0.1,
+  "vis_max": 10.0,
+  "warmup": 0
+}

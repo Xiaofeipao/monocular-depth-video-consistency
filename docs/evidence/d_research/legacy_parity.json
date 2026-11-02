@@ -1,0 +1,16 @@
+{
+  "all_passed": true,
+  "baseline_git_sha": "29c81327c95d638626cf5ed1d435b69a5f640295",
+  "seed": 15,
+  "fusion_frames": 16,
+  "pose_cases": 3,
+  "old_normalized_source_sha256": {
+    "fusion": "5745436ea7a8d7247159a170cb4cf43ba75ffc4f6c2d61168f411d864ea637cd",
+    "pose": "95c854ff1c6ca056c27a821e9af24c5c5a6590028b7a6cfe7b4539bdfbf927e1"
+  },
+  "current_source_sha256": {
+    "src/exploration/uncertainty.py": "a43e1d6fc9676260249cd926e063e01f114e0b8edffb215dcbdeef81ebbbe9fa",
+    "src/metrics/pose.py": "e0bddec6f64d8a39f4bc5c03b4de158b58d24f18d08d5675753290e2cf11698d"
+  },
+  "scope": "Exact outputs on deterministic regression cases, not proof for all possible inputs"
+}

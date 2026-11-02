@@ -1,0 +1,834 @@
+[
+  {
+    "id": "000000",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 0,
+    "rgb_sha256": "3f6e3edafd8146258a85c1eb0545fffc96e15f0c5d2e5fe1fa4558f45d26e8c6",
+    "depth_sha256": "d2b3ebed9d43f5e1a37cbd8f9c76729b5aca6728850ceafd59c83bba03a9212c",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000000",
+    "timestamp": 1341846313.654184
+  },
+  {
+    "id": "000001",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 1,
+    "rgb_sha256": "d4652c54652bbd7be9fa297dd74584840452114755867ff679b56863dca94252",
+    "depth_sha256": "b791bfc2c939afc6342d44f0017bb56bc5551411e1245bd06afe86621ab5ed39",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000001",
+    "timestamp": 1341846313.890011
+  },
+  {
+    "id": "000002",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 2,
+    "rgb_sha256": "d8c4133f2774e6a4d1daac5b82d3fdcaf468e9c04e24ad773e93cfc0628ac195",
+    "depth_sha256": "0bb88bc8d8599388181c72e7412121422b6dba2ce4ddc494dba9914c89c7f746",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000002",
+    "timestamp": 1341846314.122037
+  },
+  {
+    "id": "000003",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 3,
+    "rgb_sha256": "394ac46adc7c338c1f90ed9eb653cd825bd5bcfdd71680f67e6717f6056a012d",
+    "depth_sha256": "177a704ae93d6fa8d526b9e36356455b2e13f874b441f0ef8dc7d05211e12d22",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000003",
+    "timestamp": 1341846314.325981
+  },
+  {
+    "id": "000004",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 4,
+    "rgb_sha256": "f8cdfc0184b0b9ff3433d05dc87c2e7b9ee3c92e2540630ff02a8ad669f63556",
+    "depth_sha256": "944985890d339e50945ee68fcc77a42dd1df12539c0857182222005c100db786",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000004",
+    "timestamp": 1341846314.526085
+  },
+  {
+    "id": "000005",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 5,
+    "rgb_sha256": "76d9ad1d1fc392fa3e8270a1e67cc17f537ef8dbacbb7c128d6f11311598c476",
+    "depth_sha256": "36ee6f7b67d7a30196b21a21a127b7d7a1a6bd7d2e983e4d1acdd9c4f23e3688",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000005",
+    "timestamp": 1341846314.761942
+  },
+  {
+    "id": "000006",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 6,
+    "rgb_sha256": "4b7f5a93e747f686b3e38fef89dbf3fdf7d7a40069f05319559917d04d9d4e70",
+    "depth_sha256": "b2185e9cc3a0a7de8ab0e3387b90e1e18e7c4e67c00c721bd341d1091369030c",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000006",
+    "timestamp": 1341846314.994564
+  },
+  {
+    "id": "000007",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 7,
+    "rgb_sha256": "52c60a97f3f392978aab2db4062cb02e393c92e722e04941ae1e38d2b3c6aeea",
+    "depth_sha256": "9c16aaee858f388895819d3795170187670baf78d74f9c39b6668f6aaccecf9f",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000007",
+    "timestamp": 1341846315.197984
+  },
+  {
+    "id": "000008",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 8,
+    "rgb_sha256": "42d3c44cd5c85c6becf9ed82a2333d6dc63e6bfe7946da6778abe25206c39e2f",
+    "depth_sha256": "14a12ef96553cc06f9dd5d18eaae60849c9ad1dea4d327fb287686ba5230b2d8",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000008",
+    "timestamp": 1341846315.429923
+  },
+  {
+    "id": "000009",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 9,
+    "rgb_sha256": "2c82558cde8dd76824582e0c18899d76555f5943241ec66b26bcee8884effb02",
+    "depth_sha256": "6920a6969bc13214ad5e3083432f8da2ed233ac908c60d9aa0dc2b1fada98dd9",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000009",
+    "timestamp": 1341846315.630109
+  },
+  {
+    "id": "000010",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 10,
+    "rgb_sha256": "b3b5cbcc30e19646857d24e2a41552cb93826c9d4b1f9f7f2a538c7790f19b30",
+    "depth_sha256": "5aa1a51d842650cc6a9343fe12043867b17eafe5bcbde6cac65a00526b05ccce",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000010",
+    "timestamp": 1341846315.83414
+  },
+  {
+    "id": "000011",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 11,
+    "rgb_sha256": "4caf55aeaf676c15c1622431382817301a7288676bc2a70f1c7e12268b5bf665",
+    "depth_sha256": "dbe412d0ffc80024a7975e649593933c0a085c72bdfd8291be413b819d13f673",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000011",
+    "timestamp": 1341846316.034204
+  },
+  {
+    "id": "000012",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 12,
+    "rgb_sha256": "a905361748fb1e5c7cd1234f3ca95c31684a0fe3f1c2509f06c1e3d5f09ad2f2",
+    "depth_sha256": "865e328bd6f541cffdb65888e69aeaebb4852bbb5b39d65905e4a0e98b44f599",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000012",
+    "timestamp": 1341846316.270052
+  },
+  {
+    "id": "000013",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 13,
+    "rgb_sha256": "bfa357da0fa78d3af7f92b65fe00c720880451d315f2690d238881c57e20e1c5",
+    "depth_sha256": "4399be9a4ca55ee6055ecb329c377b3071b3b441cde86baff28b4e3405f4af05",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000013",
+    "timestamp": 1341846316.470076
+  },
+  {
+    "id": "000014",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 14,
+    "rgb_sha256": "2045a3322a0f58289c5401e7d43bbd6bb12e73f1de959caee76e491ca058d26b",
+    "depth_sha256": "160c0cb307e1f2ebb522c024e7bb0dc6b461bd564549276901aae2bdfb7f5179",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000014",
+    "timestamp": 1341846316.705941
+  },
+  {
+    "id": "000015",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 15,
+    "rgb_sha256": "d6c591d3d67fdc1ef9c44dedb81a3b3be78fc4c9273dc1aa236c2618ede87aa1",
+    "depth_sha256": "a59a86040b03c6d25f30fef3a37e381060ae62b516590f0f562dfbda2a356c92",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000015",
+    "timestamp": 1341846316.906344
+  },
+  {
+    "id": "000016",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 16,
+    "rgb_sha256": "6a915ad3195c4463c81ac7f0940470ef6caa651da767caa338bdaf40acb9151d",
+    "depth_sha256": "a965e5b556b611d9608275f66c34b6174177be136e9fb4d6526fefc3be9f17d0",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000016",
+    "timestamp": 1341846317.137887
+  },
+  {
+    "id": "000017",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 17,
+    "rgb_sha256": "a04e607b3f07a66be958274c1348fb527125f28dbbdcddaa122621d034fb8df1",
+    "depth_sha256": "cc28ddfb48a6d73126f363e33a3f7b9abfafe2e4afbf637fa19a832081fb96ac",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000017",
+    "timestamp": 1341846317.348137
+  },
+  {
+    "id": "000018",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 18,
+    "rgb_sha256": "92d3655f203b657f48449eac3d155a63cdf39e7764aa735efd6441c27eda0012",
+    "depth_sha256": "b0b2b52d95187aef8aaa7b6a28c42247f51db16346c53cf2881a931bf9967071",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000018",
+    "timestamp": 1341846317.573943
+  },
+  {
+    "id": "000019",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 19,
+    "rgb_sha256": "303e98767ce95fe40ec14b6022c0835d282c5e72a09ddb66f2626b844dd93417",
+    "depth_sha256": "c79a8f7166955d44064bc1846ad5ece0b1011417f4ff9fd68b22ac6b1bd7e2dd",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000019",
+    "timestamp": 1341846317.777923
+  },
+  {
+    "id": "000020",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 20,
+    "rgb_sha256": "d60cc22054e48f2de6ac303517ed2b2eb4afe4dba4e453e1c4df6469380a6d80",
+    "depth_sha256": "cb6667b6135da838dc736ca867456402a1a81c7f936051a0b0bc0605f1e1cea7",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000020",
+    "timestamp": 1341846317.978041
+  },
+  {
+    "id": "000021",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 21,
+    "rgb_sha256": "743940d958118b8fe73c7cd9bc8d24e370db95e2f8875009ed237f252b028ea5",
+    "depth_sha256": "a50c0ca9a63283cf0c434ff5e90f24d803b916b75be131dfa63b5179abca22ba",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000021",
+    "timestamp": 1341846318.214074
+  },
+  {
+    "id": "000022",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 22,
+    "rgb_sha256": "926240db9a65d11c889ed4b1d9673ebfa55c83a68101ef7acad9aa252064f0b0",
+    "depth_sha256": "24d19f6673db74c99d92a8c636199ca7675eb89d2bae93f33c2878334933ec0f",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000022",
+    "timestamp": 1341846318.446035
+  },
+  {
+    "id": "000023",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 23,
+    "rgb_sha256": "74745ca310bbd6dd8e8e39f1ec5237a8f5e1b7c3cad726504a73f41b74a855d4",
+    "depth_sha256": "4a0474f4eff42fe60c6ec9caf10be6343b1de9c072940843451ed07d2d98addf",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000023",
+    "timestamp": 1341846318.650038
+  },
+  {
+    "id": "000024",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 24,
+    "rgb_sha256": "484ea04c92f00279cf36fc5f627f1d76495c74b9021226684b74e26e472df591",
+    "depth_sha256": "9d91d08bcde15c99bb03d937143475048c63212af7056c104461aed487e0581b",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000024",
+    "timestamp": 1341846318.850072
+  },
+  {
+    "id": "000025",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 25,
+    "rgb_sha256": "0bac8faddf1d21227e32c3d313c60051a70aea4b6aa3b4211951ced5e44c943e",
+    "depth_sha256": "b5ca13f938fc72c88b0897d489939a3f3e38d1dba94e59f7668c82fa91ec1567",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000025",
+    "timestamp": 1341846319.050745
+  },
+  {
+    "id": "000026",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 26,
+    "rgb_sha256": "3a0a93180d0f8a8a3c4d92df13ef03cd7e8f82421b94849c5c056e5780c883d6",
+    "depth_sha256": "ff5afd2d89dd000ae5f4a89191b3135cd4b9c630ebb55457b27e362386a2c030",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000026",
+    "timestamp": 1341846319.286594
+  },
+  {
+    "id": "000027",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 27,
+    "rgb_sha256": "e1b1fc2d3a9ff8ae4abd26d2b4cebdd82d73c8786603cd91bdd4a846648d9f3c",
+    "depth_sha256": "b04340387dfd897acc2fdadca8506c4114601d1dddf4cbfbdf191228cd871c5a",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000027",
+    "timestamp": 1341846319.554083
+  },
+  {
+    "id": "000028",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 28,
+    "rgb_sha256": "d19cb96645273e0f155488ec9f3a9ec0498fea7ab9dc15d010609367e0307d09",
+    "depth_sha256": "aedff1c7400b031249f476c46e03b5ed19a9c0b4db0ea83f315c2e0440a32707",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000028",
+    "timestamp": 1341846319.786397
+  },
+  {
+    "id": "000029",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 29,
+    "rgb_sha256": "bae55a99325aa8a8afea9de6782c9fd38e2cec083dd122f9b1d3337b952023f3",
+    "depth_sha256": "9b47e537f0392831c784e1f2538c98a309790e06e69363bf5189572ae901d01d",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000029",
+    "timestamp": 1341846319.990054
+  },
+  {
+    "id": "000030",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 30,
+    "rgb_sha256": "3ce38cb952ae8536b7580d6dccd4c104735f9a467438cc843d89e09efd3b482c",
+    "depth_sha256": "9ed881b9317c0ace59ebd0e9fb630aa8c52ae9c84c28e0cb1c69a856643f7b38",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000030",
+    "timestamp": 1341846320.221941
+  },
+  {
+    "id": "000031",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 31,
+    "rgb_sha256": "0c27eec2f7eef2bb05dba94098b74145f30aa3e222f89f786e9a19762c358cd5",
+    "depth_sha256": "da2e815283e4d91b2403959fba498dc3f4c705425ca0c54f46705d9f4dfeb29f",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000031",
+    "timestamp": 1341846320.426544
+  },
+  {
+    "id": "000032",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 32,
+    "rgb_sha256": "a340aab0aa8437d6f26652e095ebc45b26bf35be40446b05b8e4b813c4cddf1f",
+    "depth_sha256": "1da4e0d33989099440d719d16bdd6517ac9db9e37d4ef73ebe4bfdc555157d3e",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000032",
+    "timestamp": 1341846320.631955
+  },
+  {
+    "id": "000033",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 33,
+    "rgb_sha256": "8b3a16124ecd67ca203bc081f21cba63e6698c28ac2f7c3d1ae1b135c9c693a7",
+    "depth_sha256": "8217b114f86735620901f59c3ef97a4a8db2ee31ed454ff554299ffc79f40f3d",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000033",
+    "timestamp": 1341846320.863887
+  },
+  {
+    "id": "000034",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 34,
+    "rgb_sha256": "5b9f1100d918ec7707cb8d79dafa7e57de4748802ecf7f64c74c1977c43f4113",
+    "depth_sha256": "db88049b83da37064bf89cf5de968f0cc261a5ad066232550bbccf49e8e12cae",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000034",
+    "timestamp": 1341846321.068047
+  },
+  {
+    "id": "000035",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 35,
+    "rgb_sha256": "5a2b21e6674064c8e77509d50b6fbec0bae3309a58b134d83e9f57fc9dfff2f2",
+    "depth_sha256": "bd77b45298532f2630268347d70be58f6a1e3473737a7f7b64d76335917028e5",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000035",
+    "timestamp": 1341846321.299948
+  },
+  {
+    "id": "000036",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 36,
+    "rgb_sha256": "43fc8a553e917a594a681baf62a30cf87528c9f5d9dda98e4d986da31b303833",
+    "depth_sha256": "81d2351a47ecf592378b767d8431e17112a17679adc4173b337d0addb392fa5a",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000036",
+    "timestamp": 1341846321.536109
+  },
+  {
+    "id": "000037",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 37,
+    "rgb_sha256": "37e1841da8031102e1cd9e87f312f9ac4b27e01c3f81851e72f3251a92bd8400",
+    "depth_sha256": "f4acaa6a5cac7c663da9a7dc73df59815ce067eb6791d14909bd3c8c83eb76f9",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000037",
+    "timestamp": 1341846321.736861
+  },
+  {
+    "id": "000038",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 38,
+    "rgb_sha256": "0c90c595ad21e63f4a088481a50c56d0d180d8d7997f6bd7fe9fc17dac4f0515",
+    "depth_sha256": "2971a382689f1616a993c331b5358e90e3b110c35f53271a26252e15e8e0d7f2",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000038",
+    "timestamp": 1341846321.939847
+  },
+  {
+    "id": "000039",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 39,
+    "rgb_sha256": "2f0c779833c169d0288dae7d651424779361c3ddb819cbb2329d02caccef0947",
+    "depth_sha256": "569a151fca0525fe9a5387b9a987290ac340080dc64490c1d0d76af0f69a022b",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000039",
+    "timestamp": 1341846322.166164
+  },
+  {
+    "id": "000040",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 40,
+    "rgb_sha256": "a8aaf1d0fe9beb6098a385f6f557536fee82be29f4c6f31012b6fa2564fa58e3",
+    "depth_sha256": "5621182802ef68a9f5808d33f4d95dab684581703ba2645553cf5bb9da03764d",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000040",
+    "timestamp": 1341846322.369871
+  },
+  {
+    "id": "000041",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 41,
+    "rgb_sha256": "72c01e045442fb0d7cc610111d00b1837f1039aab09e6a6b3e1fd156c6015474",
+    "depth_sha256": "646b6881162b5c07ec0df179a0afa68b18a8ba6d1dc53014bf791363b011a95f",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000041",
+    "timestamp": 1341846322.570196
+  },
+  {
+    "id": "000042",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 42,
+    "rgb_sha256": "0517ba0b93692efe0899ff179371c7c35998402f52bb4627ebdbdf2d1bb74ab5",
+    "depth_sha256": "3fd5eb33a9e4ce8019f7292dc29956df22041a5db94e5487a006f51c645aa19b",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000042",
+    "timestamp": 1341846322.806047
+  },
+  {
+    "id": "000043",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 43,
+    "rgb_sha256": "0b16e8b0391417998bc6c4cdebbada72ad19e9c3e3db57f5ddd0605850a598e8",
+    "depth_sha256": "28d781dd2de770072fbe9541a86b33833281aa5723553d29514fb08356fe4a9d",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000043",
+    "timestamp": 1341846323.01182
+  },
+  {
+    "id": "000044",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 44,
+    "rgb_sha256": "be7dd8ea9fd353a6de02d3b69c205b0f07c5dad3435b7164aabb94ec4fd969fb",
+    "depth_sha256": "a7de0041a3e743aae50d2ca0555a3fdc38232a8acae2c3c413c6c4360e104476",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000044",
+    "timestamp": 1341846323.238053
+  },
+  {
+    "id": "000045",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 45,
+    "rgb_sha256": "a69db05985cd851b5d8ec6992f80e02b3d2b58f7cb0a18341c3a3a44bed003ad",
+    "depth_sha256": "14d3d747bae79173610a07e23ccd245152b48eb10a416e21b8222a4b0c327a7b",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000045",
+    "timestamp": 1341846323.441956
+  },
+  {
+    "id": "000046",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 46,
+    "rgb_sha256": "54f6fdfcecfd2c8ab96045b04ff3e066d6f280bbbee9290b111d1babc1337dd0",
+    "depth_sha256": "4934d93b0cd230b6b677632f21c6e61027a51dfdcfef1d0232aec9ee02d89a14",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000046",
+    "timestamp": 1341846323.642014
+  },
+  {
+    "id": "000047",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 47,
+    "rgb_sha256": "3028ca5af50ea7587b619c2778f7f2bef2909afebcbfd6e2c5afabb3a58ef57d",
+    "depth_sha256": "046806da994c0ffb25e9e161e47a97ca7307cc4fcf366d97b794c19ddeda3793",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000047",
+    "timestamp": 1341846323.842207
+  },
+  {
+    "id": "000048",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 48,
+    "rgb_sha256": "054969c013f4967afad1a2d66f59228df616c54adeea1eb45ff3a0164a5fbd5f",
+    "depth_sha256": "73da2ab0fc48564ff4f47d854c2197cdb35971e71b4ae024f456466cbd3eefe6",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000048",
+    "timestamp": 1341846324.047722
+  },
+  {
+    "id": "000049",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 49,
+    "rgb_sha256": "74d4a6c01ef496305bfacd871c0ef54973f2c81423a9fbabf366fc9a04f4579f",
+    "depth_sha256": "075856b25f277f83960e486fc55d8aebc7718cb4b70a932c2e4fdad7e40ba4a6",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000049",
+    "timestamp": 1341846324.251968
+  },
+  {
+    "id": "000050",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 50,
+    "rgb_sha256": "16798cf3b875084e759c7d34626a14a83f90158e2bc66e6dcd04e3eda052eeed",
+    "depth_sha256": "5fefd01a4cc6b6b6cd3f6182fdca475f0d72f3cb9b221736469f23d3663ea578",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000050",
+    "timestamp": 1341846324.452027
+  },
+  {
+    "id": "000051",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 51,
+    "rgb_sha256": "3deaac0fbc6d6d932a7a806d109c12adc4df09bf2185cc0065499bd804969a89",
+    "depth_sha256": "387444d11c05176fae3d11f45a8fe2ea738acd4134fedfe082e21194e527b5db",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000051",
+    "timestamp": 1341846324.655955
+  },
+  {
+    "id": "000052",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 52,
+    "rgb_sha256": "926753d995e0a9fb8a60540a70bbe54197b02c22c6b338cc6a8117f40a603f2b",
+    "depth_sha256": "84e59993d7afa98dd38d2c16edede82ff785c333120b4f742f667bde6a474cf3",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000052",
+    "timestamp": 1341846324.881924
+  },
+  {
+    "id": "000053",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 53,
+    "rgb_sha256": "e00802f391634e09a16530b66960308fc5756197f1f529ebccda2972a8c10731",
+    "depth_sha256": "47aee2abf36feda6ecb8ff4ad44006936780c50873f1fe434dc5082fb5812127",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000053",
+    "timestamp": 1341846325.118531
+  },
+  {
+    "id": "000054",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 54,
+    "rgb_sha256": "571d4d2edb246f133473e3fece8cd62cbce6f478fd54bf966c277855ec391d5f",
+    "depth_sha256": "3cc5f147ed0b904337d2cdaeb92e4007899c0b047138c23e0a245a2ff5489443",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000054",
+    "timestamp": 1341846325.349844
+  },
+  {
+    "id": "000055",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 55,
+    "rgb_sha256": "f2cc9250fee2bccd3d57faf961f1b93574492bfc920a432818bbf867788e7c2f",
+    "depth_sha256": "eae87afa71ab117f0b2342375c8abd574cf124d3fbdd9f641da02803d07d9edf",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000055",
+    "timestamp": 1341846325.553859
+  },
+  {
+    "id": "000056",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 56,
+    "rgb_sha256": "130e347f8f5724a5e1bc1d6fc4b22c5360d56fff759c7489c82b10cc0667e499",
+    "depth_sha256": "69721faade9a813c575be6151826117ea2abc00b97454e4ac7b94d4a6f3fff14",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000056",
+    "timestamp": 1341846325.754083
+  },
+  {
+    "id": "000057",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 57,
+    "rgb_sha256": "785ee9d891f9a61593e7de446f56f943ee764fcf27b194a015d327f9d3ce0e48",
+    "depth_sha256": "9afa6b1ee0c3f369e3e16c83cf6bc727a00cf050923ae007aab1cd5eea7ad7f6",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000057",
+    "timestamp": 1341846325.985823
+  },
+  {
+    "id": "000058",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 58,
+    "rgb_sha256": "bc9476df589a910a010f8c306517e1f9a3a08091f7b01a8964436976783b5403",
+    "depth_sha256": "8952f01b1371e8aadbde7871f71ecea7b39e1b3927ae7191fab5de5d284345e4",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000058",
+    "timestamp": 1341846326.190178
+  },
+  {
+    "id": "000059",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 59,
+    "rgb_sha256": "6238235cd53d0fcdaa82482539ca094ca3b865790ee7dbb77c9ae80c883ee2ec",
+    "depth_sha256": "4c1325bba66e163e9aaa5cddd9cfec44b7af819494cc8f74d835b05396dea47b",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000059",
+    "timestamp": 1341846326.392109
+  },
+  {
+    "id": "000060",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 60,
+    "rgb_sha256": "96ab055f74573119d3ac56e11127f7b3ca9a25c083ab56a8cbbbb9313c9da370",
+    "depth_sha256": "007c2dc2e1ddb47394752acd49f11e927074e42972b60bd10e210249b4121fb9",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000060",
+    "timestamp": 1341846326.627027
+  },
+  {
+    "id": "000061",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 61,
+    "rgb_sha256": "8f9f387ad7219f4d690bbb802ee5e306692dd944d6c157d0eea3c5337b3d5bf1",
+    "depth_sha256": "92c2323d6b5535559b77a91cdd79fb95e78d4994e8b6214e841a87e7fbe5acc0",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000061",
+    "timestamp": 1341846326.858887
+  },
+  {
+    "id": "000062",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 62,
+    "rgb_sha256": "bb3a56e93f796aaacfc5681317178a7277a6baf79edf7a26fb9aea5c4ebdefa0",
+    "depth_sha256": "fed8bcecc2ac1a5a545daf0c9457737b70d71bcab5492f57567417782a2aff5f",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000062",
+    "timestamp": 1341846327.063945
+  },
+  {
+    "id": "000063",
+    "source": "data\\public_samples\\d_research\\freiburg3_walking_xyz\\manifest.json",
+    "source_index": 63,
+    "rgb_sha256": "9ed0685260b7ddfba8434d2885d0cb90381ca531f02f24f2ca42ded9763d1b72",
+    "depth_sha256": "fa21c73a2f60cd351a8ae6e342ac1324a1753c98e3e123fc32f28f497db9e913",
+    "shape": [
+      336,
+      448
+    ],
+    "sample_id": "freiburg3_walking_xyz_000063",
+    "timestamp": 1341846327.294023
+  }
+]

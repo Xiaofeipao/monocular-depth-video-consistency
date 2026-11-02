@@ -1,0 +1,788 @@
+{
+  "settings": {
+    "device": "cpu",
+    "precision": "fp32",
+    "frames": 64,
+    "fps": 5,
+    "input_size": 252,
+    "max_side": 448,
+    "methods": [
+      "RAW",
+      "A",
+      "C",
+      "D",
+      "E_half"
+    ],
+    "display_range": [
+      0.1,
+      10
+    ],
+    "repeats": 3,
+    "warmup": 1,
+    "limitations": [
+      "Same four phone clips are one physical scene, not four independent environments.",
+      "Warp proxy includes real z changes for moving cameras/objects; RAFT is not pose compensation.",
+      "TUM GT-pose reprojection separately compensates rigid camera geometry.",
+      "No test GT fitting; shared frozen processing parameters; no test-set search.",
+      "E accelerates A postprocessing, not the Part 2 backbone."
+    ]
+  },
+  "clips": [
+    {
+      "name": "landscape_static",
+      "track": "self-recorded",
+      "input_manifest": "outputs\\extended_video_validation_cpu\\self_inputs\\landscape_static\\input\\samples.json",
+      "input_manifest_sha256": "48451f4df4e2e5ae674a5c7bcd2ebc1a4a5d14d1393e3afd9745093192548a72",
+      "first_timestamp": 4.8664971807628525,
+      "last_timestamp": 17.466058374792702,
+      "frames": 64,
+      "flow_scores": {
+        "farneback": {
+          "RAW": 0.002781175389250238,
+          "A": 0.0023911729887393968,
+          "C": 0.002699379907137463,
+          "D": 0.0022026069872524766,
+          "E_half": 0.00239722632492582
+        },
+        "raft": {
+          "RAW": 0.002997375350253331,
+          "A": 0.0026266383901534097,
+          "C": 0.0028873524528795053,
+          "D": 0.0024781059621581955,
+          "E_half": 0.002627544040377769
+        }
+      },
+      "methods": [
+        {
+          "method": "RAW",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.002781175389250238,
+          "local_flicker": 0.0020463071257201216,
+          "temporal_coverage": 0.994476304079833,
+          "postprocess_fps": 1520.464502025743,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "A",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.0023911729887393968,
+          "local_flicker": 0.0015777935410687138,
+          "temporal_coverage": 0.994476304079833,
+          "postprocess_fps": 20.35800052880507,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "C",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.002699379907137463,
+          "local_flicker": 0.0019547054525612603,
+          "temporal_coverage": 0.994476304079833,
+          "postprocess_fps": 16.100374970173707,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "D",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.0022026069872524766,
+          "local_flicker": 0.0014709653998059885,
+          "temporal_coverage": 0.994476304079833,
+          "postprocess_fps": 20.20769979036068,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "E_half",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.00239722632492582,
+          "local_flicker": 0.0015849363805341815,
+          "temporal_coverage": 0.994476304079833,
+          "postprocess_fps": 43.17134836341264,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        }
+      ],
+      "guard": {
+        "temporal_log_error": [
+          "D"
+        ],
+        "postprocess_fps": [
+          "RAW"
+        ],
+        "accuracy_boundary_constrained_temporal_best": null,
+        "accuracy_boundary_constrained_pose_best": null,
+        "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+      },
+      "source_sha256": "3e20e72034cd04d946d92ebccff3f306552da780110a45c7bbe5839257a78831"
+    },
+    {
+      "name": "moving",
+      "track": "self-recorded",
+      "input_manifest": "outputs\\extended_video_validation_cpu\\self_inputs\\moving\\input\\samples.json",
+      "input_manifest_sha256": "2c4dd46c8c880da246ebba6c453439811119eb3c8de6f206e642be33ecc0f932",
+      "first_timestamp": 6.491403771131339,
+      "last_timestamp": 19.108029562201995,
+      "frames": 64,
+      "flow_scores": {
+        "farneback": {
+          "RAW": 0.016352735600242065,
+          "A": 0.014418434843214022,
+          "C": 0.01571532633776466,
+          "D": 0.013273844037145849,
+          "E_half": 0.01452155523223891
+        },
+        "raft": {
+          "RAW": 0.016966696629034623,
+          "A": 0.015285205990371723,
+          "C": 0.016217498389619684,
+          "D": 0.01429774071873417,
+          "E_half": 0.01522346938561116
+        }
+      },
+      "methods": [
+        {
+          "method": "RAW",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.016352735600242065,
+          "local_flicker": 0.014528854860968533,
+          "temporal_coverage": 0.9607069183493503,
+          "postprocess_fps": 1264.6488491260197,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "A",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.014418434843214022,
+          "local_flicker": 0.01264389721854102,
+          "temporal_coverage": 0.9607069183493503,
+          "postprocess_fps": 18.75407040247644,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "C",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.01571532633776466,
+          "local_flicker": 0.013858294617089014,
+          "temporal_coverage": 0.9607069183493503,
+          "postprocess_fps": 14.767164274982134,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "D",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.013273844037145849,
+          "local_flicker": 0.01169354069076242,
+          "temporal_coverage": 0.9607069183493503,
+          "postprocess_fps": 19.192305996457094,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "E_half",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.01452155523223891,
+          "local_flicker": 0.01276857688993452,
+          "temporal_coverage": 0.9607069183493503,
+          "postprocess_fps": 36.3146301829375,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        }
+      ],
+      "guard": {
+        "temporal_log_error": [
+          "D"
+        ],
+        "postprocess_fps": [
+          "RAW"
+        ],
+        "accuracy_boundary_constrained_temporal_best": null,
+        "accuracy_boundary_constrained_pose_best": null,
+        "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+      },
+      "source_sha256": "1eb8421746bd9a05097fb79403a7df5b410ff8d7936ff7c9052e0ccc667084ad"
+    },
+    {
+      "name": "portrait_static",
+      "track": "self-recorded",
+      "input_manifest": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+      "input_manifest_sha256": "0e6f8ccd632a99f7c37331dd7121d7263eed67f4c0ec0cfb4530adb04bf9ee33",
+      "first_timestamp": 1.866599365079365,
+      "last_timestamp": 14.46614507936508,
+      "frames": 64,
+      "flow_scores": {
+        "farneback": {
+          "RAW": 0.0021065226275592095,
+          "A": 0.0017294641233064115,
+          "C": 0.002042062460474433,
+          "D": 0.0016119914667104326,
+          "E_half": 0.0017339682154771355
+        },
+        "raft": {
+          "RAW": 0.0024869888466561123,
+          "A": 0.0021282724540917174,
+          "C": 0.0023792951537798795,
+          "D": 0.002067522070045391,
+          "E_half": 0.002128850751822548
+        }
+      },
+      "methods": [
+        {
+          "method": "RAW",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.0021065226275592095,
+          "local_flicker": 0.0016109887806196061,
+          "temporal_coverage": 0.9940251232768239,
+          "postprocess_fps": 927.750466073395,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "A",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.0017294641233064115,
+          "local_flicker": 0.001204787892112065,
+          "temporal_coverage": 0.9940251232768239,
+          "postprocess_fps": 20.14574798124045,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "C",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.002042062460474433,
+          "local_flicker": 0.0015393588322377394,
+          "temporal_coverage": 0.9940251232768239,
+          "postprocess_fps": 16.013740322983328,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "D",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.0016119914667104326,
+          "local_flicker": 0.0011564645868179107,
+          "temporal_coverage": 0.9940251232768239,
+          "postprocess_fps": 20.448040203935317,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "E_half",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.0017339682154771355,
+          "local_flicker": 0.001211505791630655,
+          "temporal_coverage": 0.9940251232768239,
+          "postprocess_fps": 36.58317420922941,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        }
+      ],
+      "guard": {
+        "temporal_log_error": [
+          "D"
+        ],
+        "postprocess_fps": [
+          "RAW"
+        ],
+        "accuracy_boundary_constrained_temporal_best": null,
+        "accuracy_boundary_constrained_pose_best": null,
+        "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+      },
+      "source_sha256": "cf4ec35025e867e68cdb0fa430a8e81e520b38278f033b1ac87fe72dd2e2cd14"
+    },
+    {
+      "name": "static_with_people_moving",
+      "track": "self-recorded",
+      "input_manifest": "outputs\\extended_video_validation_cpu\\self_inputs\\static_with_people_moving\\input\\samples.json",
+      "input_manifest_sha256": "0d12430efcfb56b7463e356647db16b7cabf22cb027c8c595cbdbd97f8653453",
+      "first_timestamp": 2.633239987562189,
+      "last_timestamp": 15.232793345771144,
+      "frames": 64,
+      "flow_scores": {
+        "farneback": {
+          "RAW": 0.008611061253644053,
+          "A": 0.00779762990506632,
+          "C": 0.00843992368835542,
+          "D": 0.00740052820072465,
+          "E_half": 0.007850156485339597
+        },
+        "raft": {
+          "RAW": 0.00785817012065164,
+          "A": 0.007117473102721666,
+          "C": 0.007692449081260416,
+          "D": 0.0068450580325184595,
+          "E_half": 0.00713264722643154
+        }
+      },
+      "methods": [
+        {
+          "method": "RAW",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.008611061253644053,
+          "local_flicker": 0.0067849164285386605,
+          "temporal_coverage": 0.96885221515855,
+          "postprocess_fps": 1085.622233999842,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "A",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.00779762990506632,
+          "local_flicker": 0.005964592021579544,
+          "temporal_coverage": 0.96885221515855,
+          "postprocess_fps": 19.18295441035276,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "C",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.00843992368835542,
+          "local_flicker": 0.006601440335904795,
+          "temporal_coverage": 0.96885221515855,
+          "postprocess_fps": 15.930101634549361,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "D",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.00740052820072465,
+          "local_flicker": 0.005734146944993723,
+          "temporal_coverage": 0.96885221515855,
+          "postprocess_fps": 20.22687942843501,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        },
+        {
+          "method": "E_half",
+          "extra_information": "none",
+          "AbsRel": null,
+          "RMSE": null,
+          "delta1": null,
+          "edge_F1": null,
+          "temporal_log_error": 0.007850156485339597,
+          "local_flicker": 0.006019439860542733,
+          "temporal_coverage": 0.96885221515855,
+          "postprocess_fps": 36.68525628347979,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": null,
+          "pose_temporal_MAE_m": null
+        }
+      ],
+      "guard": {
+        "temporal_log_error": [
+          "D"
+        ],
+        "postprocess_fps": [
+          "RAW"
+        ],
+        "accuracy_boundary_constrained_temporal_best": null,
+        "accuracy_boundary_constrained_pose_best": null,
+        "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+      },
+      "source_sha256": "99be43b6eb691a52df546cdd6c001860af936d41626de5da8c475300c4010fcf"
+    },
+    {
+      "name": "tum_xyz_early",
+      "track": "TUM GT sample",
+      "input_manifest": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_early\\manifest.json",
+      "input_manifest_sha256": "e4f02da9358fd4f4dc0582698c7ad95e4b7a58541049b80b95cffebecdd769f7",
+      "first_timestamp": 1305031102.175304,
+      "last_timestamp": 1305031115.98074,
+      "frames": 64,
+      "flow_scores": {
+        "farneback": {
+          "RAW": 0.06317469474696924,
+          "A": 0.06005294817603297,
+          "C": 0.0629054017897163,
+          "D": 0.05906446674276912,
+          "E_half": 0.0609683363387982
+        },
+        "raft": {
+          "RAW": 0.03997866114571927,
+          "A": 0.03855462484653034,
+          "C": 0.039746025281529575,
+          "D": 0.03789906453577772,
+          "E_half": 0.038222832989598075
+        }
+      },
+      "methods": [
+        {
+          "method": "RAW",
+          "extra_information": "none",
+          "AbsRel": 0.4334320788375682,
+          "RMSE": 0.5490785542352214,
+          "delta1": 0.055673659068966264,
+          "edge_F1": 0.14791682963683234,
+          "temporal_log_error": 0.06317469474696924,
+          "local_flicker": 0.04635997237785468,
+          "temporal_coverage": 0.5262929514563762,
+          "postprocess_fps": 771.3293660601356,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.03377666335676968,
+          "pose_temporal_MAE_m": 0.05831513358793007
+        },
+        {
+          "method": "A",
+          "extra_information": "none",
+          "AbsRel": 0.4334443939655249,
+          "RMSE": 0.5488216163358615,
+          "delta1": 0.05663757489406002,
+          "edge_F1": 0.14799582279406118,
+          "temporal_log_error": 0.06005294817603297,
+          "local_flicker": 0.04332859639728826,
+          "temporal_coverage": 0.5262929514563762,
+          "postprocess_fps": 14.449047327284749,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.03253047260138755,
+          "pose_temporal_MAE_m": 0.05615331050900036
+        },
+        {
+          "method": "C",
+          "extra_information": "none",
+          "AbsRel": 0.43319078852125215,
+          "RMSE": 0.548076012232133,
+          "delta1": 0.05573182356811453,
+          "edge_F1": 0.1531741776288748,
+          "temporal_log_error": 0.0629054017897163,
+          "local_flicker": 0.04601418055475704,
+          "temporal_coverage": 0.5262929514563762,
+          "postprocess_fps": 10.349022006904011,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.03357766288202655,
+          "pose_temporal_MAE_m": 0.0579076319250071
+        },
+        {
+          "method": "D",
+          "extra_information": "none",
+          "AbsRel": 0.43341167487862076,
+          "RMSE": 0.5485437664441182,
+          "delta1": 0.057072051236700755,
+          "edge_F1": 0.14726754373810658,
+          "temporal_log_error": 0.05906446674276912,
+          "local_flicker": 0.043103614334194434,
+          "temporal_coverage": 0.5262929514563762,
+          "postprocess_fps": 14.102632628779364,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.03209430061022978,
+          "pose_temporal_MAE_m": 0.055402595969834566
+        },
+        {
+          "method": "E_half",
+          "extra_information": "none",
+          "AbsRel": 0.4334075236133894,
+          "RMSE": 0.5487274368899615,
+          "delta1": 0.05668305550121324,
+          "edge_F1": 0.14795091286894552,
+          "temporal_log_error": 0.0609683363387982,
+          "local_flicker": 0.04417435826349353,
+          "temporal_coverage": 0.5262929514563762,
+          "postprocess_fps": 26.642099690526546,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.03230058780558494,
+          "pose_temporal_MAE_m": 0.05561809706224594
+        }
+      ],
+      "guard": {
+        "AbsRel": [
+          "C"
+        ],
+        "edge_F1": [
+          "C"
+        ],
+        "temporal_log_error": [
+          "D"
+        ],
+        "postprocess_fps": [
+          "RAW"
+        ],
+        "accuracy_boundary_constrained_temporal_best": "D",
+        "accuracy_boundary_constrained_pose_best": "D",
+        "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+      },
+      "source_sha256": "a0236d97b8c30cd93b653656d2b6c293ff7c982a4130ef2a1a8beecdb124ef98"
+    },
+    {
+      "name": "tum_xyz_late",
+      "track": "TUM GT sample",
+      "input_manifest": "outputs\\extended_video_validation_cpu\\sample_inputs\\tum_xyz_late\\manifest.json",
+      "input_manifest_sha256": "da950772efe52dcda0baae06455a3ddfb14bea46f9cfcfe50a9f254cc615807a",
+      "first_timestamp": 1305031117.179264,
+      "last_timestamp": 1305031128.711457,
+      "frames": 54,
+      "flow_scores": {
+        "farneback": {
+          "RAW": 0.047901607083402714,
+          "A": 0.04419614497642472,
+          "C": 0.04756755422238471,
+          "D": 0.04227270467101403,
+          "E_half": 0.04489544970598423
+        },
+        "raft": {
+          "RAW": 0.03640163508858883,
+          "A": 0.034468942585418806,
+          "C": 0.036127429543379344,
+          "D": 0.03337330170819219,
+          "E_half": 0.03388205711852829
+        }
+      },
+      "methods": [
+        {
+          "method": "RAW",
+          "extra_information": "none",
+          "AbsRel": 0.4539460708101209,
+          "RMSE": 0.5552524919790708,
+          "delta1": 0.07142281287746953,
+          "edge_F1": 0.21576421296312154,
+          "temporal_log_error": 0.047901607083402714,
+          "local_flicker": 0.036250644240458055,
+          "temporal_coverage": 0.5837826949765754,
+          "postprocess_fps": 902.2928263133603,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.03348183073121315,
+          "pose_temporal_MAE_m": 0.05499367844003646
+        },
+        {
+          "method": "A",
+          "extra_information": "none",
+          "AbsRel": 0.4535905398111509,
+          "RMSE": 0.5544352653508586,
+          "delta1": 0.07099869667678839,
+          "edge_F1": 0.21724611083434794,
+          "temporal_log_error": 0.04419614497642472,
+          "local_flicker": 0.032806320168640254,
+          "temporal_coverage": 0.5837826949765754,
+          "postprocess_fps": 14.209867800581213,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.031595643095196316,
+          "pose_temporal_MAE_m": 0.05180534891300801
+        },
+        {
+          "method": "C",
+          "extra_information": "none",
+          "AbsRel": 0.45365062607034684,
+          "RMSE": 0.5538414978627217,
+          "delta1": 0.07145360570576603,
+          "edge_F1": 0.21884688594962787,
+          "temporal_log_error": 0.04756755422238471,
+          "local_flicker": 0.035834894585862476,
+          "temporal_coverage": 0.5837826949765754,
+          "postprocess_fps": 10.062014118457517,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.03319815913457592,
+          "pose_temporal_MAE_m": 0.054388253665566565
+        },
+        {
+          "method": "D",
+          "extra_information": "none",
+          "AbsRel": 0.45315108206167765,
+          "RMSE": 0.5536581570512848,
+          "delta1": 0.07098621572391171,
+          "edge_F1": 0.21280188689648216,
+          "temporal_log_error": 0.04227270467101403,
+          "local_flicker": 0.03219027936739741,
+          "temporal_coverage": 0.5837826949765754,
+          "postprocess_fps": 14.176670561150626,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.030484158611025332,
+          "pose_temporal_MAE_m": 0.050022443923027834
+        },
+        {
+          "method": "E_half",
+          "extra_information": "none",
+          "AbsRel": 0.45351163236415876,
+          "RMSE": 0.5541374818475816,
+          "delta1": 0.0707274215615399,
+          "edge_F1": 0.21715664060315343,
+          "temporal_log_error": 0.04489544970598423,
+          "local_flicker": 0.03357212516075035,
+          "temporal_coverage": 0.5837826949765754,
+          "postprocess_fps": 27.694166752020184,
+          "warning_F1": null,
+          "warning_recall": null,
+          "warning_accuracy": null,
+          "pose_temporal_log_error": 0.03093133555232253,
+          "pose_temporal_MAE_m": 0.050603914257811126
+        }
+      ],
+      "guard": {
+        "AbsRel": [
+          "D"
+        ],
+        "edge_F1": [
+          "C"
+        ],
+        "temporal_log_error": [
+          "D"
+        ],
+        "postprocess_fps": [
+          "RAW"
+        ],
+        "accuracy_boundary_constrained_temporal_best": "D",
+        "accuracy_boundary_constrained_pose_best": "D",
+        "constraint": "AbsRel <= RAW+0.01, delta1 >= RAW-0.005, edge_F1 >= RAW-0.01; B variants use extra measured information"
+      },
+      "source_sha256": "a0236d97b8c30cd93b653656d2b6c293ff7c982a4130ef2a1a8beecdb124ef98"
+    }
+  ]
+}

@@ -41,3 +41,10 @@ def test_geometry_output_allows_nan_only_outside_boolean_valid_mask() -> None:
     validate_depth_output(depth, metadata, valid_mask=mask)
     with pytest.raises(ValueError, match="Valid raw depth contains"):
         validate_depth_output(depth, metadata, valid_mask=np.ones((2, 2), dtype=bool))
+
+
+def test_relative_zero_endpoint_is_preserved_but_not_a_metric_distance():
+    depth=np.array([[0.,1.],[2.,0.]],np.float32)
+    validate_depth_output(depth,dict(depth_type='relative',unit='arbitrary',alignment='none'))
+    with pytest.raises(ValueError,match='strictly positive'):
+        validate_depth_output(depth,dict(depth_type='metric',unit='meter',alignment='none'))

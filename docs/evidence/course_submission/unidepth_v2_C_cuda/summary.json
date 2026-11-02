@@ -1,0 +1,30 @@
+{
+  "samples": 654,
+  "means": {
+    "RAW": {
+      "abs_rel": 0.1145413645787274,
+      "sq_rel": 0.06894646258989916,
+      "rmse": 0.39882060739776776,
+      "rmse_log": 0.14121705467277482,
+      "delta1": 0.8923646812065051,
+      "delta2": 0.9807101528641778,
+      "delta3": 0.9933267610248648,
+      "si_boundary_f1": 0.1130096085054967
+    },
+    "C_cuda": {
+      "abs_rel": 0.11442737156421856,
+      "sq_rel": 0.06870465345658984,
+      "rmse": 0.3980346806176739,
+      "rmse_log": 0.14098634538798213,
+      "delta1": 0.8926005318352521,
+      "delta2": 0.9808253317048058,
+      "delta3": 0.9933586098651029,
+      "si_boundary_f1": 0.1225608335201598
+    }
+  },
+  "accuracy_boundary_guard_passed": true,
+  "abs_rel_improved": true,
+  "parameters": "Frozen 5x5 FP32 joint bilateral defaults; no test-set tuning",
+  "protocol": "Full RGB; crop [45,471,41,601]; .001<GT<10; clip predictions; native metric; no alignment",
+  "limitation": "Image-only refinement; no temporal claim; SI boundary guard is separately labelled from log-edge F1"
+}

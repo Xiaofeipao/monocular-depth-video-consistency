@@ -1,32 +1,27 @@
 # 当前项目状态
 
-## 数据与交付
+最新非报告交付见 [成果入口](course_delivery.md)，要求与例外见 [新版要求核对](new_brief_compliance.md)。
 
-必需公开数据和权重已齐全：Middlebury Q 分辨率的 15 对训练图、标定与视差 GT；
-完整 NYUv2 labeled MAT 和标准 654 图测试划分；四套官方源码及所需预训练权重。
-来源、版本和校验值见 `data/manifests/`，无需再补 KITTI/TUM 才能满足必需数据范围。
+## 必需实验与交付
 
-主要还缺自录视频：建议包含静态段和相机运动段，覆盖近远物体、薄结构、遮挡、
-易失败材质，用于检验闪烁、尺度漂移和应用 Demo。若选择 B，还需独立实测标定点；
-若选择 F，还需应用事件/距离标注。以 C 为主方向时，这两类数据不是前提。
+- Middlebury Q 15 对和原始预测已齐全；60 份匹配输出保留，已补全部有限正值 GT 的视差 MAE/coverage，旧 non-occluded 结果单列。
+- NYUv2 labeled MAT、标准划分与官方权重在本地；Depth Pro/UniDepthV2 两条 654 图米制基线及 C 对照已完成。课程 crop、filled GT、预测裁剪与无尺度拟合协议一致。
+- 指定 rollercoaster 的 DAV2/VDA relative Small FP16 同帧结果已完成，原始 24 FPS，固定整段归一化。官方文件实测仅 70 帧，题面 100 帧差异已在包内说明，仍需课程确认。
+- NYUv2 应用演示、三个真实困难案例及四段可选自录应用预览已生成；原始数组、配置、计时和证据保留。
+- `depth_results.zip` 已生成并逐成员核验，附 SHA256；独立 CPU 回放已验证。学术报告按用户要求暂停，不包含在包内；arXiv 可选，Canvas 提交为外部步骤。
 
-最终还需完成 CVPR 格式 6–8 页报告、arXiv 上传与 Canvas ID，以及包含全部要求
-视频和应用 Demo 的 `depth_results.zip`。
+代码与小型证据用于公共 GitHub；私人视频和大交付 ZIP 留在本地。依赖/软件版本与匿名硬件规格可复现，省略个人路径和 GPU 型号。GPU 可用时 113 passed；最终 CPU 复核 112 passed、1 CUDA 专用测试跳过。
 
-## 主要结论
+## 研究结论与限制
 
-Part 1 的 Middlebury 15 场景、四组 BM/SGBM 实验已完成；60 份预测的 1,200 项
-重载校验通过。Part 2 的两条米制模型均完成 NYUv2 654 图 GPU 推理与评分。
-Depth Pro 的精度和边界表现优于 UniDepthV2-S，与团队图像基准的结论一致。
-完整结果与命令见 [基准结果](benchmark_results.md)。
+C 在完整 NYUv2 上提高两条基线的边界 F1，距离精度只小幅变化；iBims/Depth Pro 和若干视频中存在退化，不作为普遍跨域保证。新增组件消融支持 RGB 引导对边界的重要性，但并非所有指标都因完整 C 最优。
 
-在同帧、同分辨率的公开示例视频上，DAV2/VDA 的固定参考尺度相对 warp error
-分别为 0.006370 / 0.004228，VDA 约低 33.6%。它支持时序稳定性优势，
-没有深度 GT，不能证明米制准确率更高。完整运行与评分包见
-`artifacts/relative_video_demo/`。
+D/E 的开发/冻结测试、四段 self-recorded 和 TUM 参考仍保留：D 与 E_half 均通过三条新序列的精度/边界约束；固定权重消融有更低时序分数，但一段边界退化超标；冻结 D 优化未取得新预测收益。视频折中可考虑 E_half，图像主线保留 C。
 
-Part 3 选择 C 为主要探索：完整测试中改善边界 F1，精度也有小幅改善。
-C_cuda 是保持公式的加速实现，A 作为视频时序补充。
-证据与各方向限制见 [Part 3 结果](part3_results.md)。
+- [图像与双目基准](benchmark_results.md)
+- [Part 3 结果与各方向](part3_results.md)
+- [D 多序列消融](d_research.md)与[观感复核](d_research_review.md)
+- [论文逐项协议比较](paper_comparison.md)
+- [自录检查](self_recorded_review.md)与[518 同帧验证](extended_validation_gpu518.md)
 
-回归测试：101 passed。公开说明使用通用依赖和相对路径。
+自录/TUM/iBims 作为扩展证据，不替代指定视频；未宣称超过基础模型论文或跨场景最优。

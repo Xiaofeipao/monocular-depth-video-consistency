@@ -1,0 +1,18 @@
+{
+  "input": "outputs\\extended_video_validation_cpu\\self_inputs\\portrait_static\\input\\samples.json",
+  "output": "outputs\\extended_video_validation_cpu\\portrait_static\\baseline",
+  "model": "vda",
+  "repo": "third_party/Video-Depth-Anything",
+  "checkpoint": "checkpoints/metric_video_depth_anything_vits.pth",
+  "encoder": "vits",
+  "metric": true,
+  "device": "cpu",
+  "fp16": false,
+  "input_size": 252,
+  "fps": null,
+  "max_frames": null,
+  "max_side": null,
+  "vis_min": 0.1,
+  "vis_max": 10.0,
+  "warmup": 0
+}

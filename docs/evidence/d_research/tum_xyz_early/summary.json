@@ -1,0 +1,255 @@
+{
+  "name": "tum_xyz_early",
+  "kind": "reference",
+  "frames": 64,
+  "recipes": {
+    "RAW": {},
+    "A": {},
+    "D_temporal": {
+      "use_confidence": false,
+      "enable_reset": false
+    },
+    "D_confidence": {
+      "enable_reset": false
+    },
+    "D": {},
+    "E_half": {},
+    "C": {},
+    "D_tuned": {
+      "alpha_max": 0.7,
+      "minimum_coverage": 0.02
+    }
+  },
+  "methods": [
+    {
+      "method": "RAW",
+      "fusion_seconds": 0.03658079999968322,
+      "fusion_repeat_seconds": [
+        0.037179400000241,
+        0.03658079999968322,
+        0.036385499999596504
+      ],
+      "flow_seconds": 0,
+      "postprocess_seconds": 0.03658079999968322,
+      "postprocess_fps": 1749.5516773978213,
+      "resets": 0,
+      "AbsRel": 0.12945990155947568,
+      "RMSE": 0.2176267500883961,
+      "delta1": 0.865892203129205,
+      "edge_F1": 0.20651393558805647,
+      "RAW_reference_edge_F1": 1.0,
+      "RAW_log_change": 0.0,
+      "farneback_warp_proxy": 0.059834113699339685,
+      "raft_warp_proxy": 0.03438971694263201,
+      "pose_temporal_log_error": 0.03333234925912458,
+      "guard_passed": true
+    },
+    {
+      "method": "A",
+      "fusion_seconds": 1.2692607999997563,
+      "fusion_repeat_seconds": [
+        1.2692607999997563,
+        1.4599367000000711,
+        1.1946238999998968
+      ],
+      "flow_seconds": 3.1269326999999976,
+      "postprocess_seconds": 4.396193499999754,
+      "postprocess_fps": 14.558048912088056,
+      "resets": 0,
+      "AbsRel": 0.12938185016383094,
+      "RMSE": 0.21742724413899045,
+      "delta1": 0.8662002976958889,
+      "edge_F1": 0.206673546006923,
+      "RAW_reference_edge_F1": 0.9997822185549657,
+      "RAW_log_change": 0.00169372635241416,
+      "farneback_warp_proxy": 0.0572146935802367,
+      "raft_warp_proxy": 0.033272778822316065,
+      "pose_temporal_log_error": 0.03272369277355943,
+      "guard_passed": true
+    },
+    {
+      "method": "D_temporal",
+      "fusion_seconds": 1.14234579999993,
+      "fusion_repeat_seconds": [
+        1.3375515000006999,
+        1.14234579999993,
+        1.124292499999683
+      ],
+      "flow_seconds": 3.1269326999999976,
+      "postprocess_seconds": 4.269278499999928,
+      "postprocess_fps": 14.990823390884685,
+      "resets": 0,
+      "AbsRel": 0.129455638075746,
+      "RMSE": 0.2171634492247656,
+      "delta1": 0.8652442329623764,
+      "edge_F1": 0.20104628581428136,
+      "RAW_reference_edge_F1": 0.9927361286021186,
+      "RAW_log_change": 0.004452607397070096,
+      "farneback_warp_proxy": 0.05389211557450749,
+      "raft_warp_proxy": 0.03167071101802682,
+      "pose_temporal_log_error": 0.0321923250469972,
+      "guard_passed": true
+    },
+    {
+      "method": "D_confidence",
+      "fusion_seconds": 1.4218980000005104,
+      "fusion_repeat_seconds": [
+        1.4218980000005104,
+        1.4933964000001652,
+        1.390562300000056
+      ],
+      "flow_seconds": 3.1269326999999976,
+      "postprocess_seconds": 4.548830700000508,
+      "postprocess_fps": 14.069549785616962,
+      "resets": 0,
+      "AbsRel": 0.12936263495204053,
+      "RMSE": 0.21717266525327386,
+      "delta1": 0.8663323180071041,
+      "edge_F1": 0.2026334299335998,
+      "RAW_reference_edge_F1": 0.9966431306432941,
+      "RAW_log_change": 0.002272652438023215,
+      "farneback_warp_proxy": 0.05657177028201875,
+      "raft_warp_proxy": 0.03281897649405494,
+      "pose_temporal_log_error": 0.03249942367639044,
+      "guard_passed": true
+    },
+    {
+      "method": "D",
+      "fusion_seconds": 1.520940899999914,
+      "fusion_repeat_seconds": [
+        1.6277485000000524,
+        1.4491816999998264,
+        1.520940899999914
+      ],
+      "flow_seconds": 3.1269326999999976,
+      "postprocess_seconds": 4.647873599999912,
+      "postprocess_fps": 13.769737627977063,
+      "resets": 0,
+      "AbsRel": 0.12936263495204053,
+      "RMSE": 0.21717266525327386,
+      "delta1": 0.8663323180071041,
+      "edge_F1": 0.2026334299335998,
+      "RAW_reference_edge_F1": 0.9966431306432941,
+      "RAW_log_change": 0.002272652438023215,
+      "farneback_warp_proxy": 0.05657177028201875,
+      "raft_warp_proxy": 0.03281897649405494,
+      "pose_temporal_log_error": 0.03249942367639044,
+      "guard_passed": true
+    },
+    {
+      "method": "E_half",
+      "fusion_seconds": 1.1612812000003032,
+      "fusion_repeat_seconds": [
+        1.139709000000039,
+        1.1612812000003032,
+        1.2359408000002077
+      ],
+      "flow_seconds": 0.9108257000007143,
+      "postprocess_seconds": 2.0721069000010175,
+      "postprocess_fps": 30.886437374427242,
+      "resets": 1,
+      "AbsRel": 0.1293757353179023,
+      "RMSE": 0.21741439617494088,
+      "delta1": 0.8661646469385711,
+      "edge_F1": 0.20662666063969848,
+      "RAW_reference_edge_F1": 0.999752602811397,
+      "RAW_log_change": 0.0017899041922646575,
+      "farneback_warp_proxy": 0.05805536219111038,
+      "raft_warp_proxy": 0.032949724973785496,
+      "pose_temporal_log_error": 0.03251496570595582,
+      "guard_passed": true
+    },
+    {
+      "method": "C",
+      "fusion_seconds": 6.8795569000003525,
+      "fusion_repeat_seconds": [
+        6.8795569000003525,
+        6.894534500000191,
+        6.058631900000364
+      ],
+      "flow_seconds": 0,
+      "postprocess_seconds": 6.8795569000003525,
+      "postprocess_fps": 9.30292472760807,
+      "resets": 0,
+      "AbsRel": 0.12922751742085684,
+      "RMSE": 0.21648253122580158,
+      "delta1": 0.8661801272491066,
+      "edge_F1": 0.19593826044121843,
+      "RAW_reference_edge_F1": 0.9753698391303964,
+      "RAW_log_change": 0.0022228276793612167,
+      "farneback_warp_proxy": 0.05945831173587413,
+      "raft_warp_proxy": 0.034042668218413986,
+      "pose_temporal_log_error": 0.033046134418462256,
+      "guard_passed": false
+    },
+    {
+      "method": "D_tuned",
+      "fusion_seconds": 1.6229197999991811,
+      "fusion_repeat_seconds": [
+        1.6408448000001954,
+        1.575442800000019,
+        1.6229197999991811
+      ],
+      "flow_seconds": 3.1269326999999976,
+      "postprocess_seconds": 4.749852499999179,
+      "postprocess_fps": 13.474102616873065,
+      "resets": 0,
+      "AbsRel": 0.12936263495204053,
+      "RMSE": 0.21717266525327386,
+      "delta1": 0.8663323180071041,
+      "edge_F1": 0.2026334299335998,
+      "RAW_reference_edge_F1": 0.9966431306432941,
+      "RAW_log_change": 0.002272652438023215,
+      "farneback_warp_proxy": 0.05657177028201875,
+      "raft_warp_proxy": 0.03281897649405494,
+      "pose_temporal_log_error": 0.03249942367639044,
+      "guard_passed": true
+    }
+  ],
+  "baseline": "outputs\\extended_video_validation_gpu518\\tum_xyz_early\\baseline",
+  "baseline_manifest_sha256": "4bd4af9cff317831a33629ee7d76af95ebe75c9378e7263064bba284c8b1ef8a",
+  "input_manifest_sha256": "e4f02da9358fd4f4dc0582698c7ad95e4b7a58541049b80b95cffebecdd769f7",
+  "predictions_sha256": "eb76155b4948b0daefed7d6915e3bc5cc06859b8786f2f7c1504dd80147a2865",
+  "prediction_locations": {
+    "RAW": {
+      "run": "outputs\\extended_video_validation_gpu518\\tum_xyz_early\\baseline",
+      "manifest_sha256": "4bd4af9cff317831a33629ee7d76af95ebe75c9378e7263064bba284c8b1ef8a"
+    },
+    "A": {
+      "run": "outputs\\extended_video_validation_gpu518\\tum_xyz_early\\directions\\A",
+      "manifest_sha256": "3f8a6f55780df1834d5113a829cf4114a6b8ecdef9fb98ecce9ee940d72d3ff2"
+    },
+    "D_temporal": {
+      "npz_key": "D_temporal"
+    },
+    "D_confidence": {
+      "npz_key": "D_confidence"
+    },
+    "D": {
+      "npz_key": "D_confidence"
+    },
+    "E_half": {
+      "run": "outputs\\extended_video_validation_gpu518\\tum_xyz_early\\directions\\E_half",
+      "manifest_sha256": "13bdbcc093319addfd649ff12aa8b739877f0504df2c3c1da3b2fdefc7ad8deb"
+    },
+    "C": {
+      "run": "outputs\\extended_video_validation_gpu518\\tum_xyz_early\\directions\\C",
+      "manifest_sha256": "4de38bece30088e25c835fffe878fd566c838218579375a7ed43c29ef29747c8"
+    },
+    "D_tuned": {
+      "npz_key": "D_confidence"
+    }
+  },
+  "flow_repeat_seconds": {
+    "full": [
+      3.1269326999999976,
+      3.122512299999471,
+      3.2264505000002828
+    ],
+    "half": [
+      0.9041248999992604,
+      0.9108257000007143,
+      0.9385489000005691
+    ]
+  }
+}

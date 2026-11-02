@@ -1,0 +1,120 @@
+{
+  "seed": 42,
+  "resamples": 10000,
+  "input_sha256": {
+    "docs/evidence/full_benchmark_20261029/depth_pro_C_cuda/per_image.csv": "47e080c548d8445035dbab4162d6c4466f23e2919559b65733e20e7acc9202ec",
+    "docs/evidence/full_benchmark_20261029/depth_pro_nyuv2/metrics_per_image.csv": "ca67d55557c8d699a40bf9350b4e519430156277681c096484f53f818d9e7312",
+    "docs/evidence/full_benchmark_20261029/unidepth_v2_C_cuda/per_image.csv": "4db63009495ee952c3b23ac3b532b28a8003997dafa4b894c82ce14157a6938e",
+    "docs/evidence/full_benchmark_20261029/unidepth_v2_nyuv2/metrics_per_image.csv": "09d9639433bd4eaf4d5ff129075ad104768c4c11817216452e589c1e3f1f7fdd"
+  },
+  "script_sha256": "f7ca490b8376ccaf4a1e4dc1deafebfbb790af63587947756aa325627fa81ed5",
+  "unit": "NYUv2 scene, sampled with replacement; image-weighted ratio estimator within each draw",
+  "caveats": [
+    "Conditional on this frozen test set and protocol; not evidence of cross-domain superiority.",
+    "Scenes may still share acquisition/environment conditions.",
+    "Exploratory intervals without multiple-comparison adjustment; no test-set tuning performed.",
+    "Statistical detectability is separate from practical effect size."
+  ],
+  "models": {
+    "depth_pro": {
+      "images": 654,
+      "scenes": 215,
+      "metrics": {
+        "abs_rel": {
+          "RAW_mean": 0.10047326365641308,
+          "refined_mean": 0.1003669849863708,
+          "delta_refined_minus_RAW": -0.00010627867004229365,
+          "paired_scene_bootstrap_ci95": [
+            -0.0001267108231891813,
+            -8.885269372968997e-05
+          ],
+          "descriptive_image_win_fraction": 0.808868501529052,
+          "CI_excludes_zero_in_favorable_direction": true
+        },
+        "rmse": {
+          "RAW_mean": 0.3922195685272713,
+          "refined_mean": 0.3915428244355742,
+          "delta_refined_minus_RAW": -0.0006767440916970695,
+          "paired_scene_bootstrap_ci95": [
+            -0.0007981407695205963,
+            -0.0005661993421411633
+          ],
+          "descriptive_image_win_fraction": 0.7966360856269113,
+          "CI_excludes_zero_in_favorable_direction": true
+        },
+        "delta1": {
+          "RAW_mean": 0.9151851539922512,
+          "refined_mean": 0.9154543276478442,
+          "delta_refined_minus_RAW": 0.0002691736555930922,
+          "paired_scene_bootstrap_ci95": [
+            0.0002218956877075409,
+            0.00031958637498190844
+          ],
+          "descriptive_image_win_fraction": 0.7996941896024465,
+          "CI_excludes_zero_in_favorable_direction": true
+        },
+        "si_boundary_f1": {
+          "RAW_mean": 0.15926854653995523,
+          "refined_mean": 0.1711066145225365,
+          "delta_refined_minus_RAW": 0.011838067982581229,
+          "paired_scene_bootstrap_ci95": [
+            0.010160149150517939,
+            0.013552409539553917
+          ],
+          "descriptive_image_win_fraction": 0.72782874617737,
+          "CI_excludes_zero_in_favorable_direction": true
+        }
+      }
+    },
+    "unidepth_v2": {
+      "images": 654,
+      "scenes": 215,
+      "metrics": {
+        "abs_rel": {
+          "RAW_mean": 0.1145413645787274,
+          "refined_mean": 0.11442737156421856,
+          "delta_refined_minus_RAW": -0.00011399301450884803,
+          "paired_scene_bootstrap_ci95": [
+            -0.0001261634537158658,
+            -0.00010266979320813598
+          ],
+          "descriptive_image_win_fraction": 0.9311926605504587,
+          "CI_excludes_zero_in_favorable_direction": true
+        },
+        "rmse": {
+          "RAW_mean": 0.39882060739776776,
+          "refined_mean": 0.3980346806176739,
+          "delta_refined_minus_RAW": -0.0007859267800939223,
+          "paired_scene_bootstrap_ci95": [
+            -0.0008695790974712661,
+            -0.0007074009116748474
+          ],
+          "descriptive_image_win_fraction": 0.9373088685015291,
+          "CI_excludes_zero_in_favorable_direction": true
+        },
+        "delta1": {
+          "RAW_mean": 0.8923646812065051,
+          "refined_mean": 0.8926005318352521,
+          "delta_refined_minus_RAW": 0.00023585062874699952,
+          "paired_scene_bootstrap_ci95": [
+            0.00020086383132121571,
+            0.00027135698823190115
+          ],
+          "descriptive_image_win_fraction": 0.7996941896024465,
+          "CI_excludes_zero_in_favorable_direction": true
+        },
+        "si_boundary_f1": {
+          "RAW_mean": 0.1130096085054967,
+          "refined_mean": 0.1225608335201598,
+          "delta_refined_minus_RAW": 0.009551225014663088,
+          "paired_scene_bootstrap_ci95": [
+            0.008044985875702446,
+            0.01116322447059449
+          ],
+          "descriptive_image_win_fraction": 0.672782874617737,
+          "CI_excludes_zero_in_favorable_direction": true
+        }
+      }
+    }
+  }
+}
