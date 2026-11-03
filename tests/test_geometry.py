@@ -36,3 +36,19 @@ def test_first_order_error_grows_quadratically_with_depth() -> None:
     )
     assert errors[1] / errors[0] == pytest.approx(4.0)
 
+
+
+def test_middlebury_mm_offset_and_opencv_units():
+    from src.stereo.geometry import middlebury_disparity_to_depth
+    from src.stereo.matching import decode_opencv_disparity
+    raw = np.array([[160, 0, -16]], dtype=np.int16)
+    px, _ = decode_opencv_disparity(raw, min_disparity=0)
+    depth, valid = middlebury_disparity_to_depth(px, focal_length_px=1000., baseline_mm=200., doffs_px=10.)
+    assert depth[0,0] == pytest.approx(10.)
+    assert valid.tolist() == [[True,False,False]]
+    assert np.isnan(depth[0,1:]).all()
+    for invalid in (0., -1., np.inf, np.nan):
+        with pytest.raises(ValueError):
+            middlebury_disparity_to_depth(px, focal_length_px=1000., baseline_mm=invalid, doffs_px=0.)
+    depth, valid = middlebury_disparity_to_depth(np.array([1.]), focal_length_px=1000., baseline_mm=200., doffs_px=-1.)
+    assert not valid.any() and np.isnan(depth).all()

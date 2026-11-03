@@ -11,18 +11,19 @@ def compute_disparity_metrics(
     prediction_px: np.ndarray,
     target_px: np.ndarray,
     *,
-    evaluation_mask: np.ndarray,
-) -> Mapping[str, float | int]:
-    """Compute non-occluded disparity errors and prediction coverage.
+    evaluation_mask: np.ndarray | None = None,
+    prediction_valid_mask: np.ndarray | None = None,
+) -> Mapping[str, float | int | None]:
+    """Course MAE and valid fraction on every finite positive GT disparity.
 
-    MAE/RMSE use pixels with valid predictions. Bad-pixel rates use every GT
-    evaluation pixel and therefore count invalid predictions as bad; this
-    prevents methods from improving error simply by returning fewer pixels.
+    Invalid predictions remain in the fraction's denominator, but not in MAE.
+    No valid prediction means MAE=None and fraction=0, never a perfect score.
+    An explicit evaluation mask is supported only for separately labelled subsets.
     """
 
     prediction = np.asarray(prediction_px, dtype=np.float64)
     target = np.asarray(target_px, dtype=np.float64)
-    mask = np.asarray(evaluation_mask, dtype=bool)
+    mask = np.ones(target.shape, bool) if evaluation_mask is None else np.asarray(evaluation_mask, dtype=bool)
     if prediction.shape != target.shape or prediction.shape != mask.shape:
         raise ValueError(
             f"Disparity/mask shapes differ: {prediction.shape}, {target.shape}, {mask.shape}"
@@ -32,22 +33,25 @@ def compute_disparity_metrics(
     if gt_count == 0:
         raise ValueError("No valid ground-truth disparity pixels")
     common = gt_valid & np.isfinite(prediction) & (prediction > 0)
+    if prediction_valid_mask is not None:
+        if np.shape(prediction_valid_mask) != target.shape:
+            raise ValueError('Prediction validity shape differs')
+        common &= np.asarray(prediction_valid_mask, dtype=bool)
     prediction_count = int(common.sum())
-    if prediction_count == 0:
-        raise ValueError("No valid predicted disparity pixels")
     absolute_error = np.abs(prediction[common] - target[common])
-    full_error = np.full(target.shape, np.inf, dtype=np.float64)
-    full_error[common] = np.abs(prediction[common] - target[common])
-    return {
-        "disparity_mae_px": float(absolute_error.mean()),
-        "disparity_rmse_px": float(np.sqrt(np.mean(np.square(absolute_error)))),
-        "bad1": float(np.mean(full_error[gt_valid] > 1.0)),
-        "bad2": float(np.mean(full_error[gt_valid] > 2.0)),
-        "bad4": float(np.mean(full_error[gt_valid] > 4.0)),
-        "valid_coverage": float(prediction_count / gt_count),
+    result = {
+        "disparity_mae_px": float(absolute_error.mean()) if prediction_count else None,
+        "valid_prediction_fraction": float(prediction_count / gt_count),
         "evaluation_pixels": gt_count,
         "valid_prediction_pixels": prediction_count,
+        "invalid_prediction_pixels": gt_count - prediction_count,
     }
+    # Invalid predictions are failures, including when no prediction is valid.
+    # Thresholds are strict (>), and the denominator is the full GT domain.
+    for threshold in (1, 2, 4):
+        bad_count = gt_count - prediction_count + int((absolute_error > threshold).sum())
+        result[f'bad{threshold}'] = float(bad_count / gt_count)
+    return result
 
 
 def compute_stereo_depth_metrics(
@@ -71,13 +75,11 @@ def compute_stereo_depth_metrics(
         raise ValueError("depth_bin_edges_m must contain four increasing boundaries")
     gt_valid = mask & np.isfinite(target) & (target > 0)
     common = gt_valid & np.isfinite(prediction) & (prediction > 0)
-    if not common.any():
-        raise ValueError("No common valid depth pixels")
     difference = prediction[common] - target[common]
     result: dict[str, float | int | None] = {
-        "depth_abs_rel": float(np.mean(np.abs(difference) / target[common])),
-        "depth_rmse_m": float(np.sqrt(np.mean(np.square(difference)))),
-        "depth_valid_coverage": float(common.sum() / gt_valid.sum()),
+        "depth_abs_rel": float(np.mean(np.abs(difference) / target[common])) if common.any() else None,
+        "depth_rmse_m": float(np.sqrt(np.mean(np.square(difference)))) if common.any() else None,
+        "depth_valid_prediction_fraction": float(common.sum() / gt_valid.sum()) if gt_valid.any() else None,
     }
     labels = ("near", "mid", "far")
     for index, label in enumerate(labels):

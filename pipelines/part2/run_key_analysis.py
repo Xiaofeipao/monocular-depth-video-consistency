@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Joint four-part analysis for frozen Depth Pro and UniDepthV2-S outputs."""
+"""Absolute-scale and boundary analysis of frozen native metric predictions."""
 
 from __future__ import annotations
 
@@ -7,7 +7,6 @@ import argparse
 import csv
 from datetime import datetime, timezone
 import json
-import math
 from pathlib import Path
 import platform
 import sys
@@ -20,7 +19,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import yaml
 from scipy.ndimage import binary_dilation
-from scipy.stats import spearmanr
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -31,14 +29,12 @@ from pipelines.part2.run_depth_pro_nyuv2 import (
     DEPTH_METRICS,
     bootstrap_mean_ci,
     prediction_stem,
-    resize_prediction,
     sha256,
     write_csv,
 )
 from src.data.nyuv2 import NYUv2LabeledDataset
 from src.metrics.boundary import compute_depth_boundary_metrics, depth_edge_map
 from src.metrics.depth import build_valid_mask, compute_depth_metrics
-from src.models.unidepth_v2_adapter import UniDepthV2Adapter
 from src.visualization.nyuv2 import save_contact_sheet
 
 
@@ -71,23 +67,27 @@ def resolve_and_verify(relative_path: str, expected_sha256: str) -> Path:
 def load_config(path: Path) -> dict:
     with path.open(encoding="utf-8") as handle:
         config = yaml.safe_load(handle)
-    if config["protocol_status"] != "analysis_v1":
-        raise ValueError("Expected analysis_v1 protocol")
+    if config["protocol_status"] != "native_depth_error_analysis_v1":
+        raise ValueError("Expected native_depth_error_analysis_v1 protocol")
     if config["evaluation"]["test_time_alignment"] != "none":
         raise ValueError("Primary analysis must preserve alignment:none")
-    if config["cross_domain_analysis"]["add_another_target_domain"]:
-        raise ValueError("This run is intentionally restricted to NYUv2")
+    if set(config["baseline_outputs"]) != set(MODEL_LABELS):
+        raise ValueError("Both native metric baselines are required")
+    evaluation = config["evaluation"]
+    if (
+        config["dataset"]["split_variable"] != "testNdxs"
+        or config["dataset"]["expected_test_images"] != 654
+        or [evaluation["crop"][k] for k in ("top", "bottom", "left", "right")]
+        != [45, 471, 41, 601]
+        or evaluation["valid_depth_m"] != {"minimum": 0.001, "maximum": 10.0, "bounds": "exclusive"}
+        or evaluation["clip_prediction_to_valid_range"] is not True
+        or evaluation["aggregation"] != "per_image_macro_mean"
+    ):
+        raise ValueError("Analysis must preserve the standard NYUv2 test protocol")
+    oracle = config["absolute_scale_analysis"]["oracle_alignment"]
+    if not oracle["enabled_for_diagnosis_only"] or not oracle["forbidden_as_primary_result"]:
+        raise ValueError("GT-based oracle alignment is diagnostic only")
     return config
-
-
-def reference_intrinsics(config: dict) -> np.ndarray:
-    matrix = np.asarray(
-        config["camera_analysis"]["reference_intrinsics_full_480x640_px"],
-        dtype=np.float32,
-    )
-    if matrix.shape != (3, 3) or not np.all(np.isfinite(matrix)):
-        raise ValueError("Reference intrinsics must be a finite 3x3 matrix")
-    return matrix
 
 
 def validate_baseline_root(root: Path, expected_count: int) -> None:
@@ -106,118 +106,24 @@ def validate_baseline_root(root: Path, expected_count: int) -> None:
         raise ValueError(f"Baseline prediction count is not {expected_count}: {root}")
 
 
-def infer_unidepth_with_reference_intrinsics(
-    *,
-    config: dict,
-    dataset: NYUv2LabeledDataset,
-    output_root: Path,
-    device: str,
-    resume: bool,
-) -> dict[str, object]:
-    track_root = output_root / "camera_ablation" / "unidepth_external_intrinsics"
-    predictions_dir = track_root / "predictions"
-    metadata_dir = track_root / "metadata"
-    predictions_dir.mkdir(parents=True, exist_ok=True)
-    metadata_dir.mkdir(parents=True, exist_ok=True)
-    model_config = resolve_and_verify(
-        config["unidepth_model"]["config"],
-        config["unidepth_model"]["config_sha256"],
-    )
-    checkpoint = resolve_and_verify(
-        config["unidepth_model"]["checkpoint"],
-        config["unidepth_model"]["checkpoint_sha256"],
-    )
-    if model_config.parent != checkpoint.parent:
-        raise ValueError("UniDepth config and checkpoint must share a directory")
-    intrinsics = reference_intrinsics(config)
-    adapter = UniDepthV2Adapter(
-        repository=PROJECT_ROOT / config["unidepth_model"]["repository"],
-        checkpoint_dir=checkpoint.parent,
-        device=device,
-    )
-    warmup = dataset.get_test_sample(0)
-    adapter.infer(warmup.rgb, intrinsics_px=intrinsics)
+def read_baseline_metrics(root: Path, expected_count: int) -> dict[int, dict[str, str]]:
+    rows = read_csv(root / "metrics_per_image.csv")
+    lookup = {int(row["test_position"]): row for row in rows}
+    if len(rows) != expected_count or set(lookup) != set(range(expected_count)):
+        raise ValueError(f"Baseline metrics have missing/duplicate positions: {root}")
+    return lookup
 
-    inferred = skipped = 0
-    runtimes: list[float] = []
-    peak_memory = 0
-    start = time.perf_counter()
-    for position in range(len(dataset)):
-        sample = dataset.get_test_sample(position)
-        stem = prediction_stem(position, sample.matlab_index_1based)
-        prediction_path = predictions_dir / f"{stem}.npz"
-        metadata_path = metadata_dir / f"{stem}.json"
-        if prediction_path.exists() or metadata_path.exists():
-            if resume and prediction_path.exists() and metadata_path.exists():
-                skipped += 1
-                continue
-            raise FileExistsError(f"Existing/incomplete external-camera output: {stem}")
-        depth, effective_intrinsics, runtime, memory = adapter.infer(
-            sample.rgb, intrinsics_px=intrinsics
-        )
-        depth = resize_prediction(depth, sample.depth_m.shape)
-        if not np.allclose(effective_intrinsics, intrinsics, rtol=1e-4, atol=1e-3):
-            raise AssertionError(f"Effective external intrinsics changed for {stem}")
-        if depth.dtype != np.float32 or not np.all(np.isfinite(depth)) or np.any(depth <= 0):
-            raise ValueError(f"Invalid external-camera metric depth for {stem}")
-        np.savez_compressed(
-            prediction_path,
-            depth_m=depth,
-            intrinsics_px=effective_intrinsics.astype(np.float32),
-        )
-        metadata = {
-            "sample_id": stem,
-            "test_position": position,
-            "matlab_index_1based": sample.matlab_index_1based,
-            "scene": sample.scene,
-            "scene_type": sample.scene_type,
-            "model": "UniDepthV2-S (ViT-S/14)",
-            "depth_type": "metric",
-            "unit": "meter",
-            "alignment": "none",
-            "intrinsics_source": "nyuv2_calibration_extra_camera_information",
-            "intrinsics_px": effective_intrinsics.tolist(),
-            "external_intrinsics_provided": True,
-            "input_shape": list(sample.rgb.shape[:2]),
-            "output_shape": list(depth.shape),
-            "inference_seconds": runtime,
-            "peak_gpu_memory_bytes": memory,
-        }
-        metadata_path.write_text(
-            json.dumps(metadata, indent=2) + "\n", encoding="utf-8"
-        )
-        runtimes.append(runtime)
-        peak_memory = max(peak_memory, memory)
-        inferred += 1
-        if (position + 1) % 25 == 0 or position in {0, len(dataset) - 1}:
-            print(
-                f"[{position + 1:03d}/{len(dataset)}] external-K {stem}: "
-                f"{runtime:.3f}s, peak={memory / 2**30:.2f}GiB",
-                flush=True,
-            )
-    wall_seconds = time.perf_counter() - start
-    summary = {
-        "formal_training_run": False,
-        "sample_count": len(dataset),
-        "inferred_this_invocation": inferred,
-        "resumed": skipped,
-        "wall_seconds_this_invocation": wall_seconds,
-        "mean_inference_seconds_this_invocation": (
-            float(np.mean(runtimes)) if runtimes else None
-        ),
-        "peak_gpu_memory_bytes_this_invocation": peak_memory if runtimes else None,
-        "external_intrinsics_px": intrinsics.tolist(),
-        "environment": {
-            **adapter.environment(),
-            "python": platform.python_version(),
-            "numpy": np.__version__,
-            "model_load_seconds": adapter.load_seconds,
-        },
-    }
-    (track_root / "inference_summary.json").write_text(
-        json.dumps(summary, indent=2) + "\n", encoding="utf-8"
-    )
-    return summary
+
+def validate_sample_identity(row: dict, sample: object, position: int, stem: str) -> None:
+    if (
+        row["sample_id"] != stem
+        or int(row["test_position"]) != position
+        or int(row["matlab_index_1based"]) != sample.matlab_index_1based
+        or row["scene"] != sample.scene
+        or row["scene_type"] != sample.scene_type
+        or not np.isfinite(float(row["si_boundary_f1"]))
+    ):
+        raise ValueError(f"Baseline identity or SI metric mismatch: {stem}")
 
 
 def load_prediction(root: Path, stem: str) -> tuple[np.ndarray, dict[str, np.ndarray]]:
@@ -243,11 +149,6 @@ def mean_ci(values: list[float], config: dict, seed_offset: int = 0) -> dict[str
     return {"mean": float(array.mean()), "lower": lower, "upper": upper}
 
 
-def correlation(x: list[float], y: list[float]) -> dict[str, float]:
-    result = spearmanr(np.asarray(x), np.asarray(y))
-    return {"spearman_rho": float(result.statistic), "p_value": float(result.pvalue)}
-
-
 def edge_region_abs_rel(
     prediction: np.ndarray,
     target: np.ndarray,
@@ -265,52 +166,6 @@ def edge_region_abs_rel(
         int(edge_band.sum()),
         int(nonedge.sum()),
     )
-
-
-def save_camera_plots(
-    output_root: Path,
-    per_image: list[dict[str, object]],
-    camera_summary: dict[str, object],
-) -> None:
-    tracks = [
-        ("dp_native", "Depth Pro\npredicted f"),
-        ("dp_calibrated", "Depth Pro\ncalibrated f"),
-        ("ud_native", "UniDepthV2-S\npredicted K"),
-        ("ud_calibrated", "UniDepthV2-S\ncalibrated K"),
-    ]
-    metrics = [("abs_rel", "AbsRel ↓"), ("rmse", "RMSE (m) ↓"), ("delta1", "δ1 ↑")]
-    figure, axes = plt.subplots(1, 3, figsize=(13, 4), constrained_layout=True)
-    for axis, (metric, title) in zip(axes, metrics):
-        values = [
-            float(np.mean([float(row[f"{prefix}_{metric}"]) for row in per_image]))
-            for prefix, _ in tracks
-        ]
-        axis.bar(range(len(tracks)), values, color=["#4477AA", "#66CCEE", "#CC6677", "#EE99AA"])
-        axis.set_xticks(range(len(tracks)), [label for _, label in tracks], fontsize=8)
-        axis.set_title(title)
-        axis.grid(axis="y", alpha=0.25)
-    figure.suptitle("Camera information ablation (external-camera tracks are diagnostic)")
-    path = output_root / "camera_ablation" / "camera_ablation_metrics.png"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    figure.savefig(path, dpi=180)
-    plt.close(figure)
-
-    figure, axes = plt.subplots(1, 2, figsize=(11, 4.5), constrained_layout=True)
-    definitions = [
-        ("dp_focal_abs_relative_error", "dp_abs_log_scale_error", "Depth Pro"),
-        ("ud_focal_abs_relative_error", "ud_abs_log_scale_error", "UniDepthV2-S"),
-    ]
-    for axis, (x_key, y_key, title) in zip(axes, definitions):
-        x = np.asarray([float(row[x_key]) for row in per_image])
-        y = np.asarray([float(row[y_key]) for row in per_image])
-        axis.scatter(x, y, s=8, alpha=0.35)
-        rho = camera_summary["correlations"][title]["camera_error_vs_abs_log_scale_error"]["spearman_rho"]
-        axis.set_xlabel("absolute focal error (relative)")
-        axis.set_ylabel("absolute log scale error")
-        axis.set_title(f"{title}: Spearman ρ={rho:.3f}")
-        axis.grid(alpha=0.25)
-    figure.savefig(output_root / "camera_ablation" / "camera_error_vs_scale.png", dpi=180)
-    plt.close(figure)
 
 
 def save_scale_plots(
@@ -370,7 +225,7 @@ def save_boundary_plots(
     axes[0].set_xticks([1, 2, 3])
     axes[0].set_xlabel("matching tolerance (px)")
     axes[0].set_ylabel("macro depth-edge F1")
-    axes[0].set_title("Section 6.2 depth-edge metric")
+    axes[0].set_title("Depth-edge matching")
     axes[0].grid(alpha=0.25)
     axes[0].legend()
 
@@ -396,46 +251,6 @@ def save_boundary_plots(
     axes[1].legend(fontsize=8)
     axes[1].grid(axis="y", alpha=0.25)
     figure.savefig(output_root / "boundary" / "boundary_quantitative.png", dpi=180)
-    plt.close(figure)
-
-
-def save_cross_domain_plot(output_root: Path, category_rows: list[dict[str, object]]) -> None:
-    categories = sorted(
-        {str(row["scene_type"]) for row in category_rows},
-        key=lambda category: -sum(
-            int(row["image_count"]) for row in category_rows if row["scene_type"] == category
-        ),
-    )
-    y = np.arange(len(categories))
-    figure, axis = plt.subplots(
-        figsize=(10, max(6, 0.32 * len(categories))), constrained_layout=True
-    )
-    for offset, method, label, color in (
-        (-0.12, "depth_pro", "Depth Pro", "#4477AA"),
-        (0.12, "unidepth_v2", "UniDepthV2-S", "#CC6677"),
-    ):
-        lookup = {
-            str(row["scene_type"]): float(row["abs_rel"])
-            for row in category_rows
-            if row["method"] == method
-        }
-        axis.barh(y + offset, [lookup[c] for c in categories], height=0.23, label=label, color=color)
-    sample_counts = {
-        str(row["scene_type"]): int(row["image_count"])
-        for row in category_rows
-        if row["method"] == "depth_pro"
-    }
-    axis.set_yticks(
-        y,
-        [f"{category} (n={sample_counts[category]})" for category in categories],
-        fontsize=8,
-    )
-    axis.invert_yaxis()
-    axis.set_xlabel("macro AbsRel")
-    axis.set_title("NYUv2 target-domain robustness by scene type")
-    axis.grid(axis="x", alpha=0.25)
-    axis.legend()
-    figure.savefig(output_root / "cross_domain" / "nyuv2_scene_type_absrel.png", dpi=180)
     plt.close(figure)
 
 
@@ -519,6 +334,8 @@ def select_boundary_cases(
     ]
     for reason, ranking in rankings:
         needed = int(requested[reason])
+        if needed <= 0:
+            continue
         added = 0
         for row in ranking:
             position = int(row["test_position"])
@@ -550,22 +367,14 @@ def analyze(config: dict, dataset: NYUv2LabeledDataset, output_root: Path) -> di
     }
     for root in baseline_roots.values():
         validate_baseline_root(root, expected_count)
-    external_root = output_root / "camera_ablation" / "unidepth_external_intrinsics"
-    if len(list((external_root / "predictions").glob("*.npz"))) != expected_count:
-        raise ValueError("UniDepth external-intrinsics track is incomplete")
 
     primary_rows = {
-        method: {
-            int(row["test_position"]): row
-            for row in read_csv(root / "metrics_per_image.csv")
-        }
+        method: read_baseline_metrics(root, expected_count)
         for method, root in baseline_roots.items()
     }
     crop = crop_slices(config)
     minimum = float(config["evaluation"]["valid_depth_m"]["minimum"])
     maximum = float(config["evaluation"]["valid_depth_m"]["maximum"])
-    intrinsics = reference_intrinsics(config)
-    reference_focal = float(math.sqrt(float(intrinsics[0, 0] * intrinsics[1, 1])))
     log_threshold = float(config["boundary_analysis"]["edge_log_threshold"])
     tolerances = [int(value) for value in config["boundary_analysis"]["tolerance_pixels"]]
     edge_band = int(config["boundary_analysis"]["edge_error_band_pixels"])
@@ -580,39 +389,20 @@ def analyze(config: dict, dataset: NYUv2LabeledDataset, output_root: Path) -> di
     per_image: list[dict[str, object]] = []
     boundary_rows: list[dict[str, object]] = []
     depth_bin_rows: list[dict[str, object]] = []
-    dp_raw_min = math.inf
-    dp_raw_max = -math.inf
-    dp_official_lower_clamp_count = 0
-    dp_official_upper_clamp_count = 0
-    dp_raw_value_count = 0
     for position in range(len(dataset)):
         sample = dataset.get_test_sample(position)
         stem = prediction_stem(position, sample.matlab_index_1based)
-        dp_depth, dp_extra = load_prediction(baseline_roots["depth_pro"], stem)
-        ud_depth, ud_extra = load_prediction(baseline_roots["unidepth_v2"], stem)
-        ud_calibrated_depth, ud_calibrated_extra = load_prediction(external_root, stem)
-        dp_focal = float(np.asarray(dp_extra["focal_length_px"]).item())
-        dp_raw_min = min(dp_raw_min, float(np.min(dp_depth)))
-        dp_raw_max = max(dp_raw_max, float(np.max(dp_depth)))
-        dp_official_lower_clamp_count += int(np.count_nonzero(dp_depth <= 1e-4))
-        dp_official_upper_clamp_count += int(np.count_nonzero(dp_depth >= 1e4))
-        dp_raw_value_count += int(dp_depth.size)
-        ud_intrinsics = np.asarray(ud_extra["intrinsics_px"], dtype=np.float64)
-        effective_calibrated = np.asarray(
-            ud_calibrated_extra["intrinsics_px"], dtype=np.float64
-        )
-        if not np.allclose(effective_calibrated, intrinsics, rtol=1e-4, atol=1e-3):
-            raise AssertionError(f"Unexpected calibrated K in {stem}")
-        # This is the exact non-saturated relation in Depth Pro's official
-        # infer equation: inverse_depth = canonical_inverse_depth * W / f.
-        dp_calibrated_depth = dp_depth * np.float32(reference_focal / dp_focal)
+        dp_depth, _ = load_prediction(baseline_roots["depth_pro"], stem)
+        ud_depth, _ = load_prediction(baseline_roots["unidepth_v2"], stem)
+        for method, depth in (("depth_pro", dp_depth), ("unidepth_v2", ud_depth)):
+            if depth.shape != sample.depth_m.shape or not np.all(np.isfinite(depth)) or np.any(depth <= 0):
+                raise ValueError(f"Invalid full-size native metric prediction: {method}/{stem}")
+            validate_sample_identity(primary_rows[method][position], sample, position, stem)
 
         target = sample.depth_m[crop]
         tracks = {
             "dp_native": dp_depth[crop],
-            "dp_calibrated": dp_calibrated_depth[crop],
             "ud_native": ud_depth[crop],
-            "ud_calibrated": ud_calibrated_depth[crop],
         }
         row: dict[str, object] = {
             "sample_id": stem,
@@ -632,9 +422,9 @@ def analyze(config: dict, dataset: NYUv2LabeledDataset, output_root: Path) -> di
             for metric in DEPTH_METRICS:
                 row[f"{prefix}_{metric}"] = float(metrics[metric])
 
-        for short, prediction, intrinsics_pred in (
-            ("dp", tracks["dp_native"], None),
-            ("ud", tracks["ud_native"], ud_intrinsics),
+        for short, prediction in (
+            ("dp", tracks["dp_native"]),
+            ("ud", tracks["ud_native"]),
         ):
             valid = build_valid_mask(
                 prediction, target, min_depth=minimum, max_depth=maximum
@@ -713,137 +503,23 @@ def analyze(config: dict, dataset: NYUv2LabeledDataset, output_root: Path) -> di
                     }
                 )
 
-            if intrinsics_pred is None:
-                focal_error = dp_focal / reference_focal - 1.0
-                row["dp_predicted_focal_px"] = dp_focal
-                row["dp_focal_relative_error"] = focal_error
-                row["dp_focal_abs_relative_error"] = abs(focal_error)
-            else:
-                predicted_focal = float(
-                    math.sqrt(float(intrinsics_pred[0, 0] * intrinsics_pred[1, 1]))
-                )
-                focal_error = predicted_focal / reference_focal - 1.0
-                row["ud_predicted_fx_px"] = float(intrinsics_pred[0, 0])
-                row["ud_predicted_fy_px"] = float(intrinsics_pred[1, 1])
-                row["ud_predicted_cx_px"] = float(intrinsics_pred[0, 2])
-                row["ud_predicted_cy_px"] = float(intrinsics_pred[1, 2])
-                row["ud_predicted_geometric_focal_px"] = predicted_focal
-                row["ud_focal_relative_error"] = focal_error
-                row["ud_focal_abs_relative_error"] = abs(focal_error)
-                diagonal = math.hypot(sample.rgb.shape[1], sample.rgb.shape[0])
-                row["ud_principal_point_error_px"] = float(
-                    math.hypot(
-                        float(intrinsics_pred[0, 2] - intrinsics[0, 2]),
-                        float(intrinsics_pred[1, 2] - intrinsics[1, 2]),
-                    )
-                )
-                row["ud_principal_point_error_normalized_diagonal"] = float(
-                    row["ud_principal_point_error_px"] / diagonal
-                )
+        for short, method in (("dp", "depth_pro"), ("ud", "unidepth_v2")):
+            for metric in DEPTH_METRICS:
+                actual = float(row[f"{short}_native_{metric}"])
+                expected = float(primary_rows[method][position][metric])
+                if not np.isfinite(expected) or not np.isclose(actual, expected, rtol=1e-6, atol=1e-8):
+                    raise ValueError(f"Native metrics differ from baseline: {method}/{stem}/{metric}")
 
         row["dp_si_boundary_f1"] = float(primary_rows["depth_pro"][position]["si_boundary_f1"])
         row["ud_si_boundary_f1"] = float(primary_rows["unidepth_v2"][position]["si_boundary_f1"])
         per_image.append(row)
         if (position + 1) % 50 == 0 or position == len(dataset) - 1:
-            print(f"[{position + 1:03d}/{len(dataset)}] four-part analysis", flush=True)
+            print(f"[{position + 1:03d}/{len(dataset)}] absolute-scale and boundary analysis", flush=True)
 
     output_root.mkdir(parents=True, exist_ok=True)
     write_csv(output_root / "per_image_analysis.csv", per_image)
     write_csv(output_root / "boundary" / "boundary_per_image.csv", boundary_rows)
     write_csv(output_root / "absolute_scale" / "depth_bin_per_image.csv", depth_bin_rows)
-
-    camera_summary: dict[str, object] = {
-        "reference_intrinsics_px": intrinsics.tolist(),
-        "depth_pro_reference_scalar_focal_px": reference_focal,
-        "primary_tracks": "model-predicted camera; no extra camera information",
-        "external_tracks": "NYUv2 calibrated camera; diagnostic extra information",
-        "depth_pro_external_focal_derivation": {
-            "equation": "depth_external = depth_predicted * focal_external / focal_predicted",
-            "source": "official infer equation inverse_depth = canonical_inverse_depth * W / focal",
-            "uses_model_rerun": False,
-            "official_depth_clamp_m": [1e-4, 1e4],
-            "saved_raw_depth_min_m": dp_raw_min,
-            "saved_raw_depth_max_m": dp_raw_max,
-            "saved_raw_value_count": dp_raw_value_count,
-            "lower_clamp_value_count": dp_official_lower_clamp_count,
-            "upper_clamp_value_count": dp_official_upper_clamp_count,
-            "closed_form_rescale_validated_without_clamp_saturation": (
-                dp_official_lower_clamp_count == 0
-                and dp_official_upper_clamp_count == 0
-            ),
-        },
-        "track_metrics": {},
-        "external_minus_predicted_paired_delta": {},
-        "camera_parameter_error": {},
-        "correlations": {},
-    }
-    for prefix in ("dp_native", "dp_calibrated", "ud_native", "ud_calibrated"):
-        camera_summary["track_metrics"][prefix] = {
-            metric: mean_ci(
-                [float(row[f"{prefix}_{metric}"]) for row in per_image],
-                config,
-                seed_offset=100 + list(DEPTH_METRICS).index(metric),
-            )
-            for metric in DEPTH_METRICS
-        }
-    for model_prefix in ("dp", "ud"):
-        camera_summary["external_minus_predicted_paired_delta"][model_prefix] = {}
-        for metric_index, metric in enumerate(DEPTH_METRICS):
-            deltas = [
-                float(row[f"{model_prefix}_calibrated_{metric}"])
-                - float(row[f"{model_prefix}_native_{metric}"])
-                for row in per_image
-            ]
-            camera_summary["external_minus_predicted_paired_delta"][model_prefix][metric] = mean_ci(
-                deltas, config, seed_offset=200 + metric_index
-            )
-    camera_summary["camera_parameter_error"] = {
-        "Depth Pro": {
-            "focal_abs_relative_error": mean_ci(
-                [float(row["dp_focal_abs_relative_error"]) for row in per_image],
-                config,
-                301,
-            )
-        },
-        "UniDepthV2-S": {
-            "focal_abs_relative_error": mean_ci(
-                [float(row["ud_focal_abs_relative_error"]) for row in per_image],
-                config,
-                302,
-            ),
-            "principal_point_error_px": mean_ci(
-                [float(row["ud_principal_point_error_px"]) for row in per_image],
-                config,
-                303,
-            ),
-        },
-    }
-    camera_summary["correlations"] = {
-        "Depth Pro": {
-            "camera_error_vs_abs_log_scale_error": correlation(
-                [float(row["dp_focal_abs_relative_error"]) for row in per_image],
-                [float(row["dp_abs_log_scale_error"]) for row in per_image],
-            ),
-            "camera_error_vs_abs_rel": correlation(
-                [float(row["dp_focal_abs_relative_error"]) for row in per_image],
-                [float(row["dp_native_abs_rel"]) for row in per_image],
-            ),
-        },
-        "UniDepthV2-S": {
-            "camera_error_vs_abs_log_scale_error": correlation(
-                [float(row["ud_focal_abs_relative_error"]) for row in per_image],
-                [float(row["ud_abs_log_scale_error"]) for row in per_image],
-            ),
-            "camera_error_vs_abs_rel": correlation(
-                [float(row["ud_focal_abs_relative_error"]) for row in per_image],
-                [float(row["ud_native_abs_rel"]) for row in per_image],
-            ),
-        },
-    }
-    (output_root / "camera_ablation" / "summary.json").write_text(
-        json.dumps(camera_summary, indent=2) + "\n", encoding="utf-8"
-    )
-    save_camera_plots(output_root, per_image, camera_summary)
 
     scale_summary: dict[str, object] = {
         "primary_results_remain_native_metric_without_alignment": True,
@@ -985,8 +661,9 @@ def analyze(config: dict, dataset: NYUv2LabeledDataset, output_root: Path) -> di
             deltas, config, 450 + tolerance
         )
     boundary_report = {
-        "assignment_section_6_2_compliance": {
-            "main": "official scale-invariant Boundary F1",
+        "evaluation_protocol": {
+            "role": "supplemental_boundary_diagnosis",
+            "scale_invariant_metric": "official scale-invariant Boundary F1",
             "supplement": "depth-edge precision/recall/F1",
             "edge_ratio_threshold": config["boundary_analysis"]["edge_ratio_threshold"],
             "tolerance_pixels": tolerances,
@@ -1042,209 +719,89 @@ def analyze(config: dict, dataset: NYUv2LabeledDataset, output_root: Path) -> di
         tile_width=1000,
     )
 
-    category_rows: list[dict[str, object]] = []
-    scene_types = sorted({str(row["scene_type"]) for row in per_image})
-    for scene_type in scene_types:
-        selected = [row for row in per_image if row["scene_type"] == scene_type]
-        for short, method in (("dp", "depth_pro"), ("ud", "unidepth_v2")):
-            failures = sum(
-                float(row[f"{short}_native_abs_rel"]) > 0.25
-                or float(row[f"{short}_native_delta1"]) < 0.60
-                or float(row[f"{short}_si_boundary_f1"]) < 0.01
-                for row in selected
-            )
-            category_rows.append(
-                {
-                    "scene_type": scene_type,
-                    "method": method,
-                    "image_count": len(selected),
-                    "abs_rel": float(
-                        np.mean([float(row[f"{short}_native_abs_rel"]) for row in selected])
-                    ),
-                    "rmse": float(
-                        np.mean([float(row[f"{short}_native_rmse"]) for row in selected])
-                    ),
-                    "delta1": float(
-                        np.mean([float(row[f"{short}_native_delta1"]) for row in selected])
-                    ),
-                    "si_boundary_f1": float(
-                        np.mean([float(row[f"{short}_si_boundary_f1"]) for row in selected])
-                    ),
-                    "failure_count": int(failures),
-                    "failure_rate": float(failures / len(selected)),
-                }
-            )
-    write_csv(output_root / "cross_domain" / "nyuv2_scene_type_metrics.csv", category_rows)
-    model_comparison: dict[str, object] = {}
-    for metric_index, metric in enumerate((*DEPTH_METRICS, "si_boundary_f1")):
-        dp_key = f"dp_native_{metric}" if metric in DEPTH_METRICS else "dp_si_boundary_f1"
-        ud_key = f"ud_native_{metric}" if metric in DEPTH_METRICS else "ud_si_boundary_f1"
-        deltas = [float(row[dp_key]) - float(row[ud_key]) for row in per_image]
-        model_comparison[f"depth_pro_minus_unidepth_{metric}"] = mean_ci(
-            deltas, config, 500 + metric_index
-        )
-    dp_wins = sum(
-        float(row["dp_native_abs_rel"]) < float(row["ud_native_abs_rel"])
-        for row in per_image
-    )
-    ud_wins = sum(
-        float(row["ud_native_abs_rel"]) < float(row["dp_native_abs_rel"])
-        for row in per_image
-    )
-    cross_domain_report = {
-        "scope": "NYUv2 is the only target domain in this analysis",
-        "what_can_be_claimed": (
-            "zero-shot target-domain transfer and within-NYUv2 scene-type robustness"
-        ),
-        "what_cannot_be_claimed": (
-            "multi-target-domain generalization; no second target dataset was evaluated"
-        ),
-        "training_evidence": config["cross_domain_analysis"],
-        "per_image_absrel_wins": {
-            "depth_pro": dp_wins,
-            "unidepth_v2": ud_wins,
-            "ties": len(dataset) - dp_wins - ud_wins,
-        },
-        "paired_model_comparison": model_comparison,
-        "scene_type_ranking_minimum_images": int(
-            config["cross_domain_analysis"]["minimum_scene_type_images_for_ranking"]
-        ),
-        "worst_scene_types_by_absrel": {
-            method: sorted(
-                [
-                    row
-                    for row in category_rows
-                    if row["method"] == method
-                    and int(row["image_count"])
-                    >= int(
-                        config["cross_domain_analysis"][
-                            "minimum_scene_type_images_for_ranking"
-                        ]
-                    )
-                ],
-                key=lambda row: float(row["abs_rel"]),
-                reverse=True,
-            )[:5]
-            for method in MODEL_LABELS
-        },
-    }
-    (output_root / "cross_domain" / "summary.json").write_text(
-        json.dumps(cross_domain_report, indent=2) + "\n", encoding="utf-8"
-    )
-    save_cross_domain_plot(output_root, category_rows)
-
-    run_metadata = {
-        "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "protocol_status": config["protocol_status"],
-        "sample_count": len(dataset),
-        "formal_training_run": False,
-        "primary_tracks_test_time_alignment": "none",
-        "primary_tracks_extra_camera_information": "none",
-        "external_camera_tracks_are_diagnostic": True,
-        "another_target_domain_added": False,
-    }
-    (output_root / "run_metadata.json").write_text(
-        json.dumps(run_metadata, indent=2) + "\n", encoding="utf-8"
-    )
     return {
-        "camera": camera_summary,
         "absolute_scale": scale_summary,
         "boundary": boundary_report,
-        "cross_domain": cross_domain_report,
     }
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=PROJECT_ROOT / "configs/part2/key_analysis.yaml",
+    parser = argparse.ArgumentParser(
+        description="从两条完整native基线分析绝对尺度与边界；不加载模型，不覆盖目录。"
     )
-    parser.add_argument(
-        "--output-dir",
-        type=Path,
-        default=PROJECT_ROOT / "outputs/part2/key_analysis_v1",
-    )
-    parser.add_argument("--mode", choices=("all", "infer-external", "analyze"), default="all")
-    parser.add_argument("--device", default="cuda:0")
-    parser.add_argument("--resume", action="store_true")
+    parser.add_argument('--config', type=Path, default=PROJECT_ROOT / 'configs/part2/key_analysis.yaml')
+    parser.add_argument('--output-dir', type=Path)
     args = parser.parse_args()
-
     config = load_config(args.config)
-    labeled_mat = resolve_and_verify(
-        config["dataset"]["labeled_mat"], config["dataset"]["labeled_mat_sha256"]
-    )
-    split_file = resolve_and_verify(
-        config["dataset"]["split_file"], config["dataset"]["split_file_sha256"]
-    )
-    args.output_dir.mkdir(parents=True, exist_ok=True)
-    (args.output_dir / "config_resolved.yaml").write_text(
-        yaml.safe_dump(config, sort_keys=False, allow_unicode=True), encoding="utf-8"
-    )
-
-    with NYUv2LabeledDataset(
-        labeled_mat,
-        split_file,
-        split_variable=config["dataset"]["split_variable"],
-    ) as dataset:
-        if len(dataset) != int(config["dataset"]["expected_test_images"]):
-            raise ValueError(f"Unexpected NYUv2 test count: {len(dataset)}")
-        inference = None
-        if args.mode in {"all", "infer-external"}:
-            inference = infer_unidepth_with_reference_intrinsics(
-                config=config,
-                dataset=dataset,
-                output_root=args.output_dir,
-                device=args.device,
-                resume=args.resume,
-            )
-        analysis = None
-        if args.mode in {"all", "analyze"}:
-            analysis = analyze(config, dataset, args.output_dir)
-
+    output_root = (args.output_dir or PROJECT_ROOT / config['outputs']['root']).resolve()
+    if output_root.exists():
+        raise FileExistsError(f'Output already exists; choose a new directory: {output_root}')
+    labeled_mat = resolve_and_verify(config['dataset']['labeled_mat'], config['dataset']['labeled_mat_sha256'])
+    split_file = resolve_and_verify(config['dataset']['split_file'], config['dataset']['split_file_sha256'])
+    source_paths = [
+        Path(__file__),
+        PROJECT_ROOT / 'pipelines/part2/run_depth_pro_nyuv2.py',
+        PROJECT_ROOT / 'src/data/nyuv2.py',
+        PROJECT_ROOT / 'src/metrics/depth.py',
+        PROJECT_ROOT / 'src/metrics/boundary.py',
+        PROJECT_ROOT / 'src/visualization/nyuv2.py',
+    ]
     metadata = {
-        "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "config_path": str(args.config.resolve()),
-        "config_sha256": sha256(args.config),
-        "mode": args.mode,
-        "formal_training_run": False,
-        "inference_performed_this_invocation": inference is not None,
-        "analysis_performed_this_invocation": analysis is not None,
-        "external_inference_output_complete": len(
-            list(
-                (
-                    args.output_dir
-                    / "camera_ablation"
-                    / "unidepth_external_intrinsics"
-                    / "predictions"
-                ).glob("*.npz")
-            )
-        )
-        == int(config["dataset"]["expected_test_images"]),
-        "analysis_output_complete": all(
-            (args.output_dir / relative_path).exists()
-            for relative_path in (
-                "camera_ablation/summary.json",
-                "absolute_scale/summary.json",
-                "boundary/summary.json",
-                "cross_domain/summary.json",
-            )
-        ),
+        'status': 'running',
+        'created_at_utc': datetime.now(timezone.utc).isoformat(),
+        'config_path': str(args.config.resolve()),
+        'config_sha256': sha256(args.config),
+        'command': sys.argv,
+        'protocol_status': config['protocol_status'],
+        'formal_training_run': False,
+        'inference_performed_this_invocation': False,
+        'primary_tracks_test_time_alignment': 'none',
+        'oracle_scale_alignment_is_diagnostic_only': True,
+        'environment': {'python': platform.python_version(), 'numpy': np.__version__, 'device': 'cpu'},
+        'baseline_sources': {},
+        'source_sha256': {str(p.relative_to(PROJECT_ROOT)): sha256(p) for p in source_paths},
     }
-    (args.output_dir / "invocation_metadata.json").write_text(
-        json.dumps(metadata, indent=2) + "\n", encoding="utf-8"
-    )
-    print(
-        json.dumps(
-            {
-                "inference": inference,
-                "analysis_outputs": str(args.output_dir) if analysis is not None else None,
-            },
-            indent=2,
-        )
-    )
+    output_root.mkdir(parents=True, exist_ok=False)
+    (output_root / 'config_resolved.yaml').write_text(yaml.safe_dump(config, sort_keys=False, allow_unicode=True), encoding='utf-8')
+    metadata_path = output_root / 'run_metadata.json'
+    def save_metadata() -> None:
+        metadata_path.write_text(json.dumps(metadata, indent=2, allow_nan=False) + '\n', encoding='utf-8')
+    save_metadata()
+    start = time.perf_counter()
+    try:
+        for method, relative in config['baseline_outputs'].items():
+            root = PROJECT_ROOT / relative
+            validate_baseline_root(root, int(config['dataset']['expected_test_images']))
+            recorded = json.loads((root / 'run_metadata.json').read_text())
+            baseline_config = yaml.safe_load(Path(recorded['config']).read_text())
+            for key in ('labeled_mat_sha256', 'split_file_sha256', 'split_variable', 'expected_test_images'):
+                if baseline_config['dataset'][key] != config['dataset'][key]:
+                    raise ValueError(f'Baseline dataset protocol differs: {method}/{key}')
+            for key in ('crop', 'valid_depth_m', 'clip_prediction_to_valid_range', 'aggregation', 'test_time_alignment'):
+                if baseline_config['evaluation'][key] != config['evaluation'][key]:
+                    raise ValueError(f'Baseline evaluation protocol differs: {method}/{key}')
+            metadata['baseline_sources'][method] = {
+                'root': str(root.resolve()),
+                'records_sha256': {name: sha256(root / name) for name in ('run_metadata.json', 'metrics_per_image.csv', 'metrics_summary.json')},
+                'prediction_sha256': {p.name: sha256(p) for p in sorted((root / 'predictions').glob('*.npz'))},
+            }
+        save_metadata()
+        with NYUv2LabeledDataset(labeled_mat, split_file, split_variable=config['dataset']['split_variable']) as dataset:
+            if len(dataset) != int(config['dataset']['expected_test_images']):
+                raise ValueError(f'Unexpected NYUv2 test count: {len(dataset)}')
+            analyze(config, dataset, output_root)
+            metadata['sample_count'] = len(dataset)
+        metadata['status'] = 'complete'
+    except Exception as error:
+        metadata['status'] = 'failed'
+        metadata['error'] = f'{type(error).__name__}: {error}'
+        raise
+    finally:
+        metadata['finished_at_utc'] = datetime.now(timezone.utc).isoformat()
+        metadata['wall_seconds'] = time.perf_counter() - start
+        save_metadata()
+    print(json.dumps({'status': metadata['status'], 'analysis_outputs': str(output_root)}, indent=2))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

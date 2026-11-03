@@ -1,17 +1,219 @@
-# Step 2 / Part 1B：相对深度基准与视频时序诊断
+# Step 2 / Part 1B：指定片段的单目逐帧基线
 
 ## 任务与当前状态
 
-本步骤使用同一个DA-V2-Small相对深度权重，完成两类工作，不训练或微调模型。要求依据课程PDF §5.1、§6.1–6.2（本地保留：`../AIAA3201_Project3_Monocular_Metric_Depth_Video_Consistency_Spring2027 (1).pdf`）及中文说明（本地保留：`../Project3_CN_new.md#2-单目逐帧-baseline`）。
+依据[新版课程PDF §5.1、§6.1–6.2](../Project_3__Monocular_Metric_Depth_Estimation_and_Video_Consistency.pdf)和[中文说明](../Project3_CN_final.md)，使用官方**Depth Anything V2-Small**，独立处理`data/davis_rollercoaster.mp4`的连续原始帧。输出标为**relative depth**，不估计米、不读取视频深度GT，不做逐帧尺度拟合或时间平滑。
 
-| 部分 | 输入与目标 | 当前状态 |
+本页主线是：准备指定输入 → DA-V2逐帧预测 → 保存浮点结果与固定色标视频 → 分析尺度约定、边界和时间变化。**本次不运行Video Depth Anything，也不作DA/VDA比较**；相同帧上的比较交给Part 2B。原DA-V2-NYUv2尺度对齐分支作为扩展诊断保留在本页后半部分。
+
+当前指定文件的**全部70个真实帧**已经完成预测、可视化和原始重算核验。课程要求前100帧，但文件实际仅70帧、24 FPS、约2.917秒；没有重复、循环、插帧或换片凑数。因此“当前素材的逐帧基线”已具备，**课程100帧要求仍待教师确认70帧是否接受，或提供至少100帧的版本**。这项限制不会由`--max_len 100`自动解决。
+
+## 输入与固定协议
+
+| 项目 | 本次设置 |
+|---|---|
+| 原片 | `data/davis_rollercoaster.mp4`，官方Video Depth Anything示例副本；960×540、24 FPS |
+| SHA256 | `7268cbecd9806a1e90a416de50dc02e50b4ae01428d5971837cf679dd0c87cb8` |
+| 选帧 | 按解码索引连续读取前`min(100,实际帧数)`；当前0–69，保留原始PTS，不使用FPS网格重采样 |
+| 缓存画布 | 长边≤640，保持比例，当前640×360；供后续2B只读复用 |
+| 模型 | 官方DA-V2-Small / ViT-S；本地固定commit与权重SHA，主环境`aiaa3201` |
+| 网络输入与输出 | 官方预处理，`input_size=518`；实际H×W为518×924，恢复输出360×640 |
+| 精度与设备 | CUDA / FP16，NVIDIA RTX A6000；逐帧独立前向，骨干不训练 |
+| 原生预测 | 完整有限非负float32 NPY；arbitrary、近处数值通常较大，alignment:none、gt_used:false |
+| 显示 | TURBO；从全部原生预测的P1/P99确定一次范围，整段固定；不逐帧归一化 |
+| 保存 | 原始预测不裁剪；仅显示时截断固定范围外的颜色，并记录饱和比例 |
+| 效率 | 首帧预热1次，每帧测3次，保存首次预测；时间包含模型预处理、传输、前向与输出恢复，不含解码/保存/绘图 |
+| 辅助诊断 | CPU Farneback双向对应、FB≤1 px；不修改预测，不需要RAFT权重，也不是课程必做数值评价 |
+
+原始PTS按视频提供的小数保存，显示帧率使用流中的精确24 FPS。连续索引选帧避免把0.083333这样的PTS舍入值放到24 FPS浮点网格上比较而误跳帧。不同视频不能靠修改路径或既有运行JSON拼成同一实验。
+
+## 运行指令
+
+命令从项目根目录执行；shell入口会自行定位根目录并选择`aiaa3201`。当前结果已经存在，阅读/检查它不需要再次预测。该分支只使用DA-V2，不要求先准备VDA或RAFT权重。
+
+### 首次从空目录完整运行
+
+```bash
+# 只读检查指定片段、DA代码/权重、实际CUDA与原始帧数
+./scripts/part1/run_dav2_video.sh check
+
+# 抽连续原帧 → DA逐帧预测 → 图视频与诊断 → 完整raw重算
+./scripts/part1/run_dav2_video.sh run
+```
+
+默认配置为`configs/part1/dav2_video.yaml`。已有目录不会覆盖，失败时保留run/status及已写出的原始产物，不自动把残缺阶段当作成功续跑。独立复现或教师提供新素材时，用新配置、源SHA和空目录，不把70帧记录改写成100帧：
+
+```bash
+./scripts/part1/run_dav2_video.sh run   --output outputs/part1/dav2_video/reproduce_v1   --cache data/video_frames/part1b_davis_reproduce_v1
+```
+
+仅更换输出位置可直接使用以上参数；更换视频或科学参数时，先复制配置并如实修改源路径/SHA，再通过`--config`指定新配置。
+
+### 核验当前结果
+
+```bash
+./scripts/part1/run_dav2_video.sh verify   --run outputs/part1/dav2_video/rollercoaster_v1
+```
+
+`verify`不运行深度模型；它重新核对源/权重/源码、RGB、原始预测、帧序/PTS、整段归一化、CSV、报告SHA和2B交接记录，并从raw重新计算辅助指标。容差为`rtol=1e-6、atol=1e-8`。
+
+### 只重新生成分析和图视频
+
+```bash
+./scripts/part1/run_dav2_video.sh analyze   --run outputs/part1/dav2_video/rollercoaster_v1   --analysis outputs/part1/dav2_video/rollercoaster_v1/analysis_replot_v1
+
+./scripts/part1/run_dav2_video.sh verify   --run outputs/part1/dav2_video/rollercoaster_v1   --analysis outputs/part1/dav2_video/rollercoaster_v1/analysis_replot_v1
+```
+
+新分析目录必须不存在；它不重推理、不更改原始预测和原分析。长时间训练仍由用户启动，本任务不需要训练或微调。
+
+## 结果与观看入口
+
+- RGB / 相对深度 / 预测边缘同步视频（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/rgb_relative_edges.mp4`）：70帧、24 FPS，同一固定色标；颜色不表示米。
+- 全段总览（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/contact.png`）、诊断曲线（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/diagnostics.png`）、固定色标（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/fixed_colorbar.png`）。红色是预测深度梯度，不是人工GT边界。
+- 原生运行与效率（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/run.json`）、完整精度诊断（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/summary.json`）、原始重算核验（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/verification.json`）。
+
+实际恢复70份360×640浮点预测、70个源帧索引和69个相邻帧对。整段固定显示范围为`[0.00000000, 2.68554688]`；超过上界的160,584个像素仅在显示时饱和，约占全段0.995685%，原生数值未修改。
+
+| 效率项目 | 实际结果 |
+|---|---:|
+| 平均 / 中位 / P95耗时（ms/帧） | 21.43496807 / 21.28723877 / 22.37827087 |
+| 模型FPS | 46.65274036 |
+| 峰值allocated / reserved（MiB） | 329.4043 / 404.0000 |
+| 参数 / 权重字节 | 24,785,089 / 99,218,434 |
+| 模型加载（秒） | 0.74890405 |
+| 准备输入至原生保存阶段（秒） | 6.59967969 |
+
+FPS是上述模型计时的倒数；端到端6.60秒另含准备输入、加载、预热、三次测量及I/O，不是“单遍实时播放速度”。报告与CPU诊断不计入模型FPS，显存是PyTorch实际分配/保留峰值，不是整卡占用。
+
+## 分析一：为什么它不是正确的米制尺度
+
+画面中天空、过山车轨道、支架和车体的前后层次总体可辨；这说明模型恢复了有用的相对结构，不能说明它知道物体距离相机几米。原生值的方向是“通常越大越近”，并不是“数值越大，米数越远”。因此不能把色标上的2.0标成2米，也不应在没有视频GT时给出“错了多少米”的误差表。
+
+辅助尺度演示对同一原生输出仅作`2D+5`的数学变换，同时相应变换整段固定显示范围；其归一化显示与原图最大差约`5.95e-08`。这说明同一层次/颜色可以对应不同数字单位；演示没有作为新预测保存，更没有修改原生输出。视频里没有已知米制参考、深度GT或相机位姿，无法据此估计绝对尺度。后面的NYUv2对齐诊断用GT求评价映射，必须与这里无GT的relative身份分开。
+
+## 分析二：边界稳定性与三个实际困难案例
+
+先由全段诊断分数定位候选，再人工检查候选前后的连续RGB/深度；完整候选图与局部放大来源均保留。下面是本片确实存在的三个观察窗口，不要求虚构镜面、行人或其他未出现的场景。
+
+| 观察窗口（0-based帧号） | 实际内容与观察 | 能支持的结论 |
 |---|---|---|
-| NYUv2 Scale Alignment | 标准654张test；对齐相对预测后进行定量评估 | **完整运行、重评、原生重算与结果分析已完成** |
-| 自录Relative Depth与Temporal Diagnosis | 固定、运动相机视频；独立预测每帧，测背景闪烁与相对输出变化 | 三类型单视频流程、全图逐像素/光流指标及合成验证已具备；正式运行待用户启动 |
+| 65–69：薄结构与深度交界（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/review/thin_boundary.png`） | 中央支架、轨道及车体外沿对着天空；大轮廓连续，细杆和车体边缘的预测厚度、局部色带有变化，远处旗杆较弱 | 细结构和遮挡轮廓仍是难点；局部厚度变化不等于测得了GT定位误差 |
+| 52–56：运动列车与支架交叉遮挡（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/review/occlusion_train.png`） | 列车从交叉杆件后经过，乘客与车体在相对图上合并成粗轮廓，局部颜色/锯齿变化；RGB里车体本身也在运动 | 逐帧输出缺少显式跨帧约束，动态小结构难以持续分开；不能把真实位移、运动模糊和显露变化全算成模型伪影 |
+| 57–61：快速轮廓位移与显露区域（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/review/moving_edge.png`） | 列车沿弯轨下降，画面随相机移动；稀细轮廓及下方新显露的远景变化，深度有局部形状/颜色波动 | 应结合RGB观看时序，而不能只看固定像素差就判定闪烁；本窗口也展示光流近似与遮挡的局限 |
 
-**NYUv2分支使用测试图GT对齐，身份为`aligned_relative`；自录视频保持`alignment:none`，不逐帧调整尺度。** 前者检查对齐后的结构质量，后者观察原生输出的时间变化。NYUv2完成不代表自录视频任务完成，已有Part 2A原生米制结果也不被本分支替代。
+三例都是同一短片内的窗口，不构成三个独立场景或覆盖所有困难类型。放大图使用同一画面坐标和同一整段色标，没有为某个案例单独调色，也没有把显示裁剪区域用作数值评价mask。来源、帧号、PTS、放大框和SHA见review_sources.json（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/review/review_sources.json`）。
+
+## 分析三：时序闪烁与运动伪影
+
+这个片段中，主体杆架大轮廓总体连贯，天空大区域的输出也较平坦；**没有足够证据把它描述成全画面剧烈随机闪烁**。能直接看到的是列车/细杆附近局部颜色与轮廓的变化。它们值得保留给后续2B比较，但当前不能预先断言VDA会改善多少。
+
+为帮助找变化位置，另外保存两组可选数值。记`S=P99−P1=2.68554688`，它是整段一次确定的相对输出跨度，不是米，也不是逐帧对齐参数。
+
+| 辅助量（69个帧对等权） | 实际值 | 解释 |
+|---|---:|---|
+| 全图同坐标MAE/S | 0.09631664 | 不使用光流，包含真实物体/相机运动 |
+| 全图同坐标RMSE/S | 0.23702812 | 对大变化更敏感，不能单独叫作纯flicker |
+| Farneback对应MAE/S | 0.01294299 | FB有效域上比较，不做深度scale/shift拟合 |
+| Farneback对应RMSE/S | 0.04071483 | 含近似光流与遮挡残差，不是时序GT误差 |
+| 光流有效像素比例 | 0.91111526 | 越界与FB不一致位置不参加对应项 |
+| 边缘变化proxy | 0.00339027 | 对应后边缘在2 px容差内的双向未匹配比例；不是GT边界F1 |
+
+同坐标项较高，而近似对应后的项较低，与画面确有相机/列车运动相符；由于两者有效域不同，不能将两者之差当作被“消除的闪烁”。大量天空及平坦相对输出会压低全图均值，低边缘变化proxy也不证明乘客或细杆细节已经准确恢复。辅助数值只定位案例、补充解释，课程的视频主结果仍是同帧、固定显示下的定性观察。
+
+### 怎样看诊断图 `diagnostics.png`
+
+诊断图（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/diagnostics.png`）从上到下有四张子图；`diagnostics.pdf`是同一图的导出版本。横坐标均为原视频时间戳PTS，单位是秒。第一张每个点对应一帧，共70个点；下面三张每个点对应一对相邻帧，共69个点，放在后一帧的时间位置。例如横坐标`2.791667 s`对应第66→67帧，而不是“从开头累计到此刻的平均误差”。帧号从0开始，曲线用直线连接实际采样点，没有增加帧。
+
+| 从上到下 | 图上名称与数据列 | 这条曲线在问什么 |
+|---|---|---|
+| ① 原生相对值中位数 | `Raw relative median`；`frame_diagnostics.csv`的`median` | 每帧所有像素的预测值排序后，中间那个数是多少？用于观察整体数值分布，但不是相机距离或米制尺度。 |
+| ② 相邻帧变化 | `Pair RMSE / fixed S`；蓝线`pixel_rmse_normalized`，橙线`flow_rmse_normalized` | 不寻找对应位置、以及先近似寻找对应位置时，两帧预测分别变化了多少？ |
+| ③ 边缘变化 | `Edge change proxy`；`pair_diagnostics.csv`的`edge_instability` | 经过近似运动对应后，有多少预测边缘找不到邻近的对应边缘？ |
+| ④ 光流有效覆盖 | `Flow valid fraction`；`pair_diagnostics.csv`的`flow_coverage` | 本帧对有多少像素可以参加光流对应后的深度变化计算？ |
+
+**① 为什么第一张是一条零线？** 当前CSV中70帧的中位数确实全部为0，不是绘图漏画。完整非负相对预测中的零值合法；这一统计量被占较大面积的零值输出主导，结合画面中的大面积天空理解即可。纵轴上的负刻度只是绘图库对常数零线自动留白，不表示原生预测有负值。中位数只看数值排序的中间位置，即使列车、支架等局部预测变化很明显，中位数也可能不动。因此，零线不表示“所有像素深度都是0”，不表示“距离相机0米”，也不能作为“没有尺度漂移或闪烁”的证据。这里没有视频深度GT，不能从这条线测得真实尺度漂移。
+
+**② 蓝线和橙线有什么区别？** 蓝线`Same pixel`直接比较两帧同一屏幕坐标；如果列车驶过某个像素，该像素从天空换成车体，合理的深度变化也会被计入。橙线`Farneback + FB`先从RGB估计运动，尽量找到两帧同一画面内容的对应位置，再比较预测；FB是前向、后向运动是否一致的检查，本次阈值为1像素，越界或不一致位置不参加橙线计算。
+
+两条线都使用RMSE：先计算两帧预测差，平方后求平均，再开平方，最后除以整段固定跨度`S=2.685546875`。MAE则是对差值取绝对值后直接求平均；较大的局部变化在平方后影响更大，因此RMSE比MAE更敏感。蓝线对全图计算，橙线只在光流有效域计算；这张图**没有画MAE曲线**，MAE/S仍可在CSV和上表中查看。计算使用原生预测，不把显示时的颜色截断用于误差计算，也不逐帧拟合尺度。
+
+当前蓝线平均`0.23702812`、橙线平均`0.04071483`。例如橙线为`0.04`，表示这一帧对的对应后变化RMSE约为固定跨度S的4%，不是4%的像素预测错误，也不是4%的真实深度误差。当前蓝线在视频后段明显上升，而橙线大体保持较低水平，与画面运动影响相符；不是两个不同模型的比较，也不表示光流改善了原始预测。橙线的波动仍混合了预测变化、实际视角变化、遮挡和光流误差，没有一个现成阈值可以将它直接判为“严重闪烁”。
+
+**③ 边缘变化曲线的高低怎么读？** 先把上一帧的预测边缘按光流对应到当前帧，再在有效区域内双向查找：一侧的边缘能否在另一侧的2像素邻域中找到对应边缘？两侧未匹配比例取平均，得到该点的值。0表示在本次有效域和容差下全部能匹配；越高表示不匹配的比例越高。没有有效边缘时记为不可用，不强行记0。
+
+当前平均为`0.00339027`，即约0.3390%；最高点在第66→67帧、`2.791667 s`，为`0.00827897`，即约0.8279%，可以回看65–69帧的放大图。这些百分比的分母是参与比较的预测边缘，不是全图像素，更不是真实物体边界。曲线低只能说明这些预测边缘较一致，不能证明它们位置准确；2像素以内的抖动、两帧一致的错误边缘，以及少量细结构问题都可能被掩盖。
+
+**④ 最下面是不是准确率？** 不是。它是通过光流越界和前后向一致性检查的像素数除以全图像素数。当前平均为91.1115%，范围约87.3681%–95.4887%。数值下降表示可用于对应比较的位置减少，可能与遮挡、出画或光流不可靠有关，不能直接认定深度预测变差；天空等弱纹理区域通过检查，也不保证光流一定正确。读橙线时应同时看这张图：如果橙线下降、有效域也减少，就不能仅凭橙线认为时序变好了。边缘指标还会额外收缩有效域，避免2像素匹配窗口借用无效区域。
+
+实际阅读时，先在②和③找到变化较大的时间，再看④确认对应覆盖情况，最后回到相同时间的RGB、深度视频及局部图。曲线用于告诉我们“这里值得看”，是否为模型闪烁、真实运动或遮挡，需要结合画面判断。
+
+### 红色预测边缘的来源与粗细
+
+三栏视频的第三栏是RGB上叠加红色的**预测深度变化明显区域**。DA-V2只输出浮点相对深度图，没有单独预测一张物体边界图。这里由项目分析程序从深度图提取边缘：
+
+```text
+原生相对深度 / 整段固定跨度S
+  → Gaussian轻微平滑（sigma=0.8像素）
+  → Sobel计算横向、纵向变化，幅值组合为梯度强度
+  → 梯度强度达到固定阈值0.02的像素标红
+```
+
+Sobel使用3×3核并除以8，阈值作用于这一定义下的梯度；它不是“相邻两点深度恰好相差0.02米”。平滑和梯度计算只用于诊断，不修改原生预测。叠加图直接标记满足阈值的像素，没有再人为加粗；边缘匹配指标中的2像素容差，也不是这张红色图的绘制线宽。
+
+因此可以把红色理解为“模型预测的深度分界线索”，但不能把它当作模型明确识别的物体类别边界或GT。例如车体与天空之间通常有较大深度差，容易出现红色；同一深度平面上的花纹未必应该有红线，模型错误地把纹理当深度变化时却可能出现红线。某处没有红线，也可能只是预测深度差较小、过渡梯度未达到阈值，不能直接说模型没识别出物体。
+
+红色有时是一条窄线，有时是一条较宽的带，表示达到梯度阈值的像素区域有宽有窄。它同时受深度变化幅度、过渡形状、相邻边缘叠加、输出插值和平滑影响；**不是物体实际厚度、置信度或错误大小，越粗也不必然越模糊**。例如较宽的深度过渡可能形成红带，深度跳变量增大也可能让固定阈值覆盖更多像素；很细的杆件两侧边缘靠近，还可能合成一条较粗的带。
+
+判断不稳定时，应跟着RGB里的同一个物体看连续帧：实际轮廓没有相应变化，预测深度过渡却突然变宽、缩窄、偏移、断裂或消失，才是值得讨论的局部现象。同时检查彩色深度图；单看红线变粗，无法区分深度跳变幅度、过渡宽度和阈值效应。物体或相机运动、遮挡和RGB模糊造成的正常变化仍需单独考虑。
+
+## 架构、产物与后续2B输入
+
+| 文件 | 职责 |
+|---|---|
+| `configs/part1/dav2_video.yaml` | 指定素材、DA-S、前100真实帧上限、原FPS、640画布和固定显示 |
+| `scripts/part1/run_dav2_video.sh`、`pipelines/part1/dav2_video.py` | check/run/analyze/verify；只调用DA-V2 |
+| `src/evaluation/course_video_inputs.py` | 连续原始索引和PTS、来源SHA、只准备一套RGB |
+| `src/evaluation/framewise_clip.py` | 模型运行、来源/源码快照、原生保存、计时、分析与核验 |
+| `src/metrics/video_diagnostics.py` | 固定整段单位、可选Farneback、边缘变化与候选定位 |
+| `src/visualization/framewise_clip.py` | RGB/relative/边缘视频、连续案例、固定色标和曲线 |
+
+```text
+data/davis_rollercoaster.mp4
+data/video_frames/part1b_davis_v1/
+  manifest.json、rgb/                    连续原始帧/PTS/SHA与640画布
+outputs/part1/dav2_video/rollercoaster_v1/
+  protocol.json、run.json                实际输入/配置/源码归档、模型/效率
+  raw/*.npy                             70份未对齐原生relative
+  verification.json                    完整原始重算
+  analysis/
+    summary.json、status.json、analysis.md
+    frame_diagnostics.csv、pair_diagnostics.csv
+    handoff_2b.json                      后续2B只读引用的RGB/DA身份与显示约定
+    visualization/                      同步视频、总览、曲线、色标和候选图
+  review/                               实际查看的连续局部图、来源及复绘脚本
+```
+
+handoff_2b.json（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/handoff_2b.json`）明确`vda_executed:false`。后续2B应使用同一份RGB manifest、真实帧号/PTS和输出画布，保留DA原生预测；VDA可有自己的整段固定归一化，但同TURBO颜色不代表共享米制尺度。1B与2B运行入口及产物继续分开。
+
+旧自录2B产物及其专用自录入口/工作流/配置已按用户要求清理；当前指定片段与NYUv2分支不受影响。原始自录视频、旧1B原生结果和历史执行记录仅作归档，不再属于当前运行主线；实际删除清单见`outputs/maintenance/self_recorded_part2b_cleanup_20261103/`。
+
+## 完成门禁
+
+| 项目 | 状态 |
+|---|---|
+| DA-V2-S独立逐帧、无视频GT/米制对齐、原生保存 | 当前70帧已完成并核验 |
+| 原FPS/连续帧/固定色标/真实效率/三个实际案例 | 当前70帧已完成 |
+| 尺度约定、边界和局部时序现象的诚实分析 | 本页已补充；不强行声称全局严重闪烁 |
+| 课程要求100个真实原始帧 | 素材仅70帧，待教师确认或补充版本 |
+| 与VDA同帧比较 | 当前70帧已在Part 2B完成并重算，配对分析见[Step 4第二部分](step4.md) |
+| 最终应用Demo、报告和ZIP交付 | 留给后续整合 |
+
+---
 
 ## NYUv2：DA-V2-S的Scale Alignment
+
+本节是保留的扩展诊断，不是新版课程的逐帧视频主线，也不是Part 2A的原生米制结果。以下结果与核验描述沿用该分支已有审计；本轮只读保留，未重新运行NYUv2模型、对齐或评价，原始预测、协议和来源均保持原样。
 
 ### 基本信息与协议
 
@@ -111,13 +313,13 @@ AbsRel中位数为0.04970669，均值高于中位数，存在较难样本形成�
 
 | 缓存test位置 / scene | AbsRel | δ1 | 查看与解释 |
 |---|---:|---:|---|
-| 310 / bathroom_0046 | 0.34122097 | 0.15456070 | 案例图（本地保留：`../outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0310.png`）：镜面及其周围区域的GT和预测差异大；全局对齐无法修复局部不一致 |
-| 266 / bathroom_0008 | 0.28713603 | 0.53367287 | 案例图（本地保留：`../outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0266.png`）：约束后的常数评价结果；不能把它作为正常层次恢复展示 |
-| 447 / bedroom_0085 | 0.27964143 | 0.44479795 | 案例图（本地保留：`../outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0447.png`）：前景轮廓可辨，但背景/远处层次被压缩，绝对误差仍较大 |
+| 310 / bathroom_0046 | 0.34122097 | 0.15456070 | 案例图（本地产物：`outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0310.png`）：镜面及其周围区域的GT和预测差异大；全局对齐无法修复局部不一致 |
+| 266 / bathroom_0008 | 0.28713603 | 0.53367287 | 案例图（本地产物：`outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0266.png`）：约束后的常数评价结果；不能把它作为正常层次恢复展示 |
+| 447 / bedroom_0085 | 0.27964143 | 0.44479795 | 案例图（本地产物：`outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0447.png`）：前景轮廓可辨，但背景/远处层次被压缩，绝对误差仍较大 |
 
-这些观察来自实际查看RGB/GT/预测/误差图，不仅依据分数。没有将所有反光处差异归因于模型，GT在复杂反射场景中的语义也需谨慎解释。完整contact sheet（本地保留：`../outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/contact.jpg`）包含固定位置0/326/653和AbsRel最高6图，共9张，不是全部654张可视化。
+这些观察来自实际查看RGB/GT/预测/误差图，不仅依据分数。没有将所有反光处差异归因于模型，GT在复杂反射场景中的语义也需谨慎解释。完整contact sheet（本地产物：`outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/contact.jpg`）包含固定位置0/326/653和AbsRel最高6图，共9张，不是全部654张可视化。
 
-按场景类型的补充统计如下，完整16类结果见metrics_by_scene_type.csv（本地保留：`../outputs/part1/dav2_nyuv2/analysis_v1/metrics_by_scene_type.csv`）。这是同一NYUv2内的描述性分组，不是另一个数据域，也不改主结果的逐图权重。
+按场景类型的补充统计如下，完整16类结果见metrics_by_scene_type.csv（本地产物：`outputs/part1/dav2_nyuv2/analysis_v1/metrics_by_scene_type.csv`）。这是同一NYUv2内的描述性分组，不是另一个数据域，也不改主结果的逐图权重。
 
 | 场景类型 | 图像数 | AbsRel | RMSE (m) |
 |---|---:|---:|---:|
@@ -155,7 +357,7 @@ outputs/part1/dav2_nyuv2/
 
 本次对主评价及独立重评均重新执行`verify`，654张的raw、资源/源码、对齐数组/mask、CSV、宏平均和CI通过`rtol=1e-6 / atol=1e-8`核验。另对0/326/653、266/310/447及裁剪较多的45共7图，用独立`numpy.linalg.lstsq`和显式七指标公式复核，通过。
 
-详细来源、SHA和全精度统计见results_analysis.json（本地保留：`../outputs/part1/dav2_nyuv2/analysis_v1/results_analysis.json`），实际过程见review.py（本地保留：`../outputs/part1/dav2_nyuv2/analysis_v1/review.py`）。本次没有运行模型、训练或下载，也没有改写正式预测和自动运行元数据。
+详细来源、SHA和全精度统计见results_analysis.json（本地产物：`outputs/part1/dav2_nyuv2/analysis_v1/results_analysis.json`），实际过程见review.py（本地产物：`outputs/part1/dav2_nyuv2/analysis_v1/review.py`）。本次没有运行模型、训练或下载，也没有改写正式预测和自动运行元数据。
 
 ### 项目架构
 
@@ -167,213 +369,3 @@ outputs/part1/dav2_nyuv2/
 | `src/metrics/relative_alignment.py` | 逆深度尺度/偏移拟合、约束与退化处理 |
 | 既有NYUv2 loader、DA-V2 adapter与depth metrics | 复用数据读取、官方模型推理和七指标，Part 2A协议不变 |
 
-## 自录视频：Relative Depth与Temporal Diagnosis
-
-### 基本信息与当前状态
-
-每段视频有自己的ID、类型和结果目录。**一条命令完成这一段的抽帧、冻结、DA-V2预测、光流、全部适用诊断、图视频与重算核验**；也可以指定某项任务。新视频不需要改Python，也不要求一次收齐六段。
-
-当前六段原视频已到位，来源/SHA及视频流信息见source_inventory.json（本地保留：`../data/self_recorded/source_inventory.json`）。本流程的实现与合成生命周期验证已通过；**当前正式视频预测、指标和案例等待用户运行**。NYUv2部分已经完成，不需要重跑。本节只运行Part 1B。
-
-入口为`./scripts/part1/video.sh`，主环境`aiaa3201`；科学配置为[self_recorded.yaml](../configs/video/self_recorded.yaml)，视频登记为[clips.yaml](../configs/video/clips.yaml)。命令从项目根目录执行，脚本自行定位根目录并选择环境。
-
-### 三种视频各做什么
-
-| 类型 | 定义 | 主要任务 | 其他保留项 |
-|---|---|---|---|
-| `fixed_static` | 相机固定、无人且场景基本不动 | 原生relative；全图逐像素MAE/S、RMSE/S；全图背景时间std/S | 全图光流MAE/S、RMSE/S与coverage；中位数曲线、效率、案例 |
-| `fixed_dynamic` | 相机固定、有人经过/遮挡，或场景中存在真实运动 | 原生relative；光流对应后的MAE/S、RMSE/S；人物/边缘变化案例 | 逐像素MAE/S、RMSE/S与中位数作补充；背景std为N/A |
-| `moving` | 相机移动，视差和可见内容随时间改变 | 原生relative；光流对应后的MAE/S、RMSE/S；中位数比值/变化曲线与尺度proxy解释 | 逐像素MAE/S、RMSE/S作补充；背景std为N/A |
-
-共同的RGB、模型和光流只生成一次，不为不同指标重复预测。三类都保留光流项，以满足课程的共同评价；差别在于背景任务是否适用，以及每项指标能支持什么结论。
-
-**无人固定的背景就是整幅画面，不需要画矩形ROI。** 全图统计能覆盖墙、家具、地面和边缘。前提是相机和场景确实基本静止；轻微抖动、曝光与光照变化仍可能影响结果，不把变化全部归因于模型。如果有真实运动，应明确登记类型，不根据评分事后挑一块安静区域。
-
-### 固定科学协议
-
-| 项目 | 设置 |
-|---|---|
-| 原视频 | 保留手机原文件、源SHA和真实PTS，不覆盖原片 |
-| 选帧/缓存 | 10 FPS，按真实PTS选帧，不复制帧；长边≤960，保持宽高比 |
-| 模型 | 官方DA-V2-Small relative，CUDA/FP16，`input_size=518`；16:9实际网络H×W=518×924、输出540×960 |
-| 光流 | RAFT-Small、双向、FP32、12次更新；backward warp，FB残差≤1 px，排除越界/非有限插值支持 |
-| 固定单位 | 各模型第0帧全图`S=P95−P5`，整段不变；不是逐帧对齐 |
-| 逐像素域 | 整幅图像相同坐标，不warp、不使用光流mask；正式预测要求完整有限float32 |
-| 光流域 | 全图中的有效对应像素；所有非空帧对等权，coverage<5%只标记、不筛除 |
-| 背景域 | 仅fixed_static，全画面时间std；其余两类N/A，不补零 |
-| 显示 | TURBO，原生[0,50]、固定参考副图[0,1]、两种差分[0,0.1]；不逐帧调色标 |
-| 计时 | 每片预热1次、完整计时3次，保存第一轮原生结果；记录实际尺寸、精度、设备及显存 |
-| 数据身份 | 六段均为固定协议的test评价片；不选参、不称盲测；未知session保持null |
-
-原生值为`relative / inverse_depth_like / arbitrary / alignment:none`，数值大表示相对更近；不取倒数，不增加平滑，不读取视频深度GT。合法零值保留；NaN/Inf明确失败，不靠删难像素掩盖问题。参考跨度为零时归一化项N/A，仍保留原生变化及原因。
-
-### 指标怎样读
-
-记`D_t(x,y)`为第t帧原生预测。表中fixed_dynamic和moving的“逐像素变化作补充”，具体就是下面不经光流对齐的逐像素MAE/S、RMSE/S；它们仍计算并保存，只是解读时不能将真实运动或视差都算作模型闪烁。
-
-- **逐像素MAE/S**：对整图`|D_t−D_(t−1)|`求平均，再除以S；**逐像素RMSE/S**先对同一差值求均方根，再除以S。完全不用光流，衡量相同屏幕位置的变化。
-- **光流MAE/S、RMSE/S**：先把上一帧搬到当前帧，再在共同有效对应域上计算。更适合真实运动下检查输出连续性，但仍受光流误差和遮挡筛选影响。
-- **背景std/S**：fixed_static的每个像素先对整段计算时间标准差，再对全图取平均，`ddof=0`。它同时反映短时跳动和缓慢变化，不是纯高频闪烁指标。
-- **尺度proxy**：保留每帧原生中位数`m_t`、`m_t/m_0`、`(m_t−m_0)/S`及其曲线；摘要为平均绝对log比值与平均绝对归一化变化。原生比值受任意固定加性偏移影响；真实距离、视野与人物占比也会改变中位数。
-
-各项误差先对每个帧对计算，再等权平均；不是把整段像素混在一起计算一个RMSE。逐像素域是全图，光流域是有效对应区域，两项有效域不同；应各自比较，而不是简单把两者的大小差当作算法优劣。**固定有人和移动视频的逐像素项混有真实运动，不能单独叫作模型flicker；没有GT，中位数变化也不是已测得的真实米制尺度漂移。**
-
-### 当前六段的使用安排
-
-| ID（省略.mp4） | 类型 | 按10 FPS预计帧数 | 背景任务 |
-|---|---|---:|---|
-| `fixed_scenario1` | fixed_static | 122 | 全图 |
-| `fixed_scenario2` | fixed_static | 130 | 全图 |
-| `fixed_scenario1_people_moving` | fixed_dynamic | 139 | N/A |
-| `fixed_scenario2_people_moving` | fixed_dynamic | 135 | N/A |
-| `moving_left_to_right` | moving | 141 | N/A |
-| `moving_rear_to_front` | moving | 151 | N/A |
-
-预计818帧/812对是根据当前源PTS和选帧规则得到的安排，不是本流程已运行的结果。最终以每片新manifest、run和summary为准；不将六段名称、帧数或尺寸写死在调度器里。
-
-### 用户运行：六段自录完整实验
-
-本页命令只运行Part 1B，结果保存在`outputs/part1/video/<ID>/`。它不会启动VDA或生成Part 2B报告。Part 2B由[Step 4](step4.md)的独立入口运行并另存；比较时只读引用这里的RGB、DA-V2和光流。
-
-先检查一次本地资源与实际CUDA；不推理、不下载。若指定输出文件已存在，换一个检查文件名，不覆盖记录。
-
-```bash
-./scripts/part1/video.sh check --output outputs/part1/video_checks/resources.json
-```
-
-要求`ready_for_requested_device: true`。下面每行独立完成一个视频的全部Part 1B任务，主要耗时在DA-V2与双向RAFT，由用户启动。不必按功能把六段来回分批处理。
-
-```bash
-./scripts/part1/video.sh run --clip fixed_scenario1
-./scripts/part1/video.sh run --clip fixed_scenario2
-./scripts/part1/video.sh run --clip fixed_scenario1_people_moving
-./scripts/part1/video.sh run --clip fixed_scenario2_people_moving
-./scripts/part1/video.sh run --clip moving_left_to_right
-./scripts/part1/video.sh run --clip moving_rear_to_front
-```
-
-每段自动执行`prepare → dav2 → flow → analyze1 → verify1`。结束应有`outputs/part1/video/<ID>/verify1.json`的`status: verified`；命令失败会停止并保留实际失败记录，不把后续阶段记成成功。
-
-六段都完成后可汇总；单段视频的完整产物不依赖汇总。
-
-```bash
-./scripts/part1/video.sh summarize --output-dir outputs/part1/video_summary/all_v1
-```
-
-按三种类型分别等视频汇总，N/A不补零。新视频完成后可再次生成到新的汇总目录，如`outputs/part1/video_summary/with_new_clip_v1`；这只是汇总快照，每段视频仍只有自己的同一套完整产物。
-
-### 只做某项任务与续跑
-
-`plan`只显示会做哪些依赖，不解码、不预测、不生成正式结果。
-
-```bash
-./scripts/part1/video.sh plan --clip fixed_scenario1
-./scripts/part1/video.sh run --clip fixed_scenario1 --task prepare
-./scripts/part1/video.sh run --clip fixed_scenario1 --task dav2
-./scripts/part1/video.sh run --clip fixed_scenario1 --task flow
-./scripts/part1/video.sh run --clip fixed_scenario1 --task analyze --no-deps
-./scripts/part1/video.sh run --clip fixed_scenario1 --task verify --no-deps
-```
-
-`--task`可取`all/prepare/dav2/flow/analyze/verify`，默认all。默认补齐所选任务缺少的依赖；`--no-deps`严格只执行该任务，缺依赖就报错。`analyze`会生成所有适用的逐像素、光流、背景和尺度诊断；`verify`从raw/flow重算全部指标，不执行模型。
-
-再次运行同一条`run --clip ID`即可续跑：已完成阶段须通过来源/完整性核验才复用，原预测和元数据不覆盖。未完成或失败目录不会被当作成功跳过；查看`prepare_failure.json`、对应run/status及`commands/`后处理。若确实需要重试失败阶段，可把失败目录原样移到维护位置，再恢复原ID；改变原视频、类型、配置或代码后应使用新ID或新的输出和缓存根目录，不绕过绑定。
-
-### 新增视频
-
-把原片放到`data/self_recorded/`，用尚未使用的ID，明确类型。下面是假定已经放入`my_new_video.mp4`后的实际命令格式：
-
-```bash
-./scripts/part1/video.sh run --clip my_new_video --video data/self_recorded/my_new_video.mp4 --type fixed_static
-```
-
-第一次调用会冻结路径、类型、真实源SHA、PTS和配置；之后直接`run --clip my_new_video`即可从保存的登记恢复，不要求修改六段清单。也可以先在`configs/video/clips.yaml`增加一项`video/type/session/description`，再仅按ID运行。session知道时加`--session 实际录制批次`；不知道就保留null，不根据文件名虚构独立性。
-
-### 项目架构与产物
-
-| 文件 | 职责 |
-|---|---|
-| `scripts/part1/video.sh`、`pipelines/part1/video_clip.py` | Part 1B独立入口，只调度prepare/DA-V2/光流/单模型诊断与核验 |
-| `pipelines/video/clip.py` | 两入口共用参数定义和预检/汇总辅助；不提供可执行入口 |
-| `src/video/clip_workflow.py` | 按单视频解析登记、处理依赖、保存命令/失败、核验后复用 |
-| `src/video/clip_analysis.py` | 全图逐像素指标、光流指标、类型限定背景、尺度proxy、原生重算与汇总 |
-| `src/video/clip_report.py` | 单/双模型共用的固定色标深度、两种差分视频、曲线与案例 |
-| `src/video/frames.py`、`runner.py`、`flow.py`及官方adapter | 真实PTS选帧、冻结、官方推理与RAFT；共用数值基础 |
-
-```text
-data/self_recorded/<ID>.mp4                 原视频，不改写
-data/video_frames/self_recorded/<ID>/       只准备一次的RGB、PTS和manifest
-outputs/part1/video/<ID>/
-  clip.json、protocol.json                  视频类型、源/配置/源码冻结
-  dav2/{run.json,raw/}                      逐帧原生relative
-  flow/{flow_manifest.json,pairs/}          共享双向RAFT
-  part1/
-    summary.json、status.json
-    pair_metrics.csv、frame_metrics.csv
-    dav2/                                  光流mask、适用的全图背景数组
-    report/
-      analysis.md、report.json、curves.png/pdf
-      depth_raw.mp4、depth_normalized.mp4
-      pixel_difference.mp4、flow_difference.mp4
-      pixel_cases.png、flow_cases.png、contact_raw.png、contact_normalized.png
-      background_std.png                   仅fixed_static
-  verify1.json                             原生重算核验
-  commands/                                每次调用及实际执行/复用/失败
-```
-
-### 结果与分析状态
-
-正式结果待用户运行后填写；当前不填入其他协议的背景std或任何预测结果。每片先看`part1/report/analysis.md`的类型说明与各项指标，再看两种差分、曲线、coverage、饱和比例和案例。固定无人看短时闪烁和整段缓变；固定有人看人物进入/离开、遮挡及背景受影响；移动看对应位置变化和中位数趋势，并明确真实运动限制。
-
-当前验证使用真实临时MP4/PNG/NPY和合成预测，检查全画面、平移、零值/N/A、类型分工、来源篡改、续跑、失败保留、CSV/图视频与原始重算；不加载深度或RAFT权重，也不代表真实视频已取得新结果。
-
-### 自录视频怎样拍
-
-下面是便于得到清楚、可解释结果的**本项目建议**，不是课程规定的固定时长、段数或距离。
-
-#### 手机设置与场景布置
-
-| 项目 | 建议与原因 |
-|---|---|
-| 时长 | 每段10–15秒；10 FPS分析约100–150帧，足以画变化曲线。另留约1秒用于放稳相机，不必拍几分钟 |
-| 原片尺寸 | 优先1920×1080；1280×720也可。横屏16:9，30 FPS即可，通常无需4K/60 FPS |
-| 镜头 | 后置普通1×镜头；全片不变焦、不切镜头，不用人像虚化、电影景深或滤镜 |
-| 清晰度 | 擦镜头，避免极暗、严重运动模糊和近距离失焦；保留手机原文件，避免聊天软件转发压缩 |
-| 近处 | 约0.7–2米有桌沿、椅子、箱子或植物，不让一个近物占满画面 |
-| 中处 | 约2–5米有家具、门框或走廊结构，提供清楚的遮挡与轮廓 |
-| 远处 | 约5–10米有墙面、门或走廊尽头；房间较小也可，只要近中远层次可辨 |
-| 画面内容 | 同时有较平整表面、纹理、几条明确物体边界及少量细结构，如椅腿；不要只拍一面白墙或一整片天空 |
-| 光线 | 均匀、稳定、不过曝；优先白天室内柔和光或稳定照明。主实验避免正对强光窗、开关灯和明显闪烁照明 |
-| 自动设置 | 若手机支持，可锁定曝光、对焦和白平衡；无法锁定时保留自动设置并记录，不必另买设备 |
-| 防抖 | 固定镜头靠支架；移动时平稳小步。记录是否开防抖，别在片中途切换；不要靠后期防抖改写原片 |
-
-上述距离只是布置场景的参考，**不是GT、不是标定，也不是模型被限制在0.7–10米预测**。不要求逐点测距、RGB-D传感器或相机位姿。普通有层次的房间、办公室、门厅和走廊都合适。
-
-镜面、玻璃、强反光、暗处、快速运动可以另拍挑战片，用于失败分析；先保证主片清楚且条件可解释，不把所有困难都堆进一段。
-
-#### 固定相机怎样拍
-
-1. 手机放三脚架、桌面支架或稳定支撑，放稳后不再碰，避免“手持但尽量不动”。
-2. 画面保留近中远层次。先拍场景基本不动的10–15秒，检查背景预测是否跳动。
-3. 另一段可让人缓慢经过画面一侧，观察上下文变化带来的影响；留出不被人遮挡的墙面/家具作为稳定背景。
-4. 无人固定主片尽量保持整幅画面静止，避免窗外树叶、播放中的屏幕和明显反光变化；有这些真实运动时登记为fixed_dynamic，不按预测分数临时裁画面。
-
-固定相机、静态内容下分数很小甚至接近零也是有效结果，不必故意制造闪烁。
-
-#### 移动相机怎样拍
-
-1. 选择静止场景，手机大致保持朝向和高度，10–15秒缓慢侧移约0.5–1.5米；或者缓慢前进约0.5–1米。
-2. 保持近中远物体大部分仍在视野内，避免快速甩动、整圈旋转、突然遮住镜头或连续变焦。
-3. 侧移有利于观察对应位置变化；前进会真实改变物体距离，分析时必须承认这一点，不能把所有变化称为预测漂移。
-4. 可在另一段加入动态物体或轻微遮挡用于失败分析，不需要相机轨迹GT。
-
-
-## Part 1B完成门禁
-
-| 项目 | 当前状态 |
-|---|---|
-| NYUv2标准654张relative、GT辅助对齐、七指标、效率/案例与原始重算 | 已完成，原产物保持不变 |
-| 三类型单视频入口、全图逐像素与光流指标、背景/尺度诊断、报告与核验 | 实现和合成验证已通过 |
-| 六段正式全片预测、光流、适用指标和原始重算 | 待用户运行本节单视频命令 |
-| 实际flicker/scale proxy、效率、收益/失败解释 | 待正式产物后分析，不把无GT proxy当米制真值 |
-| mandatory clips来源确认、最终Demo、报告及视频打包 | 单列待完成 |

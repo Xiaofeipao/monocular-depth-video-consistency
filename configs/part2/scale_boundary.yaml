@@ -1,0 +1,54 @@
+protocol: nyuv2_scale_boundary_v1
+dataset:
+  labeled_mat: data/nyuv2/nyu_depth_v2_labeled.mat
+  labeled_mat_sha256: 2d724b0c0ab358aa1ce5df855e5bd14a2279ab7202efe22f32a30d612dcb86aa
+  split_file: data/nyuv2/splits.mat
+  split_file_sha256: 6e081404491a8bfba2f066beaa9713ef6046f9007aa5f799f2a350506a580cee
+  split_variable: testNdxs
+  expected_images: 654
+baselines:
+  depth_pro: outputs/part2/depth_pro_nyuv2/frozen_v1
+  unidepth_v2: outputs/part2/unidepth_v2_nyuv2/frozen_v1
+evaluation:
+  crop: [45, 471, 41, 601]
+  minimum_m: 0.001
+  maximum_m: 10.0
+  alignment: none
+  aggregation: per_image_macro_mean
+scale:
+  depth_bins_m: [[0.001, 1.0], [1.0, 2.0], [2.0, 4.0], [4.0, 6.0], [6.0, 10.0]]
+  within_ratio: [0.9, 1.1]
+  oracle: raw_per_image_median_ratio_diagnostic_only
+boundary:
+  ratios: [1.05, 1.10, 1.25]
+  primary_ratio: 1.05
+  tolerance_pixels: [1, 2, 3]
+  matching_distance: chebyshev
+  localization_distance: euclidean_capped
+  distance_cap_px: 10
+  object_annotation_support_px: 2
+  object_metric: gt_depth_edge_recall_near_class_instance_contours
+profiles:
+  radius_px: 20
+  plateau_samples: 5
+  minimum_gt_ratio: 1.10
+  maximum_gt_log_std: 0.03
+  maximum_gt_backtracking: 0.10
+  maximum_gt_width_px: 6.0
+  minimum_prediction_ratio: 1.05
+  maximum_per_image: 3
+  separation_px: 60
+  require_object_annotation_support: true
+statistics:
+  bootstrap_resamples: 10000
+  confidence: 0.95
+  seed: 42
+  unit: scene_cluster_preserving_image_weights
+cases:
+  fixed_test_positions: [21, 545, 302]
+  automatically_selected: 9
+  roi_radius_px: 55
+  depth_display_m: [0.5, 10.0]
+  signed_error_display_m: [-1.0, 1.0]
+outputs:
+  root: outputs/part2/scale_boundary_v1

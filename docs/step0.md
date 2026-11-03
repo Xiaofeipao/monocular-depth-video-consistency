@@ -2,7 +2,7 @@
 
 ## 状态
 
-公开数据所需的环境、数据、权重、输出 schema、公共指标、smoke test 和自动测试已经建立。自录视频与教师 mandatory clips 按用户要求暂缓，因此视频相关协议仍为 `candidate_v1`，不会伪造或视为已冻结。
+公开数据所需的环境、数据、权重、输出 schema、公共指标、smoke test 和自动测试已经建立。Part 1B指定官方davis_rollercoaster的70个真实帧已完成DA逐帧预测与核验，100帧素材需课程确认，指定片段当前70帧的2B独立实验与比较已完成，见Step 4。CPU工程检查和完整GPU实验分别记录，不视为课程正式视频已完成。
 
 ## 通用复现顺序
 
@@ -25,9 +25,9 @@ git -C UniDepth checkout --detach 8d8cfe4c7ee15297099983607febf0d4f32eb3d6
 
 ```
 
-用 `git -C <repo> rev-parse HEAD` 对照 `configs/versions.yaml`；保护已有修改，不 reset 或覆盖。本分支保存项目自有代码；第三方实现仍需按固定 commit 单独取得。
+用 `git -C <repo> rev-parse HEAD` 对照 `configs/versions.yaml`；保护已有修改，不 reset 或覆盖。应先取得本分支的项目自有代码，再按下列固定版本取得上游依赖。
 
-依次完成：环境 → 数据/权重 checksum → 项目测试与 smoke 门禁 → [Middlebury](step1.md) → [NYUv2 与分析](step3.md)。视频步骤依赖另行冻结的输入，保持暂缓。
+依次完成：环境 → 数据/权重 checksum → 项目测试与 smoke 门禁 → [Middlebury](step1.md) → [NYUv2 与分析](step3.md)。[逐帧视频步骤](step2.md)使用连续原始帧、固定整段色标与独立冻结协议；指定片段当前70帧的VDA独立实验与同帧比较见[Step 4](step4.md)。
 
 ## Conda 环境
 
@@ -105,10 +105,10 @@ sha256sum -c data/manifests/downloads.sha256
 - NYUv2 模型输入使用完整 480×640 RGB，评估时才应用 `[45:471, 41:601]` crop；
 - NYUv2 GT 有效条件为 `0.001 < depth < 10 m`，预测计算指标时裁剪到 `[0.001,10] m`；
 - 标准 654 张 crop 内最小正 GT 为 0.71330047 m；
-- 视频方法必须共享解码帧、FPS、分辨率、插值、mask 和固定可视化范围；
+- 视频方法比较须共享真实帧/FPS/输出画布、同一palette，每方法整段固定归一化；若附加光流误差，保持同一对应/mask协议；
 - 时序误差使用 target-to-source backward flow 与 forward/backward consistency mask。
 
-Depth Pro 和 UniDepthV2-S 的 NYUv2 协议已冻结为 `frozen_v1`。视频片段、帧率和哈希尚未冻结，所以视频公共协议仍为候选版本。
+Depth Pro 和 UniDepthV2-S 的 NYUv2 协议已冻结为 `frozen_v1`。Part 1B的NYUv2 aligned_relative基准已完成654张，独立配置为`configs/part1/dav2_nyuv2.yaml`。视频按各自配置生成绑定输入、资源与源码的`protocol.json`；当前指定片段使用独立`configs/part1/dav2_video.yaml`，保留真实70帧限制，不用自录补齐。
 
 ## 测试
 
@@ -116,7 +116,7 @@ Depth Pro 和 UniDepthV2-S 的 NYUv2 协议已冻结为 `frozen_v1`。视频片�
 conda run -n aiaa3201 python -m pytest -q
 ```
 
-公共基础建立时的记录为 **43 passed**，覆盖：
+当前结果为 **43 passed**，覆盖：
 
 - 七项单图深度指标及有效 mask；
 - Middlebury `doffs` disparity-to-depth 几何；
@@ -147,18 +147,20 @@ conda run -n aiaa3201 python scripts/smoke_models.py
 ```text
 configs/       公共协议与各 Part 配置
 src/           可复用的数据、几何、模型、指标和可视化实现
-pipelines/     Part 1/2 Python 入口
+pipelines/     Part 1/2/3 Python 入口
 scripts/       数据准备、smoke test 与各 Part shell 入口
 tests/         项目自有测试
 data/          本地数据集与 manifest
 checkpoints/   本地预训练权重与 checksum
 outputs/       运行输出和验证证据
-docs/          Step 0、1、3 的操作与结果说明
+docs/          Step 0–6 的操作与结果说明
 ```
 
-## 视频范围
+## 视频输入与后续补齐
 
-本分支不包含正式视频实验。公共时序指标和模型 smoke 仅作为 Step 0 基础保留，不能视为 Part 1B/2B 完成。
+当前课程指定`data/davis_rollercoaster.mp4`，原960×540、24 FPS、70帧。1B按连续原始索引保存640画布与原PTS，不降到10 FPS、不伪装为自录；DA-V2-S原生relative、固定整段TURBO色标，70帧运行及raw重算已完成，见[Step 2](step2.md)。100帧要求待确认是否接受现有官方完整素材或补充版本。
+
+2B以后通过1B的`analysis/handoff_2b.json`复用同一RGB/PTS/画布，本次不运行VDA。旧自录视频及其1B派生文件因为现有2B的冻结绑定而只读保留，不作为新1B任务；本次不下载或删除原数据。
 
 ## 独立资源 SHA256
 
@@ -183,11 +185,11 @@ SHA256
 
 ## 当前产物完整性
 
-当前 Middlebury 正式目录应有 60 份 `prediction.npz`；两条 NYUv2 baseline 的 prediction、metadata 与 `visualization/test_*.png` 各 654 份；外部 K prediction 与 metadata 各 654 份。可只读查看：
+Middlebury正式评估 `outputs/part1/middlebury/evaluation/` 完成后应有60份 `prediction.npz`（完整运行待用户启动）。两条 NYUv2 baseline 的 prediction、metadata 与 `visualization/test_*.png` 各 654 份。可只读查看：
 
 ```bash
 conda run -n aiaa3201 python -c \
-  'from pathlib import Path; roots=["outputs/part2/depth_pro_nyuv2/frozen_v1", "outputs/part2/unidepth_v2_nyuv2/frozen_v1", "outputs/part2/key_analysis_v1/camera_ablation/unidepth_external_intrinsics"]; print([(r, len(list((Path(r)/"predictions").glob("*.npz"))), len(list((Path(r)/"metadata").glob("*.json")))) for r in roots])'
+  'from pathlib import Path; roots=["outputs/part2/depth_pro_nyuv2/frozen_v1", "outputs/part2/unidepth_v2_nyuv2/frozen_v1"]; print([(r, len(list((Path(r)/"predictions").glob("*.npz"))), len(list((Path(r)/"metadata").glob("*.json")))) for r in roots])'
 ```
 
-数量不能独立证明结果来源。逐图身份、完整精度指标、调用模式、配置哈希及外部 K 来源证据见 [当前结果审计](current_results.md)。原始元数据中的实际路径和时间保持真实，不改写为新的执行记录。
+数量不能独立证明结果来源。逐图身份、完整精度指标、配置哈希及尺度/边界来源证据见 当前结果审计（完整记录保存在源项目，本发布包不包含）。原始元数据中的实际路径和时间保持真实，不改写为新的执行记录。

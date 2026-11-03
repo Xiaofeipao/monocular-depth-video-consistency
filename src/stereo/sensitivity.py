@@ -6,7 +6,7 @@ from collections.abc import Iterable, Mapping, Sequence
 
 import numpy as np
 
-from .geometry import depth_sensitivity, disparity_to_depth
+from .geometry import depth_sensitivity, middlebury_disparity_to_depth
 from .io import MiddleburyScene
 
 
@@ -24,13 +24,13 @@ def analyze_depth_sensitivity(
     maximum_depth = 0.0
     for scene in scenes:
         calibration = scene.calibration
-        gt_depth, depth_valid = disparity_to_depth(
+        gt_depth, depth_valid = middlebury_disparity_to_depth(
             scene.gt_disparity_px,
             focal_length_px=calibration.focal_length_px,
-            baseline=calibration.baseline_m,
-            disparity_offset_px=calibration.doffs_px,
+            baseline_mm=calibration.baseline_mm,
+            doffs_px=calibration.doffs_px,
         )
-        valid = scene.non_occluded_mask & depth_valid & np.isfinite(scene.gt_disparity_px)
+        valid = depth_valid & np.isfinite(scene.gt_disparity_px) & (scene.gt_disparity_px > 0)
         if not valid.any():
             continue
         depth_values = gt_depth[valid]
@@ -66,11 +66,11 @@ def analyze_depth_sensitivity(
             )
             exact_directions: list[np.ndarray] = []
             for signed_error in (-error_magnitude, error_magnitude):
-                perturbed_depth, valid = disparity_to_depth(
+                perturbed_depth, valid = middlebury_disparity_to_depth(
                     disparities + signed_error,
                     focal_length_px=focal_length_px,
-                    baseline=baseline_m,
-                    disparity_offset_px=doffs_px,
+                    baseline_mm=baseline_m * 1000.,
+                    doffs_px=doffs_px,
                 )
                 absolute_error = np.full(depths.shape, np.nan, dtype=np.float64)
                 absolute_error[valid] = np.abs(perturbed_depth[valid] - depths[valid])
@@ -114,8 +114,7 @@ def analyze_prediction_error_by_distance(
     """Bin one experiment's observed disparity/depth errors by GT distance.
 
     Unlike :func:`analyze_depth_sensitivity`, this is matcher-dependent. Invalid
-    predictions contribute to Bad-2 and reduce coverage, but are not assigned a
-    fabricated numerical MAE.
+    predictions reduce the valid fraction, but are not assigned a fabricated MAE.
     """
 
     if depth_bin_width_m <= 0:
@@ -135,19 +134,19 @@ def analyze_prediction_error_by_distance(
                 f"{prediction.shape} != {scene.gt_disparity_px.shape}"
             )
         calibration = scene.calibration
-        gt_depth, gt_depth_valid = disparity_to_depth(
+        gt_depth, gt_depth_valid = middlebury_disparity_to_depth(
             scene.gt_disparity_px,
             focal_length_px=calibration.focal_length_px,
-            baseline=calibration.baseline_m,
-            disparity_offset_px=calibration.doffs_px,
+            baseline_mm=calibration.baseline_mm,
+            doffs_px=calibration.doffs_px,
         )
-        predicted_depth, predicted_depth_valid = disparity_to_depth(
+        predicted_depth, predicted_depth_valid = middlebury_disparity_to_depth(
             prediction,
             focal_length_px=calibration.focal_length_px,
-            baseline=calibration.baseline_m,
-            disparity_offset_px=calibration.doffs_px,
+            baseline_mm=calibration.baseline_mm,
+            doffs_px=calibration.doffs_px,
         )
-        evaluation = scene.non_occluded_mask & gt_depth_valid
+        evaluation = gt_depth_valid & np.isfinite(scene.gt_disparity_px) & (scene.gt_disparity_px > 0)
         if not evaluation.any():
             continue
         maximum_depth = max(maximum_depth, float(gt_depth[evaluation].max()))
@@ -163,11 +162,10 @@ def analyze_prediction_error_by_distance(
 
     totals = np.zeros(len(bin_edges) - 1, dtype=np.int64)
     valids = np.zeros(len(bin_edges) - 1, dtype=np.int64)
-    bad2_counts = np.zeros(len(bin_edges) - 1, dtype=np.int64)
     depth_errors: list[list[np.ndarray]] = [[] for _ in range(len(bin_edges) - 1)]
     disparity_errors: list[list[np.ndarray]] = [[] for _ in range(len(bin_edges) - 1)]
     for scene, gt_depth, gt_disparity, predicted_depth, prediction in records:
-        evaluation = scene.non_occluded_mask & np.isfinite(gt_depth) & (gt_depth > 0)
+        evaluation = np.isfinite(gt_depth) & (gt_depth > 0) & np.isfinite(gt_disparity) & (gt_disparity > 0)
         prediction_valid = (
             evaluation
             & np.isfinite(prediction)
@@ -190,8 +188,6 @@ def analyze_prediction_error_by_distance(
                 depth_errors[bin_index].append(
                     np.abs(predicted_depth[valid_in_bin] - gt_depth[valid_in_bin])
                 )
-                bad2_counts[bin_index] += int((disparity_error > 2.0).sum())
-            bad2_counts[bin_index] += total - valid
 
     rows: list[dict[str, float | int]] = []
     for bin_index, total in enumerate(totals):
@@ -214,15 +210,14 @@ def analyze_prediction_error_by_distance(
                     (bin_edges[bin_index] + bin_edges[bin_index + 1]) / 2
                 ),
                 "mean_abs_depth_error_m": (
-                    float(np.mean(depth_error)) if depth_error is not None else float("nan")
+                    float(np.mean(depth_error)) if depth_error is not None else None
                 ),
                 "mean_abs_disparity_error_px": (
                     float(np.mean(disparity_error))
                     if disparity_error is not None
-                    else float("nan")
+                    else None
                 ),
-                "bad2": float(bad2_counts[bin_index] / total),
-                "valid_coverage": float(valid / total),
+                "valid_prediction_fraction": float(valid / total),
                 "evaluation_pixel_count": int(total),
                 "valid_prediction_count": valid,
             }

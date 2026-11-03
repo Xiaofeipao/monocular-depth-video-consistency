@@ -5,7 +5,7 @@ from src.stereo.io import MiddleburyCalibration, MiddleburyScene
 from src.stereo.sensitivity import analyze_prediction_error_by_distance
 
 
-def test_empirical_sensitivity_counts_invalid_predictions_as_bad2() -> None:
+def test_empirical_sensitivity_uses_full_gt_and_discloses_invalid() -> None:
     camera = np.array(
         [[10.0, 0.0, 0.0], [0.0, 10.0, 0.0], [0.0, 0.0, 1.0]],
         dtype=np.float64,
@@ -25,7 +25,7 @@ def test_empirical_sensitivity_counts_invalid_predictions_as_bad2() -> None:
         left_rgb=np.zeros((1, 4, 3), dtype=np.uint8),
         right_rgb=np.zeros((1, 4, 3), dtype=np.uint8),
         gt_disparity_px=np.full((1, 4), 10.0, dtype=np.float32),
-        non_occluded_mask=np.ones((1, 4), dtype=bool),
+        non_occluded_mask=np.array([[True, False, False, False]]),
         occluded_mask=np.zeros((1, 4), dtype=bool),
         calibration=calibration,
     )
@@ -35,6 +35,6 @@ def test_empirical_sensitivity_counts_invalid_predictions_as_bad2() -> None:
     )
 
     assert len(rows) == 1
-    assert rows[0]["valid_coverage"] == pytest.approx(0.75)
-    assert rows[0]["bad2"] == pytest.approx(0.5)
+    assert rows[0]["valid_prediction_fraction"] == pytest.approx(0.75)
+    assert rows[0]["evaluation_pixel_count"] == 4
     assert rows[0]["mean_abs_disparity_error_px"] == pytest.approx(1.0)

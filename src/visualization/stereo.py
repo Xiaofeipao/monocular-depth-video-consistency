@@ -13,52 +13,74 @@ from PIL import Image
 
 
 def save_stereo_panel(
-    output_path: Path,
-    *,
-    scene_name: str,
-    method_name: str,
-    rgb: np.ndarray,
-    target_disparity_px: np.ndarray,
-    prediction_disparity_px: np.ndarray,
-    evaluation_mask: np.ndarray,
-    raw_prediction_valid: np.ndarray,
-    lr_consistent: np.ndarray,
-    disparity_max_px: float,
+    output_path: Path, *, scene_name: str, method_name: str, rgb: np.ndarray,
+    target_disparity_px: np.ndarray, prediction_disparity_px: np.ndarray,
+    evaluation_mask: np.ndarray, raw_prediction_valid: np.ndarray,
+    lr_consistent: np.ndarray, disparity_max_px: float,
+    raw_disparity_px: np.ndarray | None = None,
 ) -> None:
-    """Save RGB, GT, prediction, error, invalid, and L-R failure panels."""
-
-    target = np.asarray(target_disparity_px)
+    """Compact six panels, preserving the full input and standalone LR masks."""
+    target = np.asarray(target_disparity_px).copy()
     prediction = np.asarray(prediction_disparity_px)
     evaluation = np.asarray(evaluation_mask, dtype=bool)
-    common = evaluation & np.isfinite(prediction)
-    absolute_error = np.full(target.shape, np.nan, dtype=np.float32)
-    absolute_error[common] = np.abs(prediction[common] - target[common])
-    invalid = evaluation & ~np.asarray(raw_prediction_valid, dtype=bool)
-    lr_failure = evaluation & raw_prediction_valid & ~np.asarray(lr_consistent, dtype=bool)
-
-    figure, axes = plt.subplots(2, 3, figsize=(15, 9), constrained_layout=True)
-    panels = axes.ravel()
-    panels[0].imshow(rgb)
-    panels[0].set_title("RGB (left)")
-    target_image = panels[1].imshow(target, cmap="turbo", vmin=0, vmax=disparity_max_px)
-    panels[1].set_title("GT disparity (px)")
-    prediction_image = panels[2].imshow(
-        prediction, cmap="turbo", vmin=0, vmax=disparity_max_px
-    )
-    panels[2].set_title(f"{method_name} disparity (px)")
-    error_image = panels[3].imshow(absolute_error, cmap="magma", vmin=0, vmax=4)
-    panels[3].set_title("Absolute disparity error (0–4 px)")
-    panels[4].imshow(invalid, cmap="gray", vmin=0, vmax=1)
-    panels[4].set_title("Matcher-invalid in eval mask")
-    panels[5].imshow(lr_failure, cmap="gray", vmin=0, vmax=1)
-    panels[5].set_title("Left-right inconsistency")
-    for axis in panels:
-        axis.axis("off")
-    figure.colorbar(target_image, ax=[panels[1], panels[2]], shrink=0.75)
-    figure.colorbar(error_image, ax=panels[3], shrink=0.75)
-    figure.suptitle(f"{scene_name} — {method_name}", fontsize=16)
+    target[~evaluation] = np.nan
+    raw_valid = np.asarray(raw_prediction_valid, dtype=bool)
+    consistent = np.asarray(lr_consistent, dtype=bool)
+    final_valid = np.isfinite(prediction) & (prediction > 0)
+    common = evaluation & final_valid
+    error = np.full(target.shape, np.nan, dtype=np.float32)
+    error[common] = np.abs(prediction[common] - target[common])
+    lr_status = np.zeros(target.shape, dtype=np.uint8)
+    lr_status[raw_valid & ~consistent] = 1
+    lr_status[raw_valid & consistent] = 2
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    for name, mask in {'matcher_invalid': ~raw_valid, 'invalid': ~final_valid,
+                       'lr_inconsistent': raw_valid & ~consistent}.items():
+        Image.fromarray(mask.astype(np.uint8) * 255).save(output_path.parent / f'{name}.png')
+    Image.fromarray(lr_status).save(output_path.parent / 'lr_status.png')
+
+    # Physical axes sizes preserve aspect ratio and give every image equal space.
+    # Colorbars have their own reserved column rather than shrinking image axes.
+    panel_width = 4.6
+    panel_height = panel_width * target.shape[0] / target.shape[1]
+    left, bottom, gap_x, gap_y, top, right = .08, .08, .48, .34, .56, .68
+    width = left + 3 * panel_width + 2 * gap_x + right
+    height = bottom + 2 * panel_height + gap_y + top
+    figure = plt.figure(figsize=(width, height))
+    axes = []
+    for row in range(2):
+        for column in range(3):
+            x = left + column * (panel_width + gap_x)
+            y = bottom + (1-row) * (panel_height + gap_y)
+            axes.append(figure.add_axes([x/width, y/height,
+                                        panel_width/width, panel_height/height]))
+    axes[0].imshow(rgb)
+    axes[0].set_title('RGB (left)', fontsize=10, pad=4)
+    for index, values, title in (
+        (1, target, 'GT disparity (px)'),
+        (2, prediction, f'{method_name} disparity (px)'),
+    ):
+        disparity_image = axes[index].imshow(values, cmap='turbo', vmin=0, vmax=disparity_max_px)
+        axes[index].set_title(title, fontsize=10, pad=4)
+    error_image = axes[3].imshow(error, cmap='magma', vmin=0, vmax=4)
+    axes[3].set_title('Absolute error (0–4 px)', fontsize=10, pad=4)
+    axes[4].imshow(~raw_valid, cmap='gray', vmin=0, vmax=1, interpolation='nearest')
+    axes[4].set_title('Matcher invalid (white = invalid)', fontsize=10, pad=4)
+    axes[5].imshow(~final_valid, cmap='gray', vmin=0, vmax=1, interpolation='nearest')
+    axes[5].set_title('Final invalid (white = invalid)', fontsize=10, pad=4)
+    for axis in axes:
+        axis.axis('off')
+    colorbar_x = left + 3 * panel_width + 2 * gap_x + .045
+    for image, x, y, label in (
+        (disparity_image, colorbar_x, bottom + panel_height + gap_y, 'Disparity (px)'),
+        (error_image, left + panel_width + .035, bottom, 'Error (px)'),
+    ):
+        colorbar_axis = figure.add_axes([x/width, y/height, .09/width, panel_height/height])
+        bar = figure.colorbar(image, cax=colorbar_axis)
+        bar.ax.tick_params(labelsize=8, length=2, pad=2)
+        bar.set_label(label, fontsize=8, labelpad=3)
+    figure.suptitle(f'{scene_name} — {method_name}', fontsize=13, y=1-.08/height)
     figure.savefig(output_path, dpi=140)
     plt.close(figure)
 
@@ -100,17 +122,17 @@ def save_empirical_depth_error_plot(
         selected = [row for row in rows if row["experiment"] == experiment]
         selected.sort(key=lambda row: float(row["depth_bin_center_m"]))
         distance = [float(row["depth_bin_center_m"]) for row in selected]
-        depth_error = [float(row["mean_abs_depth_error_m"]) for row in selected]
-        coverage = [float(row["valid_coverage"]) for row in selected]
+        depth_error = [float(row["mean_abs_depth_error_m"]) if row["mean_abs_depth_error_m"] is not None else np.nan for row in selected]
+        coverage = [float(row["valid_prediction_fraction"]) for row in selected]
         axes[0].plot(distance, depth_error, color=color, label=experiment)
         axes[1].plot(distance, coverage, color=color, label=experiment)
     axes[0].set_xlabel("GT depth (m)")
     axes[0].set_ylabel("Mean absolute depth error (m)")
     axes[0].set_title("Observed depth error by distance")
     axes[1].set_xlabel("GT depth (m)")
-    axes[1].set_ylabel("Valid coverage")
+    axes[1].set_ylabel("Valid prediction fraction")
     axes[1].set_ylim(0.0, 1.0)
-    axes[1].set_title("Valid coverage by distance")
+    axes[1].set_title("Valid prediction fraction by distance")
     for axis in axes:
         axis.grid(True, alpha=0.25)
         axis.legend(fontsize=8)

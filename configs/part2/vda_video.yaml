@@ -1,0 +1,50 @@
+protocol: course_part2b_offline_v1
+source:
+  path: data/davis_rollercoaster.mp4
+  sha256: 7268cbecd9806a1e90a416de50dc02e50b4ae01428d5971837cf679dd0c87cb8
+  url: https://github.com/DepthAnything/Video-Depth-Anything/blob/4f5ae23172ba60fd7bc11ef671cca678842c7072/assets/example_videos/davis_rollercoaster.mp4
+  kind: public
+input:
+  requested_frames: 100
+  original_fps: true
+  max_long_edge: 640
+  cache: data/video_frames/part1b_davis_v1
+model:
+  repository: Video-Depth-Anything
+  commit: 4f5ae23172ba60fd7bc11ef671cca678842c7072
+  checkpoint: checkpoints/video_depth_anything/video_depth_anything_vits.pth
+  sha256: 13379300b739e659f076a59d52e9801bd8d38c541a7e71f73bbca4dcfb013609
+runtime:
+  device: cuda:0
+  precision: float16
+  torch_threads: 4
+  seed: 42
+inference:
+  mode: offline
+  metric: false
+  input_size: 518
+  warmup: 1
+  timing_repeats: 3
+output: outputs/part2/vda_video/rollercoaster_v1
+visualization:
+  palette: TURBO
+  percentiles: [1, 99]
+  video: true
+diagnostics:
+  farneback: true
+  fb_threshold_px: 1.0
+  edge_threshold: 0.02
+  edge_tolerance_px: 2
+  case_separation_frames: 5
+review:
+  # 同一片段的连续局部观察，只控制展示，不限制数值评价区域。
+  cases:
+    - id: thin_boundary
+      frames: [65, 66, 67, 68, 69]
+      bbox_xyxy: [280, 80, 560, 340]
+    - id: occlusion_train
+      frames: [52, 53, 54, 55, 56]
+      bbox_xyxy: [180, 70, 570, 330]
+    - id: moving_edge
+      frames: [57, 58, 59, 60, 61]
+      bbox_xyxy: [260, 100, 600, 350]

@@ -1,3 +1,0 @@
-# Part 2B与Part 1B读取同一科学协议；视频清单独立于方法配置。
-shared_protocol: configs/video/self_recorded.yaml
-default_model: vda

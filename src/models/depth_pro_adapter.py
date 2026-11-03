@@ -51,39 +51,20 @@ class DepthProAdapter:
             torch.cuda.synchronize(self.device)
         self.load_seconds = time.perf_counter() - start
 
-    def infer(
-        self,
-        rgb: np.ndarray,
-        *,
-        focal_length_px: float | None = None,
-    ) -> tuple[np.ndarray, float, float, int]:
-        """Return depth, effective focal length, wall time, and peak CUDA bytes.
-
-        ``focal_length_px=None`` preserves the frozen no-extra-camera-information
-        baseline. A positive value is only for a separately labelled camera
-        ablation and is forwarded to the official ``model.infer`` API.
-        """
+    def infer(self, rgb: np.ndarray) -> tuple[np.ndarray, float, float, int]:
+        """Return native depth, predicted focal length, time and peak CUDA bytes."""
 
         rgb = np.asarray(rgb)
         if rgb.ndim != 3 or rgb.shape[2] != 3 or rgb.dtype != np.uint8:
             raise ValueError(f"Expected uint8 HxWx3 RGB, got {rgb.shape}/{rgb.dtype}")
-        image = Image.fromarray(rgb, mode="RGB")
+        image = Image.fromarray(rgb)
         if self.device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(self.device)
             torch.cuda.synchronize(self.device)
         start = time.perf_counter()
         with torch.inference_mode():
             transformed = self.transform(image)
-            if focal_length_px is None:
-                # Deliberately omit f_px for the frozen primary track.
-                prediction = self.model.infer(transformed)
-            else:
-                if not np.isfinite(focal_length_px) or focal_length_px <= 0:
-                    raise ValueError("focal_length_px must be finite and positive")
-                focal = torch.tensor(
-                    float(focal_length_px), device=self.device, dtype=torch.float32
-                )
-                prediction = self.model.infer(transformed, f_px=focal)
+            prediction = self.model.infer(transformed)
         if self.device.type == "cuda":
             torch.cuda.synchronize(self.device)
         runtime = time.perf_counter() - start

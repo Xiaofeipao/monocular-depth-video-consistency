@@ -1,0 +1,20 @@
+# 已有上游示例，不重新下载；公开示例不冒充自录或 mandatory clips。
+clips:
+  tokyo_walk:
+    path: Video-Depth-Anything/assets/example_videos/Tokyo-Walk_rgb.mp4
+    source_kind: public
+    camera_motion: moving
+    split: development
+    recording_session: upstream_tokyo_walk
+    source_url: https://github.com/DepthAnything/Video-Depth-Anything/blob/4f5ae23172ba60fd7bc11ef671cca678842c7072/assets/example_videos/Tokyo-Walk_rgb.mp4
+    sha256: 097f16c33dd8c8d1d2a24d9ea31a90b76bd0ee324b958a47385183e3547a63a8
+    provenance_note: 官方随仓库提供的 RGB 示例；不据此推定原视频的单独再分发许可。
+  rollercoaster:
+    path: Video-Depth-Anything/assets/example_videos/davis_rollercoaster.mp4
+    source_kind: public
+    camera_motion: moving
+    split: development
+    recording_session: upstream_davis_rollercoaster
+    source_url: https://github.com/DepthAnything/Video-Depth-Anything/blob/4f5ae23172ba60fd7bc11ef671cca678842c7072/assets/example_videos/davis_rollercoaster.mp4
+    sha256: 7268cbecd9806a1e90a416de50dc02e50b4ae01428d5971837cf679dd0c87cb8
+    provenance_note: 上游随仓库提供的 DAVIS 示例；正式报告按实际来源引用。

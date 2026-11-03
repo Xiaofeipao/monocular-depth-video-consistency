@@ -1,6 +1,6 @@
 """Classical stereo geometry, I/O, matching, and evaluation utilities."""
 
-from .geometry import depth_sensitivity, disparity_to_depth
+from .geometry import depth_sensitivity, disparity_to_depth, middlebury_disparity_to_depth
 from .io import (
     MiddleburyCalibration,
     MiddleburyScene,
@@ -25,6 +25,7 @@ __all__ = [
     "compute_stereo_depth_metrics",
     "depth_sensitivity",
     "disparity_to_depth",
+    "middlebury_disparity_to_depth",
     "left_right_consistency_mask",
     "load_middlebury_calibration",
     "load_middlebury_scene",

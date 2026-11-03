@@ -274,19 +274,6 @@ def manual_depth_metrics(
     }
 
 
-def aggregate_scene_types(rows: list[dict[str, object]]) -> list[dict[str, object]]:
-    grouped: dict[str, list[dict[str, object]]] = {}
-    for row in rows:
-        grouped.setdefault(str(row["scene_type"]), []).append(row)
-    summaries = []
-    for scene_type, selected in sorted(grouped.items()):
-        summary: dict[str, object] = {"scene_type": scene_type, "image_count": len(selected)}
-        for metric in (*DEPTH_METRICS, "si_boundary_f1"):
-            summary[metric] = float(np.mean([float(row[metric]) for row in selected]))
-        summaries.append(summary)
-    return summaries
-
-
 def select_failure_cases(
     rows: list[dict[str, object]], thresholds: dict[str, dict[str, object]]
 ) -> list[dict[str, object]]:
@@ -442,8 +429,6 @@ def evaluate_saved_predictions(
         )
 
     write_csv(output_dir / "metrics_per_image.csv", rows)
-    scene_type_rows = aggregate_scene_types(rows)
-    write_csv(output_dir / "metrics_by_scene_type.csv", scene_type_rows)
 
     stats = config["statistics"]
     report_metrics = (*DEPTH_METRICS, "si_boundary_f1")
@@ -482,24 +467,6 @@ def evaluate_saved_predictions(
         "bootstrap_95_ci": confidence_intervals,
         "efficiency": efficiency,
     }
-    if camera_output == "focal_length_px":
-        focal_lengths = np.asarray([float(row["focal_length_px"]) for row in rows])
-        summary["focal_length_source"] = "model_prediction"
-        summary["focal_length_px"] = {
-            "mean": float(focal_lengths.mean()),
-            "minimum": float(focal_lengths.min()),
-            "maximum": float(focal_lengths.max()),
-        }
-    else:
-        summary["intrinsics_source"] = "model_prediction"
-        summary["intrinsics_px"] = {
-            key: {
-                "mean": float(np.mean([float(row[key]) for row in rows])),
-                "minimum": float(np.min([float(row[key]) for row in rows])),
-                "maximum": float(np.max([float(row[key]) for row in rows])),
-            }
-            for key in ("fx_px", "fy_px", "cx_px", "cy_px")
-        }
     (output_dir / "metrics_summary.json").write_text(
         json.dumps(summary, indent=2) + "\n", encoding="utf-8"
     )
