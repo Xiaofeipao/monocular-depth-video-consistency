@@ -57,6 +57,26 @@ python scripts/audit_metric_reproduction.py --reference path/to/reference.csv --
 
 ## 资源实验与 Part 3 的边界
 
-分辨率/计时/显存实验单独归档，开发集全局尺度校准属于 Part 3 B。
+资源实验已完成：16 个预先均匀选定的 test 位置、外部 RGB 尺度 0.5/0.75/1.0，
+每种形状一次预热、两次计时；恢复 480×640 后按相同课程 crop 评价。
+原始执行与尺度实验共用主线脚本，下面的独立入口提取相同资源流程，不需要运行尺度校准：
+
+```bash
+python scripts/metric_resource_study.py --model depth_pro --output outputs/resource_depth_pro_new
+python scripts/metric_resource_study.py --model unidepth_v2 --output outputs/resource_unidepth_new
+```
+
+复现时四个上游仓库放在 `third_party/` 下；其余数据/权重位置保持项目约定。
+使用已配置模型依赖的 GPU 环境，默认精度沿用适配器。测量包括适配器预处理、
+同步与推理，不包括数据集读取/评分；这些是离线调用时间，不是在线首帧延迟。
+
+Depth Pro：0.5 与 1.0 尺度耗时约 549.5/551.9 ms，显存均约 4.00 GB，
+AbsRel 为 0.13405/0.12824。外部降采样不等于降低固定内部网络尺寸，没有实质加速证据。
+UniDepthV2：0.75 与 1.0 尺度约 23.23/26.01 ms，显存约 430.6/535.0 MB，
+AbsRel 为 0.12205/0.11984；δ1 排序不同。样本仅 16 张、重复仅两次，
+不能用它宣布最优分辨率，也不能把该子集误差与完整 654 张基线排名。
+
+原始逐次记录及汇总见 `evidence/controlled_studies/resource_*`。
+开发集全局尺度校准属于主线 Part 3 B，与这里 untouched 模型的资源测量分开报告。
 在同伴原始预测上重新验证 C，仍须先取得其 NPY/NPZ；已有指标表不能充当预测输入。
 固定测试集不得用于选择尺度或分辨率“最优”参数。
