@@ -237,6 +237,10 @@ data/public_samples/nyuv2/*
 depth_results.zip
 tmp/
 
+# Course assignment PDFs stay local; reference papers under docs/papers remain tracked.
+/Project*.pdf
+/AIAA3201_Project3*.pdf
+
 # Marimo
 marimo/_static/
 marimo/_lsp/

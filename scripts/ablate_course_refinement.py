@@ -1,5 +1,5 @@
 """Fixed C component removal on saved 654-image NYU predictions, no tuning."""
-import json,sys
+import argparse,json,sys
 from pathlib import Path
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
@@ -12,14 +12,21 @@ from src.io import write_csv,write_json,sha256
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--run',default='outputs/full_benchmark_20261029/depth_pro_nyuv2')
+    parser.add_argument('--output',default='outputs/course_submission/C_ablation')
+    parser.add_argument('--mat',default='data/nyuv2/nyu_depth_v2_labeled.mat')
+    parser.add_argument('--splits',default='data/nyuv2/splits.mat')
+    args=parser.parse_args()
     import torch;torch.set_num_threads(4)
-    out=ROOT/'outputs/course_submission/C_ablation';out.mkdir(parents=True,exist_ok=True)
     methods={'C_no_RGB':CUDAEdgeRefiner(use_rgb_guidance=False),'C_no_depth_gate':CUDAEdgeRefiner(use_depth_guidance=False)}
+    out=Path(args.output);out.mkdir(parents=True,exist_ok=False)
     rows=[]
-    with NYUv2LabeledDataset(ROOT/'data/nyuv2/nyu_depth_v2_labeled.mat',ROOT/'data/nyuv2/splits.mat') as data:
+    with NYUv2LabeledDataset(Path(args.mat),Path(args.splits)) as data:
+        if len(data)!=654: raise ValueError('Course evaluation requires 654 test images')
         for i in range(len(data)):
             s=data.get_test_sample(i);key=f'test_{i:04d}_mat_{s.matlab_index_1based:04d}'
-            path=ROOT/'outputs/full_benchmark_20261029/depth_pro_nyuv2/predictions'/f'{key}.npz'
+            path=Path(args.run)/'predictions'/f'{key}.npz'
             with np.load(path) as f: raw=f['depth_m']
             for name,refine in methods.items():
                 z=refine(raw,s.rgb)[45:471,41:601];gt=s.depth_m[45:471,41:601]

@@ -1,0 +1,12 @@
+{
+  "model": "depth_pro",
+  "checkpoint_sha256": "3eb35ca68168ad3d14cb150f8947a4edf85589941661fdb2686259c80685c0ce",
+  "split_sha256": "6e081404491a8bfba2f066beaa9713ef6046f9007aa5f799f2a350506a580cee",
+  "mat_sha256": "2d724b0c0ab358aa1ce5df855e5bd14a2279ab7202efe22f32a30d612dcb86aa",
+  "source_sha256": "68a13090a3b41082215bfb55014f941b4a7655dc45411b2de9e049e25ac315af",
+  "precision": "adapter official defaults",
+  "camera": "RGB only, predicted camera",
+  "device": "GPU-A",
+  "calibration": "median over training-image median log(GT/pred); one frozen scale; no test GT fit",
+  "resource": "16 deterministic equally spaced test positions, external RGB scales .5/.75/1; one warmup, two measured repeats; restore depth to 480x640; same crop and metrics; not a full-test resource benchmark; external resizing does not imply changing fixed internal network size"
+}

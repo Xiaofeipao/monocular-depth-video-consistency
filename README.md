@@ -26,6 +26,9 @@ course confirmation. The academic report is paused at the user's request.
 - [Current assignment compliance and the clip-length discrepancy](docs/new_brief_compliance.md)
 - [Benchmark results and reproduction](docs/benchmark_results.md)
 - [Part 3 results and direction selection](docs/part3_results.md)
+- [Part 3 B: frozen development-set global scale calibration](docs/global_scale_study.md)
+- [Step 5: Part 3 inputs, reproduction, ablations and limitations](docs/step5.md)
+- [Local Part 1/2 integration notes](docs/team_integration.md)
 - [Assignment requirements](docs/course_overview.md)
 - [Complete saved-video replay bundle](artifacts/relative_video_demo/README.md)
 
@@ -98,10 +101,18 @@ be chosen once and shared across the comparison. Native metric evaluation
 rejects ground-truth alignment. KITTI uses the same evaluator with its own
 manifest, crop, valid mask and max depth. No official protocol is guessed.
 
-## Part 3: fusion and controlled ablations
+## Part 3: edge-aware refinement and controlled ablations
 
 入口与代码归属：[pipelines/part3/README.md](pipelines/part3/README.md)。
-核心改进在 `src/temporal.py`、`src/flow.py`，应用在 `src/demo.py`。
+正式主线 C 在 `src/exploration/edge_aware.py`，完整输入、输出和复现见
+[Step 5](docs/step5.md)。时序融合在 `src/temporal.py`、`src/flow.py`，作为扩展保留。
+
+```powershell
+python -m pipelines.part3.refine_nyuv2 --run outputs/full_benchmark_20261029/depth_pro_nyuv2 --output outputs/part3/depth_pro_C_reproduce_v1 --check-only
+python -m pipelines.part3.refine_nyuv2 --run outputs/full_benchmark_20261029/depth_pro_nyuv2 --output outputs/part3/depth_pro_C_reproduce_v1 --backend cuda --save-predictions
+```
+
+以下为可选时序扩展入口，需要 Part 2 的米制视频预测：
 
 ```powershell
 python -m pipelines.part3.run_temporal_fusion --run outputs/part2/metric_static --output outputs/part3/static_A6
