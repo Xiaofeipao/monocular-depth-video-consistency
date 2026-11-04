@@ -1,0 +1,76 @@
+{
+  "description": "Independent explicit NumPy formulas versus shared evaluator",
+  "tolerance": 1e-10,
+  "all_passed": true,
+  "samples": [
+    {
+      "test_position": 0,
+      "sample_id": "test_0000_mat_0001",
+      "manual_metrics": {
+        "abs_rel": 0.02035607507482695,
+        "sq_rel": 0.002380610651641687,
+        "rmse": 0.08129671486705382,
+        "rmse_log": 0.028959827560988867,
+        "delta1": 0.997677733065057,
+        "delta2": 1.0,
+        "delta3": 1.0
+      },
+      "absolute_differences": {
+        "abs_rel": 0.0,
+        "sq_rel": 0.0,
+        "rmse": 0.0,
+        "rmse_log": 0.0,
+        "delta1": 0.0,
+        "delta2": 0.0,
+        "delta3": 0.0
+      },
+      "passed": true
+    },
+    {
+      "test_position": 326,
+      "sample_id": "test_0326_mat_0769",
+      "manual_metrics": {
+        "abs_rel": 0.04161527107151588,
+        "sq_rel": 0.013356232044709444,
+        "rmse": 0.18091721496887844,
+        "rmse_log": 0.07870395210063733,
+        "delta1": 0.9787684439973172,
+        "delta2": 0.9924756874580818,
+        "delta3": 0.9997484909456741
+      },
+      "absolute_differences": {
+        "abs_rel": 0.0,
+        "sq_rel": 0.0,
+        "rmse": 0.0,
+        "rmse_log": 0.0,
+        "delta1": 0.0,
+        "delta2": 0.0,
+        "delta3": 0.0
+      },
+      "passed": true
+    },
+    {
+      "test_position": 653,
+      "sample_id": "test_0653_mat_1449",
+      "manual_metrics": {
+        "abs_rel": 0.14974440922317,
+        "sq_rel": 0.09318816709223315,
+        "rmse": 0.5880672047273114,
+        "rmse_log": 0.1858368427007901,
+        "delta1": 0.9244257209926224,
+        "delta2": 0.9778630114017438,
+        "delta3": 0.995565057008719
+      },
+      "absolute_differences": {
+        "abs_rel": 0.0,
+        "sq_rel": 0.0,
+        "rmse": 0.0,
+        "rmse_log": 0.0,
+        "delta1": 0.0,
+        "delta2": 0.0,
+        "delta3": 0.0
+      },
+      "passed": true
+    }
+  ]
+}

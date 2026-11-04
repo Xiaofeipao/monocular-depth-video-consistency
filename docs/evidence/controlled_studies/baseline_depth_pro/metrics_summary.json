@@ -1,0 +1,67 @@
+{
+  "protocol_status": "frozen_v1",
+  "image_count": 654,
+  "aggregation": "per_image_macro_mean",
+  "depth_type": "metric",
+  "unit": "meter",
+  "alignment": "none",
+  "extra_camera_information": "none",
+  "camera_output": "focal_length_px",
+  "macro_mean": {
+    "abs_rel": 0.10047326365641308,
+    "sq_rel": 0.06401210079010482,
+    "rmse": 0.3922195685272713,
+    "rmse_log": 0.1353388797454811,
+    "delta1": 0.9151851539922512,
+    "delta2": 0.979860361198793,
+    "delta3": 0.9918793469276411,
+    "si_boundary_f1": 0.15926854653995523
+  },
+  "bootstrap_95_ci": {
+    "abs_rel": {
+      "lower": 0.0960589940049973,
+      "upper": 0.1051169033418868
+    },
+    "sq_rel": {
+      "lower": 0.05632038610969092,
+      "upper": 0.072904964403567
+    },
+    "rmse": {
+      "lower": 0.370486508775263,
+      "upper": 0.41521629951562317
+    },
+    "rmse_log": {
+      "lower": 0.12874043805882215,
+      "upper": 0.1421592483953959
+    },
+    "delta1": {
+      "lower": 0.9042000819904135,
+      "upper": 0.9258134898201646
+    },
+    "delta2": {
+      "lower": 0.9753475135343149,
+      "upper": 0.9837772325530657
+    },
+    "delta3": {
+      "lower": 0.9895010200409902,
+      "upper": 0.9940238009991651
+    },
+    "si_boundary_f1": {
+      "lower": 0.15180987143853084,
+      "upper": 0.16668295413043138
+    }
+  },
+  "efficiency": {
+    "mean_seconds": 0.6300538174311979,
+    "median_seconds": 0.6451786000002357,
+    "p95_seconds": 0.6501740999999811,
+    "fps_from_mean_inference_time": 1.587166004448819,
+    "peak_gpu_memory_bytes": 4000329728
+  },
+  "focal_length_source": "model_prediction",
+  "focal_length_px": {
+    "mean": 519.3578829517422,
+    "minimum": 505.335205078125,
+    "maximum": 536.538818359375
+  }
+}

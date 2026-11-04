@@ -126,3 +126,7 @@ src 为公共实现，tests 为相关回归测试，docs 为完整步骤说明�
 本包测试范围小于源项目全部测试，不能沿用全项目测试数量。
 
 发布文件清单与SHA256见 PART1_PART2_EXPORT.json；完成范围见 implemented.md。
+
+## 补充实验与公开证据
+
+[误差与覆盖率、独立基线逐图核对](docs/controlled_studies.md)：开发集冻结选参、十场景验证、Pareto 图，以及独立 NYUv2 运行证据；不替换上述原有基线。
