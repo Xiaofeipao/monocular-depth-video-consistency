@@ -1,6 +1,6 @@
 # AIAA 3201 Project 3
 
-项目研究经典双目、单目米制深度和视频时序一致性。课程要求以[课程PDF](Project_3__Monocular_Metric_Depth_Estimation_and_Video_Consistency.pdf)为准，中文说明见[Project3_CN_final.md](Project3_CN_final.md)。Part 3采用 **B：开发集全局尺度校准**与 **C：固定边缘感知细化**，两项独立评价。
+项目研究经典双目、单目米制深度和视频时序一致性。课程要求以[课程PDF](Project_3__Monocular_Metric_Depth_Estimation_and_Video_Consistency.pdf)为准。Part 3采用 **B：开发集全局尺度校准**与 **C：固定边缘感知细化**，两项独立评价。
 
 ## 当前状态与操作入口
 
@@ -87,6 +87,3 @@ outputs/part3/                  # B/C完整正式结果、尺度、消融与案�
 outputs/maintenance/            # 小型核验、保护与删除审计
 ```
 
-详细门禁见[PLAN.md](PLAN.md)，实际实施与验证见[implemented.md](implemented.md)。测试使用`conda run -n aiaa3201 python -m pytest -q`；合成测试不替代真实实验。
-
-包含Part 1、Part 2和Direction B/C的完整分支更新见[GitHub上传指南](docs/github_upload_project.md)：白名单导出项目自有代码、配置、测试与说明，在独立克隆中替换目标分支最新文件树；视频、数据、权重、outputs和第三方仓库均不上传。仅上传Part 1/2时仍可使用[专用指南](docs/github_upload_part1_part2.md)。队友分支审查在[analysis_branch.md](github_repository/analysis_branch.md)，main Part 3审查在[analysis.md](github_repository/analysis.md)；借用实现的来源与MIT许可保存在`src/refinement/`，第三方仓库保持独立。
