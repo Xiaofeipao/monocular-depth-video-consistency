@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/Xiaofeipao/monocular-depth-video-consistency",
+  "commit": "528e33e22065cefdb1f5d202cf8b61c46581d3d6",
+  "files": {
+    "src/exploration/edge_aware.py": {
+      "raw_sha256": "a85c7677c539e5e6d92ffef5c6bdf7c46eb24768d427f92125a3c5d03fde6a8b",
+      "lf_sha256": "ec3faa33e73b11aebccbaf00b63c763ca3461d7fb51d2758d07ae866e426216c"
+    },
+    "scripts/metric_resource_calibration_study.py": {
+      "raw_sha256": "b3a95c551aa4c0d63c1d5213b3f6c585e53eb8e2e5fe5bea6b4d660952ed3bec",
+      "lf_sha256": "68a13090a3b41082215bfb55014f941b4a7655dc45411b2de9e049e25ac315af"
+    }
+  },
+  "note": "edge_aware.py按LF逐字移植；全局尺度公式独立接入本项目I/O，移除资源实验与硬编码third_party路径。"
+}

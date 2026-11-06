@@ -69,9 +69,9 @@
 
 ## 结果与观看入口
 
-- RGB / 相对深度 / 预测边缘同步视频（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/rgb_relative_edges.mp4`）：70帧、24 FPS，同一固定色标；颜色不表示米。
-- 全段总览（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/contact.png`）、诊断曲线（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/diagnostics.png`）、固定色标（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/fixed_colorbar.png`）。红色是预测深度梯度，不是人工GT边界。
-- 原生运行与效率（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/run.json`）、完整精度诊断（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/summary.json`）、原始重算核验（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/verification.json`）。
+- [RGB / 相对深度 / 预测边缘同步视频](../outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/rgb_relative_edges.mp4)：70帧、24 FPS，同一固定色标；颜色不表示米。
+- [全段总览](../outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/contact.png)、[诊断曲线](../outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/diagnostics.png)、[固定色标](../outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/fixed_colorbar.png)。红色是预测深度梯度，不是人工GT边界。
+- [原生运行与效率](../outputs/part1/dav2_video/rollercoaster_v1/run.json)、[完整精度诊断](../outputs/part1/dav2_video/rollercoaster_v1/analysis/summary.json)、[原始重算核验](../outputs/part1/dav2_video/rollercoaster_v1/verification.json)。
 
 实际恢复70份360×640浮点预测、70个源帧索引和69个相邻帧对。整段固定显示范围为`[0.00000000, 2.68554688]`；超过上界的160,584个像素仅在显示时饱和，约占全段0.995685%，原生数值未修改。
 
@@ -98,11 +98,11 @@ FPS是上述模型计时的倒数；端到端6.60秒另含准备输入、加载�
 
 | 观察窗口（0-based帧号） | 实际内容与观察 | 能支持的结论 |
 |---|---|---|
-| 65–69：薄结构与深度交界（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/review/thin_boundary.png`） | 中央支架、轨道及车体外沿对着天空；大轮廓连续，细杆和车体边缘的预测厚度、局部色带有变化，远处旗杆较弱 | 细结构和遮挡轮廓仍是难点；局部厚度变化不等于测得了GT定位误差 |
-| 52–56：运动列车与支架交叉遮挡（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/review/occlusion_train.png`） | 列车从交叉杆件后经过，乘客与车体在相对图上合并成粗轮廓，局部颜色/锯齿变化；RGB里车体本身也在运动 | 逐帧输出缺少显式跨帧约束，动态小结构难以持续分开；不能把真实位移、运动模糊和显露变化全算成模型伪影 |
-| 57–61：快速轮廓位移与显露区域（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/review/moving_edge.png`） | 列车沿弯轨下降，画面随相机移动；稀细轮廓及下方新显露的远景变化，深度有局部形状/颜色波动 | 应结合RGB观看时序，而不能只看固定像素差就判定闪烁；本窗口也展示光流近似与遮挡的局限 |
+| [65–69：薄结构与深度交界](../outputs/part1/dav2_video/rollercoaster_v1/review/thin_boundary.png) | 中央支架、轨道及车体外沿对着天空；大轮廓连续，细杆和车体边缘的预测厚度、局部色带有变化，远处旗杆较弱 | 细结构和遮挡轮廓仍是难点；局部厚度变化不等于测得了GT定位误差 |
+| [52–56：运动列车与支架交叉遮挡](../outputs/part1/dav2_video/rollercoaster_v1/review/occlusion_train.png) | 列车从交叉杆件后经过，乘客与车体在相对图上合并成粗轮廓，局部颜色/锯齿变化；RGB里车体本身也在运动 | 逐帧输出缺少显式跨帧约束，动态小结构难以持续分开；不能把真实位移、运动模糊和显露变化全算成模型伪影 |
+| [57–61：快速轮廓位移与显露区域](../outputs/part1/dav2_video/rollercoaster_v1/review/moving_edge.png) | 列车沿弯轨下降，画面随相机移动；稀细轮廓及下方新显露的远景变化，深度有局部形状/颜色波动 | 应结合RGB观看时序，而不能只看固定像素差就判定闪烁；本窗口也展示光流近似与遮挡的局限 |
 
-三例都是同一短片内的窗口，不构成三个独立场景或覆盖所有困难类型。放大图使用同一画面坐标和同一整段色标，没有为某个案例单独调色，也没有把显示裁剪区域用作数值评价mask。来源、帧号、PTS、放大框和SHA见review_sources.json（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/review/review_sources.json`）。
+三例都是同一短片内的窗口，不构成三个独立场景或覆盖所有困难类型。放大图使用同一画面坐标和同一整段色标，没有为某个案例单独调色，也没有把显示裁剪区域用作数值评价mask。来源、帧号、PTS、放大框和SHA见[review_sources.json](../outputs/part1/dav2_video/rollercoaster_v1/review/review_sources.json)。
 
 ## 分析三：时序闪烁与运动伪影
 
@@ -123,7 +123,7 @@ FPS是上述模型计时的倒数；端到端6.60秒另含准备输入、加载�
 
 ### 怎样看诊断图 `diagnostics.png`
 
-诊断图（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/diagnostics.png`）从上到下有四张子图；`diagnostics.pdf`是同一图的导出版本。横坐标均为原视频时间戳PTS，单位是秒。第一张每个点对应一帧，共70个点；下面三张每个点对应一对相邻帧，共69个点，放在后一帧的时间位置。例如横坐标`2.791667 s`对应第66→67帧，而不是“从开头累计到此刻的平均误差”。帧号从0开始，曲线用直线连接实际采样点，没有增加帧。
+[诊断图](../outputs/part1/dav2_video/rollercoaster_v1/analysis/visualization/diagnostics.png)从上到下有四张子图；`diagnostics.pdf`是同一图的导出版本。横坐标均为原视频时间戳PTS，单位是秒。第一张每个点对应一帧，共70个点；下面三张每个点对应一对相邻帧，共69个点，放在后一帧的时间位置。例如横坐标`2.791667 s`对应第66→67帧，而不是“从开头累计到此刻的平均误差”。帧号从0开始，曲线用直线连接实际采样点，没有增加帧。
 
 | 从上到下 | 图上名称与数据列 | 这条曲线在问什么 |
 |---|---|---|
@@ -194,7 +194,7 @@ outputs/part1/dav2_video/rollercoaster_v1/
   review/                               实际查看的连续局部图、来源及复绘脚本
 ```
 
-handoff_2b.json（本地产物：`outputs/part1/dav2_video/rollercoaster_v1/analysis/handoff_2b.json`）明确`vda_executed:false`。后续2B应使用同一份RGB manifest、真实帧号/PTS和输出画布，保留DA原生预测；VDA可有自己的整段固定归一化，但同TURBO颜色不代表共享米制尺度。1B与2B运行入口及产物继续分开。
+[handoff_2b.json](../outputs/part1/dav2_video/rollercoaster_v1/analysis/handoff_2b.json)明确`vda_executed:false`。后续2B应使用同一份RGB manifest、真实帧号/PTS和输出画布，保留DA原生预测；VDA可有自己的整段固定归一化，但同TURBO颜色不代表共享米制尺度。1B与2B运行入口及产物继续分开。
 
 旧自录2B产物及其专用自录入口/工作流/配置已按用户要求清理；当前指定片段与NYUv2分支不受影响。原始自录视频、旧1B原生结果和历史执行记录仅作归档，不再属于当前运行主线；实际删除清单见`outputs/maintenance/self_recorded_part2b_cleanup_20261103/`。
 
@@ -313,13 +313,13 @@ AbsRel中位数为0.04970669，均值高于中位数，存在较难样本形成�
 
 | 缓存test位置 / scene | AbsRel | δ1 | 查看与解释 |
 |---|---:|---:|---|
-| 310 / bathroom_0046 | 0.34122097 | 0.15456070 | 案例图（本地产物：`outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0310.png`）：镜面及其周围区域的GT和预测差异大；全局对齐无法修复局部不一致 |
-| 266 / bathroom_0008 | 0.28713603 | 0.53367287 | 案例图（本地产物：`outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0266.png`）：约束后的常数评价结果；不能把它作为正常层次恢复展示 |
-| 447 / bedroom_0085 | 0.27964143 | 0.44479795 | 案例图（本地产物：`outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0447.png`）：前景轮廓可辨，但背景/远处层次被压缩，绝对误差仍较大 |
+| 310 / bathroom_0046 | 0.34122097 | 0.15456070 | [案例图](../outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0310.png)：镜面及其周围区域的GT和预测差异大；全局对齐无法修复局部不一致 |
+| 266 / bathroom_0008 | 0.28713603 | 0.53367287 | [案例图](../outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0266.png)：约束后的常数评价结果；不能把它作为正常层次恢复展示 |
+| 447 / bedroom_0085 | 0.27964143 | 0.44479795 | [案例图](../outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/test_0447.png)：前景轮廓可辨，但背景/远处层次被压缩，绝对误差仍较大 |
 
-这些观察来自实际查看RGB/GT/预测/误差图，不仅依据分数。没有将所有反光处差异归因于模型，GT在复杂反射场景中的语义也需谨慎解释。完整contact sheet（本地产物：`outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/contact.jpg`）包含固定位置0/326/653和AbsRel最高6图，共9张，不是全部654张可视化。
+这些观察来自实际查看RGB/GT/预测/误差图，不仅依据分数。没有将所有反光处差异归因于模型，GT在复杂反射场景中的语义也需谨慎解释。完整[contact sheet](../outputs/part1/dav2_nyuv2/frozen_v1/evaluation/visualization/contact.jpg)包含固定位置0/326/653和AbsRel最高6图，共9张，不是全部654张可视化。
 
-按场景类型的补充统计如下，完整16类结果见metrics_by_scene_type.csv（本地产物：`outputs/part1/dav2_nyuv2/analysis_v1/metrics_by_scene_type.csv`）。这是同一NYUv2内的描述性分组，不是另一个数据域，也不改主结果的逐图权重。
+按场景类型的补充统计如下，完整16类结果见[metrics_by_scene_type.csv](../outputs/part1/dav2_nyuv2/analysis_v1/metrics_by_scene_type.csv)。这是同一NYUv2内的描述性分组，不是另一个数据域，也不改主结果的逐图权重。
 
 | 场景类型 | 图像数 | AbsRel | RMSE (m) |
 |---|---:|---:|---:|
@@ -357,7 +357,7 @@ outputs/part1/dav2_nyuv2/
 
 本次对主评价及独立重评均重新执行`verify`，654张的raw、资源/源码、对齐数组/mask、CSV、宏平均和CI通过`rtol=1e-6 / atol=1e-8`核验。另对0/326/653、266/310/447及裁剪较多的45共7图，用独立`numpy.linalg.lstsq`和显式七指标公式复核，通过。
 
-详细来源、SHA和全精度统计见results_analysis.json（本地产物：`outputs/part1/dav2_nyuv2/analysis_v1/results_analysis.json`），实际过程见review.py（本地产物：`outputs/part1/dav2_nyuv2/analysis_v1/review.py`）。本次没有运行模型、训练或下载，也没有改写正式预测和自动运行元数据。
+详细来源、SHA和全精度统计见[results_analysis.json](../outputs/part1/dav2_nyuv2/analysis_v1/results_analysis.json)，实际过程见[review.py](../outputs/part1/dav2_nyuv2/analysis_v1/review.py)。本次没有运行模型、训练或下载，也没有改写正式预测和自动运行元数据。
 
 ### 项目架构
 

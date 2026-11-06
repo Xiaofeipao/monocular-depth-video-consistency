@@ -1,0 +1,9 @@
+# 开发集选择与独立场景泛化；不改变四组主实验。
+protocol: middlebury_coverage_v1
+base_config: configs/part1/middlebury_sgbm.yaml
+coverage_tolerance: 0.01
+regions:
+  texture_window: 7
+  texture_variance_threshold: 25.0
+  boundary_sobel_threshold_px: 4.0
+output_dir: outputs/part1/middlebury/coverage_study_v1

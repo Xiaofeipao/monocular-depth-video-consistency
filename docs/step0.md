@@ -2,7 +2,7 @@
 
 ## 状态
 
-公开数据所需的环境、数据、权重、输出 schema、公共指标、smoke test 和自动测试已经建立。Part 1B指定官方davis_rollercoaster的70个真实帧已完成DA逐帧预测与核验，100帧素材需课程确认，指定片段当前70帧的2B独立实验与比较已完成，见Step 4。CPU工程检查和完整GPU实验分别记录，不视为课程正式视频已完成。
+公开数据所需的环境、数据、权重、输出 schema、公共指标、smoke test 和自动测试已经建立。Part 1B指定官方davis_rollercoaster的70个真实帧已完成DA逐帧预测与核验，100帧素材需课程确认，指定片段的2B比较待后续。CPU工程检查和完整GPU实验分别记录，不视为课程正式视频已完成。
 
 ## 通用复现顺序
 
@@ -25,9 +25,9 @@ git -C UniDepth checkout --detach 8d8cfe4c7ee15297099983607febf0d4f32eb3d6
 
 ```
 
-用 `git -C <repo> rev-parse HEAD` 对照 `configs/versions.yaml`；保护已有修改，不 reset 或覆盖。应先取得本分支的项目自有代码，再按下列固定版本取得上游依赖。
+用 `git -C <repo> rev-parse HEAD` 对照 `configs/versions.yaml`；保护已有修改，不 reset 或覆盖。工程根目录当前没有可用 Git 历史，不能仅克隆一个上游仓库就恢复项目自有代码。
 
-依次完成：环境 → 数据/权重 checksum → 项目测试与 smoke 门禁 → [Middlebury](step1.md) → [NYUv2 与分析](step3.md)。[逐帧视频步骤](step2.md)使用连续原始帧、固定整段色标与独立冻结协议；指定片段当前70帧的VDA独立实验与同帧比较见[Step 4](step4.md)。
+依次完成：环境 → 数据/权重 checksum → 项目测试与 smoke 门禁 → [Middlebury](step1.md) → [NYUv2 与分析](step3.md)。[逐帧视频步骤](step2.md)使用连续原始帧、固定整段色标与独立冻结协议；指定片段的2B比较待后续，旧[Step 4](step4.md)仅保留兼容依赖。
 
 ## Conda 环境
 
@@ -192,4 +192,4 @@ conda run -n aiaa3201 python -c \
   'from pathlib import Path; roots=["outputs/part2/depth_pro_nyuv2/frozen_v1", "outputs/part2/unidepth_v2_nyuv2/frozen_v1"]; print([(r, len(list((Path(r)/"predictions").glob("*.npz"))), len(list((Path(r)/"metadata").glob("*.json")))) for r in roots])'
 ```
 
-数量不能独立证明结果来源。逐图身份、完整精度指标、配置哈希及尺度/边界来源证据见 当前结果审计（完整记录保存在源项目，本发布包不包含）。原始元数据中的实际路径和时间保持真实，不改写为新的执行记录。
+数量不能独立证明结果来源。逐图身份、完整精度指标、配置哈希及尺度/边界来源证据见 [当前结果审计](current_results.md)。原始元数据中的实际路径和时间保持真实，不改写为新的执行记录。

@@ -4,7 +4,7 @@
 
 本步在 Middlebury Stereo v3 的15组 quarter-resolution 训练图像上运行 OpenCV BM 和 SGBM，展示视差与无效区域，使用每个场景自己的标定将视差转换为米制深度，并评价视差精度和有效预测比例。左右一致性作为附加诊断保留。经典双目与 Part 2A 的 NYUv2 米制模型比较分开报告。
 
-配置为 [`configs/part1/middlebury_sgbm.yaml`](../configs/part1/middlebury_sgbm.yaml)，协议标识为 `middlebury_course_v1`。用户已完成两算法完整开发搜索、四组15场景评估与独立核验。另对本次真实输出复核了60份预测、1,200个精度值及全部原尺寸掩码，均通过；当前全项目测试为1,494项通过。
+配置为 [`configs/part1/middlebury_sgbm.yaml`](../configs/part1/middlebury_sgbm.yaml)，协议标识为 `middlebury_course_v1`。用户已完成两算法完整开发搜索、四组15场景评估与独立核验。另对本次真实输出复核了60份预测、1,200个精度值及全部原尺寸掩码，均通过。误差—有效比例研究也已完成完整搜索、独立场景评估与原始重算，详见后文。
 
 | 实验组 | 方法 | 参数来源 |
 |---|---|---|
@@ -205,6 +205,110 @@ GT和最终视差使用本场景相同色标范围；误差图显示0–4 px（�
 
 `sensitivity.csv/png` 对GT视差注入 ±0.25/0.5/1/2 px，比较精确深度误差和一阶近似 `|Δz| ≈ z²|Δd|/(f×B_m)`，四组共享这份几何分析。`empirical_depth_error_by_distance.csv/png` 则按0.25米分桶，分别统计四组真实预测的视差MAE、深度MAE、有效比例及像素支持量。分桶是域内像素汇总，不等同于主表逐场景宏平均；距离越远越敏感不保证某次实际匹配误差单调上升。
 
+## 误差—有效预测比例与泛化
+
+### 开发集上的两种比较规则
+
+MAE只评价有输出的位置，因此误差下降可能伴随更多空白。除四组主表外，在相同5个开发场景与同一参数网格上，分别冻结以下两种选择，再检查10个独立评估场景：
+
+| 选择 | 开发集约束与目标 |
+|---|---|
+| `fixed` | 对应算法的固定参数参考 |
+| `matched_coverage` | 有效比例与fixed相差不超过**1个百分点**，在其中选MAE最低者；平局时优先有效比例高、候选序号小 |
+| `matched_error` | MAE不高于fixed，在其中选有效比例最高者；平局时优先MAE低、候选序号小 |
+
+这两个英文名称指**开发集选参条件**，不表示独立评估场景已经具有相同覆盖率或相同误差。例如开发集fixed有效比例为50%时，matched_coverage允许49%–51%，不是只能等于50%。主实验`tuned`的“有效比例不低于fixed”规则继续单独保留。
+
+完整记录有BM 145行、SGBM 37行：144/36套网格分别另加一行fixed参考，重复参数不删除。逐场景开发分数共910行。参数冻结文件写出后，才加载10个独立评估场景的图像和GT数值；已有独立结果不参与选择。每算法三组，共60份独立评估预测。
+
+本次冻结参数如下；其余参数、quarter标定与固定LR=1 px均沿用前述主协议。候选0为额外fixed，1起按YAML网格顺序枚举。
+
+| 算法 | 选择 | 候选序号 | block | uniqueness | speckle window | texture |
+|---|---|---:|---:|---:|---:|---:|
+| BM | `fixed` | 0 | 15 | 10 | 100 | 10 |
+| BM | `matched_coverage` | 45 | 9 | 0 | 100 | 20 |
+| BM | `matched_error` | 40 | 9 | 0 | 50 | 0 |
+| SGBM | `fixed` | 0 | 5 | 10 | 100 | — |
+| SGBM | `matched_coverage` | 9 | 3 | 10 | 100 | — |
+| SGBM | `matched_error` | 2 | 3 | 0 | 50 | — |
+
+### 运行与核验
+
+配置为[configs/part1/middlebury_coverage.yaml](../configs/part1/middlebury_coverage.yaml)，入口为[scripts/part1/study_middlebury_coverage.sh](../scripts/part1/study_middlebury_coverage.sh)。本地完整搜索、60份原生预测、区域统计、图和独立重算已完成，默认目录已有结果；以下命令用于复现，运行入口拒绝覆盖已有目录。
+
+```bash
+# 首次完整运行：CPU，aiaa3201，无需GPU或训练。
+./scripts/part1/study_middlebury_coverage.sh
+
+# 已有结果可直接只读核验，默认打印报告，不覆盖原verification.json。
+./scripts/part1/study_middlebury_coverage.sh --mode verify
+```
+
+需要从头再运行时，为run和verify指定同一个**新空目录**：
+
+```bash
+./scripts/part1/study_middlebury_coverage.sh   --output-dir outputs/part1/middlebury/coverage_reproduce_v1
+
+./scripts/part1/study_middlebury_coverage.sh --mode verify   --output-dir outputs/part1/middlebury/coverage_reproduce_v1
+```
+
+输入、源代码与配置分别保存指纹和快照。verify会重放开发表及选参，从保存的原始左右视差重算LR、最终有效域、米制深度与精度，再重算五类区域表和汇总；不重新调用匹配器。失败保留状态与中间文件，不手改状态或覆盖重跑。
+
+### 独立评估场景的结果
+
+完整精度来源为`coverage_study_v1/held_out.csv`与`summary.json`，以下均为**10个独立评估场景**的等权平均，不与前面的15场景主表混排。Bad-2把无效预测计为失败。
+
+| 算法 | 开发集选择 | 视差MAE↓（px） | 有效预测比例↑ | Bad-2↓ |
+|---|---|---:|---:|---:|
+| BM | `fixed` | 1.04526212 | 49.084447% | 54.840839% |
+| BM | `matched_coverage` | 0.76862694 | 46.188786% | 56.451527% |
+| BM | `matched_error` | 0.85488592 | 47.556232% | 55.425266% |
+| SGBM | `fixed` | 1.23006771 | 62.713380% | 43.008139% |
+| SGBM | `matched_coverage` | 1.16035400 | 60.948217% | 44.158210% |
+| SGBM | `matched_error` | 1.43719311 | 63.832454% | 42.693327% |
+
+**BM：更小的条件误差没有消除输出缺失的代价。** matched_coverage的MAE从1.0453降至0.7686，但有效比例从49.08%降至46.19%，下降约2.90个百分点，已超出开发集的±1个百分点条件；Bad-2由54.84%升至56.45%。matched_error同样降低MAE、减少覆盖。因此不能把较低MAE写成“同样覆盖率下全面更好”。
+
+**SGBM：开发集约束不保证评估集仍成立。** matched_coverage略降MAE，也降低覆盖；matched_error将有效比例从62.71%提高到63.83%，但MAE从1.2301升到1.4372，开发集的“误差不增加”未推广到独立场景。其Bad-2却略降，说明输出数量与有效处误差确有取舍，不能用任何一项指标代替整体判断。
+
+这与主实验tuned的泛化观察一致：需要同时报告误差、覆盖率、无效预测代价和独立场景表现。这里的两个规则不是新的匹配算法，也不依据评估表反过来重选参数。
+
+### 分区域表现
+
+五类区域共300行：10场景×2算法×3种选择×5区域。每行额外保留GT、有效与无效像素数，以及Bad-1/2/4。
+
+- `all_GT`：全有限正GT域，与课程主指标一致。
+- `non_occluded` / `occluded`：分别使用官方mask的255 / 128标记，再与有效GT相交；0不视为已标注遮挡。
+- `low_texture`：左图灰度7×7局部方差<25。
+- `depth_boundary`：GT视差的3×3 Sobel x/y梯度绝对和>4。无效GT先置0再计算梯度，因此孔洞附近可能触发；这是深度突变proxy，不能当作纯物体语义边界。
+
+这些区域可以重叠，不能把区域误差或覆盖率相加。空GT区域不参与该区域均值，但保留支持场景数；有GT而没有有效预测时，覆盖率为0、MAE为null，不静默删去该场景的失败。
+
+下面每格为“**MAE（px） / 有效比例**”；各区域本次都有10个支持场景，完整非遮挡结果及计数见CSV。
+
+| 算法 / 选择 | 遮挡区域 | 低纹理区域 | 深度边缘区域 |
+|---|---:|---:|---:|
+| BM / `fixed` | 7.0822 / 14.79% | 0.8429 / 41.57% | 2.8425 / 43.66% |
+| BM / `matched_coverage` | 6.7926 / 12.00% | 0.5205 / 37.72% | 2.6951 / 37.42% |
+| BM / `matched_error` | 6.9492 / 12.82% | 0.6124 / 38.90% | 2.7807 / 40.17% |
+| SGBM / `fixed` | 6.6603 / 18.98% | 1.6008 / 56.68% | 2.7511 / 63.92% |
+| SGBM / `matched_coverage` | 6.1174 / 17.13% | 1.5838 / 55.40% | 2.5183 / 62.02% |
+| SGBM / `matched_error` | 6.5199 / 18.32% | 2.0651 / 59.56% | 2.6831 / 64.63% |
+
+遮挡区域只有约12%–19%的有效预测，留下的预测MAE仍约6–7 px；全图均值不能代表这类困难位置已解决。BM在低纹理区域降低条件误差的同时，覆盖也从41.57%降到37.72%；边界区域的matched_coverage覆盖从43.66%降到37.42%，同样存在筛掉困难位置的代价。SGBM matched_error在低纹理处多给出预测，但MAE由1.6008升到2.0651，反映参数取舍对不同区域影响不同。GT仅用于评分与事后分组，不用于预测有效性筛选。
+
+### 开发集误差—覆盖率图
+
+[BM图](../outputs/part1/middlebury/coverage_study_v1/bm_pareto.png)与[SGBM图](../outputs/part1/middlebury/coverage_study_v1/sgbm_pareto.png)均只使用5个开发场景。横轴越右表示有效比例越高，纵轴越低表示有效预测的MAE越小；蓝线连接没有被其他候选同时超过的选择，即Pareto前沿。点落在前沿不代表它能在独立评估场景保持优势，重叠点也不表示少搜索了候选。
+
+### 实际环境与验证范围
+
+本轮使用`aiaa3201`、Python 3.10.22、NumPy 1.24.0、OpenCV 4.11.0，Intel Core Ultra 9 285K、OpenCV单线程，GPU不适用。主表时间仍使用原四组运行记录，不将本轮搜索/绘图总耗时混成受控速度比较。
+
+独立核验通过60份预测、1,200个精度值、300行区域统计与910行开发分数，选参重放通过。原始左右视差、LR/几何有效域、米制转换和区域分母均被检查。同协议证据的6套参数选择相同，182行开发表和300行评估表的964个数值在`rtol=1e-6, atol=1e-8`内一致；本实现沿用float64评分，不为追求逐位一致修改预测。参考副本只在本地结果生成后用于核对，保存于provenance，不进入选参。
+
+完整精度、环境与实际命令见`run_metadata.json`；`verification.json`记录首次核验，独立复核另存在`outputs/maintenance/part1a_coverage_20261104/recheck.json`。原四组运行和搜索不变，本轮501份既有科学文件/产物指纹核对一致。该次1A研究新增10项合成检查通过，当次全项目为1,515项通过，14个既有Matplotlib/PyParsing弃用告警；后续测试集合调整的当前数量见implemented.md。
+
 ## 目录与完成门禁
 
 ```text
@@ -213,6 +317,12 @@ outputs/part1/middlebury/
 │   ├── status.json、summary.json
 │   ├── bm/    # best、候选CSV、逐场景分数、fixed参考、provenance、status
 │   └── sgbm/
+├── coverage_study_v1/
+│   ├── development.csv、development_per_scene.csv、selection.json
+│   ├── held_out.csv、summary.json、bm_pareto.png、sgbm_pareto.png
+│   ├── evaluation/<scene>/<selection>/  # 60份原始NPZ、标定/参数、六联图与掩码
+│   ├── provenance/                    # 配置、源码与可选同协议参考副本
+│   └── run_metadata.json、status.json、verification.json
 └── evaluation/
     ├── <scene>/<experiment>/   # prediction.npz、metadata、六联图、四张掩码
     ├── metrics_per_scene.csv、metrics_summary.json
@@ -223,4 +333,4 @@ outputs/part1/middlebury/
     └── run_metadata.json、status.json、reload_validation.json、verification.json
 ```
 
-完成需要：两次开发集搜索证据完整；四组各15场景；课程主指标与米制转换齐全；60组视差/无效/LR展示齐全；保存数组独立核验通过；主表、独立评估表现、效率与真实困难案例分析完成。本次完整开发搜索、60组正式预测/图与独立重算已完成，上表及边界/精度—有效比例分析已补齐。最终课程报告与其他Part分别整合；不把经典双目的覆盖局限宣称为已解决。
+完成需要：两次开发集搜索证据完整；四组各15场景；课程主指标与米制转换齐全；60组视差/无效/LR展示齐全；保存数组独立核验通过；主表、独立评估表现、效率与真实困难案例分析完成。本次完整开发搜索、60组正式预测/图与独立重算已完成，上表及边界/精度—有效比例分析已补齐。误差—有效比例研究的开发冻结、60份预测、300行区域结果和重算也已完成。最终课程报告与其他Part分别整合；不把经典双目的覆盖局限宣称为已解决。

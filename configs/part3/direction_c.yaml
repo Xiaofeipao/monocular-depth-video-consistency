@@ -1,0 +1,17 @@
+protocol: part3_joint_bilateral_v1
+models:
+  depth_pro:
+    config: configs/part2/depth_pro_nyuv2.yaml
+    baseline: outputs/part2/depth_pro_nyuv2/frozen_v1
+  unidepth_v2:
+    config: configs/part2/unidepth_v2_nyuv2.yaml
+    baseline: outputs/part2/unidepth_v2_nyuv2/frozen_v1
+output_root: outputs/part3/direction_c
+parameters:
+  radius: 2
+  sigma_rgb: 0.10
+  sigma_log: 0.18
+  sigma_space: 1.5
+methods: [RAW, C, C_no_RGB, C_no_depth_gate]
+bootstrap_resamples: 10000
+bootstrap_seed: 42

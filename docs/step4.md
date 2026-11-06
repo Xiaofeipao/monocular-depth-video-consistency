@@ -8,7 +8,7 @@
 
 使用官方**Video Depth Anything-Small相对深度权重**，处理指定`data/davis_rollercoaster.mp4`的前100个真实原始帧，保留原始帧率。保存原生浮点预测，制作RGB/相对深度/预测边缘同步视频，分析尺度约定、边界稳定性、时序变化和运动伪影，并记录实际推理成本。
 
-**当前70个真实帧的VDA独立预测、图视频、诊断和完整raw重算已完成，独立结果与分析见本部分后半段。同帧比较也已完成，结果单列在第二部分。** 实际使用RTX A6000、FP16；现有源视频、官方仓库和relative权重已核验。运行前资源检查见resources.json（本地产物：`outputs/maintenance/part2b_course_20261103/resources.json`），独立复核见recheck.json（本地产物：`outputs/maintenance/part2b_standalone_review_20261103/recheck.json`）。不需要重新下载，也不依赖RAFT、相机位姿、深度GT或其他深度模型的运行产物。
+**当前70个真实帧的VDA独立预测、图视频、诊断和完整raw重算已完成，独立结果与分析见本部分后半段。同帧比较也已完成，结果单列在第二部分。** 实际使用RTX A6000、FP16；现有源视频、官方仓库和relative权重已核验。运行前资源检查见[resources.json](../outputs/maintenance/part2b_course_20261103/resources.json)，独立复核见[recheck.json](../outputs/maintenance/part2b_standalone_review_20261103/recheck.json)。不需要重新下载，也不依赖RAFT、相机位姿、深度GT或其他深度模型的运行产物。
 
 当前文件实际只有**70帧、24 FPS、约2.917秒**。程序处理全部70个真实帧，输出索引0–69；课程“前100帧”素材数量仍待教师确认70帧是否接受，或提供更长版本。不会重复、循环或插帧来凑100，官方网络内部的尾部补齐也不算新增真实帧。
 
@@ -158,9 +158,9 @@ outputs/part2/vda_video/rollercoaster_v1/
 
 来源为当前`outputs/part2/vda_video/rollercoaster_v1/`，从完整精度JSON/CSV读取后按8位小数展示。独立复核阶段检查源身份、70份原始NPY与整段NPZ一致性、70行逐帧/69行帧对统计、官方窗口、报告附件SHA，并重新执行独立verify；全部通过。该阶段没有重新预测、训练或改写原分析及运行元数据；随后完成的配对比较见第二部分。
 
-- RGB / VDA相对深度 / 红色预测边缘视频（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/rgb_relative_edges.mp4`）：实际解码70帧、24 FPS。
-- 全段总览（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/contact.png`）、诊断图（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/diagnostics.png`）、固定色标（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/fixed_colorbar.png`）。
-- 完整精度summary（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/summary.json`）、实际run与效率（本地产物：`outputs/part2/vda_video/rollercoaster_v1/run.json`）、用户运行的核验记录（本地产物：`outputs/part2/vda_video/rollercoaster_v1/verification.json`）。
+- [RGB / VDA相对深度 / 红色预测边缘视频](../outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/rgb_relative_edges.mp4)：实际解码70帧、24 FPS。
+- [全段总览](../outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/contact.png)、[诊断图](../outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/diagnostics.png)、[固定色标](../outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/fixed_colorbar.png)。
+- [完整精度summary](../outputs/part2/vda_video/rollercoaster_v1/analysis/summary.json)、[实际run与效率](../outputs/part2/vda_video/rollercoaster_v1/run.json)、[用户运行的核验记录](../outputs/part2/vda_video/rollercoaster_v1/verification.json)。
 
 | 独立诊断量：69个相邻帧对等权 | 实际值 | 可以说明什么 |
 |---|---:|---|
@@ -212,11 +212,11 @@ outputs/part2/vda_video/rollercoaster_v1/
 
 | 实际连续窗口 | 看到的表现 | 解释与局限 |
 |---|---|---|
-| 65–69：细结构与深度交界（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/review/thin_boundary.png`） | 橙色弯轨与支架外形连续，列车/座椅附近呈较粗的青绿色块；远处旗杆在相对图上只是较弱的细线，未被完整、清楚地分离 | 大结构可持续跟踪，但小目标、空隙与薄结构仍不足；不能把较宽红带当成物体变厚或确定的定位错误 |
-| 52–56：列车与杆件交叉（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/review/occlusion_train.png`） | 车体、乘客及附近结构在局部相对图上合并，交叉处的色带/轮廓较粗；RGB同时发生真实遮挡和位移 | 时序建模没有自动解决所有动态细节；局部合并值得记录，但没有GT，不能测出遮挡深度错误或延迟帧数 |
-| 57–61：移动轮廓与显露区域（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/review/moving_edge.png`） | 轨道和支架随画面移动，列车下缘与细杆附近仍有形状/宽度变化，旗杆等低对比结构较弱 | 需要同时看RGB，不能把真实运动和显露变化全算成闪烁；相同屏幕坐标也不代表相同物体点 |
+| [65–69：细结构与深度交界](../outputs/part2/vda_video/rollercoaster_v1/analysis/review/thin_boundary.png) | 橙色弯轨与支架外形连续，列车/座椅附近呈较粗的青绿色块；远处旗杆在相对图上只是较弱的细线，未被完整、清楚地分离 | 大结构可持续跟踪，但小目标、空隙与薄结构仍不足；不能把较宽红带当成物体变厚或确定的定位错误 |
+| [52–56：列车与杆件交叉](../outputs/part2/vda_video/rollercoaster_v1/analysis/review/occlusion_train.png) | 车体、乘客及附近结构在局部相对图上合并，交叉处的色带/轮廓较粗；RGB同时发生真实遮挡和位移 | 时序建模没有自动解决所有动态细节；局部合并值得记录，但没有GT，不能测出遮挡深度错误或延迟帧数 |
+| [57–61：移动轮廓与显露区域](../outputs/part2/vda_video/rollercoaster_v1/analysis/review/moving_edge.png) | 轨道和支架随画面移动，列车下缘与细杆附近仍有形状/宽度变化，旗杆等低对比结构较弱 | 需要同时看RGB，不能把真实运动和显露变化全算成闪烁；相同屏幕坐标也不代表相同物体点 |
 
-边缘变化proxy平均约0.3405%，最高点为第27→28帧、`1.166667 s`，约0.7173%；26–30帧候选图（本地产物：`outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/cases/case_01_boundary_change_0028.png`）中，列车靠近中央立柱、轮廓发生交叠，值得检查局部边缘对应。但低值或高值都不是GT边界准确率；2像素以内的抖动、持续存在的错误轮廓和少量细杆问题可能被容差与整体平均掩盖。
+边缘变化proxy平均约0.3405%，最高点为第27→28帧、`1.166667 s`，约0.7173%；[26–30帧候选图](../outputs/part2/vda_video/rollercoaster_v1/analysis/visualization/cases/case_01_boundary_change_0028.png)中，列车靠近中央立柱、轮廓发生交叠，值得检查局部边缘对应。但低值或高值都不是GT边界准确率；2像素以内的抖动、持续存在的错误轮廓和少量细杆问题可能被容差与整体平均掩盖。
 
 三个固定窗口来自同一短片，不是三个独立场景；没有因此声称已覆盖反光、行人或其他未出现的困难类型。
 
@@ -232,7 +232,7 @@ outputs/part2/vda_video/rollercoaster_v1/
 
 ### 独立复核来源与当前范围
 
-独立`verify`从原始预测重算全部辅助量，通过`rtol=1e-6、atol=1e-8`；六项CSV宏平均与summary的完整精度一致，NPZ与70份NPY逐值一致。原视频、预测、自动分析和运行元数据均未改写。补充描述统计与来源SHA见results_review.json（本地产物：`outputs/maintenance/part2b_standalone_review_20261103/results_review.json`），复核过程见review_stats.py（本地产物：`outputs/maintenance/part2b_standalone_review_20261103/review_stats.py`）。第一部分当前70帧工作已完成，配对比较单列在第二部分；100帧素材数量及报告/应用Demo/ZIP仍单列。
+独立`verify`从原始预测重算全部辅助量，通过`rtol=1e-6、atol=1e-8`；六项CSV宏平均与summary的完整精度一致，NPZ与70份NPY逐值一致。原视频、预测、自动分析和运行元数据均未改写。补充描述统计与来源SHA见[results_review.json](../outputs/maintenance/part2b_standalone_review_20261103/results_review.json)，复核过程见[review_stats.py](../outputs/maintenance/part2b_standalone_review_20261103/review_stats.py)。第一部分当前70帧工作已完成，配对比较单列在第二部分；100帧素材数量及报告/应用Demo/ZIP仍单列。
 
 ## 第二部分：与Part 1B逐帧基线正式比较
 
@@ -303,8 +303,8 @@ outputs/part2/video_comparison/rollercoaster_v1/
 
 实际来源为`outputs/part2/video_comparison/rollercoaster_v1/summary.json`及逐帧/帧对CSV，从完整精度读取后展示；双方原始预测均重新核验，不沿用其他机器或旧自录结果。五项指标各有69个双方共同可评价帧对，没有删去负差、难帧或零值像素。双方对应后数值与各自独立汇总一致，逐帧范围/中位数/边缘比例也与独立CSV一致。
 
-- RGB / DA-V2 / VDA同步视频（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/visualization/rgb_dav2_vda.mp4`）、双方红色预测边缘视频（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/visualization/rgb_dav2_vda_edges.mp4`）：实际均解码70帧、24 FPS。
-- 双方诊断曲线（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/visualization/diagnostics.png`）、完整精度比较汇总（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/summary.json`）、用户运行的重算核验（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/verification.json`）。
+- [RGB / DA-V2 / VDA同步视频](../outputs/part2/video_comparison/rollercoaster_v1/visualization/rgb_dav2_vda.mp4)、[双方红色预测边缘视频](../outputs/part2/video_comparison/rollercoaster_v1/visualization/rgb_dav2_vda_edges.mp4)：实际均解码70帧、24 FPS。
+- [双方诊断曲线](../outputs/part2/video_comparison/rollercoaster_v1/visualization/diagnostics.png)、[完整精度比较汇总](../outputs/part2/video_comparison/rollercoaster_v1/summary.json)、[用户运行的重算核验](../outputs/part2/video_comparison/rollercoaster_v1/verification.json)。
 
 | 69个共同帧对，逐对等权 | DA-V2-S | VDA-S | DA−VDA | 相对降低率 |
 |---|---:|---:|---:|---:|
@@ -345,16 +345,16 @@ MAE平等累加每个像素的变化，RMSE先平方，对大变化更敏感。�
 
 | 实际帧对与观看窗口 | 指标 | DA-V2-S → VDA-S | 实际解读 |
 |---|---|---:|---|
-| 28→29，查看27–31帧（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/visualization/cases/01_flow_rmse_normalized_largest_dav2_minus_vda_0029.png`） | 对应后RMSE/S，最大正差 | 0.04225216 → 0.03578321 | 列车经过中央立柱附近，两模型主体轮廓接近、局部色带不同；该帧对的变化减小，不等于列车距离更准确 |
-| 2→3，查看1–5帧（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/visualization/cases/02_flow_rmse_normalized_smallest_dav2_minus_vda_0003.png`） | 对应后RMSE/S，最大负差 | 0.03766652 → 0.04179529 | 早段两者均可辨列车和轨道，但VDA这一项更高，说明改善并非逐帧对成立 |
-| 66→67，查看65–69帧（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/visualization/cases/03_edge_instability_largest_dav2_minus_vda_0067.png`） | 边缘变化，最大正差 | 0.00827897 → 0.00514779 | 弯轨、车体外沿及显露远景处，VDA该帧对的预测边缘更易匹配；两侧细杆仍弱，不能据此认定恢复了真实细节 |
-| 36→37，查看35–39帧（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/visualization/cases/04_edge_instability_smallest_dav2_minus_vda_0037.png`） | 边缘变化，最大负差 | 0.00446338 → 0.00662387 | 列车与交叉支架附近仍有轮廓/色带变化，VDA此对未匹配比例更高；不能只展示有利的66→67帧 |
+| [28→29，查看27–31帧](../outputs/part2/video_comparison/rollercoaster_v1/visualization/cases/01_flow_rmse_normalized_largest_dav2_minus_vda_0029.png) | 对应后RMSE/S，最大正差 | 0.04225216 → 0.03578321 | 列车经过中央立柱附近，两模型主体轮廓接近、局部色带不同；该帧对的变化减小，不等于列车距离更准确 |
+| [2→3，查看1–5帧](../outputs/part2/video_comparison/rollercoaster_v1/visualization/cases/02_flow_rmse_normalized_smallest_dav2_minus_vda_0003.png) | 对应后RMSE/S，最大负差 | 0.03766652 → 0.04179529 | 早段两者均可辨列车和轨道，但VDA这一项更高，说明改善并非逐帧对成立 |
+| [66→67，查看65–69帧](../outputs/part2/video_comparison/rollercoaster_v1/visualization/cases/03_edge_instability_largest_dav2_minus_vda_0067.png) | 边缘变化，最大正差 | 0.00827897 → 0.00514779 | 弯轨、车体外沿及显露远景处，VDA该帧对的预测边缘更易匹配；两侧细杆仍弱，不能据此认定恢复了真实细节 |
+| [36→37，查看35–39帧](../outputs/part2/video_comparison/rollercoaster_v1/visualization/cases/04_edge_instability_smallest_dav2_minus_vda_0037.png) | 边缘变化，最大负差 | 0.00446338 → 0.00662387 | 列车与交叉支架附近仍有轮廓/色带变化，VDA此对未匹配比例更高；不能只展示有利的66→67帧 |
 
 固定三个局部窗口也全部保留：
 
-- 52–56帧交叉遮挡（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/review/occlusion_train.png`）：两者的车体/乘客及附近杆件都存在色块合并；没有清楚证据表明VDA已解决遮挡处的细节问题。
-- 57–61帧移动轮廓（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/review/moving_edge.png`）：整体形状相似，局部色带与粗细有差异；真实位移、遮挡显露与RGB模糊仍参与变化，当前不能量化声称减少了多少拖影或滞后。
-- 65–69帧细结构（本地产物：`outputs/part2/video_comparison/rollercoaster_v1/review/thin_boundary.png`）：轨道主体连续，但两者都未把远处旗杆、乘客与细小空隙稳定清楚地分离。局部更平滑不等于更准确。
+- [52–56帧交叉遮挡](../outputs/part2/video_comparison/rollercoaster_v1/review/occlusion_train.png)：两者的车体/乘客及附近杆件都存在色块合并；没有清楚证据表明VDA已解决遮挡处的细节问题。
+- [57–61帧移动轮廓](../outputs/part2/video_comparison/rollercoaster_v1/review/moving_edge.png)：整体形状相似，局部色带与粗细有差异；真实位移、遮挡显露与RGB模糊仍参与变化，当前不能量化声称减少了多少拖影或滞后。
+- [65–69帧细结构](../outputs/part2/video_comparison/rollercoaster_v1/review/thin_boundary.png)：轨道主体连续，但两者都未把远处旗杆、乘客与细小空隙稳定清楚地分离。局部更平滑不等于更准确。
 
 已查看的同步帧与连续窗口中，视觉差异总体较细微，最明确的收益证据来自对应后平均变化；不将本短片描述成由剧烈闪烁转为完全稳定，也不以红带粗细判定GT边界准确性。
 
@@ -385,7 +385,7 @@ VDA均摊时间增加约7.8866 ms/帧，即36.79%；FPS降低26.90%；峰值allo
 
 本次再次运行`verify-comparison`，对双方来源、原生预测、独立分析、相同RGB/帧序/PTS/尺寸/精度、共享光流覆盖及全部比较数值重算，通过`rtol=1e-6、atol=1e-8`；五项均为69个共同帧对，无N/A或额外排除。两段正式比较视频均完整解码为70帧/24 FPS。222份现有原生结果、报告和科学源码的保护SHA一致，没有重新预测、训练或修改自动元数据。
 
-补充逐对较低/较高计数、来源SHA与成本比值见results_review.json（本地产物：`outputs/maintenance/part2b_comparison_review_20261103/results_review.json`），实际只读复核脚本见review_stats.py（本地产物：`outputs/maintenance/part2b_comparison_review_20261103/review_stats.py`），本次重算记录见recheck.json（本地产物：`outputs/maintenance/part2b_comparison_review_20261103/recheck.json`）。当前70帧的独立实验和同帧比较均已完成；素材仅70帧这一课程门禁、应用Demo、报告与最终打包仍未因本次分析而完成。
+补充逐对较低/较高计数、来源SHA与成本比值见[results_review.json](../outputs/maintenance/part2b_comparison_review_20261103/results_review.json)，实际只读复核脚本见[review_stats.py](../outputs/maintenance/part2b_comparison_review_20261103/review_stats.py)，本次重算记录见[recheck.json](../outputs/maintenance/part2b_comparison_review_20261103/recheck.json)。当前70帧的独立实验和同帧比较均已完成；素材仅70帧这一课程门禁、应用Demo、报告与最终打包仍未因本次分析而完成。
 
 ### 逐项比较方法与解释边界
 

@@ -1,0 +1,34 @@
+# 新视频可在这里加一项，也可通过命令直接指定 --video 和 --type。
+# type必须明确指定；不根据文件名猜测是否有真实运动。
+schema_version: self_recorded_clips_v1
+clips:
+  fixed_scenario1:
+    video: data/self_recorded/fixed_scenario1.mp4
+    type: fixed_static
+    session: null
+    description: 无人固定场景，墙面、家具和地面
+  fixed_scenario2:
+    video: data/self_recorded/fixed_scenario2.mp4
+    type: fixed_static
+    session: null
+    description: 无人固定场景，桌椅、水瓶和立柱
+  fixed_scenario1_people_moving:
+    video: data/self_recorded/fixed_scenario1_people_moving.mp4
+    type: fixed_dynamic
+    session: null
+    description: 固定相机，人物经过及遮挡
+  fixed_scenario2_people_moving:
+    video: data/self_recorded/fixed_scenario2_people_moving.mp4
+    type: fixed_dynamic
+    session: null
+    description: 固定相机，人物活动并拿走物品
+  moving_left_to_right:
+    video: data/self_recorded/moving_left_to_right.mp4
+    type: moving
+    session: null
+    description: 会议室横向移动，视野组成改变
+  moving_rear_to_front:
+    video: data/self_recorded/moving_rear_to_front.mp4
+    type: moving
+    session: null
+    description: 向货架前进，真实距离和遮挡改变

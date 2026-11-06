@@ -1,0 +1,18 @@
+# 路径约定示例，均相对于项目根目录；当前 pipeline 不加载本模板。
+project_root: .
+data_root: data
+checkpoint_root: checkpoints
+output_root: outputs
+
+datasets:
+  middlebury: data/middlebury/MiddEval3
+  nyuv2_labeled: data/nyuv2/nyu_depth_v2_labeled.mat
+  self_recorded: data/self_recorded
+
+checkpoints:
+  depth_pro: checkpoints/depth_pro/depth_pro.pt
+  depth_anything_v2_small: checkpoints/depth_anything_v2/depth_anything_v2_vits.pth
+  video_depth_anything_small: checkpoints/video_depth_anything/video_depth_anything_vits.pth
+  metric_video_depth_anything_small: checkpoints/video_depth_anything/metric_video_depth_anything_vits.pth
+  unidepth_v2_small: checkpoints/unidepth_v2_vits14/model.safetensors
+

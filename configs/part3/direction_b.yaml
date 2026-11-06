@@ -1,0 +1,13 @@
+protocol: part3_global_scale_v1
+# 原生基线与模型协议只读引用，不复制或覆盖Part 2输出。
+models:
+  depth_pro:
+    config: configs/part2/depth_pro_nyuv2.yaml
+    baseline: outputs/part2/depth_pro_nyuv2/frozen_v1
+    prediction_env: aiaa3201
+  unidepth_v2:
+    config: configs/part2/unidepth_v2_nyuv2.yaml
+    baseline: outputs/part2/unidepth_v2_nyuv2/frozen_v1
+    prediction_env: aiaa3201-unidepth
+output_root: outputs/part3/direction_b
+formula: exp(median_over_795_images(median_valid_pixels(log(GT/pred))))

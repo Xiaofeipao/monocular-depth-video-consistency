@@ -1,0 +1,19 @@
+protocol: part3_c_classical_diagnostics_v1
+base_config: configs/part3/direction_c.yaml
+reference_name: evaluation_v1
+output_name: diagnostics_v1
+methods: [RAW, C, C_no_RGB, C_no_depth_gate, Gaussian_log, RGB_guided_log]
+classical:
+  gaussian: {radius: 2, sigma: 1.5}
+  guided: {radius: 2, epsilon: 0.01}
+# 复用2A的GT/标注支持剖面选择和边缘容差定义；不改原配置。
+diagnostic_config: configs/part2/scale_boundary.yaml
+texture:
+  radius: 3
+  maximum_gt_ratio: 1.02
+  minimum_rgb_gradient: 0.05
+  maximum_control_gradient: 0.01
+  prediction_edge_ratio: 1.05
+case_positions: [0, 21, 302, 545]
+bootstrap_resamples: 10000
+bootstrap_seed: 42

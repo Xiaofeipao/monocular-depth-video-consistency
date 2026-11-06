@@ -110,7 +110,7 @@ Depth Pro 的 AbsRel、RMSE、δ1 和 SI 平均值更好，UniDepth 的 δ2/δ3 
 
 ## 绝对尺度：原始预测、距离误差与整图偏差
 
-完整精度来源：summary.json（本地产物：`outputs/part2/scale_boundary_v1/summary.json`）、逐图表（本地产物：`outputs/part2/scale_boundary_v1/tables/per_image.csv`）。以下raw统计均在固定crop内的有效GT域计算，每模型156,018,240个像素；预测不经评分裁剪。`raw`是这里的模型原生预测，GT仍是课程规定的填充`depths`。
+完整精度来源：[summary.json](../outputs/part2/scale_boundary_v1/summary.json)、[逐图表](../outputs/part2/scale_boundary_v1/tables/per_image.csv)。以下raw统计均在固定crop内的有效GT域计算，每模型156,018,240个像素；预测不经评分裁剪。`raw`是这里的模型原生预测，GT仍是课程规定的填充`depths`。
 
 ### 原始尺度比与超范围预测
 
@@ -130,11 +130,11 @@ Depth Pro 的 AbsRel、RMSE、δ1 和 SI 平均值更好，UniDepth 的 δ2/δ3 
 
 这说明裁剪对整图尺度中位数影响较小，但对RMSE长尾有可见影响。raw结果只作诊断，正式成绩仍使用课程clip；不因诊断发现极端值而删除图像或改预测。
 
-尺度分布（本地产物：`outputs/part2/scale_boundary_v1/figures/scale_distribution.png`）
+![尺度分布](../outputs/part2/scale_boundary_v1/figures/scale_distribution.png)
 
 ### 不同真实距离的误差
 
-来源：完整三轨道分桶表（本地产物：`outputs/part2/scale_boundary_v1/summary/depth_bins.csv`）。下表使用正式clip轨道；每桶先逐图计算，再对有支持图像等权平均，空桶N/A并保留覆盖。RMSE为逐图RMSE的平均。
+来源：[完整三轨道分桶表](../outputs/part2/scale_boundary_v1/summary/depth_bins.csv)。下表使用正式clip轨道；每桶先逐图计算，再对有支持图像等权平均，空桶N/A并保留覆盖。RMSE为逐图RMSE的平均。
 
 | GT距离 m | 图像数 | Depth Pro AbsRel | Depth Pro RMSE m | Depth Pro有符号偏差 | UniDepth AbsRel | UniDepth RMSE m | UniDepth有符号偏差 |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -146,7 +146,7 @@ Depth Pro 的 AbsRel、RMSE、δ1 和 SI 平均值更好，UniDepth 的 δ2/δ3 
 
 UniDepth在1 m以内平均偏深约30.85%，在6–10 m却偏浅约13.46%；Depth Pro相应为+8.05%和-12.71%。两者都有距离向中间压缩的表现；仅将整个深度图乘一个系数，无法同时解释近处和远处误差。不同桶的图像可重叠，图像数不相加作为独立样本数。
 
-距离误差（本地产物：`outputs/part2/scale_boundary_v1/figures/distance_error.png`）
+![距离误差](../outputs/part2/scale_boundary_v1/figures/distance_error.png)
 
 ### 整图比例与图内结构分别占什么位置
 
@@ -186,9 +186,9 @@ NYUv2的`labels`与`instances`提供现成物体标注。组合类别号和实�
 
 Depth Pro找回的边缘更多，UniDepth预测的边缘Precision更高但漏检更多。物体支持子集有636张图，另18张在该阈值下无支持，保留N/A；不把它们作为0召回混入均值，也不把不完整标注用于惩罚所有预测边缘。
 
-定位诊断另计算GT边缘到最近预测边缘的Euclidean距离，最大记10 px；Depth Pro/UniDepth的逐图均值分别约3.97/4.98 px。它同时受到漏检和错位影响，不能解释为“匹配成功轮廓的纯位置误差”。全部阈值、raw/clipped和覆盖见边缘汇总（本地产物：`outputs/part2/scale_boundary_v1/summary/boundary.csv`）与定位汇总（本地产物：`outputs/part2/scale_boundary_v1/summary/localization.csv`）。1.05处提高容差会提高分数，体现定位容忍度；不同阈值选中不同强度边缘，不据此挑最高分作最终结果。
+定位诊断另计算GT边缘到最近预测边缘的Euclidean距离，最大记10 px；Depth Pro/UniDepth的逐图均值分别约3.97/4.98 px。它同时受到漏检和错位影响，不能解释为“匹配成功轮廓的纯位置误差”。全部阈值、raw/clipped和覆盖见[边缘汇总](../outputs/part2/scale_boundary_v1/summary/boundary.csv)与[定位汇总](../outputs/part2/scale_boundary_v1/summary/localization.csv)。1.05处提高容差会提高分数，体现定位容忍度；不同阈值选中不同强度边缘，不据此挑最高分作最终结果。
 
-边界敏感性（本地产物：`outputs/part2/scale_boundary_v1/figures/boundary_sensitivity.png`）
+![边界敏感性](../outputs/part2/scale_boundary_v1/figures/boundary_sensitivity.png)
 
 ### 边界附近承担多少米制误差
 
@@ -201,9 +201,9 @@ Depth Pro找回的边缘更多，UniDepth预测的边缘Precision更高但漏检
 
 调整整图尺度后，边缘与内部都改善，但边缘残余误差仍明显更高。这把“全图比例不准”和“轮廓局部结构不准”联系起来，支持同时分析两者。误差份额来自每图平方误差和的会计式统计，不表示发现了具体物理原因。
 
-互斥区域[0,1]、(1,3]、(3,5]、>5 px的像素/误差份额可相加；“≤3 px”和“物体支持边缘≤3 px”是重叠区域，不能重复相加。空区域的误差均值为N/A、份额为0；完整覆盖在区域汇总（本地产物：`outputs/part2/scale_boundary_v1/summary/regions.csv`）。
+互斥区域[0,1]、(1,3]、(3,5]、>5 px的像素/误差份额可相加；“≤3 px”和“物体支持边缘≤3 px”是重叠区域，不能重复相加。空区域的误差均值为N/A、份额为0；完整覆盖在[区域汇总](../outputs/part2/scale_boundary_v1/summary/regions.csv)。
 
-尺度与边界联系（本地产物：`outputs/part2/scale_boundary_v1/figures/scale_boundary_connection.png`）
+![尺度与边界联系](../outputs/part2/scale_boundary_v1/figures/scale_boundary_connection.png)
 
 ### 用同一局部剖面区分偏移、模糊与漏检
 
@@ -220,15 +220,15 @@ Depth Pro的不可测状态为弱对比35、交点不唯一35、顺序错误10�
 
 在双方都可测的相同剖面上配对后，位置误差差值（Depth Pro−UniDepth）为-0.17593709 [-0.30439116, -0.05279468] px，宽度增量差值为-0.63567118 [-0.92179151, -0.36834913] px，均有495张图支持。在这一固定GT支持子集上，区间支持Depth Pro更少偏移和更窄的过渡；结论不覆盖所有细杆、曲线或弱边界。
 
-完整剖面逐条表（本地产物：`outputs/part2/scale_boundary_v1/tables/profiles.csv`）保留实际坐标、GT宽度、状态、位置、宽度和对比幅度。水平/垂直剖面是图像坐标方向的局部截面，曲线或斜边的连续法线宽度仍需更专门的几何定义。
+[完整剖面逐条表](../outputs/part2/scale_boundary_v1/tables/profiles.csv)保留实际坐标、GT宽度、状态、位置、宽度和对比幅度。水平/垂直剖面是图像坐标方向的局部截面，曲线或斜边的连续法线宽度仍需更专门的几何定义。
 
 ### 实际物体与失败案例
 
-产物含12张整图比较、固定坐标局部放大和13组剖面图；没有可选GT剖面的案例另给局部放大。固定示例与按指标选出的困难图见总览（本地产物：`outputs/part2/scale_boundary_v1/figures/case_contact_sheet.jpg`）、选择记录（本地产物：`outputs/part2/scale_boundary_v1/case_selection.json`）。候选用于解释机制，不是随机代表集，也不用于参数选择。
+产物含12张整图比较、固定坐标局部放大和13组剖面图；没有可选GT剖面的案例另给局部放大。固定示例与按指标选出的困难图见[总览](../outputs/part2/scale_boundary_v1/figures/case_contact_sheet.jpg)、[选择记录](../outputs/part2/scale_boundary_v1/case_selection.json)。候选用于解释机制，不是随机代表集，也不用于参数选择。
 
-- test_0021，红色椅背边缘，剖面0（本地产物：`outputs/part2/scale_boundary_v1/cases/test_0021_mat_0040/profile_0.png`）：Depth Pro位置误差约0.57 px，UniDepth约2.08 px；UniDepth两侧台阶幅度只有GT的约62.87%，且椅子侧预测偏深。可同时看到位置错位与米制偏差。该图另一剖面上UniDepth位置误差更小，说明同图也有局部优劣。
-- test_0545，左侧容器与地面，剖面0（本地产物：`outputs/part2/scale_boundary_v1/cases/test_0545_mat_1234/profile_0.png`）：Depth Pro还能测量，但过渡比GT宽约14.74 px；UniDepth对比太弱，几何量N/A。沙发上沿剖面1（本地产物：`outputs/part2/scale_boundary_v1/cases/test_0545_mat_1234/profile_1.png`）上UniDepth的定位/宽度较好。整图SI较高不能保证每一处物体边界都好。
-- test_0302，小圆形物体，剖面0（本地产物：`outputs/part2/scale_boundary_v1/cases/test_0302_mat_0713/profile_0.png`）：GT有明显深度断层，而两模型原生曲线接近平坦；两者log对比幅度只约GT的1.89%/2.75%，都标记弱对比。形状图明确N/A，原生曲线显示漏检，不能赋予“宽度很小”的好成绩。反射表面与填充GT的物理对应仍有限制，解释限定为相对该GT的误差。
+- [test_0021，红色椅背边缘，剖面0](../outputs/part2/scale_boundary_v1/cases/test_0021_mat_0040/profile_0.png)：Depth Pro位置误差约0.57 px，UniDepth约2.08 px；UniDepth两侧台阶幅度只有GT的约62.87%，且椅子侧预测偏深。可同时看到位置错位与米制偏差。该图另一剖面上UniDepth位置误差更小，说明同图也有局部优劣。
+- [test_0545，左侧容器与地面，剖面0](../outputs/part2/scale_boundary_v1/cases/test_0545_mat_1234/profile_0.png)：Depth Pro还能测量，但过渡比GT宽约14.74 px；UniDepth对比太弱，几何量N/A。[沙发上沿剖面1](../outputs/part2/scale_boundary_v1/cases/test_0545_mat_1234/profile_1.png)上UniDepth的定位/宽度较好。整图SI较高不能保证每一处物体边界都好。
+- [test_0302，小圆形物体，剖面0](../outputs/part2/scale_boundary_v1/cases/test_0302_mat_0713/profile_0.png)：GT有明显深度断层，而两模型原生曲线接近平坦；两者log对比幅度只约GT的1.89%/2.75%，都标记弱对比。形状图明确N/A，原生曲线显示漏检，不能赋予“宽度很小”的好成绩。反射表面与填充GT的物理对应仍有限制，解释限定为相对该GT的误差。
 
 ## 配对统计与结论范围
 
@@ -278,4 +278,4 @@ AbsRel、δ1和这些边界量支持Depth Pro优势；RMSE与绝对log尺度偏�
 
 ## 实际验证
 
-完整CPU分析与独立重放已完成，正式米制七指标逐图与两条基线一致；六张数值表和汇总的重放检查通过1,039,777个数值。原始数据/预测只读，完整输入及旧key_analysis/基线记录的保留核对见维护记录（本地产物：`outputs/maintenance/part2_scale_boundary_20261102/README.md`）。没有训练、模型推理或下载。结果来源与实际完成记录见当前结果审计（完整记录保存在源项目，本发布包不包含）、[implemented.md](../implemented.md)。
+完整CPU分析与独立重放已完成，正式米制七指标逐图与两条基线一致；六张数值表和汇总的重放检查通过1,039,777个数值。原始数据/预测只读，完整输入及旧key_analysis/基线记录的保留核对见[维护记录](../outputs/maintenance/part2_scale_boundary_20261102/README.md)。没有训练、模型推理或下载。结果来源与实际完成记录见[当前结果审计](current_results.md)、[implemented.md](../implemented.md)。

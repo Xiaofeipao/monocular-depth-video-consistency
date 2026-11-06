@@ -1,0 +1,9 @@
+protocol: part3_b_three_estimators_v1
+base_config: configs/part3/direction_b.yaml
+methods: [RAW, B_median_log, B_mean_log, B_absrel]
+development_root: outputs/part3/direction_b
+fit_name: estimators_fit_v1
+evaluation_name: estimators_evaluation_v1
+bootstrap_resamples: 10000
+bootstrap_seed: 42
+# B_absrel拟合未裁剪预测；测试保持课程clip评分，不声称最小化裁剪后目标。
