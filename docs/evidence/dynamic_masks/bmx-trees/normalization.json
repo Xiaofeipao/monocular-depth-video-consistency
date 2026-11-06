@@ -1,0 +1,11 @@
+{
+  "spans": {
+    "dav2": 5.574014899209138,
+    "vda": 9.521072266101836,
+    "depth_pro": 27.439486303329467,
+    "C": 27.439486303329467,
+    "C_no_RGB": 27.439486303329467,
+    "C_no_depth_gate": 27.439486303329467
+  },
+  "note": "fixed P99-P1 for scoring; shared RAW depth_pro span for its variants"
+}

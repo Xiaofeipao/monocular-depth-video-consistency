@@ -1,0 +1,22 @@
+[
+  {
+    "sequence": "bmx-trees",
+    "input_tensor_shape": [
+      3,
+      504,
+      910
+    ],
+    "max_tensor_difference": 2.7418136596679688e-05,
+    "tensor_values_identical": false
+  },
+  {
+    "sequence": "tennis",
+    "input_tensor_shape": [
+      3,
+      504,
+      910
+    ],
+    "max_tensor_difference": 3.445148468017578e-05,
+    "tensor_values_identical": false
+  }
+]

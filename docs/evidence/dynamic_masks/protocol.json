@@ -1,0 +1,24 @@
+{
+  "source_fps": null,
+  "frame_selection": "all consecutive frames, no sampling",
+  "display_fps": 10,
+  "vda_api_fps_placeholder": 1,
+  "placeholder_scope": "upstream infer_video_depth returns target_fps unchanged; no resampling in this API",
+  "input_size": 518,
+  "effective_small_short_side": 504,
+  "external_hw": [
+    240,
+    432
+  ],
+  "precision": "FP16 official Small relative; Depth Pro FP16; C FP32",
+  "calibration": "none",
+  "depth_gt": false,
+  "device": "GPU-A",
+  "torch": "2.12.1+cu132",
+  "cuda": "13.2",
+  "timing": "one warmup; sequence inference excludes load/IO; VDA offline amortized, not streaming latency",
+  "source_sha256": "ddf0b54916087b8def0d3d5bb26d12456337e685481d9b6cb8c84604f959ef9a",
+  "region_rule": "current foreground/background also agrees with warped previous segmentation; boundary=current mask +/-2 px; FB threshold 1px; >=8 common pixels per region",
+  "scoring": "Farneback and independent RAFT-Small; mean absolute warp difference divided by fixed whole-clip P99-P1; C variants use unchanged Depth Pro span; not depth accuracy",
+  "edge_proxy": "fraction of mask boundary within 2px of normalized depth Sobel edges >.02; segmentation silhouette is not depth-edge GT"
+}

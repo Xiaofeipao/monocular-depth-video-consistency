@@ -16,3 +16,5 @@
 B和C独立，不执行B+C。正式训练与长时间运行由用户启动；不能把小型检查或队友独立分数写成本地全量结果。Part 1/2上传GitHub见[分支替换指南](github_upload_part1_part2.md)，不上传数据、视频、权重或outputs。
 
 完整项目（含Direction B/C）更新GitHub分支见[完整上传指南](github_upload_project.md)，包含白名单打包、转移、完整替换、校验与推送命令；不上传视频、数据、权重或运行产物。
+
+动态片段的目标/背景/边界检查见[动态实验](dynamic_clips.md)；与 NYU 主表分别报告。

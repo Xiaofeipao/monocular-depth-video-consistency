@@ -1,0 +1,14 @@
+protocol: dynamic_mask_regions_v1
+data: data/course_provided/dynamic_clips
+assets_root: .
+sequences: {bmx-trees: 80, tennis: 70}
+saved_hw: [240, 432]
+input_size: 518
+source_fps: null
+vda_api_fps_placeholder: 1
+display_fps: 10
+farneback: {pyr_scale: 0.5, levels: 3, winsize: 21, iterations: 3, poly_n: 5, poly_sigma: 1.2}
+raft: {variant: small, iterations: 12}
+forward_backward_threshold_px: 1
+minimum_region_pixels: 8
+note: Validated frozen protocol; CLI --data/--assets-root override only local locations. Not a parameter search.

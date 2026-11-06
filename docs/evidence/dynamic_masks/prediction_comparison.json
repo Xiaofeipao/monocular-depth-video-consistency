@@ -1,0 +1,98 @@
+[
+  {
+    "sequence": "bmx-trees",
+    "method": "dav2",
+    "frames": 80,
+    "max_absolute_difference": 0.5815936326980591,
+    "mean_absolute_difference": 0.0010007065677200444,
+    "byte_values_equal": false
+  },
+  {
+    "sequence": "bmx-trees",
+    "method": "vda",
+    "frames": 80,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "bmx-trees",
+    "method": "depth_pro",
+    "frames": 80,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "bmx-trees",
+    "method": "C",
+    "frames": 80,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "bmx-trees",
+    "method": "C_no_RGB",
+    "frames": 80,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "bmx-trees",
+    "method": "C_no_depth_gate",
+    "frames": 80,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "tennis",
+    "method": "dav2",
+    "frames": 70,
+    "max_absolute_difference": 0.08042430877685547,
+    "mean_absolute_difference": 0.0007378053273506728,
+    "byte_values_equal": false
+  },
+  {
+    "sequence": "tennis",
+    "method": "vda",
+    "frames": 70,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "tennis",
+    "method": "depth_pro",
+    "frames": 70,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "tennis",
+    "method": "C",
+    "frames": 70,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "tennis",
+    "method": "C_no_RGB",
+    "frames": 70,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  },
+  {
+    "sequence": "tennis",
+    "method": "C_no_depth_gate",
+    "frames": 70,
+    "max_absolute_difference": 0.0,
+    "mean_absolute_difference": 0.0,
+    "byte_values_equal": true
+  }
+]

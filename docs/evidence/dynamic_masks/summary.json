@@ -1,0 +1,435 @@
+{
+  "status": "complete",
+  "scores": {
+    "bmx-trees": {
+      "farneback": {
+        "all": {
+          "dav2": {
+            "normalized_warp_mae": 0.02355729998706743,
+            "evaluable_pairs": 79
+          },
+          "vda": {
+            "normalized_warp_mae": 0.0158377201748932,
+            "evaluable_pairs": 79
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.05350311208449887,
+            "evaluable_pairs": 79
+          },
+          "C": {
+            "normalized_warp_mae": 0.05341080021438312,
+            "evaluable_pairs": 79
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.05338121259709975,
+            "evaluable_pairs": 79
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.05318579112138308,
+            "evaluable_pairs": 79
+          }
+        },
+        "foreground": {
+          "dav2": {
+            "normalized_warp_mae": 0.02918546191146966,
+            "evaluable_pairs": 79
+          },
+          "vda": {
+            "normalized_warp_mae": 0.020201219070045243,
+            "evaluable_pairs": 79
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.056051822070791193,
+            "evaluable_pairs": 79
+          },
+          "C": {
+            "normalized_warp_mae": 0.05607036906246936,
+            "evaluable_pairs": 79
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.05615802507117774,
+            "evaluable_pairs": 79
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.056062591423039106,
+            "evaluable_pairs": 79
+          }
+        },
+        "background": {
+          "dav2": {
+            "normalized_warp_mae": 0.022992056970915418,
+            "evaluable_pairs": 79
+          },
+          "vda": {
+            "normalized_warp_mae": 0.01527191925095863,
+            "evaluable_pairs": 79
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.05335014056194156,
+            "evaluable_pairs": 79
+          },
+          "C": {
+            "normalized_warp_mae": 0.05326369908632276,
+            "evaluable_pairs": 79
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.05324016245351608,
+            "evaluable_pairs": 79
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.05303916776521421,
+            "evaluable_pairs": 79
+          }
+        },
+        "boundary": {
+          "dav2": {
+            "normalized_warp_mae": 0.041388158517385226,
+            "evaluable_pairs": 79
+          },
+          "vda": {
+            "normalized_warp_mae": 0.03524829726120643,
+            "evaluable_pairs": 79
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.06013987408758869,
+            "evaluable_pairs": 79
+          },
+          "C": {
+            "normalized_warp_mae": 0.05976674683375116,
+            "evaluable_pairs": 79
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.0593966919192728,
+            "evaluable_pairs": 79
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.0593849645554333,
+            "evaluable_pairs": 79
+          }
+        }
+      },
+      "raft": {
+        "all": {
+          "dav2": {
+            "normalized_warp_mae": 0.02338492341846814,
+            "evaluable_pairs": 79
+          },
+          "vda": {
+            "normalized_warp_mae": 0.01588860349032867,
+            "evaluable_pairs": 79
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.05379589249097564,
+            "evaluable_pairs": 79
+          },
+          "C": {
+            "normalized_warp_mae": 0.053703616249418565,
+            "evaluable_pairs": 79
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.0536757481861239,
+            "evaluable_pairs": 79
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.053478155561172185,
+            "evaluable_pairs": 79
+          }
+        },
+        "foreground": {
+          "dav2": {
+            "normalized_warp_mae": 0.03111350826937254,
+            "evaluable_pairs": 79
+          },
+          "vda": {
+            "normalized_warp_mae": 0.023095268730192447,
+            "evaluable_pairs": 79
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.054950186026151995,
+            "evaluable_pairs": 79
+          },
+          "C": {
+            "normalized_warp_mae": 0.05480763390131948,
+            "evaluable_pairs": 79
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.05478301720693871,
+            "evaluable_pairs": 79
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.05487267825179701,
+            "evaluable_pairs": 79
+          }
+        },
+        "background": {
+          "dav2": {
+            "normalized_warp_mae": 0.022760055976893134,
+            "evaluable_pairs": 79
+          },
+          "vda": {
+            "normalized_warp_mae": 0.015200536467307771,
+            "evaluable_pairs": 79
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.05368165482097609,
+            "evaluable_pairs": 79
+          },
+          "C": {
+            "normalized_warp_mae": 0.053597708299966886,
+            "evaluable_pairs": 79
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.053576936369072674,
+            "evaluable_pairs": 79
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.05337479726369482,
+            "evaluable_pairs": 79
+          }
+        },
+        "boundary": {
+          "dav2": {
+            "normalized_warp_mae": 0.047551111266961196,
+            "evaluable_pairs": 79
+          },
+          "vda": {
+            "normalized_warp_mae": 0.045334871559694345,
+            "evaluable_pairs": 79
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.06123856497781805,
+            "evaluable_pairs": 79
+          },
+          "C": {
+            "normalized_warp_mae": 0.06069258107999628,
+            "evaluable_pairs": 79
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.06033358073183643,
+            "evaluable_pairs": 79
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.06028527161649051,
+            "evaluable_pairs": 79
+          }
+        }
+      }
+    },
+    "tennis": {
+      "farneback": {
+        "all": {
+          "dav2": {
+            "normalized_warp_mae": 0.010538694948389745,
+            "evaluable_pairs": 69
+          },
+          "vda": {
+            "normalized_warp_mae": 0.005479479344115809,
+            "evaluable_pairs": 69
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.04486631430606124,
+            "evaluable_pairs": 69
+          },
+          "C": {
+            "normalized_warp_mae": 0.044760480318403836,
+            "evaluable_pairs": 69
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.04468142784211823,
+            "evaluable_pairs": 69
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.044520778670582906,
+            "evaluable_pairs": 69
+          }
+        },
+        "foreground": {
+          "dav2": {
+            "normalized_warp_mae": 0.024910462283201363,
+            "evaluable_pairs": 69
+          },
+          "vda": {
+            "normalized_warp_mae": 0.022849095888781607,
+            "evaluable_pairs": 69
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.03626496706075655,
+            "evaluable_pairs": 69
+          },
+          "C": {
+            "normalized_warp_mae": 0.035987665129943794,
+            "evaluable_pairs": 69
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.035649205335598864,
+            "evaluable_pairs": 69
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.03522516587088362,
+            "evaluable_pairs": 69
+          }
+        },
+        "background": {
+          "dav2": {
+            "normalized_warp_mae": 0.008349569543779637,
+            "evaluable_pairs": 69
+          },
+          "vda": {
+            "normalized_warp_mae": 0.002922186520108926,
+            "evaluable_pairs": 69
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.045629646053051795,
+            "evaluable_pairs": 69
+          },
+          "C": {
+            "normalized_warp_mae": 0.04554726061420843,
+            "evaluable_pairs": 69
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.04549767927919331,
+            "evaluable_pairs": 69
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.045360929087964255,
+            "evaluable_pairs": 69
+          }
+        },
+        "boundary": {
+          "dav2": {
+            "normalized_warp_mae": 0.014336870756383485,
+            "evaluable_pairs": 69
+          },
+          "vda": {
+            "normalized_warp_mae": 0.011396513219960129,
+            "evaluable_pairs": 69
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.038216336880240356,
+            "evaluable_pairs": 69
+          },
+          "C": {
+            "normalized_warp_mae": 0.03801400326572863,
+            "evaluable_pairs": 69
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.03790942416349323,
+            "evaluable_pairs": 69
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.03782516793632562,
+            "evaluable_pairs": 69
+          }
+        }
+      },
+      "raft": {
+        "all": {
+          "dav2": {
+            "normalized_warp_mae": 0.009907707466115554,
+            "evaluable_pairs": 69
+          },
+          "vda": {
+            "normalized_warp_mae": 0.004613673754459085,
+            "evaluable_pairs": 69
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.04475179739667701,
+            "evaluable_pairs": 69
+          },
+          "C": {
+            "normalized_warp_mae": 0.04467102675239729,
+            "evaluable_pairs": 69
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.04461750133188435,
+            "evaluable_pairs": 69
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.044487243568924764,
+            "evaluable_pairs": 69
+          }
+        },
+        "foreground": {
+          "dav2": {
+            "normalized_warp_mae": 0.020182619263910368,
+            "evaluable_pairs": 69
+          },
+          "vda": {
+            "normalized_warp_mae": 0.01711202622465129,
+            "evaluable_pairs": 69
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.03324723026333401,
+            "evaluable_pairs": 69
+          },
+          "C": {
+            "normalized_warp_mae": 0.03303964915983286,
+            "evaluable_pairs": 69
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.03281554554604842,
+            "evaluable_pairs": 69
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.032657136669279226,
+            "evaluable_pairs": 69
+          }
+        },
+        "background": {
+          "dav2": {
+            "normalized_warp_mae": 0.008479877544424724,
+            "evaluable_pairs": 69
+          },
+          "vda": {
+            "normalized_warp_mae": 0.0029971533995650545,
+            "evaluable_pairs": 69
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.04519460834180307,
+            "evaluable_pairs": 69
+          },
+          "C": {
+            "normalized_warp_mae": 0.045126819979278164,
+            "evaluable_pairs": 69
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.04508463415523008,
+            "evaluable_pairs": 69
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.0449554754056592,
+            "evaluable_pairs": 69
+          }
+        },
+        "boundary": {
+          "dav2": {
+            "normalized_warp_mae": 0.012786957516652963,
+            "evaluable_pairs": 69
+          },
+          "vda": {
+            "normalized_warp_mae": 0.008757589798474264,
+            "evaluable_pairs": 69
+          },
+          "depth_pro": {
+            "normalized_warp_mae": 0.03458658155393091,
+            "evaluable_pairs": 69
+          },
+          "C": {
+            "normalized_warp_mae": 0.03453740636619718,
+            "evaluable_pairs": 69
+          },
+          "C_no_RGB": {
+            "normalized_warp_mae": 0.034532131800445454,
+            "evaluable_pairs": 69
+          },
+          "C_no_depth_gate": {
+            "normalized_warp_mae": 0.03447682545365133,
+            "evaluable_pairs": 69
+          }
+        }
+      }
+    }
+  },
+  "limitations": "No depth GT; no real FPS; mask foreground is not per-pixel motion GT. Flow/occlusion errors and true depth motion remain. Mask support is not depth boundary accuracy. Independent backend is a sensitivity check, not temporal truth.",
+  "raft_checkpoint_sha256": "01064c6dba73b0fc9fc8edf772248560a00a3acfd62ac6677e9eeebad9680e27"
+}

@@ -1,0 +1,29 @@
+{
+  "dav2": {
+    "model": "dav2",
+    "checkpoint_sha256": "715fade13be8f229f8a70cc02066f656f2423a59effd0579197bbf57860e1378",
+    "precision": "fp16",
+    "device": "GPU-A",
+    "input_size": 518,
+    "adapter": "teammate native RGB adapter through explicit BGR conversion",
+    "depth_type": "relative"
+  },
+  "vda": {
+    "model": "vda",
+    "checkpoint_sha256": "13379300b739e659f076a59d52e9801bd8d38c541a7e71f73bbca4dcfb013609",
+    "precision": "fp16",
+    "device": "GPU-A",
+    "input_size": 518,
+    "adapter": "teammate native RGB adapter through explicit BGR conversion",
+    "depth_type": "relative"
+  },
+  "depth_pro": {
+    "model": "depth-pro",
+    "checkpoint_sha256": "3eb35ca68168ad3d14cb150f8947a4edf85589941661fdb2686259c80685c0ce",
+    "precision": "fp16",
+    "device": "GPU-A",
+    "input_size": 1536,
+    "adapter": "teammate native RGB adapter through explicit BGR conversion",
+    "depth_type": "metric"
+  }
+}
