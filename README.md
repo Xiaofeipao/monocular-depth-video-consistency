@@ -97,10 +97,7 @@ outputs/part3/                  # B/C完整正式结果、尺度、消融与案�
 outputs/maintenance/            # 小型核验、保护与删除审计
 ```
 
-详细门禁见[PLAN.md](PLAN.md)，实际实施与验证见[implemented.md](implemented.md)。测试使用`conda run -n aiaa3201 python -m pytest -q`；合成测试不替代真实实验。
 
-完整项目（Part 1/2、B、C v1/v2）通过工作站7897代理更新GitHub分支，见[上传指南](docs/github_upload_project.md)。用`scripts/publishing/export_project.py`生成项目外白名单包，再在独立克隆中完整替换目标分支；视频、data、checkpoints、outputs与第三方仓库均不上传，无需转移到本地电脑。队友分支审查在[analysis_branch.md](github_repository/analysis_branch.md)，main Part 3审查在[analysis.md](github_repository/analysis.md)；借用实现的来源与MIT许可保存在`src/refinement/`，第三方仓库保持独立。
 
 Part 1A入口为`./scripts/part1/run_middlebury.sh`（两组fixed）和`./scripts/part1/study_middlebury_coverage.sh`（matched_coverage/matched_error开发选择）；输出分别为`fixed_v1/`和`coverage_study_v1/`。fixed从已有数组原样整理并重算，研究原始记录与源码快照保留；当前无需重新匹配。完整协议与指令见[Step 1](docs/step1.md)。
 
-[2026-11-14项目清理](docs/project_cleanup.md)已删除旧自录视频、抽帧缓存、旧`outputs/part1/video`、对应预检、过期上传包及项目自有Python缓存；指定DAVIS片段、NYUv2/Middlebury和B/C v1/v2正式结果完整保留。删除前逐文件SHA、来源登记快照与保护核对见`outputs/maintenance/project_cleanup_20261114/`。旧上传说明归档到同一维护目录，当前使用上述完整指南。
