@@ -1,4 +1,4 @@
-# 本仓库只发布项目自有代码、配置、测试和文档。
+# 仅发布项目自有代码、配置、测试和文档；资源与产物不入库。
 /data/
 /checkpoints/
 /outputs/
@@ -8,15 +8,16 @@
 /UniDepth/
 /ml-depth-pro/
 /SAM2/
+/docs/figures/
 .conda/
 .venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
+.DS_Store
 .idea/
 .vscode/
-.DS_Store
 .env
 .env.*
 *.pem
@@ -35,3 +36,5 @@ __pycache__/
 *.log
 *.tmp
 *.part
+*.tar.gz
+depth_results.zip

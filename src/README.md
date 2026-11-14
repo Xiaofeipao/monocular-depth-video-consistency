@@ -18,3 +18,5 @@
 `refinement/edge_aware.py`是main固定5×5 RGB/log-depth联合引导逆深度滤波的CPU/CUDA移植，保留无效位置；`ablation.py`提供同设置的CPU组件移除与统一后端选择。它们不读取GT、相机或另一模型深度，不训练。
 
 来源commit、原始及LF源码SHA见`refinement/ORIGIN.json`，MIT许可见`refinement/MAIN_LICENSE.txt`。B/C三规则与六方法正式结果、核验报告及分析已生成；测试/同公式滤波重放的范围仍分别说明。方法、命令和状态见[Step B](../docs/stepB.md)、[Step C](../docs/stepC.md)。
+
+Part 1A的`stereo/development.py`提供候选公共评分，误差—覆盖率研究统一管理两种选择；`analysis/stereo_history.py`仅在临时隔离目录中重放已有研究的不可变源码快照，以保持历史产物可核验。固定基线与研究入口见[Step 1](../docs/step1.md)。

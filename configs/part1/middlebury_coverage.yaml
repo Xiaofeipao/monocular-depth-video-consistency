@@ -1,4 +1,4 @@
-# 开发集选择与独立场景泛化；不改变四组主实验。
+# 开发集选择与独立场景泛化；同一两组fixed参考。
 protocol: middlebury_coverage_v1
 base_config: configs/part1/middlebury_sgbm.yaml
 coverage_tolerance: 0.01

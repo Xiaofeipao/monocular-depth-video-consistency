@@ -93,34 +93,28 @@ def test_shared_candidate_protocol_preserves_native_metric_scale() -> None:
     assert config["video"]["flow_convention"] == "backward_target_to_source_dx_dy"
 
 
-def test_middlebury_protocol_has_four_frozen_experiments_and_disjoint_split() -> None:
+def test_middlebury_protocol_has_two_fixed_experiments_and_disjoint_split() -> None:
     config = load_yaml("configs/part1/middlebury_sgbm.yaml")
     development = config["split"]["development_scenes"]
     held_out = config["split"]["evaluation_scenes"]
-    assert config["protocol_status"] == "middlebury_course_v1"
+    assert config["protocol_status"] == "middlebury_fixed_v1"
     assert len(development) == 5
     assert len(held_out) == 10
     assert not set(development) & set(held_out)
     assert len(set(development + held_out)) == 15
     assert set(config["experiments"]) == {
         "bm_fixed",
-        "bm_tuned",
         "sgbm_fixed",
-        "sgbm_tuned",
     }
     assert config["experiments"]["bm_fixed"]["algorithm"] == "bm"
-    assert config["experiments"]["bm_tuned"]["algorithm"] == "bm"
     assert config["experiments"]["sgbm_fixed"]["algorithm"] == "sgbm"
-    assert config["experiments"]["sgbm_tuned"]["algorithm"] == "sgbm"
     assert config['evaluation']['mask_name'] == 'finite_positive_gt'
     assert config['evaluation']['primary_metrics'] == ['disparity_mae_px','valid_prediction_fraction']
-    assert config['tuning']['objective'] == 'minimum_mae_with_fixed_fraction_floor'
     for method in ('bm', 'sgbm'):
         parameters = config['experiments'][method+'_fixed']['parameters']
         assert parameters['lr_threshold_px'] == 1.0
-        assert config['experiments'][method+'_tuned']['parameters'] is None
-        for name, values in config['tuning'][method]['search'].items():
+        for name, values in config['development_search'][method]['search'].items():
             assert parameters[name] in values
-    assert config['outputs']['evaluation_run'] == 'evaluation'
+    assert config['outputs']['evaluation_run'] == 'fixed_v1'
     from src.stereo.protocol import load_config
     assert load_config(PROJECT_ROOT/'configs/part1/middlebury_sgbm.yaml') == config

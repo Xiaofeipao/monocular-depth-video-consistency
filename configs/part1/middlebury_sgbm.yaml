@@ -1,5 +1,5 @@
-# Part 1A：四组经典双目、全有效GT评价与固定开发集选参。
-protocol_status: middlebury_course_v1
+# Part 1A：两组固定基线；开发网格供误差—有效比例研究使用。
+protocol_status: middlebury_fixed_v1
 dataset:
   name: Middlebury Stereo v3
   root: data/middlebury/MiddEval3/trainingQ
@@ -26,8 +26,8 @@ split:
   - Shelves
   - Teddy
   - Vintage
-  rule: Tune BM and SGBM only on the five declared development scenes; report all
-    scenes and the held-out macro separately.
+  rule: Report fixed on all 15 scenes; choose matched_coverage/matched_error only
+    on five development scenes and evaluate ten held-out scenes.
 geometry:
   formula: z_m = focal_length_px * baseline_mm / (disparity_px + doffs_px) / 1000
   calibration_baseline_unit: millimeter
@@ -39,8 +39,14 @@ evaluation:
   primary_metrics:
   - disparity_mae_px
   - valid_prediction_fraction
-  auxiliary_metrics: [bad1, bad2, bad4, depth_abs_rel, depth_rmse_m]
-  bad_pixel_rule: absolute_error_strictly_greater_than_threshold; invalid_counts_as_bad; full_gt_denominator
+  auxiliary_metrics:
+  - bad1
+  - bad2
+  - bad4
+  - depth_abs_rel
+  - depth_rmse_m
+  bad_pixel_rule: absolute_error_strictly_greater_than_threshold; invalid_counts_as_bad;
+    full_gt_denominator
   invalid_prediction_rule: exclude_from_mae_keep_in_fraction_denominator; zero_valid_mae_is_null
   depth_bin_edges_m:
   - 0.0
@@ -63,10 +69,6 @@ experiments:
       texture_threshold: 10
       disp12_max_diff: 1
       lr_threshold_px: 1.0
-  bm_tuned:
-    algorithm: bm
-    parameter_source: bound_development_selection
-    parameters: null
   sgbm_fixed:
     algorithm: sgbm
     parameter_source: fixed_empirical
@@ -80,17 +82,31 @@ experiments:
       disp12_max_diff: 1
       mode: sgbm_3way
       lr_threshold_px: 1.0
-  sgbm_tuned:
-    algorithm: sgbm
-    parameter_source: bound_development_selection
-    parameters: null
-tuning:
-  objective: minimum_mae_with_fixed_fraction_floor
-  tie_breakers:
-  - higher_valid_prediction_fraction
-  - lexicographic_candidate_parameters
+sensitivity:
+  disparity_errors_px:
+  - 0.25
+  - 0.5
+  - 1.0
+  - 2.0
+  depth_bin_width_m: 0.25
+  theoretical_scope: shared_camera_geometry
+  empirical_scope: compare_two_fixed_experiments
+visualization:
+  failure_zoom:
+    scene: Jadeplant
+    experiment: sgbm_fixed
+    crop_xyxy:
+    - 150
+    - 10
+    - 570
+    - 350
+outputs:
+  root: outputs/part1/middlebury
+  evaluation_run: fixed_v1
+  save_npz: true
+  save_visualizations: true
+development_search:
   lr_threshold_px: 1.0
-  rationale: 开发集有效预测比例不得低于同方法fixed基线；可行候选中取最小MAE；LR=1 px不参与搜索。
   bm:
     search:
       block_size:
@@ -137,27 +153,3 @@ tuning:
       pre_filter_cap: 63
       disp12_max_diff: 1
       mode: sgbm_3way
-sensitivity:
-  disparity_errors_px:
-  - 0.25
-  - 0.5
-  - 1.0
-  - 2.0
-  depth_bin_width_m: 0.25
-  theoretical_scope: shared_camera_geometry
-  empirical_scope: compare_all_four_experiments
-visualization:
-  failure_zoom:
-    scene: Jadeplant
-    experiment: sgbm_tuned
-    crop_xyxy:
-    - 150
-    - 10
-    - 570
-    - 350
-outputs:
-  root: outputs/part1/middlebury
-  tuning_run: tuning
-  evaluation_run: evaluation
-  save_npz: true
-  save_visualizations: true

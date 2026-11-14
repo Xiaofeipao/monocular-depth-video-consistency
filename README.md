@@ -1,13 +1,13 @@
 # AIAA 3201 Project 3
 
-项目研究经典双目、单目米制深度和视频时序一致性。课程要求以[课程PDF](Project_3__Monocular_Metric_Depth_Estimation_and_Video_Consistency.pdf)为准。Part 3采用 **B：开发集全局尺度校准**与 **C：固定边缘感知细化**，两项独立评价。
+项目研究经典双目、单目米制深度和视频时序一致性。课程要求以[课程PDF](Project_3__Monocular_Metric_Depth_Estimation_and_Video_Consistency.pdf)为准，中文说明见[Project3_CN_final.md](Project3_CN_final.md)。Part 3采用 **B：开发集全局尺度校准**与 **C：固定边缘感知细化**，两项独立评价。
 
 ## 当前状态与操作入口
 
 | 内容 | 当前状态 | 文档 |
 |---|---|---|
 | 公共环境与资源 | 两个推理环境、数据/权重、协议与测试已具备 | [Step 0](docs/step0.md) |
-| Part 1A：Middlebury BM/SGBM | 四组15场景及误差—覆盖率研究已完成，原始重算通过 | [Step 1](docs/step1.md) |
+| Part 1A：Middlebury BM/SGBM | 两组fixed各15场景及误差—覆盖率研究完成；30/60份预测重算通过 | [Step 1](docs/step1.md) |
 | Part 1B：DA-V2-S逐帧relative | 指定片段70帧运行/分析/重算完成；保留NYUv2对齐扩展 | [Step 2](docs/step2.md) |
 | Part 2A：Depth Pro / UniDepthV2-S | 两条654图原生米制基线及尺度/物体边界分析完成 | [Step 3](docs/step3.md) |
 | Part 2B：VDA-S offline relative | 当前70帧独立及DA/VDA同帧比较/双方raw重算完成 | [Step 4](docs/step4.md) |
@@ -68,6 +68,12 @@ B流程为“开发预测→参考尺度与三规则冻结→四方法评价/核
 
 官方开发/测试各249/215个scene，无场景交集；尺度仍仅用开发GT拟合。方法比较属于已查看测试结果后的探索性结论，不把该654图称为独立首次确认，也不按分数再选参数。B校准结果与C处理结果都不改写Part 2原生基线。
 
+## Direction C v2：受控边界收窄
+
+独立改进版见[Step C v2](docs/stepC_v2.md)，现有B/C的代码、配置和正式产物保持原位。v2以原C去噪为初值，通过双侧深度结构与RGB支持，受控收窄边界；复用已有795张开发预测，按scene划为636张tune与159张validation，两模型同六候选、同选参规则、各自冻结参数。正式比较RAW、原C、两个经典对照、完整v2及两个消融，联合报告SI、定位、宽度、纹理和米制误差。
+
+两模型完整开发、冻结、654图七方法评价及四份重放报告均已完成并通过。Depth Pro的SI为RAW/C/v2：0.15927408/0.17111979/0.17388612，UniDepth为0.11300740/0.12257544/0.12035916。v2相对原C宽度减少0.42494/0.46976像素，但相对RAW仍宽0.13382/0.12143像素，未实现比RAW更锐的双目标；正式分析、消融、纹理/定位代价及完整命令见Step C v2。实现阶段359项测试通过，本轮不重跑长实验，不组合B+C或覆盖原有结果。新入口`./scripts/part3_c_v2/direction_c.sh`，新产物独立放在`outputs/part3/direction_c_v2/`。
+
 ## 项目架构
 
 ```text
@@ -80,6 +86,10 @@ src/part3_studies/              # 尺度估计、经典对照、共同GT诊断
 pipelines/part3_studies/        # 三规则/六方法统一评价与来源核验
 configs/part3_studies/          # 三尺度规则与六方法诊断的预声明设置
 scripts/part3_studies/          # 统一比较Conda入口（aiaa3201）
+src/part3_c_v2/                 # 受控边界收窄，独立于现有C
+pipelines/part3_c_v2/           # 开发选参/验证、冻结、七方法评价与重放
+configs/part3_c_v2/             # v2固定设置、六候选与场景划分
+scripts/part3_c_v2/             # v2 CPU后处理入口（aiaa3201）
 data/                          # 数据与指定视频（不上传）
 checkpoints/                    # 基础模型权重（不上传）
 outputs/part1/、part2/           # 已有只读科学产物
@@ -87,3 +97,10 @@ outputs/part3/                  # B/C完整正式结果、尺度、消融与案�
 outputs/maintenance/            # 小型核验、保护与删除审计
 ```
 
+详细门禁见[PLAN.md](PLAN.md)，实际实施与验证见[implemented.md](implemented.md)。测试使用`conda run -n aiaa3201 python -m pytest -q`；合成测试不替代真实实验。
+
+完整项目（Part 1/2、B、C v1/v2）通过工作站7897代理更新GitHub分支，见[上传指南](docs/github_upload_project.md)。用`scripts/publishing/export_project.py`生成项目外白名单包，再在独立克隆中完整替换目标分支；视频、data、checkpoints、outputs与第三方仓库均不上传，无需转移到本地电脑。队友分支审查在[analysis_branch.md](github_repository/analysis_branch.md)，main Part 3审查在[analysis.md](github_repository/analysis.md)；借用实现的来源与MIT许可保存在`src/refinement/`，第三方仓库保持独立。
+
+Part 1A入口为`./scripts/part1/run_middlebury.sh`（两组fixed）和`./scripts/part1/study_middlebury_coverage.sh`（matched_coverage/matched_error开发选择）；输出分别为`fixed_v1/`和`coverage_study_v1/`。fixed从已有数组原样整理并重算，研究原始记录与源码快照保留；当前无需重新匹配。完整协议与指令见[Step 1](docs/step1.md)。
+
+[2026-11-14项目清理](docs/project_cleanup.md)已删除旧自录视频、抽帧缓存、旧`outputs/part1/video`、对应预检、过期上传包及项目自有Python缓存；指定DAVIS片段、NYUv2/Middlebury和B/C v1/v2正式结果完整保留。删除前逐文件SHA、来源登记快照与保护核对见`outputs/maintenance/project_cleanup_20261114/`。旧上传说明归档到同一维护目录，当前使用上述完整指南。

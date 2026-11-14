@@ -1,0 +1,31 @@
+protocol: part3_c_bounded_shock_v2
+base_config: configs/part3/direction_c.yaml
+diagnostics_reference: configs/part3_studies/direction_c.yaml
+output_root: outputs/part3/direction_c_v2
+development_root: outputs/part3/direction_b
+# SHA256(scene字符串)排序；前80%的开发scene用于tune，其余只验证。
+development_scene_fraction: 0.8
+development_scene_seed: c_v2_scene_partition_v1
+# 已查看的两张工程检查图属于此scene，固定归入tune，不进入验证。
+design_scenes: [office_0003]
+methods: [RAW, C, Gaussian_log, RGB_guided_log, C_v2, C_v2_no_sharpen, C_v2_no_RGB_support]
+fixed:
+  step: 0.15
+  derivative_sigma: 0.8
+  support_radius: 6
+  minimum_depth_ratio: 1.10
+  maximum_plateau_fraction: 0.15
+  rgb_gradient_scale: 0.03
+  max_log_change: 0.04
+# 两模型用同一实现/开发图/场景划分/候选和规则，分别选择参数。
+candidates:
+  - {id: blend050_steps1, denoise_blend: 0.5, iterations: 1}
+  - {id: blend050_steps3, denoise_blend: 0.5, iterations: 3}
+  - {id: blend050_steps5, denoise_blend: 0.5, iterations: 5}
+  - {id: blend100_steps1, denoise_blend: 1.0, iterations: 1}
+  - {id: blend100_steps3, denoise_blend: 1.0, iterations: 3}
+  - {id: blend100_steps5, denoise_blend: 1.0, iterations: 5}
+selection: equal_rank_sum_SI_width_primaryF1_texture_then_SI_then_id
+bootstrap_resamples: 10000
+bootstrap_seed: 42
+case_positions: [0, 21, 302, 545]

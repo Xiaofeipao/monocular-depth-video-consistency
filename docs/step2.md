@@ -196,7 +196,7 @@ outputs/part1/dav2_video/rollercoaster_v1/
 
 [handoff_2b.json](../outputs/part1/dav2_video/rollercoaster_v1/analysis/handoff_2b.json)明确`vda_executed:false`。后续2B应使用同一份RGB manifest、真实帧号/PTS和输出画布，保留DA原生预测；VDA可有自己的整段固定归一化，但同TURBO颜色不代表共享米制尺度。1B与2B运行入口及产物继续分开。
 
-旧自录2B产物及其专用自录入口/工作流/配置已按用户要求清理；当前指定片段与NYUv2分支不受影响。原始自录视频、旧1B原生结果和历史执行记录仅作归档，不再属于当前运行主线；实际删除清单见`outputs/maintenance/self_recorded_part2b_cleanup_20261103/`。
+旧自录2B产物及其专用自录入口/工作流/配置已按用户要求清理；当前指定片段与NYUv2分支不受影响。2026-11-14已继续删除原始自录视频、抽帧缓存及旧1B结果，当前指定片段与NYUv2输入/产物不变。两次删除清单分别见`outputs/maintenance/self_recorded_part2b_cleanup_20261103/`及`outputs/maintenance/project_cleanup_20261114/`，历史执行记录保留。
 
 ## 完成门禁
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Middlebury四组经典双目：课程评价、全图诊断与保存产物独立核验。"""
+"""Middlebury固定双目基线：课程评价、全图诊断与保存产物独立核验。"""
 from __future__ import annotations
 
 import argparse
@@ -23,7 +23,7 @@ from src.stereo.io import load_middlebury_scene
 from src.stereo.matching import StereoMatcherConfig, match_stereo, left_right_consistency_mask
 from src.stereo.metrics import compute_disparity_metrics, compute_stereo_depth_metrics
 from src.stereo.protocol import (PROTOCOL, load_config, sha256, source_hashes,
-    data_hashes, environment, write_json, load_selection, archive_protocol)
+    data_hashes, environment, write_json, archive_protocol)
 from src.stereo.sensitivity import analyze_depth_sensitivity, analyze_prediction_error_by_distance
 from src.visualization.stereo import (save_contact_sheet, save_empirical_depth_error_plot,
     save_sensitivity_plot, save_stereo_failure_zoom, save_stereo_panel)
@@ -277,7 +277,6 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path, default=PROJECT_ROOT/'configs/part1/middlebury_sgbm.yaml')
     parser.add_argument('--output-dir', type=Path)
-    parser.add_argument('--tuning-dir', type=Path)
     parser.add_argument('--experiments', nargs='+')
     parser.add_argument('--mode', choices=('run','verify'), default='run')
     args = parser.parse_args(argv); config = load_config(args.config)
@@ -285,19 +284,12 @@ def main(argv=None):
     if output.is_relative_to(PROJECT_ROOT) and not output.is_relative_to(PROJECT_ROOT/'outputs'):
         raise ValueError('Outputs must be under outputs/')
     if args.mode == 'verify':
-        if args.experiments or args.tuning_dir: raise ValueError('Verify uses the saved experiment and parameter records')
+        if args.experiments: raise ValueError('Verify uses the saved experiment and parameter records')
         print(json.dumps(verify_run(output, config), indent=2)); return
     experiments = args.experiments or list(config['experiments'])
     if len(set(experiments))!=len(experiments) or set(experiments)-set(config['experiments']):
         raise ValueError('Unknown or repeated experiment')
     if output.exists(): raise FileExistsError(f'Refusing to overwrite: {output}')
-    tuning = args.tuning_dir or PROJECT_ROOT/config['outputs']['root']/config['outputs']['tuning_run']
-    selections = {}; resolved = copy.deepcopy(config)
-    for experiment in experiments:
-        setting = resolved['experiments'][experiment]
-        if experiment.endswith('_tuned'):
-            method = setting['algorithm']; record = load_selection(config, method, tuning)
-            selections[method] = record; setting['parameters'] = record['selected_parameters']
     names = config['split']['development_scenes']+config['split']['evaluation_scenes']
     output.mkdir(parents=True, exist_ok=False)
     write_json(output/'status.json', {'status':'running','command':sys.argv})
@@ -306,13 +298,11 @@ def main(argv=None):
         sources = archive_protocol(output/'provenance',config)
         shutil.copyfile(args.config,output/'provenance'/'config.yaml')
         inputs = data_hashes(config,names)
-        for method, selection in selections.items():
-            write_json(output/'provenance'/f'{method}_selection.json',selection)
         scenes = [load_middlebury_scene(PROJECT_ROOT/config['dataset']['root']/n) for n in names]
         rows = []
         for i,scene in enumerate(scenes,1):
             for experiment in experiments:
-                row = evaluate_scene_method(scene, experiment=experiment, config=resolved, output_dir=output)
+                row = evaluate_scene_method(scene, experiment=experiment, config=config, output_dir=output)
                 rows.append(row)
                 print(f'[{i}/{len(scenes)}] {scene.name}/{experiment}: '
                       f'MAE={row["disparity_mae_px"]}, valid fraction={row["valid_prediction_fraction"]:.6f}',flush=True)
@@ -327,7 +317,7 @@ def main(argv=None):
             'completed_at_utc':datetime.now(timezone.utc).isoformat(), 'command':sys.argv,
             'config':config, 'config_file_sha256':sha256(args.config), 'source_sha256':sources,
             'input_sha256':inputs, 'experiments':experiments, 'scene_count':len(scenes),
-            'resolved_parameters':{e:resolved['experiments'][e]['parameters'] for e in experiments},
+            'resolved_parameters':{e:config['experiments'][e]['parameters'] for e in experiments},
             'environment':environment(), 'formal_training_run':False,
             'input_sizes_wh':{s.name:[s.calibration.width,s.calibration.height] for s in scenes},
             'disparity_precision':'OpenCV int16 / 16 -> float32 pixel disparity',

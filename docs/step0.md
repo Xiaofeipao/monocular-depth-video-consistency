@@ -2,7 +2,7 @@
 
 ## 状态
 
-公开数据所需的环境、数据、权重、输出 schema、公共指标、smoke test 和自动测试已经建立。Part 1B指定官方davis_rollercoaster的70个真实帧已完成DA逐帧预测与核验，100帧素材需课程确认，指定片段的2B比较待后续。CPU工程检查和完整GPU实验分别记录，不视为课程正式视频已完成。
+公开数据所需的环境、数据、权重、输出 schema、公共指标、smoke test 和自动测试已经建立。Part 1B指定官方davis_rollercoaster的70个真实帧已完成DA逐帧预测与核验，100帧素材需课程确认，同70帧VDA独立及配对比较已完成并核验。CPU工程检查和完整GPU实验分别记录，不视为课程正式视频已完成。
 
 ## 通用复现顺序
 
@@ -27,7 +27,7 @@ git -C UniDepth checkout --detach 8d8cfe4c7ee15297099983607febf0d4f32eb3d6
 
 用 `git -C <repo> rev-parse HEAD` 对照 `configs/versions.yaml`；保护已有修改，不 reset 或覆盖。工程根目录当前没有可用 Git 历史，不能仅克隆一个上游仓库就恢复项目自有代码。
 
-依次完成：环境 → 数据/权重 checksum → 项目测试与 smoke 门禁 → [Middlebury](step1.md) → [NYUv2 与分析](step3.md)。[逐帧视频步骤](step2.md)使用连续原始帧、固定整段色标与独立冻结协议；指定片段的2B比较待后续，旧[Step 4](step4.md)仅保留兼容依赖。
+依次完成：环境 → 数据/权重 checksum → 项目测试与 smoke 门禁 → [Middlebury](step1.md) → [NYUv2 与分析](step3.md)。[逐帧视频步骤](step2.md)使用连续原始帧、固定整段色标与独立冻结协议；VDA独立与同帧比较见[Step 4](step4.md)，B/C及C v2的完整后处理见[Step B](stepB.md)、[Step C](stepC.md)、[Step C v2](stepC_v2.md)。
 
 ## Conda 环境
 
@@ -116,7 +116,7 @@ Depth Pro 和 UniDepthV2-S 的 NYUv2 协议已冻结为 `frozen_v1`。Part 1B的
 conda run -n aiaa3201 python -m pytest -q
 ```
 
-当前结果为 **43 passed**，覆盖：
+下面列出基础测试覆盖范围；43项是基础阶段的历史记录，不代表当前测试总数。最新完整测试以`implemented.md`记录为准。覆盖：
 
 - 七项单图深度指标及有效 mask；
 - Middlebury `doffs` disparity-to-depth 几何；

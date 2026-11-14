@@ -7,7 +7,7 @@ output_root: outputs
 datasets:
   middlebury: data/middlebury/MiddEval3
   nyuv2_labeled: data/nyuv2/nyu_depth_v2_labeled.mat
-  self_recorded: data/self_recorded
+  course_video: data/davis_rollercoaster.mp4
 
 checkpoints:
   depth_pro: checkpoints/depth_pro/depth_pro.pt

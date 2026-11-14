@@ -1,4 +1,4 @@
-"""小型合成数据验证选参到四组评估的完整交接，不运行正式场景搜索。"""
+"""小型合成数据验证两组固定基线的保存与完整原始重算，不运行正式场景搜索。"""
 import copy
 import json
 from pathlib import Path
@@ -8,7 +8,7 @@ import pytest
 import yaml
 from PIL import Image
 
-from pipelines.part1 import run_middlebury as run, tune_middlebury as tune
+from pipelines.part1 import run_middlebury as run
 from src.stereo import protocol
 from src.stereo.io import MiddleburyCalibration, MiddleburyScene
 from src.stereo.matching import StereoMatchResult, left_right_consistency_mask
@@ -42,14 +42,10 @@ def fake_panel(path, **kwargs):
 @pytest.fixture
 def setup_pipeline(tmp_path, monkeypatch):
     config = protocol.load_config(ROOT/'configs/part1/middlebury_sgbm.yaml')
-    for method in ('bm','sgbm'):
-        config['tuning'][method]['search'] = {
-            k:([0,10] if k=='uniqueness_ratio' else [config['experiments'][method+'_fixed']['parameters'][k]])
-            for k in config['tuning'][method]['search']}
     path = tmp_path/'config.yaml'; path.write_text(yaml.safe_dump(config,sort_keys=False))
-    for module in (protocol,run,tune):
+    for module in (protocol,run):
         monkeypatch.setattr(module,'data_hashes',lambda cfg,names:{n:'synthetic' for n in names})
-    for module in (run,tune):
+    for module in (run,):
         monkeypatch.setattr(module,'load_middlebury_scene',lambda path:synthetic(path.name))
         monkeypatch.setattr(module,'match_stereo',fake_match)
     monkeypatch.setattr(run,'save_stereo_panel',fake_panel)
@@ -57,51 +53,30 @@ def setup_pipeline(tmp_path, monkeypatch):
     return path,config
 
 
-def test_selection_valid_fraction_floor_and_undefined_mae():
-    baseline = dict(disparity_mae_px=2.,valid_prediction_fraction=.7)
-    rows = [dict(p=1,disparity_mae_px=.1,valid_prediction_fraction=.2),
-            dict(p=2,disparity_mae_px=1.,valid_prediction_fraction=.7),
-            dict(p=3,disparity_mae_px=None,valid_prediction_fraction=0.)]
-    assert protocol.choose_candidate(rows,baseline,['p'])['p']==2
-    with pytest.raises(ValueError): protocol.choose_candidate(rows[:1],baseline,['p'])
-
-
-def test_complete_tuning_four_experiments_and_raw_verify(tmp_path,setup_pipeline):
-    path,config = setup_pipeline; tuning=tmp_path/'tuning'; output=tmp_path/'run'
-    # Missing selections fail before creating any formal output.
-    with pytest.raises(FileNotFoundError):
-        run.main(['--config',str(path),'--tuning-dir',str(tuning),'--output-dir',str(output)])
-    assert not output.exists()
-    tune.main(['--config',str(path),'--output-dir',str(tuning)])
-    for method in ('bm','sgbm'):
-        record=protocol.load_selection(config,method,tuning)
-        assert record['candidate_count']==2
-        assert len(record['input_sha256'])==5
-    run.main(['--config',str(path),'--tuning-dir',str(tuning),'--output-dir',str(output)])
-    result=run.verify_run(output,config)
-    assert result['prediction_files_checked']==60
-    summary=json.loads((output/'metrics_summary.json').read_text())
+def test_two_fixed_experiments_and_raw_verify(tmp_path, setup_pipeline):
+    path, config = setup_pipeline
+    output = tmp_path/'run'
+    run.main(['--config', str(path), '--output-dir', str(output)])
+    assert run.verify_run(output, config)['prediction_files_checked'] == 30
+    summary = json.loads((output/'metrics_summary.json').read_text())
+    assert set(summary) == {'bm_fixed', 'sgbm_fixed'}
     for entry in summary.values():
-        assert entry['all']['scene_count']==15
-        assert entry['held_out']['scene_count']==10
-        assert all(key in entry['all'] for key in ('bad1','bad2','bad4','depth_abs_rel','depth_rmse_m'))
-        # mask0nocc is all False: positive MAE proves full GT evaluation.
-        assert entry['all']['disparity_mae_px']>0
-        assert entry['all']['valid_prediction_fraction']==pytest.approx(28/32)
+        assert entry['all']['scene_count'] == 15
+        assert entry['held_out']['scene_count'] == 10
+        assert entry['all']['disparity_mae_px'] > 0
+        assert entry['all']['valid_prediction_fraction'] == pytest.approx(28/32)
     with pytest.raises(FileExistsError):
-        run.main(['--config',str(path),'--output-dir',str(output)])
-    # Raw depth corruption is caught even if checksum handling is bypassed.
-    file=output/'Adirondack'/'bm_fixed'/'prediction.npz'
-    with np.load(file) as archive: arrays={k:archive[k] for k in archive.files}
-    arrays['depth_m'][0,1]+=1
-    np.savez_compressed(file,**arrays)
+        run.main(['--config', str(path), '--output-dir', str(output)])
+    file = output/'Adirondack'/'bm_fixed'/'prediction.npz'
+    with np.load(file) as archive:
+        arrays = {k: archive[k] for k in archive.files}
+    arrays['depth_m'][0,1] += 1
+    np.savez_compressed(file, **arrays)
     with pytest.raises(AssertionError):
-        run.validate_saved_outputs(output_dir=output,scenes=[synthetic('Adirondack')],
-            rows=[r for r in run.read_rows(output/'metrics_per_scene.csv') if r['scene']=='Adirondack'],config=config)
-    with pytest.raises(ValueError,match='Artifact changed'): run.verify_run(output,config)
-    candidates=tuning/'bm'/'candidates.csv'
-    candidates.write_text(candidates.read_text()+'\n')
-    with pytest.raises(ValueError,match='evidence changed'): protocol.load_selection(config,'bm',tuning)
+        run.validate_saved_outputs(output_dir=output, scenes=[synthetic('Adirondack')],
+            rows=[r for r in run.read_rows(output/'metrics_per_scene.csv') if r['scene']=='Adirondack'], config=config)
+    with pytest.raises(ValueError, match='Artifact changed'):
+        run.verify_run(output, config)
 
 
 def test_fixed_only_needs_no_search_and_records_failures(tmp_path,setup_pipeline,monkeypatch):

@@ -1,9 +1,11 @@
-# 发布范围
+# 发布范围与复现
 
-本分支提供Part 1、Part 2和Part 3 Direction B/C的项目自有实现、配置、测试与说明。
-数据、视频、权重、所有运行产物及第三方仓库均未随仓库发布。
-文档指标来自本地已运行结果；指向data/、checkpoints/、outputs/和github_repository/的路径仅供本地查阅，在本分支中不会打开。
-implemented.md保留真实执行历史，当前使用方法以README、Step 0–4、Step B/C为准。
-先按configs/versions.yaml和docs/step0.md取得固定上游版本，再创建Conda环境、准备资源。
-缺少正式产物时无法直接执行读取已有预测的评价/verify；需按各Step完整流程生成，正式长时间运行由用户启动。
-课程100真实帧素材门禁、Demo和最终报告状态仍按PLAN记录。
+本分支包含Part 1/2、Direction B、C v1与v2的项目自有实现、测试、环境和说明。
+不包含data、checkpoints、outputs、第三方仓库、队友仓库副本或缓存。
+结果数值保留在文档，预测/视频/图像/CSV/冻结参数JSON和原始运行元数据不上传。
+文档指向这些本地资源的链接需在恢复相应资源后打开，GitHub文件树中不存在。
+先按configs/versions.yaml与docs/step0.md克隆固定上游，再创建环境、准备数据与权重。
+各Step给出完整生成/评价/核验命令；只克隆本分支无法直接verify未上传的正式产物。
+B/C的part3、part3_studies和part3_c_v2目录都是必需组成，来源及MIT许可完整保留。
+不按测试GT选参，不训练，不因发布而改变70/100帧素材、Demo和报告等门禁。
+当前使用方法以README和各Step为准。

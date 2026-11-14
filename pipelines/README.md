@@ -1,6 +1,6 @@
 # 流水线
 
-- `part1/run_middlebury.py`、`tune_middlebury.py`：四组经典双目和开发集选择。
+- `part1/run_middlebury.py`：两组fixed经典双目、15场景保存与原始核验。
 - `part1/study_middlebury_coverage.py`：误差—覆盖率冻结规则、十场景评估和原始重算。
 - `part1/dav2_video.py`：指定片段逐帧DA-V2-S、分析与核验。
 - `part1/dav2_nyuv2.py`：保留的NYUv2相对深度对齐扩展。

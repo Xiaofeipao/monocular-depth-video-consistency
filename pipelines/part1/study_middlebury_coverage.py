@@ -19,7 +19,8 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from pipelines.part1 import run_middlebury as evaluation
-from pipelines.part1.tune_middlebury import measure
+from src.stereo.development import measure
+from src.analysis.stereo_history import verify_archived_coverage
 from src.analysis.stereo_coverage import (LABELS, REGIONS, pareto_frontier, regional_masks,
                                            regional_metrics, select_candidates, summarize)
 from src.stereo.io import load_middlebury_scene
@@ -32,7 +33,7 @@ def timestamp():
 
 def sources():
     names = ('src/analysis/stereo_coverage.py', 'pipelines/part1/study_middlebury_coverage.py',
-             'scripts/part1/study_middlebury_coverage.sh')
+             'scripts/part1/study_middlebury_coverage.sh', 'src/analysis/stereo_history.py')
     return {**source_hashes(), **{p: sha256(ROOT / p) for p in names}}
 
 
@@ -52,7 +53,7 @@ def load_settings(path):
 
 
 def grid(config, method):
-    tune = config['tuning'][method]
+    tune = config['development_search'][method]
     names = list(tune['search'])
     return [dict(config['experiments'][method + '_fixed']['parameters'])] + [
         {**tune['fixed'], **dict(zip(names, values)), 'lr_threshold_px': 1.}
@@ -147,6 +148,10 @@ def verify(output, settings, config):
     record = json.loads((output / 'run_metadata.json').read_text())
     if status.get('status') != 'complete' or status['metadata_sha256'] != sha256(output / 'run_metadata.json'):
         raise ValueError('Run incomplete or metadata changed')
+    if record['settings'] != settings:
+        raise ValueError('Coverage settings changed')
+    if record['config'].get('protocol_status') == 'middlebury_course_v1':
+        return verify_archived_coverage(output)
     names = config['split']['development_scenes'] + config['split']['evaluation_scenes']
     if (record['settings'] != settings or record['config'] != config or record['source_sha256'] != sources()
             or record['input_sha256'] != data_hashes(config, names)):

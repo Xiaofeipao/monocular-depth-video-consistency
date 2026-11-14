@@ -8,7 +8,8 @@ import pytest
 from src.analysis.stereo_coverage import (pareto_frontier, regional_metrics, select_candidates,
                                            summarize)
 from src.stereo.protocol import sha256, write_json
-from pipelines.part1 import study_middlebury_coverage as study, tune_middlebury as tuning
+from pipelines.part1 import study_middlebury_coverage as study
+from src.stereo import development as tuning
 from pipelines.part1 import run_middlebury as evaluation
 from src.stereo.io import MiddleburyCalibration, MiddleburyScene
 from src.stereo.matching import StereoMatchResult, left_right_consistency_mask
@@ -78,9 +79,9 @@ def fake_match(left, right, **kwargs):
 def completed(tmp_path, monkeypatch):
     settings, config = study.load_settings(study.ROOT / 'configs/part1/middlebury_coverage.yaml')
     for method in ('bm', 'sgbm'):
-        config['tuning'][method]['search'] = {
+        config['development_search'][method]['search'] = {
             k: [0, 10] if k == 'uniqueness_ratio' else [config['experiments'][method + '_fixed']['parameters'][k]]
-            for k in config['tuning'][method]['search']}
+            for k in config['development_search'][method]['search']}
     out = tmp_path / 'run'
     monkeypatch.setattr(study, 'data_hashes', lambda cfg, names: {n: 'synthetic' for n in names})
     held = set(config['split']['evaluation_scenes'])
@@ -133,3 +134,22 @@ def test_saved_disparity_mutation_is_detected(completed):
     np.savez_compressed(path, **arrays)
     with pytest.raises(ValueError, match='Artifact changed'):
         study.verify(out, settings, config)
+
+
+def test_historical_replay_refuses_changed_snapshot(tmp_path):
+    from src.analysis.stereo_history import verify_archived_coverage
+    path=tmp_path/'provenance/source/pipelines/part1/example.py'
+    path.parent.mkdir(parents=True)
+    path.write_text('raise RuntimeError("must never execute")')
+    write_json(tmp_path/'run_metadata.json', {'config':{'protocol_status':'middlebury_course_v1'},
+        'source_sha256':{'pipelines/part1/example.py':'0'*64}})
+    with pytest.raises(ValueError, match='snapshot changed'):
+        verify_archived_coverage(tmp_path)
+
+
+def test_historical_replay_refuses_source_path_escape(tmp_path):
+    from src.analysis.stereo_history import verify_archived_coverage
+    write_json(tmp_path/'run_metadata.json', {'config':{'protocol_status':'middlebury_course_v1'},
+        'source_sha256':{'../outside.py':'0'*64}})
+    with pytest.raises(ValueError, match='Invalid historical source path'):
+        verify_archived_coverage(tmp_path)
